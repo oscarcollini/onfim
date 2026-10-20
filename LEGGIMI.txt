@@ -1,48 +1,43 @@
-ONFIM — PWA 0.5 (19 ottobre 2026)
+onfim Lite — PWA 0.7.78.4
+=============================
 
-Questo ZIP contiene i file per GitHub Pages, non appunti personali.
+CONTENUTO
+index.html, sw.js, manifest.webmanifest, icone PNG.
 
-PUBBLICAZIONE SU GITHUB, SENZA TOCCARE NEBRA
-1. Vai su github.com e crea un NUOVO repository pubblico chiamato onfim.
-2. Apri il nuovo repository e scegli Add file > Upload files.
-3. Estrai questo ZIP sul telefono/computer e carica nella RADICE tutti i file:
-   index.html, manifest.webmanifest, sw.js, favicon.png, icon-192.png,
-   icon-512.png, maskable-192.png, maskable-512.png, apple-touch-icon.png.
-   Puoi caricare anche LEGGIMI.txt, ma non e' necessario.
-   Non caricare il file ZIP da solo e non creare una sottocartella Onfim_PWA_05.
-4. Premi Commit changes.
-5. Entra in Settings > Pages > Build and deployment; Source: Deploy from a branch;
-   Branch: main; Folder: / (root); Save.
-6. Quando Pages avra' pubblicato la pagina, apri:
-   https://oscarcollini.github.io/onfim/
-7. Su Chrome Android apri il menu (tre puntini) e scegli Installa app
-   o Aggiungi a schermata Home. Puo' apparire anche un invito automatico.
+PUBBLICAZIONE
+Estrarre TUTTI i file nella radice del repository oscarcollini/onfim,
+sostituendo i precedenti (GitHub Pages deve pubblicare dalla radice).
+Aprire https://oscarcollini.github.io/onfim/ con Chrome Android su HTTPS,
+aggiornare la pagina online e quindi usare Installa app/Aggiungi a schermata Home.
 
-DATI E BACKUP
-- Gli appunti restano in IndexedDB sul dispositivo/browser: non vengono
-  inviati al repository o sincronizzati tra dispositivi.
-- Le versioni HTML locali e la PWA pubblicata su GitHub Pages NON condividono
-  automaticamente il database. Fai Impostazioni > Esporta JSON dal prototipo;
-  poi, nella PWA, Impostazioni > Importa JSON.
-- Gli aggiornamenti al codice non dovrebbero cancellare gli appunti salvati
-  nello stesso origin/browser, ma prima di ogni modifica conserva un backup.
-- NON caricare su GitHub i file JSON di backup: contengono gli appunti e
-  gli eventuali disegni e le fotografie personali.
-- Se cancelli i dati del sito o disinstalli/cancelli i dati della PWA,
-  potresti perdere gli appunti non esportati.
+PRIMA DI AGGIORNARE
+Esportare un backup JSON dall'app precedente e verificarne la presenza
+in Download o Drive. Gli archivi separati APK e PWA non si sincronizzano.
+Se la PWA si trova allo stesso URL GitHub Pages e lo stesso browser,
+IndexedDB conserva normalmente gli appunti già presenti: non disinstallare
+la PWA e non cancellare i dati del sito. Verificare l'avvenuto aggiornamento
+anche aprendo Impostazioni: onfim Lite v0.7.78.4.
 
-NOTIFICHE
-- La PWA funziona offline dopo la prima visita riuscita e l'installazione.
-- I promemoria locali non sono avvisi garantiti a PWA chiusa.
-  Puoi esportare un file .ics e importarlo nel calendario Android.
-- La PWA non offre ancora promemoria basati sulla posizione, sincronizzazione
-  automatica o backup JSON automatico su Google Drive.
+COME SI COMPORTA
+- Testo, foto, disegni, audio, preferiti, archivio PIN, note collegate, cestino.
+- Salva conferma le modifiche. Chiudi le scarta con conferma.
+- Tutti i dati in IndexedDB, NON nelle cache del service worker.
+- Backup JSON manuale e condivisione via Android verso Drive se supportata.
+- Fino a 3 copie interne automatiche, in un DB separato ma nella stessa origine:
+  NON sono backup esterni e svaniscono se si cancellano i dati del browser.
+- Importazione dei backup JSON APK conservando i dati geofence nel JSON;
+  i geofence NON operano in Lite.
+- Avvisi promemoria solo durante l'uso; calendario .ics come alternativa.
+- L'app installata può ricevere testo e link dal menu Condividi di Android
+  quando Chrome supporta Web Share Target. Non riceve file multimediali
+  tramite quel menu: foto e audio si possono allegare dentro l'editor.
 
-AGGIORNAMENTI
-Per aggiornare l'app, carica i nuovi file direttamente nel repository onfim
-(senza rinominarlo). Dopo la pubblicazione, riapri la PWA online: l'aggiornamento
-potrebbe richiedere un secondo avvio per attivarsi. Non cancellare i dati del sito.
+LIMITI
+Non contiene API native Android: niente notifiche affidabili quando è chiusa,
+geofence in background, backup Drive automatici né widget Android.
+Registrazione audio richiede browser che supporti MediaRecorder e HTTPS.
+Il PIN è una protezione visiva, non una cifratura dei dati.
 
-Novita' 0.5: icona provvisoria fornita dall'utente, immagini in miniatura
-nell'elenco delle note, manifest e cache offline aggiornati. La lettura resta
-separata dalla modifica, con schede nell'editor.
+TEST
+La sintassi dei file viene verificata prima della consegna; test browser
+con database e casi di errore vengono documentati nella risposta.

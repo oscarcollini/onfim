@@ -1,14 +1,14 @@
 {
   "id": "./index.html",
-  "name": "Onfim — Appunti",
-  "short_name": "Onfim",
-  "description": "Appunti locali con testo, disegni, foto e promemoria",
+  "name": "onfim Lite — Appunti",
+  "short_name": "onfim Lite",
+  "description": "Appunti offline: testo, disegni, foto, audio, note concatenate e backup JSON. Geofence e notifiche native disponibili nell’APK.",
   "lang": "it",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f3f5f8",
-  "theme_color": "#315f75",
+  "theme_color": "#315b69",
   "icons": [
     {
       "src": "./icon-192.png",
@@ -34,5 +34,15 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "share_target": {
+    "action": "./index.html",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
 }
