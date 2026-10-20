@@ -1,6 +1,8 @@
-onfim Lite 0.7.78.5
+onfim Lite 0.7.78.6
 
 PWA per GitHub Pages. Carica tutti i file contenuti in questa cartella nella radice del repository destinato alla PWA.
 Backup Drive automatico, widget Android, geofence e collegamenti SAF non sono disponibili in Lite. I file JSON preservano eventuali riferimenti ai file del telefono, ma l'apertura richiede APK + permessi sullo stesso dispositivo.
 Promemoria: le scelte rapide funzionano; le ricorrenze vengono controllate solo mentre la PWA è aperta. Non promettere notifiche con browser chiuso.
 Prima di aggiornare, esportare JSON. Conservare il precedente APK e la PWA fino a verifica dei dati.
+
+UI: riordino parti con frecce dirette, menu home SVG uniformi, Elimina unico comando rosso.

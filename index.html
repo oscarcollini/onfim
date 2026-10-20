@@ -582,7 +582,7 @@ body.onfim-drawing-full #drawTab.expanded .drawframe{
 .lite-backup-panel .backup-local-actions button{min-height:38px;font-size:.79rem;padding:7px}
 @media(max-width:375px){.lite-backup-panel .backup-local-item{align-items:flex-start;flex-direction:column}}
 
-/* onfim 0.7.78.5 — comandi contestuali, note collegate e promemoria compatti */
+/* onfim 0.7.78.6 — comandi contestuali, note collegate e promemoria compatti */
 .photo .edit-photo{position:absolute;left:8px;bottom:8px;z-index:4;display:flex;align-items:center;justify-content:center;width:35px;height:35px;min-width:35px;min-height:35px;padding:5px;border:1px solid #d9e1e4;background:rgba(250,252,253,.93);color:#315b69;border-radius:10px;box-shadow:0 1px 7px #263c4340;font-size:0}
 .photo .edit-photo .oi{width:19px;height:19px}
 .card-menu{gap:0}.card .title{padding-right:53px}.card-quick-reminder{width:29px;height:30px}
@@ -610,6 +610,21 @@ body.onfim-drawing-full #drawTab.expanded .drawframe{
 .file-link-editor{margin:9px 0 8px;padding:9px;border:1px solid #e2e9ec;border-radius:12px;background:#f8fafb}.file-link-editor .file-link-intro{display:flex;align-items:center;justify-content:space-between;gap:10px}.file-link-editor .file-link-intro span{font-size:.82rem;font-weight:650}
 .file-link-editor .file-link-intro button{font-size:.8rem;border-radius:9px;min-height:36px}.file-link-editor .linked-file-list{margin:8px 0 0}
 @media(max-width:360px){.reminder-presets{gap:5px}.reminder-presets button{font-size:.78rem}}
+
+
+/* onfim 0.7.78.6 — menu coerenti e frecce dirette sulle parti collegate */
+.card-popup button{display:flex;align-items:center;gap:9px;text-align:left;color:#304d5b;font-weight:500;line-height:1.3;white-space:normal;min-height:41px;border-radius:8px}
+.card-popup button.archive-option{color:#304d5b}
+.card-popup button .oi{width:19px;height:19px;min-width:19px;flex-shrink:0}
+.card-popup button span{min-width:0;flex:1}
+/* First column opens rightward, preventing clipping at narrow mobile widths. */
+.note-column:first-child .card-popup{left:0;right:auto}
+.card-popup button.danger{color:#b34449!important}
+.chain-part-actions .chain-move{width:38px;min-width:38px;height:38px;min-height:38px;padding:0;display:inline-flex;align-items:center;justify-content:center;color:#315b69;border:1px solid #dbe4e8;border-radius:10px;background:#f4f8f9}
+.chain-part-actions .chain-move .oi{width:19px;height:19px}
+.chain-part-actions .chain-move:hover,.chain-part-actions .chain-move:focus-visible{background:#e4eff2;border-color:#bed3db}
+.chain-part-actions .chain-move:disabled{opacity:.4}
+@media(max-width:360px){.chain-part-actions{gap:3px}.chain-part-actions .chain-move{width:35px;min-width:35px;height:36px;min-height:36px}}
 </style>
 <link rel="manifest" href="./manifest.webmanifest"/><link rel="icon" type="image/png" href="./favicon.png"/><link rel="apple-touch-icon" href="./apple-touch-icon.png"/>
 <meta name="theme-color" content="#315b69"/>
@@ -749,7 +764,7 @@ body.onfim-drawing-full #drawTab.expanded .drawframe{
 <p class="hint">Per un backup realmente separato, esporta il JSON o condividilo con Drive. I backup non sono cifrati: possono contenere anche note dell'Archivio.</p>
 </div>
 <div class="panel"><h2>Limiti di onfim Lite</h2><p>Questa versione funziona offline e condivide gli appunti tramite file JSON con onfim Android, ma alcune funzioni richiedono l'APK:</p><ul class="lite-limit-list"><li><strong>Promemoria:</strong> nessuna sveglia affidabile con la PWA chiusa; puoi esportarli nel Calendario.</li><li><strong>Geofence:</strong> non disponibili in background; quelli importati restano nel backup senza attivarsi.</li><li><strong>Backup su Drive:</strong> manuale tramite Condividi; non automatico in background.</li><li><strong>Widget e notifiche native Android:</strong> non disponibili.</li></ul></div>
-<footer class="onfim-colophon">onfim Lite v0.7.78.5 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
+<footer class="onfim-colophon">onfim Lite v0.7.78.6 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
 <section class="view" id="trashView" aria-label="Cestino">
   <div class="controls"><button id="backTrash" type="button">← Impostazioni</button></div>
   <div class="panel trash-panel"><div class="trash-head"><div><h2>Appunti eliminati</h2><p class="hint">Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.</p></div><button id="emptyTrash" class="danger" type="button">Svuota</button></div><p id="trashCount" class="small" role="status"></p><div id="trashList" class="trash-list"></div></div>
@@ -870,7 +885,7 @@ body.onfim-drawing-full #drawTab.expanded .drawframe{
 </dialog>
 <script>
 (()=>{'use strict';
-const $=id=>document.getElementById(id);const DB='appunti-prototipo-v1',STORE='notes',SNAPSTORE='localSnapshots',VERSION='0.7.78.5 Lite';
+const $=id=>document.getElementById(id);const DB='appunti-prototipo-v1',STORE='notes',SNAPSTORE='localSnapshots',VERSION='0.7.78.6 Lite';
 const LAST_EXPORT_KEY='onfim-last-json-export-v06',LAST_CHANGE_KEY='onfim-last-data-change-v06',BACKUP_MAX_AGE_DAYS=7;let db=null,note=null,images=[],photoMarks=[],drawData='',drawn=false,pen='#202a34',erasing=false,painting=false,last=null,saveTimer=0,dirty=false,saving=Promise.resolve(),knownTags=[],unlocked=false,audioClips=[],recorder=null,audioFinalizing=false,micStream=null,audioPieces=[],audioTick=null,audioStarted=0,audioPausedAt=0,audioPauseTotal=0,readId=null,editorFrom='list',reminderTimers=new Map(),selectionRange=null,toastTimer=0;
 let textHistory=[],textHistoryAt=0,textHistoryTimer=0,drawUndoHistory=[],drawRedoHistory=[],drawLoadGeneration=0;
 function toast(msg){const el=$('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2600);}
@@ -1029,17 +1044,17 @@ async function renderNotes(){
     quickReminder.onclick=async e=>{e.stopPropagation();closeCardMenus();await openReminderFor(n,true);};
     const more=document.createElement('button');more.type='button';more.className='card-more';more.setAttribute('aria-label','Opzioni per '+(n.title||'appunto'));more.setAttribute('aria-expanded','false');more.innerHTML=ONFIM_ICONS.more;
     const popup=document.createElement('div');popup.className='card-popup hidden';
-    const del=document.createElement('button');del.type='button';del.textContent=count>1?'Sposta appunto nel Cestino':'Sposta nel Cestino';del.className='danger';
+    const del=document.createElement('button');del.type='button';del.innerHTML=ONFIM_ICONS.trash+'<span>'+(count>1?'Sposta appunto nel Cestino':'Sposta nel Cestino')+'</span>';del.className='danger';
     del.onclick=async(e)=>{e.stopPropagation();popup.classList.add('hidden');if(n.reserved&&!await checkPin())return;if(!confirmMoveToTrash(count))return;await safeDeleteNote(n);await reload();await scheduleReminders();toast('Spostato nel Cestino');};
-    const move=document.createElement('button');move.type='button';move.textContent=n.reserved?'↩ Riporta negli appunti':'🔒 Sposta in Archivio';move.className='archive-option';
+    const move=document.createElement('button');move.type='button';move.innerHTML=(n.reserved?ONFIM_ICONS.restore:ONFIM_ICONS.archive)+'<span>'+(n.reserved?'Riporta negli appunti':'Sposta in Archivio')+'</span>';move.className='archive-option';
     move.onclick=async e=>{e.stopPropagation();popup.classList.add('hidden');if(!n.reserved&&!await checkPin())return;const now=Date.now(),updated=parts.map(p=>({...p,reserved:!n.reserved,updated:now}));await putNotesBatch(updated);await reload();toast(n.reserved?'Riportato negli appunti':'Spostato nell’Archivio');};
     if(!n.reserved){
-      const star=document.createElement('button');star.type='button';star.innerHTML=ONFIM_ICONS.star+' '+(n.favorite?'Rimuovi dai Preferiti':'Aggiungi ai Preferiti');
+      const star=document.createElement('button');star.type='button';star.innerHTML=ONFIM_ICONS.star+'<span>'+(n.favorite?'Rimuovi dai Preferiti':'Aggiungi ai Preferiti')+'</span>';
       star.onclick=async e=>{e.stopPropagation();popup.classList.add('hidden');const fresh=(await allNotes()).find(x=>x.id===n.id);if(!fresh)return;await putNote({...fresh,favorite:!fresh.favorite,updated:Date.now()});await reload();toast(fresh.favorite?'Rimosso dai Preferiti':'Aggiunto ai Preferiti');};
       popup.append(star);
     }
-    const remindAction=document.createElement('button');remindAction.type='button';remindAction.textContent='Promemoria';remindAction.onclick=async e=>{e.stopPropagation();closeCardMenus();if(n.reserved&&!unlocked&&!await checkPin())return;await openReminderFor(n,true);};
-    const partAction=document.createElement('button');partAction.type='button';partAction.textContent='＋ Aggiungi parte';partAction.onclick=async e=>{e.stopPropagation();closeCardMenus();if(n.reserved&&!unlocked&&!await checkPin())return;onfimAskPartFromCard(n.id);};
+    const remindAction=document.createElement('button');remindAction.type='button';remindAction.innerHTML=ONFIM_ICONS.bell+'<span>Promemoria</span>';remindAction.onclick=async e=>{e.stopPropagation();closeCardMenus();if(n.reserved&&!unlocked&&!await checkPin())return;await openReminderFor(n,true);};
+    const partAction=document.createElement('button');partAction.type='button';partAction.innerHTML=ONFIM_ICONS.plus+'<span>Aggiungi parte</span>';partAction.onclick=async e=>{e.stopPropagation();closeCardMenus();if(n.reserved&&!unlocked&&!await checkPin())return;onfimAskPartFromCard(n.id);};
     popup.append(remindAction,partAction,move,del);menu.append(quickReminder,more,popup);el.append(menu);
     more.onclick=e=>{e.stopPropagation();const wasOpen=!popup.classList.contains('hidden');closeCardMenus();if(!wasOpen){popup.classList.remove('hidden');el.classList.add('menu-open');more.setAttribute('aria-expanded','true');}};
     const open=async()=>{if(n.reserved&&!await checkPin())return;await openRead(n);};
@@ -1159,7 +1174,7 @@ async function openRead(n){
   for(const tag of noteTags(n))addChip('#'+tag);
   if(n.reminder){const when=new Date(n.reminder);if(!Number.isNaN(when.getTime()))addChip('⏰ '+when.toLocaleString('it-IT'));}
   if(parts.length>1){for(const [i,part] of parts.entries()){
-    const block=makeChainPart(part,i+1);if(i===parts.length-1)block.querySelector('.chain-options button:last-child')?.remove();
+    const block=makeChainPart(part,i+1,parts.length);
     $('chainParts').append(block);
   }}
   $('addSequel').classList.remove('hidden');
@@ -1182,8 +1197,8 @@ async function openRead(n){
 }
 // La lettura concatenata usa gli stessi contenuti salvati delle note semplici.
 // Ogni parte e' ancora modificabile indipendentemente nell'editor normale.
-const ONFIM_ICONS={pencil:'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',more:'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>',star:'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3 1.2-6.8-5-4.9 6.9-1Z"/></svg>'};
-function makeChainPart(n,number){
+const ONFIM_ICONS={pencil:'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',more:'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>',star:'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3 1.2-6.8-5-4.9 6.9-1Z"/></svg>',archive:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"4\" rx=\"1\"/><path d=\"M5 8v12h14V8M10 12h4\"/></svg>",restore:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 8v5h5M3.5 13a8.5 8.5 0 1 1 2.6 5.8\"/></svg>",bell:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9\"/><path d=\"M10 21h4\"/></svg>",plus:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 5v14M5 12h14\"/></svg>",trash:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15M10 10v7M14 10v7\"/></svg>",up:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 19V5m-6 6 6-6 6 6\"/></svg>",down:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 5v14m-6-6 6 6 6-6\"/></svg>"};
+function makeChainPart(n,number,total){
   const block=document.createElement('section');block.className='chain-part';
   const head=document.createElement('div');head.className='chain-part-head';
   const label=document.createElement('span');label.className='chain-part-label';
@@ -1193,19 +1208,18 @@ function makeChainPart(n,number){
   const edit=document.createElement('button');edit.type='button';edit.innerHTML=ONFIM_ICONS.pencil;edit.title='Modifica parte '+number;edit.classList.add('icon-button','part-edit');edit.setAttribute('aria-label','Modifica parte '+number);
   edit.onclick=async()=>{const fresh=(await allNotes()).find(x=>x.id===n.id);if(!fresh){toast('Parte non trovata');return;}if(fresh.reserved&&!unlocked&&!await checkPin())return;editorFrom='read';editNote(fresh);};
   actions.append(edit);
-  const optionsHost=document.createElement('div');optionsHost.className='chain-options-host';
-  const more=document.createElement('button');more.className='icon-button';more.type='button';more.innerHTML='<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg>';more.title='Opzioni parte';more.setAttribute('aria-label','Opzioni parte '+number);
-  const popup=document.createElement('div');popup.className='chain-options hidden';
-  const moveUp=document.createElement('button');moveUp.type='button';moveUp.textContent='↑ Sposta su';
-  const moveDown=document.createElement('button');moveDown.type='button';moveDown.textContent='↓ Sposta giù';
-  if(number>2)popup.append(moveUp); // Parte 1 resta la radice stabile
-  // Inserita da openRead dopo aver conosciuto la lunghezza della sequenza.
-  popup.append(moveDown);
-  moveUp.onclick=e=>{e.stopPropagation();onfimClosePartMenus();void onfimMovePart(n.id,-1);};
-  moveDown.onclick=e=>{e.stopPropagation();onfimClosePartMenus();void onfimMovePart(n.id,+1);};
-  more.onclick=e=>{e.stopPropagation();const hidden=popup.classList.contains('hidden');onfimClosePartMenus();popup.classList.toggle('hidden',!hidden);};
-  optionsHost.append(more,popup);actions.append(optionsHost);
-  if(number===1)optionsHost.classList.add('hidden');
+  // Direct controls: no hidden popup for reordering.
+  // The first part remains the stable root of the concatenation.
+  function arrow(direction,label,svg){
+    const btn=document.createElement('button');btn.type='button';
+    btn.className='icon-button chain-move';btn.innerHTML=svg;
+    btn.title=label+' parte '+number;
+    btn.setAttribute('aria-label',label+' parte '+number);
+    btn.onclick=e=>{e.stopPropagation();btn.disabled=true;void onfimMovePart(n.id,direction).finally(()=>{if(btn.isConnected)btn.disabled=false;});};
+    return btn;
+  }
+  if(number>2)actions.prepend(arrow(-1,'Sposta su',ONFIM_ICONS.up));
+  if(number>1&&number<total)actions.insertBefore(arrow(+1,'Sposta giù',ONFIM_ICONS.down),edit);
   head.append(label,actions);block.append(head);
   if(number>1&&n.title){const title=document.createElement('h2');title.className='chain-part-title';title.textContent=n.title;block.append(title);}
   const markup=sanitizeHTML(migratedText(n));
@@ -1764,7 +1778,7 @@ async function renderLocalSnapshots(){
 function replaceAllNotes(notes){return new Promise((res,rej)=>{const tx=db.transaction(STORE,'readwrite'),store=tx.objectStore(STORE);store.clear();for(const n of notes)if(n&&typeof n.id==='string')store.put(n);tx.oncomplete=()=>{recordDataChange();res();};tx.onerror=()=>rej(tx.error||new Error('Ripristino non riuscito'));tx.onabort=()=>rej(tx.error||new Error('Ripristino annullato'));});}
 
 
-/* onfim 0.7.78.5: UX condivisa, promemoria rapidi, collegamenti e riordino. */
+/* onfim 0.7.78.6: UX condivisa, promemoria rapidi, collegamenti e riordino. */
 const ONFIM_REPEAT_DAYS={sunday:0,monday:1,tuesday:2,wednesday:3,thursday:4,friday:5,saturday:6};
 function onfimLocalDateTime(d){const p=v=>String(v).padStart(2,'0');return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;}
 function onfimPresetDate(kind,now=new Date()){
@@ -1816,7 +1830,7 @@ function onfimOpenLinkedFile(f){if(!onfimLinkedFileBridge()){toast('Il collegame
 if(!onfimLinkedFileBridge()){$('pickLinkedFile').disabled=true;$('linkFileExplanation').textContent='Il collegamento ai documenti sarà disponibile dopo l’aggiornamento del servizio Android.';}
 $('pickLinkedFile').onclick=()=>{if(!onfimLinkedFileBridge()){toast('Collegamento ai file: richiede aggiornamento della parte Android');return;}try{OnfimAndroid.pickLinkedFile();}catch(e){toast('Selezione non disponibile');}};
 window.onfimFilePicked=(raw)=>{try{if(!$('editView').classList.contains('show'))throw new Error('L’editor non è aperto');const o=typeof raw==='string'?JSON.parse(raw):raw;if(!o||typeof o.uri!=='string'||!/^content:\/\//.test(o.uri)||o.uri.length>4096)throw new Error('Riferimento non valido');if(onfimEditorLinks.length>=15)throw new Error('Massimo 15 file per parte');if(!onfimEditorLinks.some(f=>f.uri===o.uri))onfimEditorLinks.push({uri:o.uri,name:String(o.name||'Documento').slice(0,180),type:String(o.type||'').slice(0,120),size:Number(o.size)||0});onfimRenderEditorLinks();markDirty();toast('File collegato: ricorda di premere Salva');}catch(e){toast('Impossibile collegare il file: '+e.message);}};
-function onfimClosePartMenus(){document.querySelectorAll('.chain-options').forEach(x=>x.classList.add('hidden'));}
+function onfimClosePartMenus(){} // Compatibilità con la gestione del tocco globale.
 async function onfimMovePart(partId,direction){const all=await allNotes();const part=all.find(n=>n.id===partId&&!n.deletedAt);if(!part)return;const root=groupRootFor(part,all),parts=chainMembers(root,all);const index=parts.findIndex(x=>x.id===partId),other=parts[index+direction];
  // La radice resta prima: cambiare il primo elemento muterebbe l'identità dell'appunto.
  if(index<=0||index+direction<=0||!other)return;
