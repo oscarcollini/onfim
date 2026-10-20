@@ -1,43 +1,6 @@
-onfim Lite — PWA 0.7.78.4
-=============================
+onfim Lite 0.7.78.5
 
-CONTENUTO
-index.html, sw.js, manifest.webmanifest, icone PNG.
-
-PUBBLICAZIONE
-Estrarre TUTTI i file nella radice del repository oscarcollini/onfim,
-sostituendo i precedenti (GitHub Pages deve pubblicare dalla radice).
-Aprire https://oscarcollini.github.io/onfim/ con Chrome Android su HTTPS,
-aggiornare la pagina online e quindi usare Installa app/Aggiungi a schermata Home.
-
-PRIMA DI AGGIORNARE
-Esportare un backup JSON dall'app precedente e verificarne la presenza
-in Download o Drive. Gli archivi separati APK e PWA non si sincronizzano.
-Se la PWA si trova allo stesso URL GitHub Pages e lo stesso browser,
-IndexedDB conserva normalmente gli appunti già presenti: non disinstallare
-la PWA e non cancellare i dati del sito. Verificare l'avvenuto aggiornamento
-anche aprendo Impostazioni: onfim Lite v0.7.78.4.
-
-COME SI COMPORTA
-- Testo, foto, disegni, audio, preferiti, archivio PIN, note collegate, cestino.
-- Salva conferma le modifiche. Chiudi le scarta con conferma.
-- Tutti i dati in IndexedDB, NON nelle cache del service worker.
-- Backup JSON manuale e condivisione via Android verso Drive se supportata.
-- Fino a 3 copie interne automatiche, in un DB separato ma nella stessa origine:
-  NON sono backup esterni e svaniscono se si cancellano i dati del browser.
-- Importazione dei backup JSON APK conservando i dati geofence nel JSON;
-  i geofence NON operano in Lite.
-- Avvisi promemoria solo durante l'uso; calendario .ics come alternativa.
-- L'app installata può ricevere testo e link dal menu Condividi di Android
-  quando Chrome supporta Web Share Target. Non riceve file multimediali
-  tramite quel menu: foto e audio si possono allegare dentro l'editor.
-
-LIMITI
-Non contiene API native Android: niente notifiche affidabili quando è chiusa,
-geofence in background, backup Drive automatici né widget Android.
-Registrazione audio richiede browser che supporti MediaRecorder e HTTPS.
-Il PIN è una protezione visiva, non una cifratura dei dati.
-
-TEST
-La sintassi dei file viene verificata prima della consegna; test browser
-con database e casi di errore vengono documentati nella risposta.
+PWA per GitHub Pages. Carica tutti i file contenuti in questa cartella nella radice del repository destinato alla PWA.
+Backup Drive automatico, widget Android, geofence e collegamenti SAF non sono disponibili in Lite. I file JSON preservano eventuali riferimenti ai file del telefono, ma l'apertura richiede APK + permessi sullo stesso dispositivo.
+Promemoria: le scelte rapide funzionano; le ricorrenze vengono controllate solo mentre la PWA è aperta. Non promettere notifiche con browser chiuso.
+Prima di aggiornare, esportare JSON. Conservare il precedente APK e la PWA fino a verifica dei dati.
