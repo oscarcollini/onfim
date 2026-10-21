@@ -1,4 +1,9 @@
-onfim Lite PWA 0.8.6.4
-Correzioni: stella/puntina sempre nel piè di scheda anche con allegati (vista elenco); orari rapidi sotto Impostazioni.
-Dati, struttura e formati backup invariati.
-Caricare integralmente i file PWA sullo stesso percorso del sito.
+onfim Lite PWA 0.8.6.5
+
+Pubblicare sul proprio hosting HTTPS tutti i file della cartella allo stesso livello, mantenendo il percorso della PWA precedente. Il service worker aggiornato usa la cache v0.8.6.5. Non cancellare i dati dell'app o IndexedDB durante l'aggiornamento.
+
+Promemoria rapidi: Oggi / Domani / Altra data e soltanto Mattina / Pomeriggio, con orari modificabili nelle Impostazioni. È sempre possibile scegliere liberamente data e ora.
+
+Luogo: ricerca e mappa consentono di registrare le coordinate, ma nella PWA non sono disponibili le notifiche geografiche in background. Le funzioni native di notifiche, geofence, widget e backup automatici Android richiedono l'APK.
+
+Unione: dalla nota di partenza scegli «Aggiungi a un'altra nota»; il contenuto è copiato nella destinazione e l'originale passa nel Cestino, recuperabile indipendentemente. Gli orari delle due fasce sono inclusi nel JSON manuale.
