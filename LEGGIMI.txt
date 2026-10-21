@@ -1,7 +1,4 @@
-onfim Lite 0.8.3 — PWA
-
-Sostituisci i file nella radice del repository GitHub Pages.
-Stessa origine e archivio IndexedDB; prima di aggiornare conserva un backup JSON.
-Novità: Esporta nota (.html autonomo), icone Galleria/Fotocamera, GIF animate fino a 5 MB, menu armonizzati.
-Limitazioni PWA: widget, geofence, notifiche native e backup Drive automatico non disponibili.
-Se la pagina resta vecchia, attendi aggiornamento service worker o riapri l'app.
+onfim Lite PWA 0.8.6
+Caricare tutti i file nella radice del repository GitHub Pages.
+Prima dell’aggiornamento esportare un backup JSON. Non cancellare i dati del sito.
+Nel browser non sono disponibili widget e avvisi geografici nativi.
