@@ -680,6 +680,12 @@ body.onfim-drawing-full #drawTab.expanded .drawframe{
 .pinned-mark svg{width:14px;height:14px;stroke-width:2}
 .read-reminder-link{display:inline-flex;align-items:center;gap:4px;border:1px solid #b8d0dd;background:#edf5f8;color:#31566c;padding:5px 8px;min-height:32px;border-radius:8px;font-size:.76rem;max-width:100%;text-align:left}
 .read-reminder-link svg{width:16px;height:16px;flex-shrink:0}
+
+/* 0.8.3: due accessi fotografici compatti e distinti, senza selettore duplicato. */
+.photo-source-actions{display:flex;align-items:center;gap:9px;margin:12px 0 2px}
+.photo-source-button{display:inline-flex;align-items:center;justify-content:center;width:48px;height:46px;min-width:48px;min-height:46px;padding:8px;border-radius:12px;border:1px solid #CBD5DA;background:#fff;color:#315B69}
+.photo-source-button .oi{width:24px;height:24px;flex:none}
+.photo-source-button:hover,.photo-source-button:focus-visible{background:#E3ECF3}
 </style>
 <link rel="manifest" href="./manifest.webmanifest"/><link rel="icon" type="image/png" href="./favicon.png"/><link rel="apple-touch-icon" href="./apple-touch-icon.png"/>
 <meta name="theme-color" content="#222E38"/>
@@ -737,8 +743,10 @@ body.onfim-drawing-full #drawTab.expanded .drawframe{
         <button id="readFavOption" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3 1.2-6.8-5-4.9 6.9-1Z"/></svg><span>Preferiti</span></button>
         <button id="readPinOption" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 5 5-4 1-3 4-1 4-4-4-4-1 5-5 1-4zM9 15l-5 6"/></svg><span>Fissa in alto</span></button>
         <button id="readReminderOption" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><span>Promemoria</span></button>
-        <button id="readArchiveOption" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Sposta in Archivio</span></button>
+        <button id="onfimShareHtml" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13l-2 2 2 2m8-4 2 2-2 2m-3-5-2 6"/></svg><span>Esporta nota</span></button>
+        
         <button id="readDetachOption" class="hidden" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="m8 8 12 12M14 10l6-6M8 16l4-4"/></svg><span>Separa parti</span></button>
+        <button id="readArchiveOption" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Sposta in Archivio</span></button>
         <button id="readDeleteOption" class="danger" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15M10 10v7M14 10v7"/></svg><span>Elimina appunto</span></button>
       </div>
     </div>
@@ -787,7 +795,14 @@ body.onfim-drawing-full #drawTab.expanded .drawframe{
 <button aria-label="Grigio" class="swatch" data-draw="#62676e" style="background:#62676e" title="Grigio"></button>
 <button aria-label="Personalizza colore disegno" class="custom-draw-color" id="customDrawColor" title="Personalizza colore" type="button"><span>＋</span></button>
 </div></div>
-<div class="tab" id="photosTab"><div class="hint">Scegli una foto dalla galleria oppure scattane una nuova.</div><div class="actions" style="margin-top:12px"><button id="galleryButton"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><path d="m21 16-5-5L5 21"/></svg> Galleria</button><button id="cameraButton"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h4l2-3h6l2 3h4v13H3Z"/><circle cx="12" cy="13" r="4"/></svg> Fotocamera</button></div><input accept="image/*" class="hidden" id="galleryInput" multiple="" type="file"/><input accept="image/*" capture="environment" class="hidden" id="cameraInput" type="file"/><div class="photogrid" id="photoGallery"></div><p class="hint">Le immagini vengono ridimensionate prima del salvataggio per occupare meno spazio.</p>
+<div class="tab" id="photosTab"><div class="hint">Aggiungi una foto dalla galleria o scattane una. Le GIF animate (max 5 MB) mantengono il movimento.</div>
+<div class="photo-source-actions" role="group" aria-label="Aggiungi immagine">
+<button id="galleryButton" class="photo-source-button" type="button" aria-label="Scegli dalla galleria" title="Galleria"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><path d="m21 16-5-5L5 21"/></svg></button>
+<button id="cameraButton" class="photo-source-button" type="button" aria-label="Scatta una foto" title="Fotocamera"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h4l2-3h6l2 3h4v13H3Z"/><circle cx="12" cy="13" r="4"/></svg></button>
+</div>
+<input accept="image/*" class="hidden" id="galleryInput" multiple type="file"/>
+<input accept="image/*" capture="environment" class="hidden" id="cameraInput" type="file"/>
+<div class="photogrid" id="photoGallery"></div><p class="hint">Le fotografie vengono ridimensionate. Le GIF non si possono annotare.</p>
 </div>
 <div class="tab" id="audioTab">
 <p class="hint">Registra un messaggio vocale o allega un file audio. Le registrazioni rimangono in onfim e vengono incluse nel backup JSON.</p>
@@ -830,7 +845,7 @@ body.onfim-drawing-full #drawTab.expanded .drawframe{
 <p class="hint">Per un backup realmente separato, esporta il JSON o condividilo con Drive. I backup non sono cifrati: possono contenere anche note dell'Archivio.</p>
 </div>
 <div class="panel"><h2>Limiti di onfim Lite</h2><p>Questa versione funziona offline e condivide gli appunti tramite file JSON con onfim Android, ma alcune funzioni richiedono l'APK:</p><ul class="lite-limit-list"><li><strong>Promemoria:</strong> nessuna sveglia affidabile con la PWA chiusa; puoi esportarli nel Calendario.</li><li><strong>Geofence:</strong> non disponibili in background; quelli importati restano nel backup senza attivarsi.</li><li><strong>Backup su Drive:</strong> manuale tramite Condividi; non automatico in background.</li><li><strong>Widget e notifiche native Android:</strong> non disponibili.</li></ul></div>
-<footer class="onfim-colophon">onfim Lite v0.8.2 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
+<footer class="onfim-colophon">onfim Lite v0.8.3 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
 <section class="view" id="trashView" aria-label="Cestino">
   <div class="controls"><button id="backTrash" type="button">← Impostazioni</button></div>
   <div class="panel trash-panel"><div class="trash-head"><div><h2>Appunti eliminati</h2><p class="hint">Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.</p></div><button id="emptyTrash" class="danger" type="button">Svuota</button></div><p id="trashCount" class="small" role="status"></p><div id="trashList" class="trash-list"></div></div>
@@ -1178,7 +1193,7 @@ async function renderNotes(){
     popup.append(pinAction);
     const remindAction=document.createElement('button');remindAction.type='button';remindAction.innerHTML=ONFIM_ICONS.bell+'<span>Promemoria</span>';remindAction.onclick=async e=>{e.stopPropagation();closeCardMenus();if(n.reserved&&!unlocked&&!await checkPin())return;await openReminderFor(n,true);};
     const partAction=document.createElement('button');partAction.type='button';partAction.innerHTML=ONFIM_ICONS.plus+'<span>Aggiungi parte</span>';partAction.onclick=async e=>{e.stopPropagation();closeCardMenus();if(n.reserved&&!unlocked&&!await checkPin())return;onfimAskPartFromCard(n.id);};
-    popup.append(remindAction,partAction,move,del);menu.append(quickReminder,more,popup);el.append(menu);
+    const exportAction=document.createElement('button');exportAction.type='button';exportAction.innerHTML='<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13l-2 2 2 2m8-4 2 2-2 2m-3-5-2 6"/></svg>'+'<span>Esporta nota</span>';exportAction.onclick=e=>{e.stopPropagation();closeCardMenus();void onfimExportNote(n.id);};popup.append(remindAction,partAction,exportAction,move,del);menu.append(quickReminder,more,popup);el.append(menu);
     more.onclick=e=>{e.stopPropagation();const wasOpen=!popup.classList.contains('hidden');closeCardMenus();if(!wasOpen){popup.classList.remove('hidden');el.classList.add('menu-open');more.setAttribute('aria-expanded','true');}};
     const open=async()=>{if(n.reserved&&!await checkPin())return;await openRead(n);};
     el.addEventListener('click',e=>{if(e.target.closest('button'))return;void open();});
@@ -1263,7 +1278,7 @@ async function startAudioRecording(){
  }catch(e){stopMic();recorder=null;recordingUI();$('audioStatus').textContent='Microfono non disponibile: '+(e.name==='NotAllowedError'?'permesso negato':e.message);}
 }
 async function importAudioFiles(files){for(const f of files){if(!f.type.startsWith('audio/'))continue;if(f.size>MAX_AUDIO_BYTES){toast('Audio troppo grande (limite 10 MB): '+f.name);continue;}try{const data=await fileAsDataURL(f);audioClips.push({id:uid(),name:f.name||'Audio allegato',data,created:Date.now()});markDirty();}catch(e){toast('Errore audio: '+e.message);}}renderAudioGallery();}
-function photoList(){const host=$('photoGallery');host.replaceChildren();$('photoCount').textContent=images.length?String(images.length):'';$('tabPhotos').setAttribute('aria-label',images.length?'Foto, '+images.length+' allegate':'Foto');images.forEach((src,i)=>{const card=document.createElement('div');card.className='photo';const img=document.createElement('img');img.src=src;img.alt='Foto allegata';const del=document.createElement('button');del.type='button';del.className='remove-photo';del.textContent='×';del.title='Rimuovi foto';del.onclick=()=>{images.splice(i,1);photoMarks.splice(i,1);photoList();markDirty();};const edit=document.createElement('button');edit.type='button';edit.className='edit-photo';edit.innerHTML='<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>';edit.setAttribute('aria-label','Modifica segni sulla fotografia');edit.title='Modifica segni';edit.onclick=()=>openPhotoMarkup(i);card.append(img);if(photoMarks[i]){const mark=document.createElement('img');mark.src=photoMarks[i];mark.className='photo-mark-preview';mark.alt='';card.append(mark);}card.append(del,edit);host.append(card);});}
+function photoList(){const host=$('photoGallery');host.replaceChildren();$('photoCount').textContent=images.length?String(images.length):'';$('tabPhotos').setAttribute('aria-label',images.length?'Foto, '+images.length+' allegate':'Foto');images.forEach((src,i)=>{const card=document.createElement('div');card.className='photo';const img=document.createElement('img');img.src=src;img.alt='Foto allegata';const del=document.createElement('button');del.type='button';del.className='remove-photo';del.textContent='×';del.title='Rimuovi foto';del.onclick=()=>{images.splice(i,1);photoMarks.splice(i,1);photoList();markDirty();};const edit=document.createElement('button');edit.type='button';edit.className='edit-photo';edit.innerHTML='<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>';edit.setAttribute('aria-label','Modifica segni sulla fotografia');edit.title='Modifica segni';edit.onclick=()=>openPhotoMarkup(i);if(/^data:image\/gif;/i.test(src)){edit.classList.add('hidden');edit.disabled=true;edit.title='Le GIF animate non si possono annotare';}card.append(img);if(photoMarks[i]){const mark=document.createElement('img');mark.src=photoMarks[i];mark.className='photo-mark-preview';mark.alt='';card.append(mark);}card.append(del,edit);host.append(card);});}
 function editNote(n,allowPart=true){$('addPartEditor').classList.toggle('hidden',!allowPart);$('noteTitle').placeholder='Titolo (facoltativo)';clearTimeout(saveTimer);dirty=false;note={...n};images=[...(n.photos||[])];photoMarks=Array.isArray(n.photoMarks)?images.map((_,i)=>typeof n.photoMarks[i]==='string'?n.photoMarks[i]:''):images.map(()=>'');$('noteTitle').value=n.title||'';$('editorDates').textContent=noteDates(n);$('noteBody').innerHTML=sanitizeHTML(migratedText(n));selectionRange=null;lastHighlightAction=null;resetTextHistory();const colorSelect=$('noteColor');colorSelect.querySelector('[data-legacy-color]')?.remove();if(n.color&&![...colorSelect.options].some(o=>o.value===n.color)){const o=new Option('Colore precedente',n.color);o.dataset.legacyColor='1';colorSelect.add(o);}colorSelect.value=n.color||'#ffffff';updateNoteColorButton();$('reminder').value=n.reminder||'';$('reserved').checked=!!n.reserved;audioClips=Array.isArray(n.audios)?n.audios.filter(a=>a&&typeof a.data==='string'&&a.data.startsWith('data:audio/')):[];onfimEditorLinks=Array.isArray(n.linkedFiles)?n.linkedFiles.map(f=>({...f})):[];onfimRenderEditorLinks();renderAudioGallery();$('saveState').textContent='';$('deleteNote').classList.toggle('hidden',!n.title&&!n.text&&!(n.photos||[]).length&&!n.drawing&&!(n.audios||[]).length&&!n.persisted);photoList();showDrawing(n.drawing||'');updateTextMark();chooseTab('text');updateFormat();view('editView');}
 function newNote(){editorFrom='list';const n=emptyNote();n.reserved=$('filter').value==='reserved'&&unlocked;n.favorite=$('filter').value==='favorites';editNote(n,false);$('deleteNote').classList.add('hidden');$('noteTitle').focus();}
 async function openRead(n){
@@ -1460,7 +1475,30 @@ $('photoMarkClose').onclick=$('photoMarkCancel').onclick=closePhotoMarkup;
 $('photoMarkDialog').addEventListener('cancel',e=>{e.preventDefault();closePhotoMarkup();});
 $('photoMarkSave').onclick=()=>{if(activePhotoMark<0)return;photoMarks[activePhotoMark]=markSnapshot();closePhotoMarkup();photoList();markDirty();};
 function resizePhoto(f){return new Promise((res,rej)=>{const url=URL.createObjectURL(f),im=new Image();im.onload=()=>{URL.revokeObjectURL(url);const scale=Math.min(1,1600/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=Math.max(1,Math.round(im.width*scale));c.height=Math.max(1,Math.round(im.height*scale));const x=c.getContext('2d');x.fillStyle='white';x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.8));};im.onerror=()=>{URL.revokeObjectURL(url);rej(new Error('Formato immagine non supportato.'));};im.src=url;});}
-async function readPhotos(list){for(const file of [...list]){if(!file.type.startsWith('image/'))continue;try{images.push(await resizePhoto(file));photoMarks.push('');}catch(e){toast('Foto non importata: '+e.message);}}photoList();markDirty();}
+const ONFIM_MAX_GIF_BYTES=5*1024*1024;
+function onfimReadGif(file){return new Promise((resolve,reject)=>{
+  if(file.size>ONFIM_MAX_GIF_BYTES){reject(new Error('GIF superiore a 5 MB: scegli una GIF più piccola.'));return;}
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const data=String(reader.result||'');
+    if(!/^data:image\/gif;base64,/i.test(data))reject(new Error('GIF non valida.'));
+    else resolve(data);
+  };
+  reader.onerror=()=>reject(new Error('Lettura GIF non riuscita.'));
+  reader.readAsDataURL(file);
+});}
+async function readPhotos(list){
+  let added=0;
+  for(const file of [...list]){
+    if(!file.type.startsWith('image/')&&!/\.gif$/i.test(file.name))continue;
+    try{
+      const gif=file.type.toLowerCase()==='image/gif'||/\.gif$/i.test(file.name);
+      images.push(gif?await onfimReadGif(file):await resizePhoto(file));
+      photoMarks.push('');added++;
+    }catch(e){toast('Immagine non importata: '+e.message);}
+  }
+  photoList();if(added)markDirty();
+}
 function recordDataChange(){try{localStorage.setItem(LAST_CHANGE_KEY,String(Date.now()));}catch(e){console.warn('Onfim: impossibile registrare data modifica',e);}void refreshBackupStatus();scheduleLocalSnapshot();}
 function backupState(notes){
   const lastExport=Number(localStorage.getItem(LAST_EXPORT_KEY))||0;
@@ -1576,6 +1614,110 @@ $('detachParts').onclick=async()=>{
   await reload();await openRead(root);
   toast('Parti separate, nessun contenuto eliminato');
 };
+
+// Esportazione di una nota come HTML autonomo, offline e di sola lettura.
+function onfimShareSafeImage(value){
+  return typeof value==='string' && /^data:image\/(?:png|jpeg|webp|gif|avif);base64,[a-z0-9+/=]+$/i.test(value) ? value : '';
+}
+function onfimShareSafeAudio(value){
+  return typeof value==='string' && /^data:audio\/[\w.+-]+(?:;[\w.+-]+)*;base64,[a-z0-9+/=]+$/i.test(value) ? value : '';
+}
+function onfimShareSafeColor(value){
+  return typeof value==='string' && /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i.test(value) ? value : '#ffffff';
+}
+function onfimShareFilename(title){
+  const raw=String(title||'appunto').normalize('NFC').replace(/[\\/:*?"<>|\x00-\x1f]+/g,' ').replace(/\s+/g,' ').trim().replace(/[. ]+$/g,'');
+  return (raw||'appunto').slice(0,72)+'.html';
+}
+function onfimSharePartHTML(n,partNumber,total){
+  const fragments=[];
+  // Testo formattato, filtrato attraverso lo stesso sanitizzatore usato in lettura.
+  const body=sanitizeHTML(migratedText(n));
+  const heading=total>1?`<div class="part-label">Parte ${partNumber}${n.title&&partNumber>1?` · ${htmlEscape(n.title)}`:''}</div>`:'';
+  if(body&&txt(body).trim())fragments.push(`<div class="note-text">${body}</div>`);
+  const image=onfimShareSafeImage(n.drawing);
+  if(image)fragments.push(`<section class="media"><h3>Disegno</h3><img class="drawing" src="${image}" alt="Disegno della parte ${partNumber}" loading="lazy"></section>`);
+  const photos=[];
+  for(const [index,item] of (Array.isArray(n.photos)?n.photos:[]).entries()){
+    const src=onfimShareSafeImage(item);if(!src)continue;
+    const overlay=onfimShareSafeImage(n.photoMarks?.[index]);
+    photos.push(`<figure class="photo"><div class="photo-visual"><img src="${src}" alt="Fotografia ${index+1}" loading="lazy">${overlay?`<img class="photo-annotation" src="${overlay}" alt="" loading="lazy">`:''}</div></figure>`);
+  }
+  if(photos.length)fragments.push(`<section class="media"><h3>Foto</h3><div class="photo-grid">${photos.join('')}</div></section>`);
+  const clips=[];
+  for(const clip of Array.isArray(n.audios)?n.audios:[]){
+    const src=onfimShareSafeAudio(clip?.data);if(!src)continue;
+    clips.push(`<div class="audio-entry"><div class="audio-label">${htmlEscape(clip.name||'Registrazione vocale')}</div><audio controls preload="none" src="${src}">Registrazione audio non supportata dal browser.</audio></div>`);
+  }
+  if(clips.length)fragments.push(`<section class="media"><h3>Audio</h3>${clips.join('')}</section>`);
+  const files=Array.isArray(n.linkedFiles)?n.linkedFiles.filter(f=>f&&f.name):[];
+  if(files.length)fragments.push(`<section class="media linked"><h3>Documenti collegati (non incorporati)</h3><ul>${files.map(f=>`<li>${htmlEscape(f.name)}</li>`).join('')}</ul></section>`);
+  const tags=noteTags(n);
+  if(tags.length)fragments.push(`<div class="tags">${tags.map(t=>`<span class="tag">#${htmlEscape(t)}</span>`).join('')}</div>`);
+  return `<section class="part">${heading}${fragments.length?fragments.join('\n'):'<p class="empty-part">Parte senza contenuto esportabile</p>'}</section>`;
+}
+function onfimBuildStandaloneNoteHTML(root,parts){
+  const title=String(root.title||'Senza titolo');
+  const when=dateTimeLabel(root.created);
+  const latest=dateTimeLabel(Math.max(...parts.map(p=>Number(p.updated)||Number(p.created)||0)));
+  const background=onfimShareSafeColor(root.color);
+  const exportedOn=new Intl.DateTimeFormat('it-IT',{day:'2-digit',month:'long',year:'numeric'}).format(new Date());
+  const tagSet=[...new Set(parts.flatMap(noteTags))];
+  const content=parts.map((p,i)=>onfimSharePartHTML(p,i+1,parts.length)).join('\n');
+  return `<!doctype html>
+<html lang="it"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; media-src data:; style-src 'unsafe-inline'; script-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="color-scheme" content="light">
+<title>${htmlEscape(title)} · onfim</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#222e38;background:#f3f5f7}
+*{box-sizing:border-box}body{margin:0;line-height:1.55;padding:30px 16px 60px}main{max-width:760px;margin:0 auto}
+.sheet{background:${background};border-radius:18px;padding:clamp(18px,5vw,42px);box-shadow:0 4px 20px #17233212;overflow-wrap:anywhere}
+.header{margin-bottom:26px;padding-bottom:17px;border-bottom:1px solid #222e3820}
+h1{font-size:clamp(1.5rem,5vw,2.2rem);line-height:1.25;letter-spacing:-.025em;margin:0 0 10px}
+.meta{font-size:.75rem;color:#52646d;line-height:1.6}
+.part+.part{border-top:1px solid #222e3823;margin-top:30px;padding-top:24px}
+.part-label{font-size:.84rem;letter-spacing:.03em;font-weight:700;color:#315b69;margin-bottom:12px}
+.note-text{font:15px/1.72 ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.note-text p{margin:0 0 .65em}.note-text ul,.note-text ol{margin:5px 0 11px;padding-left:25px;white-space:normal}
+.note-text li{white-space:pre-wrap}.note-text blockquote{border-left:3px solid #8099a7;padding-left:13px;margin:8px 0}
+.media{margin-top:25px}.media h3{font:700 .84rem/1.4 system-ui,sans-serif;letter-spacing:.01em;color:#52646d;margin:0 0 10px}
+.drawing{display:block;width:100%;max-width:700px;height:auto;background:#fff;border-radius:11px;border:1px solid #222e381a}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px}
+.photo{margin:0}.photo-visual{position:relative;overflow:hidden;border-radius:11px;line-height:0;background:#fff;border:1px solid #222e381a}
+.photo-visual img{display:block;width:100%;height:auto;object-fit:contain}
+.photo-visual .photo-annotation{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none}
+.audio-entry{margin:13px 0 18px;max-width:100%}.audio-label{font:.82rem/1.4 system-ui,sans-serif;margin-bottom:6px;color:#52646d}
+audio{display:block;width:100%;max-width:500px}.linked ul{font-size:.87rem;padding-left:22px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:21px}.tag{font-size:.72rem;color:#3b5360;padding:4px 8px;border-radius:9px;background:#ffffff8c;border:1px solid #222e3814}
+footer{font-size:.72rem;color:#71808a;text-align:center;padding:16px}.empty-part{font-size:.88rem;color:#75828a;font-style:italic}
+@media(max-width:500px){body{padding:12px 9px 35px}.sheet{border-radius:13px;padding:19px 16px}.note-text{font-size:13.5px}}
+@media print{body{background:#fff;padding:0}.sheet{box-shadow:none;border-radius:0;padding:0;background:#fff}.part{break-inside:auto}.photo,.audio-entry{break-inside:avoid}footer{padding-top:25px}}
+</style></head><body><main><article class="sheet"><header class="header"><h1>${htmlEscape(title)}</h1>
+<div class="meta">Creato: ${htmlEscape(when)} · Modificato: ${htmlEscape(latest)}</div></header>
+${content}</article><footer>Appunto esportato da onfim · ${htmlEscape(exportedOn)}</footer></main></body></html>`;
+}
+async function onfimExportNote(noteId){
+  closeReadMenu();
+  try{
+    const all=await allNotes();
+    const found=all.find(n=>n.id===noteId&&!n.deletedAt);
+    if(!found){toast('Appunto non trovato');return;}
+    const root=groupRootFor(found,all),parts=chainMembers(root,all);
+    if(root.reserved){
+      if(!unlocked&&!await checkPin())return;
+      if(!confirm('L’appunto riservato sarà esportato in chiaro. Chiunque riceva il file potrà leggerlo, senza PIN. Continuare?'))return;
+    }
+    const html=onfimBuildStandaloneNoteHTML(root,parts);
+    const mb=new Blob([html]).size/(1024*1024);
+    if(mb>18&&!confirm('Questo HTML contiene allegati incorporati e occupa circa '+mb.toFixed(1)+' MB. Vuoi esportarlo comunque?'))return;
+    download(html,onfimShareFilename(root.title),'text/html;charset=utf-8');
+    toast('Nota esportata: il file HTML è pronto per l’invio');
+  }catch(e){console.error('Esportazione HTML fallita',e);toast('Errore durante la creazione della pagina HTML');}
+}
+$('onfimShareHtml').onclick=()=>void onfimExportNote(readId);
+
 
 // Menu lettura: azioni di organizzazione, separate dalla modifica dei contenuti.
 function closeReadMenu(){
