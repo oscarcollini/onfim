@@ -2,7 +2,7 @@
   "id": "./index.html",
   "name": "onfim Lite — Appunti",
   "short_name": "onfim Lite",
-  "description": "Appunti offline: testo, disegni, foto, audio, note concatenate e backup JSON. Geofence e notifiche native disponibili nell’APK.",
+  "description": "Appunti offline con testo, disegni, foto, audio, raccolte dinamiche, promemoria e backup JSON. Geofence e notifiche native sono disponibili nell’APK.",
   "lang": "it",
   "start_url": "./index.html",
   "scope": "./",

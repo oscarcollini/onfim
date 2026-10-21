@@ -1,4 +1,4 @@
-onfim Lite PWA 0.8.6
-Caricare tutti i file nella radice del repository GitHub Pages.
-Prima dell’aggiornamento esportare un backup JSON. Non cancellare i dati del sito.
-Nel browser non sono disponibili widget e avvisi geografici nativi.
+onfim Lite PWA 0.8.6.4
+Correzioni: stella/puntina sempre nel piè di scheda anche con allegati (vista elenco); orari rapidi sotto Impostazioni.
+Dati, struttura e formati backup invariati.
+Caricare integralmente i file PWA sullo stesso percorso del sito.
