@@ -643,7 +643,7 @@ body.onfim-drawing-full #drawTab.expanded .drawframe{
 .note-view-switch{display:flex;align-items:center;gap:2px;padding:3px;border:1px solid #dbe4e9;border-radius:11px;background:#eef2f4}
 .note-view-btn{display:grid;place-items:center;min-width:34px;width:34px;height:34px;min-height:34px;padding:5px;border:0;border-radius:8px;background:transparent;color:#59707c}
 .note-view-btn[aria-pressed="true"]{background:#fff;color:#222e38;box-shadow:0 1px 4px #142d3620}
-.note-view-btn:focus-visible,.note-order-btn:focus-visible{outline:2px solid #426e81;outline-offset:2px}
+.note-view-btn:focus-visible{outline:2px solid #426e81;outline-offset:2px}
 .cards.list-layout{display:block}
 .cards.list-layout .note-column{gap:9px}
 .cards.list-layout .card{display:grid;grid-template-columns:minmax(0,1fr) 76px;grid-template-rows:repeat(4,auto);align-content:start;column-gap:10px;row-gap:3px;min-height:84px;padding:12px 15px 12px 12px}
@@ -655,14 +655,31 @@ body.onfim-drawing-full #drawTab.expanded .drawframe{
 .cards.list-layout .card .cardthumb.drawing{object-fit:contain}
 .cards.list-layout .card .card-menu{top:5px;right:7px}
 .cards.list-layout .card:not(:has(.cardthumb)){grid-template-columns:minmax(0,1fr)}
-.cards.list-layout .card .note-manual-arrows{grid-column:1;grid-row:5}
-.note-manual-arrows{display:flex;gap:7px;align-items:center;margin-top:5px}
-.note-order-btn{border:1px solid #cfdbe1;background:#ffffffaa;color:#375363;border-radius:9px;min-width:39px;min-height:36px;height:36px;padding:6px 10px;display:inline-flex;align-items:center;justify-content:center}
-.note-order-btn svg{width:18px;height:18px}
-.note-order-btn:disabled{opacity:.3;cursor:default}
 .chain-part-head{cursor:pointer}
 .chain-part-head:active .chain-part-label{color:var(--accent)}
 @media(max-width:380px){.home-view-actions{gap:5px}.note-view-btn{min-width:31px;width:31px;height:32px;min-height:32px}.onfim-notes-heading .small{font-size:.68rem}.cards.list-layout .card{grid-template-columns:minmax(0,1fr) 62px}.cards.list-layout .card .cardthumb{width:62px;height:60px;max-height:60px}}
+
+/* onfim 0.8.2 — pinned notes and Unicode tag filters. No manual-order controls. */
+#filterControls{display:flex;flex-direction:column;align-items:stretch;gap:10px}
+#filterControls>div:not(.tag-filter-panel){min-width:0}
+.tag-filter-panel{min-width:0;display:flex;flex-direction:column;gap:9px;padding:10px 0 6px}
+.tag-filter-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:.88rem;color:#263944}
+.tag-filter-reset{border:0;padding:5px 8px;border-radius:8px;background:#e8eef2;color:#32546a;font-size:.75rem;min-height:30px}
+.tag-filter-section{display:flex;flex-direction:column;gap:6px}
+.tag-filter-caption{font-size:.77rem;color:#526878}
+.tag-chip-list{display:flex;flex-wrap:wrap;gap:6px}
+.tag-choice{font-size:.78rem;display:inline-flex;align-items:center;gap:5px;border-radius:20px;padding:6px 9px;min-height:34px;max-width:100%;border:1px solid #d4dfe5;background:#fff;color:#314756;line-height:1.3}
+.tag-choice[aria-pressed="true"]{background:#dfebf0;border-color:#7295a6;color:#203e4d;box-shadow:inset 0 0 0 1px #7295a6}
+.tag-choice[data-kind="exclude"][aria-pressed="true"]{background:#f0e8e7;border-color:#a48988;color:#684547;box-shadow:inset 0 0 0 1px #a48988}
+.tag-choice .tag-count{color:#75848f;font-size:.7rem;font-variant-numeric:tabular-nums}
+.tag-empty{font-size:.78rem;color:#6a7a82}
+.tag-filter-summary{font-size:.74rem;color:#435b68;border-top:1px solid #dfe7eb;padding-top:7px}
+.card .chip.tag-filter-link{cursor:pointer;display:inline-flex;align-items:center;border:1px solid #b8cdd5;padding:4px 7px;min-height:25px;background:#f7fbfcbd;color:#345867;max-width:100%;font:inherit;font-size:.67rem}
+.card .chip.tag-filter-link:focus-visible,.tag-choice:focus-visible,.tag-filter-reset:focus-visible,.read-reminder-link:focus-visible{outline:2px solid #315b69;outline-offset:2px}
+.pinned-mark{display:inline-flex;vertical-align:middle;margin-left:5px;color:#446373}
+.pinned-mark svg{width:14px;height:14px;stroke-width:2}
+.read-reminder-link{display:inline-flex;align-items:center;gap:4px;border:1px solid #b8d0dd;background:#edf5f8;color:#31566c;padding:5px 8px;min-height:32px;border-radius:8px;font-size:.76rem;max-width:100%;text-align:left}
+.read-reminder-link svg{width:16px;height:16px;flex-shrink:0}
 </style>
 <link rel="manifest" href="./manifest.webmanifest"/><link rel="icon" type="image/png" href="./favicon.png"/><link rel="apple-touch-icon" href="./apple-touch-icon.png"/>
 <meta name="theme-color" content="#222E38"/>
@@ -692,8 +709,13 @@ body.onfim-drawing-full #drawTab.expanded .drawframe{
 <button aria-controls="filterControls" aria-expanded="false" class="filters-toggle" id="filtersToggle" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4 7h16M7 12h10m-7 5h4"></path></svg><span>Filtri</span><span aria-label="Filtri attivi" class="filter-dot hidden" id="filterActiveDot"></span></button>
 </div>
 <div class="filter-selectors hidden" id="filterControls">
-<div><label for="tagFilter">Hashtag</label><select aria-label="Filtra per hashtag" id="tagFilter"><option value="">Tutti gli hashtag</option></select></div>
-<div><label for="sortOrder">Ordina per</label><select aria-label="Ordina appunti" id="sortOrder"><option value="updated-desc">Modificati di recente</option><option value="created-desc">Creati di recente</option><option value="updated-asc">Modificati meno di recente</option><option value="created-asc">Creati meno di recente</option><option value="title-asc">Titolo A–Z</option><option value="title-desc">Titolo Z–A</option><option value="manual">Manuale · usa le frecce</option></select></div>
+<div class="tag-filter-panel" id="tagFilterPanel">
+    <div class="tag-filter-heading"><strong>Etichette</strong><button id="tagFiltersClear" type="button" class="tag-filter-reset hidden">Azzera</button></div>
+    <div class="tag-filter-section"><span class="tag-filter-caption">Mostra almeno una di queste</span><div class="tag-chip-list" id="tagIncludeOptions"></div></div>
+    <div class="tag-filter-section"><span class="tag-filter-caption">Nascondi queste</span><div class="tag-chip-list" id="tagExcludeOptions"></div></div>
+    <div id="tagFiltersSummary" class="tag-filter-summary hidden" role="status"></div>
+  </div>
+<div><label for="sortOrder">Ordina per</label><select aria-label="Ordina appunti" id="sortOrder"><option value="updated-desc">Modificati di recente</option><option value="created-desc">Creati di recente</option><option value="updated-asc">Modificati meno di recente</option><option value="created-asc">Creati meno di recente</option><option value="title-asc">Titolo A–Z</option><option value="title-desc">Titolo Z–A</option></select></div>
 </div>
 <div class="notice backup-reminder hidden" id="backupReminder" role="status"><span id="backupReminderText"></span><button id="backupReminderAction" type="button">Backup</button></div>
 <div class="sectionline onfim-notes-heading"><h2 id="homeHeading">I tuoi appunti</h2>
@@ -713,6 +735,7 @@ body.onfim-drawing-full #drawTab.expanded .drawframe{
       <button id="readMoreTop" class="icon-button" type="button" aria-label="Opzioni appunto" title="Opzioni" aria-haspopup="true" aria-expanded="false"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
       <div id="readPopup" class="read-popup hidden">
         <button id="readFavOption" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3 1.2-6.8-5-4.9 6.9-1Z"/></svg><span>Preferiti</span></button>
+        <button id="readPinOption" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 5 5-4 1-3 4-1 4-4-4-4-1 5-5 1-4zM9 15l-5 6"/></svg><span>Fissa in alto</span></button>
         <button id="readReminderOption" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><span>Promemoria</span></button>
         <button id="readArchiveOption" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Sposta in Archivio</span></button>
         <button id="readDetachOption" class="hidden" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="m8 8 12 12M14 10l6-6M8 16l4-4"/></svg><span>Separa parti</span></button>
@@ -807,7 +830,7 @@ body.onfim-drawing-full #drawTab.expanded .drawframe{
 <p class="hint">Per un backup realmente separato, esporta il JSON o condividilo con Drive. I backup non sono cifrati: possono contenere anche note dell'Archivio.</p>
 </div>
 <div class="panel"><h2>Limiti di onfim Lite</h2><p>Questa versione funziona offline e condivide gli appunti tramite file JSON con onfim Android, ma alcune funzioni richiedono l'APK:</p><ul class="lite-limit-list"><li><strong>Promemoria:</strong> nessuna sveglia affidabile con la PWA chiusa; puoi esportarli nel Calendario.</li><li><strong>Geofence:</strong> non disponibili in background; quelli importati restano nel backup senza attivarsi.</li><li><strong>Backup su Drive:</strong> manuale tramite Condividi; non automatico in background.</li><li><strong>Widget e notifiche native Android:</strong> non disponibili.</li></ul></div>
-<footer class="onfim-colophon">onfim Lite v0.8.1 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
+<footer class="onfim-colophon">onfim Lite v0.8.2 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
 <section class="view" id="trashView" aria-label="Cestino">
   <div class="controls"><button id="backTrash" type="button">← Impostazioni</button></div>
   <div class="panel trash-panel"><div class="trash-head"><div><h2>Appunti eliminati</h2><p class="hint">Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.</p></div><button id="emptyTrash" class="danger" type="button">Svuota</button></div><p id="trashCount" class="small" role="status"></p><div id="trashList" class="trash-list"></div></div>
@@ -1014,10 +1037,11 @@ function view(id){
 function normalizedTag(v){return String(v||'').normalize('NFC').toLocaleLowerCase('it-IT');}
 function extractHashtags(content){
   const text=String(content||'');
-  const pattern=/(^|[^\p{L}\p{N}_])#([\p{L}\p{N}_]+(?:-[\p{L}\p{N}_]+)*)/gu;
-  return [...new Set([...text.matchAll(pattern)].map(m=>normalizedTag(m[2])))];
+  // #🍸 #🏔️ #👩🏽‍💻 #🇮🇹; hyphens in text remain allowed.
+  const pattern=/(^|[^\p{L}\p{N}_])#([\p{L}\p{N}_\p{Extended_Pictographic}\p{Regional_Indicator}\p{Emoji_Modifier}\uFE0E\uFE0F\u200D\u20E3-]+)/gu;
+  return [...new Set([...text.matchAll(pattern)].map(m=>normalizedTag(m[2].replace(/^-+|-+$/g,''))).filter(Boolean))];
 }
-function legacyTagSlug(t){return String(t||'').trim().normalize('NFC').replace(/^#+/,'').replace(/\s+/g,'_').replace(/[^\p{L}\p{N}_-]/gu,'').replace(/^-+|-+$/g,'').toLocaleLowerCase('it-IT');}
+function legacyTagSlug(t){const v=String(t||'').trim().normalize('NFC').replace(/^#+/,'').replace(/\s+/g,'_');return extractHashtags('#'+v)[0]||'';}
 function noteTags(n){const raw=extractHashtags(txt(n.text||''));const old=(n.tags||[]).map(legacyTagSlug).filter(Boolean);return [...new Set([...raw,...old])];}
 function htmlEscape(text){return String(text).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function migratedText(n){
@@ -1028,54 +1052,64 @@ function migratedText(n){
   const line=missing.map(t=>'#'+t).join(' ');
   return String(n.text||'')+'<p>'+htmlEscape(line)+'</p>';
 }
+// Filter note groups, not just the root: linked parts contribute their hashtags.
+const onfimIncludedTags=new Set(),onfimExcludedTags=new Set(),ONFIM_NO_TAG='@onfim-no-tag';
+function onfimTagsOfGroup(g){return new Set(g.parts.flatMap(noteTags));}
+function onfimGroupMatchesTagFilters(g){
+  const tags=onfimTagsOfGroup(g);
+  if([...onfimExcludedTags].some(t=>t===ONFIM_NO_TAG?tags.size===0:tags.has(t)))return false;
+  return !onfimIncludedTags.size||[...onfimIncludedTags].some(t=>t===ONFIM_NO_TAG?tags.size===0:tags.has(t));
+}
+function onfimTagFilterActive(){return !!(onfimIncludedTags.size||onfimExcludedTags.size);}
+function onfimSetTagFilter(tag,kind){
+  const own=kind==='include'?onfimIncludedTags:onfimExcludedTags;
+  const other=kind==='include'?onfimExcludedTags:onfimIncludedTags;
+  if(own.has(tag))own.delete(tag);else{own.add(tag);other.delete(tag);}
+  void showTags().then(renderNotes);
+}
+function onfimChip(kind,tag,count){
+  const btn=document.createElement('button');btn.type='button';btn.className='tag-choice';
+  const active=(kind==='include'?onfimIncludedTags:onfimExcludedTags).has(tag);
+  btn.dataset.kind=kind;btn.dataset.tag=tag;btn.setAttribute('aria-pressed',String(active));
+  const text=tag===ONFIM_NO_TAG?'Senza etichetta':'#'+tag;
+  btn.setAttribute('aria-label',(kind==='include'?'Mostra: ':'Nascondi: ')+text);
+  const lbl=document.createElement('span');lbl.textContent=(active?(kind==='include'?'✓ ':'− '):'')+text;
+  const countEl=document.createElement('span');countEl.className='tag-count';countEl.textContent=count;
+  btn.append(lbl,countEl);btn.onclick=()=>onfimSetTagFilter(tag,kind);return btn;
+}
 async function showTags(){
-  const notes=await allNotes();
-  knownTags=[...new Set(notes.filter(n=>!n.deletedAt&&($('filter').value==='reserved'?n.reserved:!n.reserved)&&($('filter').value!=='favorites'||(groupRootFor(n,notes).favorite===true))&&(!n.reserved||unlocked)).flatMap(noteTags))].sort((a,b)=>a.localeCompare(b,'it'));
-  const sel=$('tagFilter'),before=sel.value;sel.replaceChildren();sel.add(new Option('Tutti gli hashtag',''));
-  for(const t of knownTags)sel.add(new Option('#'+t,t));
-  sel.value=knownTags.includes(before)?before:'';
+  const notes=await allNotes(),fil=$('filter').value,groups=new Map();
+  for(const n of notes.filter(x=>!x.deletedAt&&(fil==='reserved'?!!x.reserved:!x.reserved)&&(!x.reserved||unlocked))){
+    const root=groupRootFor(n,notes);
+    if(fil==='favorites'&&root.favorite!==true)continue;
+    if(!groups.has(root.id))groups.set(root.id,{root,parts:chainMembers(root,notes)});
+  }
+  const counts=new Map();let untagged=0;
+  for(const g of groups.values()){const tags=onfimTagsOfGroup(g);if(!tags.size)untagged++;
+    for(const tag of tags)counts.set(tag,(counts.get(tag)||0)+1);
+  }
+  knownTags=[...counts.keys()].sort((a,b)=>a.localeCompare(b,'it'));
+  const options=knownTags.map(t=>[t,counts.get(t)]);
+  if(untagged)options.push([ONFIM_NO_TAG,untagged]);
+  for(const [kind,id] of [['include','tagIncludeOptions'],['exclude','tagExcludeOptions']]){
+    const host=$(id);host.replaceChildren();
+    if(options.length){for(const [t,count] of options)host.append(onfimChip(kind,t,count));}
+    else{const empty=document.createElement('span');empty.className='tag-empty';empty.textContent='Nessuna etichetta';host.append(empty);}
+  }
+  $('tagFiltersClear').classList.toggle('hidden',!onfimTagFilterActive());
+  const summary=$('tagFiltersSummary');summary.classList.toggle('hidden',!onfimTagFilterActive());
+  if(onfimTagFilterActive())summary.textContent=`Mostra: ${onfimIncludedTags.size||'tutti'} · Nascondi: ${onfimExcludedTags.size} · Più etichette in “Mostra” = almeno una (OR)`;
 }
+$('tagFiltersClear').onclick=()=>{onfimIncludedTags.clear();onfimExcludedTags.clear();void showTags().then(renderNotes);};
 function previewAllowed(n){return !n.reserved||unlocked;}
-// L'ordine manuale riguarda gli APPUNTI, non le parti: ogni concatenazione rimane un gruppo.
 let onfimNotesView=(localStorage.getItem('onfim-notes-view')==='list'?'list':'grid');
-function onfimGroupTime(g,field){return Math.max(...g.parts.map(n=>Number(n[field])||0));}
-function onfimManualSort(a,b){
-  const x=Number(a.root.manualOrder),y=Number(b.root.manualOrder);
-  const xa=Number.isFinite(x)&&x>0,ya=Number.isFinite(y)&&y>0;
-  if(xa&&ya&&x!==y)return x-y;
-  if(xa!==ya)return xa?-1:1;
-  return onfimGroupTime(b,'updated')-onfimGroupTime(a,'updated')||(a.root.id||'').localeCompare(b.root.id||'');
-}
 function onfimSyncViewButtons(){
   $('notesGridView').setAttribute('aria-pressed',String(onfimNotesView==='grid'));
   $('notesListView').setAttribute('aria-pressed',String(onfimNotesView==='list'));
 }
-async function onfimShiftNoteGroup(rootId,direction){
-  if($('sortOrder').value!=='manual')return;
-  const all=await allNotes(),fil=$('filter').value;
-  const reserved=fil==='reserved';
-  const groups=new Map();
-  for(const n of all.filter(x=>!x.deletedAt&&!!x.reserved===reserved)){
-    const root=groupRootFor(n,all);
-    if(!groups.has(root.id))groups.set(root.id,{root,parts:chainMembers(root,all)});
-  }
-  const ordered=[...groups.values()].sort(onfimManualSort);
-  const tag=$('tagFilter').value,q=$('search').value.toLocaleLowerCase().trim();
-  const visible=ordered.filter(g=>(fil!=='favorites'||g.root.favorite===true)&&
-    (!tag||g.parts.some(n=>noteTags(n).includes(tag)))&&
-    (!q||g.parts.some(n=>[n.title,txt(n.text),...noteTags(n)].join(' ').toLocaleLowerCase().includes(q))));
-  const at=visible.findIndex(g=>g.root.id===rootId),next=at+direction;
-  if(at<0||next<0||next>=visible.length)return;
-  const targetId=visible[next].root.id,from=ordered.findIndex(g=>g.root.id===rootId);
-  const [moving]=ordered.splice(from,1),to=ordered.findIndex(g=>g.root.id===targetId);
-  ordered.splice(direction<0?to:to+1,0,moving);
-  const changed=ordered.map((g,i)=>g.root.manualOrder===i+1?null:{...g.root,manualOrder:i+1}).filter(Boolean);
-  if(changed.length)await putNotesBatch(changed);
-  await renderNotes();
-}
 async function renderNotes(){
-  const all=await allNotes(),q=$('search').value.toLocaleLowerCase().trim(),tag=$('tagFilter').value,fil=$('filter').value,order=$('sortOrder').value;
-  $('filterActiveDot').classList.toggle('hidden',!tag&&order==='updated-desc');
+  const all=await allNotes(),q=$('search').value.toLocaleLowerCase().trim(),fil=$('filter').value,order=$('sortOrder').value;
+  $('filterActiveDot').classList.toggle('hidden',!onfimTagFilterActive()&&order==='updated-desc');
   $('homeHeading').textContent=fil==='reserved'?'Archivio 🔒':fil==='favorites'?'Preferiti ⭐':'I tuoi appunti';
   // Raggruppiamo PRIMA di filtrare: la ricerca in una parte deve trovare l'appunto composto.
   const groups=new Map();
@@ -1085,10 +1119,11 @@ async function renderNotes(){
   }
   let a=[...groups.values()];
   if(fil==='favorites')a=a.filter(g=>g.root.favorite===true);
-  a=a.filter(g=>!tag||g.parts.some(n=>noteTags(n).includes(tag)));
+  a=a.filter(onfimGroupMatchesTagFilters);
   a=a.filter(g=>!q||g.parts.some(n=>[n.title,txt(n.text),...noteTags(n)].join(' ').toLocaleLowerCase().includes(q)));
   function moment(g,which){return Math.max(...g.parts.map(n=>Number(n[which])||0));}
-  a.sort((x,y)=>order==='manual'?onfimManualSort(x,y):order==='created-desc'?moment(y,'created')-moment(x,'created'):order==='created-asc'?moment(x,'created')-moment(y,'created'):order==='updated-asc'?moment(x,'updated')-moment(y,'updated'):order==='title-asc'?(x.root.title||'').localeCompare(y.root.title||''):order==='title-desc'?(y.root.title||'').localeCompare(x.root.title||''):moment(y,'updated')-moment(x,'updated'));
+  a.sort((x,y)=>order==='created-desc'?moment(y,'created')-moment(x,'created'):order==='created-asc'?moment(x,'created')-moment(y,'created'):order==='updated-asc'?moment(x,'updated')-moment(y,'updated'):order==='title-asc'?(x.root.title||'').localeCompare(y.root.title||''):order==='title-desc'?(y.root.title||'').localeCompare(x.root.title||''):moment(y,'updated')-moment(x,'updated'));
+  a.sort((x,y)=>Number(!!y.root.pinned)-Number(!!x.root.pinned));
   $('noteCount').textContent=a.length+' '+(a.length===1?'appunto':'appunti');
   const host=$('noteList');host.replaceChildren();host.classList.toggle('list-layout',onfimNotesView==='list');onfimSyncViewButtons();
   if(!a.length){const empty=document.createElement('div');empty.className='empty';empty.innerHTML=fil==='reserved'?'<div class="empty-symbol">🔒</div><strong>Archivio vuoto</strong><span>Puoi spostare qui gli appunti dal menu ⋮.</span>':fil==='favorites'?'<div class="empty-symbol">⭐</div><strong>Nessun preferito</strong><span>Aggiungi una stella a un appunto dal menu ⋮.</span>':'<div class="empty-symbol">✎</div><strong>Nessun appunto</strong><span>Premi ＋ per crearne uno.</span>';host.append(empty);return;}
@@ -1099,7 +1134,7 @@ async function renderNotes(){
     el.className='card';el.tabIndex=0;el.setAttribute('role','button');
     el.setAttribute('aria-label',allowed?'Leggi '+(n.title||'appunto senza titolo'):'Sblocca archivio');
     el.style.setProperty('--note-color',allowed?(n.color||'#fff'):'#e8ecef');
-    const title=document.createElement('div');title.className='title';title.textContent=allowed?(n.title||'Senza titolo'):'🔒 Riservato';if(allowed&&n.favorite&&!n.reserved){const mark=document.createElement('span');mark.className='favorite-mark';mark.innerHTML=ONFIM_ICONS.star;mark.setAttribute('aria-label','Preferito');title.append(mark);}el.append(title);
+    const title=document.createElement('div');title.className='title';title.textContent=allowed?(n.title||'Senza titolo'):'🔒 Riservato';if(allowed&&n.favorite&&!n.reserved){const mark=document.createElement('span');mark.className='favorite-mark';mark.innerHTML=ONFIM_ICONS.star;mark.setAttribute('aria-label','Preferito');title.append(mark);}if(allowed&&n.pinned){const mark=document.createElement('span');mark.className='pinned-mark';mark.innerHTML=ONFIM_ICONS.pin;mark.title='Fissato in alto';mark.setAttribute('aria-label','Fissato in alto');title.append(mark);}el.append(title);
     if(allowed&&count>1){const chain=document.createElement('div');chain.className='chain-summary';chain.textContent='▤ '+count+' parti collegate';el.append(chain);}
     const excerpt=document.createElement('div');excerpt.className='preview';
     const content=txt(n.text||'').trim();excerpt.textContent=allowed?(content||''):'Inserisci il PIN per leggere';
@@ -1112,7 +1147,12 @@ async function renderNotes(){
     }
     const meta=document.createElement('div');meta.className='meta';
     if(n.reserved){const b=document.createElement('span');b.className='chip';b.textContent='🔒';b.title='Archivio';meta.append(b);}
-    if(allowed){const uniqueTags=[...new Set(parts.flatMap(noteTags))];for(const t of uniqueTags.slice(0,3)){const c=document.createElement('span');c.className='chip';c.textContent='#'+t;meta.append(c);}if(parts.some(x=>x.reminder)){const r=document.createElement('span');r.className='chip';r.textContent='◷ Promemoria';meta.append(r);}const voiceCount=parts.reduce((sum,p)=>sum+(p.audios||[]).length,0);if(voiceCount){const voice=document.createElement('span');voice.className='chip';voice.textContent='🎙 '+voiceCount;meta.append(voice);}}
+    if(allowed){const uniqueTags=[...new Set(parts.flatMap(noteTags))];for(const t of uniqueTags.slice(0,3)){
+        const c=document.createElement('button');c.type='button';c.className='chip tag-filter-link';c.textContent='#'+t;
+        c.title='Mostra appunti con #'+t;c.setAttribute('aria-label','Filtra per #'+t);
+        c.onclick=e=>{e.stopPropagation();onfimIncludedTags.clear();onfimExcludedTags.clear();onfimIncludedTags.add(t);$('filterControls').classList.remove('hidden');$('filtersToggle').classList.add('selected');$('filtersToggle').setAttribute('aria-expanded','true');void showTags().then(renderNotes);};
+        meta.append(c);
+      }if(parts.some(x=>x.reminder)){const r=document.createElement('span');r.className='chip';r.textContent='◷ Promemoria';meta.append(r);}const voiceCount=parts.reduce((sum,p)=>sum+(p.audios||[]).length,0);if(voiceCount){const voice=document.createElement('span');voice.className='chip';voice.textContent='🎙 '+voiceCount;meta.append(voice);}}
     if(meta.childNodes.length)el.append(meta);
     const menu=document.createElement('div');menu.className='card-menu';
     const quickReminder=document.createElement('button');
@@ -1133,6 +1173,9 @@ async function renderNotes(){
       star.onclick=async e=>{e.stopPropagation();popup.classList.add('hidden');const fresh=(await allNotes()).find(x=>x.id===n.id);if(!fresh)return;await putNote({...fresh,favorite:!fresh.favorite,updated:Date.now()});await reload();toast(fresh.favorite?'Rimosso dai Preferiti':'Aggiunto ai Preferiti');};
       popup.append(star);
     }
+    const pinAction=document.createElement('button');pinAction.type='button';pinAction.innerHTML=ONFIM_ICONS.pin+'<span>'+(n.pinned?'Rimuovi da Fissati':'Fissa in alto')+'</span>';
+    pinAction.onclick=async e=>{e.stopPropagation();closeCardMenus();const fresh=(await allNotes()).find(x=>x.id===n.id&&!x.deletedAt);if(!fresh)return;if(fresh.reserved&&!unlocked&&!await checkPin())return;await putNote({...fresh,pinned:!fresh.pinned});await reload();toast(fresh.pinned?'Non più fissato':'Fissato in alto');};
+    popup.append(pinAction);
     const remindAction=document.createElement('button');remindAction.type='button';remindAction.innerHTML=ONFIM_ICONS.bell+'<span>Promemoria</span>';remindAction.onclick=async e=>{e.stopPropagation();closeCardMenus();if(n.reserved&&!unlocked&&!await checkPin())return;await openReminderFor(n,true);};
     const partAction=document.createElement('button');partAction.type='button';partAction.innerHTML=ONFIM_ICONS.plus+'<span>Aggiungi parte</span>';partAction.onclick=async e=>{e.stopPropagation();closeCardMenus();if(n.reserved&&!unlocked&&!await checkPin())return;onfimAskPartFromCard(n.id);};
     popup.append(remindAction,partAction,move,del);menu.append(quickReminder,more,popup);el.append(menu);
@@ -1140,22 +1183,11 @@ async function renderNotes(){
     const open=async()=>{if(n.reserved&&!await checkPin())return;await openRead(n);};
     el.addEventListener('click',e=>{if(e.target.closest('button'))return;void open();});
     el.addEventListener('keydown',e=>{if(e.target===el&&(e.key==='Enter'||e.key===' ')){e.preventDefault();void open();}});
-    if(order==='manual'){
-      const controls=document.createElement('div');controls.className='note-manual-arrows';
-      for(const [d,svg,label] of [[-1,ONFIM_ICONS.up,'Sposta su'],[1,ONFIM_ICONS.down,'Sposta giù']]){
-        const btn=document.createElement('button');btn.type='button';btn.className='note-order-btn';
-        btn.innerHTML=svg;btn.title=label+' nell’ordine manuale';btn.setAttribute('aria-label',label+' '+(n.title||'appunto'));
-        btn.disabled=d<0?i===0:i===a.length-1;
-        btn.onclick=async e=>{e.stopPropagation();closeCardMenus();btn.disabled=true;try{await onfimShiftNoteGroup(n.id,d);}catch(err){toast('Impossibile riordinare: '+err.message);}finally{if(btn.isConnected)btn.disabled=false;}};
-        controls.append(btn);
-      }
-      el.append(controls);
-    }
     columns[i%columns.length].append(el);
   }
 }
 
-function emptyNote(){return{id:uid(),title:'',text:'',color:'#ffffff',tags:[],reminder:'',reminderRepeat:'none',reserved:false,favorite:false,photos:[],photoMarks:[],drawing:'',audios:[],linkedFiles:[],created:Date.now(),updated:Date.now()};}
+function emptyNote(){return{id:uid(),title:'',text:'',color:'#ffffff',tags:[],reminder:'',reminderRepeat:'none',reserved:false,favorite:false,pinned:false,photos:[],photoMarks:[],drawing:'',audios:[],linkedFiles:[],created:Date.now(),updated:Date.now()};}
 function hasContent(n){return !!(n.title.trim()||txt(n.text).trim()||(n.photos||[]).length||n.drawing||(n.audios||[]).length||(n.linkedFiles||[]).length);}
 function markDirty(){dirty=true;$('saveState').textContent='Modifiche non salvate';clearTimeout(saveTimer);}
 function snapshot(){return{...note,title:$('noteTitle').value.trim(),text:sanitizeHTML($('noteBody').innerHTML),color:$('noteColor').value,tags:extractHashtags(txt($('noteBody').innerHTML)),reminder:$('reminder').value,reminderBase:$('reminder').value===note.reminder?(note.reminderBase||note.reminder):$('reminder').value,reminderRepeat:$('reminder').value?(note.reminderRepeat||'none'):'none',reserved:$('reserved').checked,photos:[...images],photoMarks:[...photoMarks],drawing:drawn?$('drawCanvas').toDataURL('image/png'):drawData,audios:[...audioClips],linkedFiles:[...onfimEditorLinks],updated:Date.now()};}
@@ -1262,8 +1294,19 @@ async function openRead(n){
   const meta=$('readMeta');meta.replaceChildren();
   const addChip=s=>{const span=document.createElement('span');span.className='chip';span.textContent=s;meta.append(span);};
   if(n.reserved)addChip('🔒 Archivio');
-  for(const tag of noteTags(n))addChip('#'+tag);
-  if(n.reminder){const when=new Date(n.reminder);if(!Number.isNaN(when.getTime()))addChip('⏰ '+when.toLocaleString('it-IT'));}
+  for(const tag of [...new Set(parts.flatMap(noteTags))]){
+    const c=document.createElement('button');c.type='button';c.className='chip tag-filter-link';c.textContent='#'+tag;
+    c.onclick=async()=>{onfimIncludedTags.clear();onfimExcludedTags.clear();onfimIncludedTags.add(tag);await reload();$('filterControls').classList.remove('hidden');$('filtersToggle').setAttribute('aria-expanded','true');view('listView');};
+    meta.append(c);
+  }
+  if(n.reminder||n.geofence?.enabled){
+    const button=document.createElement('button');button.type='button';button.className='read-reminder-link';
+    button.innerHTML=ONFIM_ICONS.bell;
+    const label=document.createElement('span');const when=new Date(n.reminder);
+    label.textContent=n.reminder&&!Number.isNaN(when.getTime())?'Promemoria: '+when.toLocaleString('it-IT')+' · Modifica':'Promemoria geografico · Modifica';
+    button.append(label);button.title='Modifica o rimuovi il promemoria';
+    button.onclick=()=>void openReminderFor(n,false);meta.append(button);
+  }
   if(parts.length>1){for(const [i,part] of parts.entries()){
     const block=makeChainPart(part,i+1,parts.length);
     $('chainParts').append(block);
@@ -1277,6 +1320,7 @@ async function openRead(n){
   $('editFromRead').textContent='Modifica';
   $('readFavOption').classList.toggle('hidden',!!n.reserved);
   $('readFavOption').querySelector('span').textContent=n.favorite?'Rimuovi dai Preferiti':'Aggiungi ai Preferiti';
+  $('readPinOption').querySelector('span').textContent=n.pinned?'Rimuovi da Fissati':'Fissa in alto';
   $('readArchiveOption').querySelector('svg').outerHTML=n.reserved?ONFIM_ICONS.restore:ONFIM_ICONS.archive;$('readArchiveOption').querySelector('span').textContent=n.reserved?'Rimuovi dall’Archivio':'Sposta in Archivio';$('readReminderOption').querySelector('span').textContent=n.reminder||n.geofence?.enabled?'Modifica promemoria':'Promemoria';
   $('readDetachOption').classList.toggle('hidden',parts.length<=1);
   $('readDeleteOption').querySelector('span').textContent=parts.length>1?'Sposta appunto nel Cestino':'Sposta nel Cestino';
@@ -1288,7 +1332,7 @@ async function openRead(n){
 }
 // La lettura concatenata usa gli stessi contenuti salvati delle note semplici.
 // Ogni parte e' ancora modificabile indipendentemente nell'editor normale.
-const ONFIM_ICONS={pencil:'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',more:'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>',star:'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3 1.2-6.8-5-4.9 6.9-1Z"/></svg>',archive:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V7a4 4 0 0 1 8 0v3\"/></svg>",restore:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V7a4 4 0 0 1 7-2.65\"/></svg>",bell:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9\"/><path d=\"M10 21h4\"/></svg>",plus:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 5v14M5 12h14\"/></svg>",trash:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15M10 10v7M14 10v7\"/></svg>",up:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 19V5m-6 6 6-6 6 6\"/></svg>",down:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 5v14m-6-6 6 6 6-6\"/></svg>"};
+const ONFIM_ICONS={pin:'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 5 5-4 1-3 4-1 4-4-4-4-1 5-5 1-4zM9 15l-5 6"/></svg>',pencil:'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',more:'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>',star:'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3 1.2-6.8-5-4.9 6.9-1Z"/></svg>',archive:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V7a4 4 0 0 1 8 0v3\"/></svg>",restore:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V7a4 4 0 0 1 7-2.65\"/></svg>",bell:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9\"/><path d=\"M10 21h4\"/></svg>",plus:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 5v14M5 12h14\"/></svg>",trash:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15M10 10v7M14 10v7\"/></svg>",up:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 19V5m-6 6 6-6 6 6\"/></svg>",down:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 5v14m-6-6 6 6 6-6\"/></svg>"};
 function makeChainPart(n,number,total){
   const block=document.createElement('section');block.className='chain-part';
   const head=document.createElement('div');head.className='chain-part-head';
@@ -1452,7 +1496,7 @@ async function exportJSON(){try{
   await refreshBackupStatus();
   $('settingsStatus').textContent='Download avviato. Verifica che il file JSON sia stato effettivamente salvato sul dispositivo o su Drive.';
 }catch(e){$('settingsStatus').textContent='Errore nell’esportazione: '+e.message;}}
-async function importJSON(file){try{const data=JSON.parse(await file.text());if(!Array.isArray(data.notes)|| !['appunti-backup','onfim-backup'].includes(data.format))throw new Error('Formato JSON non riconosciuto.');if(!confirm('Importare '+data.notes.length+' appunti? Gli ID già presenti saranno aggiornati; gli altri verranno aggiunti.'))return;if(dirty)throw new Error('Prima salva o chiudi l’appunto in modifica.');const existing=await allNotes();if(existing.length&&!await makeLocalSnapshot('prima-importazione',true))throw new Error('Non è stato possibile creare una copia preventiva: esporta un JSON e riprova.');let count=0;const imported=[];for(const n of data.notes){if(!n?.id||typeof n!=='object')continue;const cleaned={id:String(n.id),title:String(n.title||''),text:sanitizeHTML(n.text),color:String(n.color||'#ffffff'),tags:Array.isArray(n.tags)?n.tags.map(String):[],photos:Array.isArray(n.photos)?n.photos.filter(s=>typeof s==='string'&&s.startsWith('data:image/')):[],photoMarks:Array.isArray(n.photoMarks)?n.photoMarks.map(s=>typeof s==='string'&&(s===''||s.startsWith('data:image/'))?s:''):[],drawing:typeof n.drawing==='string'&&n.drawing.startsWith('data:image/')?n.drawing:'',reminder:String(n.reminder||''),reminderRepeat:['none','daily','weekly','monthly','weekday','monday','tuesday','wednesday','thursday','friday','saturday','sunday'].includes(n.reminderRepeat)?n.reminderRepeat:'none',reminderBase:typeof n.reminderBase==='string'?n.reminderBase:String(n.reminder||''),geofence:cleanGeofence(n.geofence),reserved:!!n.reserved,favorite:!!n.favorite,created:Number(n.created)||Date.now(),updated:Number(n.updated)||Date.now(),audios:Array.isArray(n.audios)?n.audios.filter(a=>a&&typeof a.data==='string'&&a.data.startsWith('data:audio/')&&a.data.length<=Math.ceil(MAX_AUDIO_BYTES*1.4)).map(a=>({id:String(a.id||uid()),name:String(a.name||'Registrazione'),data:a.data,created:Number(a.created)||Date.now()})):[],chainRoot:typeof n.chainRoot==='string'?n.chainRoot:'',chainOrder:Number.isFinite(Number(n.chainOrder))?Number(n.chainOrder):0,manualOrder:Number.isSafeInteger(Number(n.manualOrder))&&Number(n.manualOrder)>0?Number(n.manualOrder):0,linkedFiles:Array.isArray(n.linkedFiles)?n.linkedFiles.filter(f=>f&&typeof f.uri==='string'&&/^content:\/\//.test(f.uri)&&f.uri.length<4096).slice(0,15).map(f=>({uri:f.uri,name:String(f.name||'Documento').slice(0,180),type:String(f.type||'').slice(0,120),size:Number(f.size)||0})):[]};if(Number(n.deletedAt)>0){cleaned.deletedAt=Number(n.deletedAt);cleaned.trashBatchId=typeof n.trashBatchId==='string'&&n.trashBatchId?n.trashBatchId:cleaned.id;}imported.push(cleaned);count++;}await putNotesBatch(imported);await reload();scheduleReminders();$('settingsStatus').textContent='Importati '+count+' appunti.';}catch(e){$('settingsStatus').textContent='Importazione non riuscita: '+e.message;}finally{$('jsonInput').value='';}}
+async function importJSON(file){try{const data=JSON.parse(await file.text());if(!Array.isArray(data.notes)|| !['appunti-backup','onfim-backup'].includes(data.format))throw new Error('Formato JSON non riconosciuto.');if(!confirm('Importare '+data.notes.length+' appunti? Gli ID già presenti saranno aggiornati; gli altri verranno aggiunti.'))return;if(dirty)throw new Error('Prima salva o chiudi l’appunto in modifica.');const existing=await allNotes();if(existing.length&&!await makeLocalSnapshot('prima-importazione',true))throw new Error('Non è stato possibile creare una copia preventiva: esporta un JSON e riprova.');let count=0;const imported=[];for(const n of data.notes){if(!n?.id||typeof n!=='object')continue;const cleaned={id:String(n.id),title:String(n.title||''),text:sanitizeHTML(n.text),color:String(n.color||'#ffffff'),tags:Array.isArray(n.tags)?n.tags.map(String):[],photos:Array.isArray(n.photos)?n.photos.filter(s=>typeof s==='string'&&s.startsWith('data:image/')):[],photoMarks:Array.isArray(n.photoMarks)?n.photoMarks.map(s=>typeof s==='string'&&(s===''||s.startsWith('data:image/'))?s:''):[],drawing:typeof n.drawing==='string'&&n.drawing.startsWith('data:image/')?n.drawing:'',reminder:String(n.reminder||''),reminderRepeat:['none','daily','weekly','monthly','weekday','monday','tuesday','wednesday','thursday','friday','saturday','sunday'].includes(n.reminderRepeat)?n.reminderRepeat:'none',reminderBase:typeof n.reminderBase==='string'?n.reminderBase:String(n.reminder||''),geofence:cleanGeofence(n.geofence),reserved:!!n.reserved,favorite:!!n.favorite,pinned:!!n.pinned,created:Number(n.created)||Date.now(),updated:Number(n.updated)||Date.now(),audios:Array.isArray(n.audios)?n.audios.filter(a=>a&&typeof a.data==='string'&&a.data.startsWith('data:audio/')&&a.data.length<=Math.ceil(MAX_AUDIO_BYTES*1.4)).map(a=>({id:String(a.id||uid()),name:String(a.name||'Registrazione'),data:a.data,created:Number(a.created)||Date.now()})):[],chainRoot:typeof n.chainRoot==='string'?n.chainRoot:'',chainOrder:Number.isFinite(Number(n.chainOrder))?Number(n.chainOrder):0,manualOrder:Number.isSafeInteger(Number(n.manualOrder))&&Number(n.manualOrder)>0?Number(n.manualOrder):0,linkedFiles:Array.isArray(n.linkedFiles)?n.linkedFiles.filter(f=>f&&typeof f.uri==='string'&&/^content:\/\//.test(f.uri)&&f.uri.length<4096).slice(0,15).map(f=>({uri:f.uri,name:String(f.name||'Documento').slice(0,180),type:String(f.type||'').slice(0,120),size:Number(f.size)||0})):[]};if(Number(n.deletedAt)>0){cleaned.deletedAt=Number(n.deletedAt);cleaned.trashBatchId=typeof n.trashBatchId==='string'&&n.trashBatchId?n.trashBatchId:cleaned.id;}imported.push(cleaned);count++;}await putNotesBatch(imported);await reload();scheduleReminders();$('settingsStatus').textContent='Importati '+count+' appunti.';}catch(e){$('settingsStatus').textContent='Importazione non riuscita: '+e.message;}finally{$('jsonInput').value='';}}
 function icsEscape(s){return String(s||'').replace(/\\/g,'\\\\').replace(/\r?\n/g,'\\n').replace(/[;,]/g,m=>'\\'+m);}
 async function exportICS(){const notes=(await allNotes()).filter(n=>!n.deletedAt&&n.reminder&&!Number.isNaN(new Date(n.reminder).getTime()));if(!notes.length){$('settingsStatus').textContent='Nessun promemoria da esportare.';return;}const stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');const out=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Onfim//Promemoria//IT','CALSCALE:GREGORIAN','METHOD:PUBLISH'];for(const n of notes){const t=n.reminder.replace(/[-:]/g,'').replace('T','T');const local=t.length===13?t+'00':t;out.push('BEGIN:VEVENT','UID:'+n.id.replace(/[^a-zA-Z0-9-]/g,'-')+'@onfim.local','DTSTAMP:'+stamp,'DTSTART:'+local,'DTEND:'+local,'SUMMARY:'+icsEscape('Onfim: '+(n.reserved?'Appunto riservato':(n.title||'Promemoria'))),...onfimIcsRepeat(n),'DESCRIPTION:'+icsEscape(n.reserved?'Apri gli appunti riservati in Onfim.':txt(n.text).slice(0,300)),'BEGIN:VALARM','TRIGGER:PT0M','ACTION:DISPLAY','DESCRIPTION:Promemoria Onfim','END:VALARM','END:VEVENT');}out.push('END:VCALENDAR');download(out.join('\r\n')+'\r\n','onfim-promemoria.ics','text/calendar;charset=utf-8');$('settingsStatus').textContent='Esportati '+notes.length+' promemoria. Importa il file nel calendario Android; l’importazione non si aggiorna automaticamente.';}
 async function tryNotify(title){const msg='Promemoria onfim: '+title;try{if('Notification'in window&&Notification.permission==='granted'){if('serviceWorker'in navigator&&location.protocol.startsWith('http')){const reg=await navigator.serviceWorker.ready;await reg.showNotification(msg,{body:'Apri onfim per leggere la nota.'});return;}new Notification(msg);return;}}catch{}alert(msg+'\n\nPer notifiche a pagina chiusa, esporta il promemoria nel calendario Android.');}
@@ -1600,6 +1644,12 @@ $('reminderSave').onclick=()=>{
 $('reminderRemove').onclick=()=>void saveReadReminder('',null,'none');
 $('readEditTop').onclick=()=>{closeReadMenu();$('editFromRead').click();};
 $('readFavOption').onclick=()=>{closeReadMenu();$('starFromRead').click();};
+$('readPinOption').onclick=async()=>{
+  closeReadMenu();const all=await allNotes(),n=all.find(x=>x.id===readId&&!x.deletedAt);if(!n)return;
+  if(n.reserved&&!unlocked&&!await checkPin())return;
+  await putNote({...n,pinned:!n.pinned});const latest=(await allNotes()).find(x=>x.id===readId);
+  if(latest)await openRead(latest);toast(n.pinned?'Non più fissato':'Fissato in alto');
+};
 $('readDetachOption').onclick=()=>{closeReadMenu();$('detachParts').click();};
 $('readArchiveOption').onclick=async()=>{
   closeReadMenu();const all=await allNotes(),root=all.find(n=>n.id===readId);
@@ -1684,8 +1734,8 @@ for(const [id,mode] of [['notesGridView','grid'],['notesListView','list']])$(id)
   onfimNotesView=mode;localStorage.setItem('onfim-notes-view',mode);renderNotes();
 };
 const oldSortPref=localStorage.getItem('onfim-sort-order');
-if(oldSortPref&&[...$('sortOrder').options].some(o=>o.value===oldSortPref))$('sortOrder').value=oldSortPref;
-$('sortOrder').onchange=()=>{localStorage.setItem('onfim-sort-order',$('sortOrder').value);renderNotes();};$('tagFilter').onchange=renderNotes;$('filter').onchange=async()=>{if($('filter').value==='reserved'&&!await checkPin())$('filter').value='ordinary';syncFilterPills();await showTags();renderNotes();};
+if(oldSortPref&&[...$('sortOrder').options].some(o=>o.value===oldSortPref))$('sortOrder').value=oldSortPref;else if(oldSortPref==='manual')localStorage.removeItem('onfim-sort-order');
+$('sortOrder').onchange=()=>{localStorage.setItem('onfim-sort-order',$('sortOrder').value);renderNotes();};$('filter').onchange=async()=>{if($('filter').value==='reserved'&&!await checkPin())$('filter').value='ordinary';syncFilterPills();await showTags();renderNotes();};
 for(const b of document.querySelectorAll('[data-tab]'))b.onclick=()=>chooseTab(b.dataset.tab);
 $('noteTitle').oninput=markDirty;for(const id of ['noteColor','reminder'])$(id).onchange=markDirty;
 $('reserved').onchange=async()=>{if($('reserved').checked){$('reserved').checked=false;const ok=await checkPin();if(ok)$('reserved').checked=true;}markDirty();};$('noteBody').oninput=()=>{lastHighlightAction=null;markDirty();recordTextHistory();updateTextMark();};$('textUndo').onclick=()=>textUndoOrRedo(-1);$('textRedo').onclick=()=>textUndoOrRedo(1);document.addEventListener('selectionchange',()=>{rememberRange();if(document.activeElement===$('noteBody'))updateFormat();});

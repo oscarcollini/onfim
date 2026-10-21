@@ -1,8 +1,12 @@
-onfim Lite PWA 0.8.1 — 21 ottobre 2026
+onfim Lite 0.8.2 — ottobre 2026
 
-Nuovo: vista griglia/elenco; ordinamento manuale degli appunti con frecce; intestazione delle parti concatenate toccabile per entrare in modifica, senza interferire con contenuti e allegati.
+Novità:
+- tolto il riordino manuale delle schede e le frecce permanenti;
+- «Fissa in alto» nel menu ⋮ della scheda e della nota aperta;
+- Filtri → Etichette: scegli più hashtag da mostrare (almeno uno, OR) o da nascondere (esclusione prioritaria), anche #🍸 e altri hashtag con emoji;
+- filtro «Senza etichetta» e tocco sugli hashtag delle schede;
+- nella nota aperta il promemoria diventa un pulsante per modificarlo/rimuoverlo.
 
-Pubblicazione: estrai tutti i file nella radice di GitHub Pages per onfim.
-Esegui sempre un backup JSON prima di aggiornare; non cancellare i dati del sito.
-
-La Lite non dispone di geofence in background, widget Android, backup Drive automatico o notifiche affidabili con browser chiuso.
+Pubblicazione: estrai TUTTI i file nella radice di GitHub Pages, sostituendo i file vecchi. Non cancellare i dati del sito. Prima fai un backup JSON.
+La Lite non supporta geofence in background, notifiche garantite con app chiusa, widget Android e backup Drive automatico.
+Le etichette filtrate sono una preferenza temporanea della schermata; non cambiano il testo delle note.
