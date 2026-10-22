@@ -1,5 +1,10 @@
-ONFIM LITE PWA 0.8.8
-Caricare i file dello ZIP nella stessa cartella di GitHub Pages.
-La PWA usa IndexedDB e non include i servizi Android.
-Novità: comandi unificati, testi e disegno rifiniti; niente fascia vuota sopra il titolo di Testo/Foto/Audio; impostazioni archivio browser, copie locali, backup esterno più chiare.
-Non cancellare i dati del sito dal browser durante l’aggiornamento.
+ONFIM LITE 0.8.9 — PWA PER GITHUB PAGES
+
+Aggiornamento circoscritto rispetto a 0.8.8:
+- Campanella non colorata sui promemoria singoli scaduti (ricorrenti attivi invariati).
+- «Condividi nota»: HTML autonomo inviabile tramite menu di condivisione del browser, quando disponibile; altrimenti scaricato come file da inviare. All'interno dell'HTML è presente «Scarica JSON per Onfim».
+- Spaziatura corretta nella prima posizione dei colori in Disegno e Annotazioni foto.
+
+Sostituire i file del sito senza cancellare i dati del browser. La cache passa alla 0.8.9.
+La PWA Lite non acquisisce per questo motivo funzioni Android native.
+Il JSON della nota può essere importato con «Importa JSON» e contiene tutti i suoi elementi incorporati; i documenti esterni collegati non sono copiati.
