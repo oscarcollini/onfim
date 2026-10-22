@@ -1,10 +1,5 @@
-ONFIM LITE PWA 0.8.7.1
-
-Correzione mirata rispetto alla 0.8.7: nella vista a righe, per le note con miniature, campanella e menu a tre punti sono disposti in una colonna separata e non si sovrappongono alla fotografia.
-
-L'app rimane la PWA Lite: IndexedDB, backup JSON e service worker. Nessuna modifica ai dati o alle funzioni rispetto alla 0.8.7.
-Pubblica tutti i file nella stessa cartella di GitHub Pages, sostituendo quelli precedenti. Mantieni lo stesso indirizzo: non cancellare i dati del sito. L'identità PWA rimane ./index.html; nome installato «onfim Lite».
-Cache aggiornata: onfim-shell-lite-v0.8.7.1.
-
-Le notifiche con app chiusa e gli avvisi geografici non sono garantiti dalla PWA; widget, backup Android e collegamento ai file esterni richiedono l'APK normale.
-Prima di aggiornare, conserva un backup JSON fuori dal dispositivo. Dopo la pubblicazione, verifica la vista a righe su note con e senza miniature e la modalità offline.
+ONFIM LITE PWA 0.8.8
+Caricare i file dello ZIP nella stessa cartella di GitHub Pages.
+La PWA usa IndexedDB e non include i servizi Android.
+Novità: comandi unificati, testi e disegno rifiniti; niente fascia vuota sopra il titolo di Testo/Foto/Audio; impostazioni archivio browser, copie locali, backup esterno più chiare.
+Non cancellare i dati del sito dal browser durante l’aggiornamento.
