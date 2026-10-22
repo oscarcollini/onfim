@@ -1,11 +1,11 @@
-onfim Lite PWA 0.8.6.6
+onfim Lite PWA 0.8.6.7 — 22 ottobre 2026
 
-Pubblicare sul proprio hosting HTTPS tutti i file della cartella allo stesso livello, mantenendo il percorso della PWA precedente. Il service worker aggiornato usa la cache v0.8.6.6. Non cancellare i dati dell'app o IndexedDB durante l'aggiornamento.
+Aggiornamento da 0.8.6.6: pubblicare TUTTI i file dello ZIP nella stessa cartella della PWA attuale, sostituendo quelli precedenti. Non cambiare il percorso di pubblicazione né cancellare i dati del sito. La cache del service worker passa a v0.8.6.7.
 
-Promemoria rapidi: Oggi / Domani / Altra data e soltanto Mattina / Pomeriggio, con orari modificabili nelle Impostazioni. È sempre possibile scegliere liberamente data e ora.
+Contenuto: checklist nelle note (spuntabile in lettura), scelta Italiano/English/Automatica nelle Impostazioni, scorciatoia facoltativa per i promemoria, nuova grafica del foglio singolo e pulsante + armonizzato, strumenti disegno/annotazioni uniformati, solo icona per Data/ora, pannello Link a file esterni visibile (collegamenti operativi solo in APK Android).
 
-Luogo: ricerca e mappa consentono di registrare le coordinate, ma nella PWA non sono disponibili le notifiche geografiche in background. Le funzioni native di notifiche, geofence, widget e backup automatici Android richiedono l'APK.
+La PWA non garantisce notifiche in background a pagina chiusa e non gestisce geofence Android. Le note restano nei dati locali del sito (IndexedDB); non sono dentro lo ZIP. Prima degli aggiornamenti è consigliabile esportare un backup JSON.
 
-Unione: dalla nota di partenza scegli «Aggiungi a un'altra nota»; il contenuto è copiato nella destinazione e l'originale passa nel Cestino, recuperabile indipendentemente. Gli orari delle due fasce sono inclusi nel JSON manuale.
+Il manifest conserva id ./index.html, start_url ./index.html e scope ./ per preservare l'identità della PWA già installata.
 
-PIN: sblocco automatico dopo 4 cifre. Se era impostato un PIN diverso, inserirlo una sola volta e sostituirlo con 4 cifre. Non cancellare i dati per aggiornare.
+Verificare su dispositivo: aggiornamento offline, dati precedenti e nuove checklist, import/export, lingua, cache e icone.
