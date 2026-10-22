@@ -1,11 +1,11 @@
-onfim Lite PWA 0.8.6.7 — 22 ottobre 2026
+ONFIM LITE PWA 0.8.7
 
-Aggiornamento da 0.8.6.6: pubblicare TUTTI i file dello ZIP nella stessa cartella della PWA attuale, sostituendo quelli precedenti. Non cambiare il percorso di pubblicazione né cancellare i dati del sito. La cache del service worker passa a v0.8.6.7.
+Contenuto: PWA Lite (browser), manifest, service worker, icone e istruzioni.
+Pubblica tutti i file nella stessa cartella di GitHub Pages usata finora, sostituendo quelli della 0.8.6.7; NON cancellare i dati del sito.
+L'identità della PWA rimane ./index.html e il nome installato conserva “Lite”. Cache aggiornata a onfim-shell-lite-v0.8.7.
 
-Contenuto: checklist nelle note (spuntabile in lettura), scelta Italiano/English/Automatica nelle Impostazioni, scorciatoia facoltativa per i promemoria, nuova grafica del foglio singolo e pulsante + armonizzato, strumenti disegno/annotazioni uniformati, solo icona per Data/ora, pannello Link a file esterni visibile (collegamenti operativi solo in APK Android).
+Novità rispetto alla 0.8.6.7: strumento T per testo sul disegno e sulle foto, strumenti in alto nell'annotazione fotografica, scorrimento verticale laterale delle immagini lunghe e revisioni delle traduzioni (compresi messaggi di backup).
 
-La PWA non garantisce notifiche in background a pagina chiusa e non gestisce geofence Android. Le note restano nei dati locali del sito (IndexedDB); non sono dentro lo ZIP. Prima degli aggiornamenti è consigliabile esportare un backup JSON.
+Limitazioni: i promemoria a pagina chiusa e i geofence non sono garantiti dalla PWA; il widget Android, i backup automatici nativi e il collegamento a file esterni richiedono l'APK. L'archivio rimane nei dati locali del browser (IndexedDB).
 
-Il manifest conserva id ./index.html, start_url ./index.html e scope ./ per preservare l'identità della PWA già installata.
-
-Verificare su dispositivo: aggiornamento offline, dati precedenti e nuove checklist, import/export, lingua, cache e icone.
+Prima di aggiornare, esegui Esporta JSON e conserva una copia fuori dal dispositivo. Verifica dopo la pubblicazione lingua, note esistenti, checklist, annotazioni, recupero e cache offline.
