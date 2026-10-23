@@ -1,19 +1,25 @@
-ONFIM LITE 0.8.10 — PWA PER GITHUB PAGES
+ONFIM Lite PWA 0.8.11 — installazione GitHub Pages
 
-BASE: onfim Lite 0.8.9.1.
+CONTENUTO
+  index.html — PWA Lite, SENZA bridge nativo Android
+  sw.js / manifest.webmanifest / icone — elementi originali PWA
+
+AGGIORNAMENTO
+- Sostituire i file del sito con quelli contenuti nello ZIP, mantenendo la stessa cartella.
+- Il service worker usa una nuova cache onfim-shell-lite-v0.8.11; i vecchi file dell’app vengono rimossi al successivo aggiornamento attivo.
+- Le note rimangono nei dati locali del browser: lo ZIP non le include e la pubblicazione sul sito non le sincronizza.
 
 NOVITÀ
-1. URL http:// e https:// ed email diventano cliccabili nella lettura delle note normali e nelle parti delle note composte; il collegamento si apre esternamente. I collegamenti già formattati come link sono conservati soltanto se usano protocolli sicuri (http, https, mailto).
-2. Condividi nota produce un solo HTML autonomo leggibile offline, senza JSON incorporato, senza tasto «Scarica JSON per Onfim» e senza lo script che lo generava. Nel documento condiviso gli indirizzi e le email sono cliccabili; foto, disegni, checklist, audio e testo rimangono disponibili.
+- Eliminato il vecchio pannello Filtri (incluso il cercatore duplicato di etichette). Rimangono la ricerca AND temporanea toccando gli hashtag, le raccolte OR e Nascondi dalla Home.
+- Ordina accanto ai pulsanti Griglia/Lista, mantenendo tutte le opzioni di ordinamento.
+- La raccolta attiva è azzurra tenue; Home e Tutti hanno selezione ottanio scuro; Appunti/Preferiti/Archivio restano nella posizione attuale.
+- Editor: 3 schede Testo / Disegno / Media; Media contiene Galleria, Fotocamera, Audio esistente e Registratore. Nessuna funzione audio eliminata.
+- Piccola pulizia di rami CSS/JS del pannello Filtri e scheda Audio; nessun cambiamento al modello dei dati e al backup.
 
-NON MODIFICATO
-- Esporta/Importa JSON generale per backup e trasferimento appunti: resta nelle Impostazioni.
-- Filtri temporanei AND per hashtag, raccolte OR, «Nascondi dalla Home», riordino delle raccolte e «Tutti» in coda.
-- Banca dati IndexedDB, chiavi di archiviazione, cache solo dell'app, limitazioni PWA.
-- La checklist contenuta nell'HTML condiviso resta rappresentata con le caselle statiche, come in 0.8.9.1; l'esportazione non è collaborativa.
+DIFFERENZE INTENZIONALI CON APK
+- PWA Lite: archivio locale IndexedDB, backup/esportazione importazione JSON e comportamento del browser; avvisi orari non garantiti ad app chiusa; geofence non attivi (dati conservati nel backup).
+- Non installare questo index.html al posto di quello Android.
 
-INSTALLAZIONE
-Sostituire tutti i file della PWA nel repository GitHub Pages, senza cancellare i dati del sito. Il Service Worker passa alla cache onfim-shell-lite-v0.8.10; le note NON sono salvate nella cache.
-
-COLLAUDO
-Eseguiti controllo sintattico JavaScript, test funzionali isolati dei collegamenti e dell'HTML esportato, test di integrità ZIP. Il comportamento su telefoni specifici e la ricezione dell'HTML via app di messaggistica non sono stati collaudati.
+TEST
+- Controlli di sintassi, DOM e logica AND/OR con note campione; prova editor Media in browser simulato.
+- Non eseguito collaudo su PWA installata e con dati reali: provare caricamenti, registrazioni, refresh cache e persistenza.
