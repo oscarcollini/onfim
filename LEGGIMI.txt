@@ -1,10 +1,11 @@
-ONFIM LITE 0.8.9 — PWA PER GITHUB PAGES
+ONFIM LITE 0.8.9.1 — PWA PER GITHUB PAGES
 
-Aggiornamento circoscritto rispetto a 0.8.8:
-- Campanella non colorata sui promemoria singoli scaduti (ricorrenti attivi invariati).
-- «Condividi nota»: HTML autonomo inviabile tramite menu di condivisione del browser, quando disponibile; altrimenti scaricato come file da inviare. All'interno dell'HTML è presente «Scarica JSON per Onfim».
-- Spaziatura corretta nella prima posizione dei colori in Disegno e Annotazioni foto.
+Modifiche rispetto a 0.8.9:
+- Rimosso il filtro con icone a occhio, anche dal codice e dai testi.
+- Toccare un hashtag nelle schede o nella lettura avvia una ricerca temporanea. Ogni altro hashtag restringe i risultati (AND). I filtri selezionati sono rimovibili e «Azzera» ripristina la vista precedente.
+- Suggerimenti # ordinati per diffusione nelle note, con restringimento progressivo e elenco scorrevole vicino al cursore.
+- Gestione raccolte compatta: creazione espandibile, modifica espandibile, frecce per riordino. «Tutti» ora segue tutte le raccolte.
+- Raccolte sempre OR; «Nascondi dalla Home» invariato.
 
-Sostituire i file del sito senza cancellare i dati del browser. La cache passa alla 0.8.9.
-La PWA Lite non acquisisce per questo motivo funzioni Android native.
-Il JSON della nota può essere importato con «Importa JSON» e contiene tutti i suoi elementi incorporati; i documenti esterni collegati non sono copiati.
+Sostituire i file di GitHub Pages senza cancellare i dati del sito. Il Service Worker usa una cache 0.8.9.1 e aggiorna solo l'app, non le note.
+La PWA Lite conserva IndexedDB, esportazione/importazione JSON e i limiti delle funzioni native Android.
