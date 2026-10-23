@@ -1,25 +1,12 @@
-ONFIM Lite PWA 0.8.11 — installazione GitHub Pages
+ONFIM LITE PWA 0.8.12
 
-CONTENUTO
-  index.html — PWA Lite, SENZA bridge nativo Android
-  sw.js / manifest.webmanifest / icone — elementi originali PWA
+Aggiornamento da 0.8.11; pubblicare tutti i file nella stessa directory GitHub Pages.
+La cache PWA passa a onfim-shell-lite-v0.8.12; le note non sono salvate nella cache.
 
-AGGIORNAMENTO
-- Sostituire i file del sito con quelli contenuti nello ZIP, mantenendo la stessa cartella.
-- Il service worker usa una nuova cache onfim-shell-lite-v0.8.11; i vecchi file dell’app vengono rimossi al successivo aggiornamento attivo.
-- Le note rimangono nei dati locali del browser: lo ZIP non le include e la pubblicazione sul sito non le sincronizza.
+- Ordinamento: nuova icona grafica accanto a Griglia e Lista.
+- Registratore: il tasto Registratore apre i comandi, ma non avvia il microfono. Per iniziare premere «● Registra».
+- OCR: la Lite NON offre un motore OCR e NON mostra un pulsante inattivo nell'uso normale.
+- Prova Lens facoltativa (NON verificata su dispositivo): visitare la PWA aggiungendo ?onfim-lens-test=1 all'indirizzo dell'app. Aprire una nota con foto e premere «Prova Lens». Il browser deve supportare la condivisione di file immagine. Lens potrebbe non essere un'opzione disponibile; nessun testo viene restituito a Onfim. Per disattivare, aprire l'indirizzo normale senza parametro.
+- Tutti gli altri meccanismi della PWA Lite, comprese le note offline, rimangono invariati.
 
-NOVITÀ
-- Eliminato il vecchio pannello Filtri (incluso il cercatore duplicato di etichette). Rimangono la ricerca AND temporanea toccando gli hashtag, le raccolte OR e Nascondi dalla Home.
-- Ordina accanto ai pulsanti Griglia/Lista, mantenendo tutte le opzioni di ordinamento.
-- La raccolta attiva è azzurra tenue; Home e Tutti hanno selezione ottanio scuro; Appunti/Preferiti/Archivio restano nella posizione attuale.
-- Editor: 3 schede Testo / Disegno / Media; Media contiene Galleria, Fotocamera, Audio esistente e Registratore. Nessuna funzione audio eliminata.
-- Piccola pulizia di rami CSS/JS del pannello Filtri e scheda Audio; nessun cambiamento al modello dei dati e al backup.
-
-DIFFERENZE INTENZIONALI CON APK
-- PWA Lite: archivio locale IndexedDB, backup/esportazione importazione JSON e comportamento del browser; avvisi orari non garantiti ad app chiusa; geofence non attivi (dati conservati nel backup).
-- Non installare questo index.html al posto di quello Android.
-
-TEST
-- Controlli di sintassi, DOM e logica AND/OR con note campione; prova editor Media in browser simulato.
-- Non eseguito collaudo su PWA installata e con dati reali: provare caricamenti, registrazioni, refresh cache e persistenza.
+La prova Lens richiede un telefono reale. Non considerarla collaudata in produzione.
