@@ -1,11 +1,19 @@
-ONFIM LITE 0.8.9.1 — PWA PER GITHUB PAGES
+ONFIM LITE 0.8.10 — PWA PER GITHUB PAGES
 
-Modifiche rispetto a 0.8.9:
-- Rimosso il filtro con icone a occhio, anche dal codice e dai testi.
-- Toccare un hashtag nelle schede o nella lettura avvia una ricerca temporanea. Ogni altro hashtag restringe i risultati (AND). I filtri selezionati sono rimovibili e «Azzera» ripristina la vista precedente.
-- Suggerimenti # ordinati per diffusione nelle note, con restringimento progressivo e elenco scorrevole vicino al cursore.
-- Gestione raccolte compatta: creazione espandibile, modifica espandibile, frecce per riordino. «Tutti» ora segue tutte le raccolte.
-- Raccolte sempre OR; «Nascondi dalla Home» invariato.
+BASE: onfim Lite 0.8.9.1.
 
-Sostituire i file di GitHub Pages senza cancellare i dati del sito. Il Service Worker usa una cache 0.8.9.1 e aggiorna solo l'app, non le note.
-La PWA Lite conserva IndexedDB, esportazione/importazione JSON e i limiti delle funzioni native Android.
+NOVITÀ
+1. URL http:// e https:// ed email diventano cliccabili nella lettura delle note normali e nelle parti delle note composte; il collegamento si apre esternamente. I collegamenti già formattati come link sono conservati soltanto se usano protocolli sicuri (http, https, mailto).
+2. Condividi nota produce un solo HTML autonomo leggibile offline, senza JSON incorporato, senza tasto «Scarica JSON per Onfim» e senza lo script che lo generava. Nel documento condiviso gli indirizzi e le email sono cliccabili; foto, disegni, checklist, audio e testo rimangono disponibili.
+
+NON MODIFICATO
+- Esporta/Importa JSON generale per backup e trasferimento appunti: resta nelle Impostazioni.
+- Filtri temporanei AND per hashtag, raccolte OR, «Nascondi dalla Home», riordino delle raccolte e «Tutti» in coda.
+- Banca dati IndexedDB, chiavi di archiviazione, cache solo dell'app, limitazioni PWA.
+- La checklist contenuta nell'HTML condiviso resta rappresentata con le caselle statiche, come in 0.8.9.1; l'esportazione non è collaborativa.
+
+INSTALLAZIONE
+Sostituire tutti i file della PWA nel repository GitHub Pages, senza cancellare i dati del sito. Il Service Worker passa alla cache onfim-shell-lite-v0.8.10; le note NON sono salvate nella cache.
+
+COLLAUDO
+Eseguiti controllo sintattico JavaScript, test funzionali isolati dei collegamenti e dell'HTML esportato, test di integrità ZIP. Il comportamento su telefoni specifici e la ricezione dell'HTML via app di messaggistica non sono stati collaudati.
