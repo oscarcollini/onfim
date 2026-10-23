@@ -1,12 +1,16 @@
-ONFIM LITE PWA 0.8.12
+ONFIM LITE PWA 0.8.13
 
-Aggiornamento da 0.8.11; pubblicare tutti i file nella stessa directory GitHub Pages.
-La cache PWA passa a onfim-shell-lite-v0.8.12; le note non sono salvate nella cache.
+Aggiornamento incrementale dalla PWA 0.8.12. Pubblicare TUTTI i file del pacchetto sulla stessa directory GitHub Pages.
+La cache dell’app e' aggiornata a 0.8.13. Le note restano in IndexedDB (non nella cache); fare comunque un backup JSON prima della prova.
 
-- Ordinamento: nuova icona grafica accanto a Griglia e Lista.
-- Registratore: il tasto Registratore apre i comandi, ma non avvia il microfono. Per iniziare premere «● Registra».
-- OCR: la Lite NON offre un motore OCR e NON mostra un pulsante inattivo nell'uso normale.
-- Prova Lens facoltativa (NON verificata su dispositivo): visitare la PWA aggiungendo ?onfim-lens-test=1 all'indirizzo dell'app. Aprire una nota con foto e premere «Prova Lens». Il browser deve supportare la condivisione di file immagine. Lens potrebbe non essere un'opzione disponibile; nessun testo viene restituito a Onfim. Per disattivare, aprire l'indirizzo normale senza parametro.
-- Tutti gli altri meccanismi della PWA Lite, comprese le note offline, rimangono invariati.
+NOVITA' DA COLLAUDARE
+- Timestamp: inserisce @gg/mm/aaaa-hh:mm (l’ora si puo' eliminare). Solo date valide generano l’etichetta automatica 📆.
+- Posizione GPS: nuovo tasto vicino a Timestamp; inserisce @46.1590N,10.7630E come testo modificabile e genera 📍.
+- Per cambiare un punto sulla mappa, posiziona il cursore all’interno delle coordinate nell’editor e tocca il pulsante Posizione: quando il cursore è dentro una coordinata, l’icona GPS cambia in Mappa. Puoi anche modificare il testo a mano.
+- 📆 e 📍 sono etichette automatiche (non testo scritto nella nota), ricercabili con gli altri hashtag e utilizzabili nelle raccolte. Date/posizioni non attivano promemoria o geofence.
+- Le coordinate diventano apribili su OpenStreetMap durante la lettura.
+- La mappa e la ricerca del punto richiedono Internet; GPS e riferimenti testuali non richiedono accesso alla mappa.
+- Test sperimentale Google Lens eliminato totalmente. Nella Lite, Android consente già pressione prolungata sulla foto → Condividi → Lens (se disponibile).
 
-La prova Lens richiede un telefono reale. Non considerarla collaudata in produzione.
+Nessuna modifica allo schema di IndexedDB o al formato dei backup. Nessuna modifica alla versione APK.
+Testare soprattutto selezione delle coordinate con tastiera Android, permessi GPS, selezione della mappa, annullamento, ricerca per etichette e comportamento offline.
