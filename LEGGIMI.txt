@@ -1,22 +1,19 @@
-ONFIM LITE PWA 0.8.13.3 — INSTALLAZIONE E IDENTITÀ
+ONFIM LITE PWA 0.8.14
 
-Pubblicare tutti i file del pacchetto nella stessa cartella GitHub Pages, sovrascrivendo quelli della PWA Lite precedente.
+Pubblicare tutti i file nella stessa cartella su GitHub Pages sovrascrivendo la versione 0.8.13.3.
+Il manifest conserva l’identità stabile ./onfim-lite-app; NON cancellare dati di Chrome per aggiornare.
 
-Modifiche rispetto alla 0.8.13.2:
-- Il manifest PWA usa un identificatore stabile nuovo (./onfim-lite-app) per distinguere la Lite da precedenti installazioni PWA registrate col vecchio identificatore (./index.html).
-- Il file del manifest viene richiesto con un parametro di versione e, ove possibile, letto dalla rete anziché da una vecchia cache.
-- Cache di servizio aggiornata.
-- Nessuna modifica alle note, alle chiavi IndexedDB o alle funzioni dell'app; resta inclusa la correzione della longitudine della 0.8.13.2.
-- APK Android NON modificato.
+Modifiche 0.8.14:
+- Elenco automatico: all’inizio di un paragrafo digitare - e uno spazio => elenco puntato; 1. e uno spazio => elenco numerato. Il pulsante elenco puntato resta.
+- Evidenziatori più vivaci: giallo #FFDC36, verde #84DCA3, viola #C7A3EE (sostituisce azzurro). Restano inalterati i quattro colori del testo e gli strumenti di disegno.
+- Nessun automatismo *abc* / /abc/: scorciatoie tipografiche ancora da decidere.
+- La correzione geografica, le etichette 📆/📍 e le altre funzioni della 0.8.13.3 restano invariate.
 
-IMPORTANTE
-- Un nuovo identificatore è considerato una NUOVA app da Chrome. Se la vecchia Lite esiste ancora tra le app installate, potrebbe comparire una seconda icona. Verificare in Impostazioni Android > App prima di procedere, senza cancellare i dati del browser.
-- Una volta installata questa versione, NON cambiare ulteriormente il campo 'id' ai successivi aggiornamenti.
-- Se Chrome continua a offrire soltanto 'Crea collegamento', NON possiamo attribuirlo con certezza alla vecchia installazione: potrebbero esserci requisiti PWA, cache o condizioni di Chrome/device non verificabili senza un test sul dispositivo.
-- La modifica dell'identità non elimina alcun dato esistente nella memoria del sito. Per prudenza fare comunque un backup JSON prima di operazioni sul browser o disinstallazioni.
+Prove suggerite su telefono:
+1. Editor, riga vuota: digitare - seguito da spazio, scrivere due righe, Invio su riga vuota per terminare.
+2. Nuova riga: digitare 1. seguito da spazio, verificare numerazione e salvataggio.
+3. Digitare trattini nel mezzo di una frase e incollare righe che iniziano con - senza conversione automatica.
+4. Applicare giallo, verde e viola su schede gialle/verdi; riaprire, salvare, annullare, esportare e reimportare.
+5. Verificare che 📆/📍, raccolte e promemoria non siano cambiati.
 
-PROVA
-1. Pubblicare i file e aprire l'indirizzo HTTPS della Lite in Chrome con connessione attiva.
-2. Ricaricare e verificare che in fondo alla pagina appaia 0.8.13.3.
-3. Dal menu Chrome scegliere 'Installa app' se disponibile.
-4. Verificare che l'app lanciata dall'icona apra una finestra autonoma (senza barra degli indirizzi), e che la stessa funzioni offline.
+Test software: sintassi HTML/JS e strutture ZIP; il collaudo su Android resta da completare.
