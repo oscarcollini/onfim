@@ -1,6 +1,6 @@
 
 (()=>{'use strict';
-const $=id=>document.getElementById(id);const DB='appunti-prototipo-v1',STORE='notes',SNAPSTORE='localSnapshots',VERSION='0.8.16.1';
+const $=id=>document.getElementById(id);const DB='appunti-prototipo-v1',STORE='notes',SNAPSTORE='localSnapshots',VERSION='0.8.17';
 const LAST_EXPORT_KEY='onfim-last-json-export-v06',LAST_CHANGE_KEY='onfim-last-data-change-v06',BACKUP_MAX_AGE_DAYS=7;let db=null,note=null,images=[],photoMarks=[],drawData='',drawn=false,pen='#202a34',erasing=false,painting=false,last=null,saveTimer=0,dirty=false,saving=Promise.resolve(),knownTags=[],unlocked=false,audioClips=[],recorder=null,audioFinalizing=false,audioStarting=false,micStream=null,audioPieces=[],audioTick=null,audioStarted=0,audioPausedAt=0,audioPauseTotal=0,readId=null,editorFrom='list',reminderTimers=new Map(),selectionRange=null,toastTimer=0;
 let textHistory=[],textHistoryAt=0,textHistoryTimer=0,drawUndoHistory=[],drawRedoHistory=[],drawLoadGeneration=0;
 function toast(msg){const el=$('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2600);}
@@ -2050,7 +2050,7 @@ window.addEventListener('resize',()=>{if($('reminderDialog').open&&$('geoEnabled
   if(incoming.title||incoming.text){window.onfimReceiveShare(incoming);query.search='';history.replaceState(null,'',query.pathname+query.hash);}}catch(e){alert('Impossibile aprire il database locale: '+(e.message||e));}})();
 
 // ONFIM 0.8.7 single-file preview. The original IndexedDB name and note IDs are unchanged.
-const ONFIM_PREVIEW_VERSION='0.8.16.1';
+const ONFIM_PREVIEW_VERSION='0.8.17';
 
 // CHECKLISTS: stored as an optional property on the note, carried by JSON backups.
 function onfimNormalizeChecklist(value){
