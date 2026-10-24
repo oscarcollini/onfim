@@ -1,19 +1,30 @@
-ONFIM LITE PWA 0.8.14
+ONFIM Lite PWA 0.8.15
 
-Pubblicare tutti i file nella stessa cartella su GitHub Pages sovrascrivendo la versione 0.8.13.3.
-Il manifest conserva l’identità stabile ./onfim-lite-app; NON cancellare dati di Chrome per aggiornare.
+Installazione: estrarre tutti i file del presente ZIP nella stessa
+cartella del sito GitHub Pages, sostituendo quelli della versione precedente.
+NON cancellare i dati del sito / browser e NON cambiare l'ID del manifest:
+le note restano nel database locale del browser.
 
-Modifiche 0.8.14:
-- Elenco automatico: all’inizio di un paragrafo digitare - e uno spazio => elenco puntato; 1. e uno spazio => elenco numerato. Il pulsante elenco puntato resta.
-- Evidenziatori più vivaci: giallo #FFDC36, verde #84DCA3, viola #C7A3EE (sostituisce azzurro). Restano inalterati i quattro colori del testo e gli strumenti di disegno.
-- Nessun automatismo *abc* / /abc/: scorciatoie tipografiche ancora da decidere.
-- La correzione geografica, le etichette 📆/📍 e le altre funzioni della 0.8.13.3 restano invariate.
+NOVITÀ:
+- nella panoramica, fino a tre etichette seguite da +N per le altre;
+- ricerca visibile in linea con Appunti, Preferiti, Archivio;
+- ricerca anche nei NOMI dei file esterni collegati e degli audio allegati;
+- nella sola lettura della nota aperta (anche composta), fotografie
+  sfogliabili orizzontalmente con contatore e frecce; annotazioni mantenute;
+- nessuna modifica a editor, miniature Home o HTML condiviso;
+- Dati e backup riorganizzati: salvataggio, copie interne, export/import;
+- nuove copie interne PWA con raccolte e impostazioni dei promemoria.
+  Le copie vecchie senza questi campi restano ripristinabili.
 
-Prove suggerite su telefono:
-1. Editor, riga vuota: digitare - seguito da spazio, scrivere due righe, Invio su riga vuota per terminare.
-2. Nuova riga: digitare 1. seguito da spazio, verificare numerazione e salvataggio.
-3. Digitare trattini nel mezzo di una frase e incollare righe che iniziano con - senza conversione automatica.
-4. Applicare giallo, verde e viola su schede gialle/verdi; riaprire, salvare, annullare, esportare e reimportare.
-5. Verificare che 📆/📍, raccolte e promemoria non siano cambiati.
+AVVERTENZE:
+- i backup interni risiedono nel browser e NON sopravvivono alla
+  cancellazione dei dati del sito. Scaricare periodicamente un JSON.
+- il ripristino di una copia interna sostituisce le note; importare
+  un JSON aggiunge o aggiorna le note secondo l'ID.
+- i JSON non sono cifrati e comprendono l'Archivio; non includono i
+  file esterni collegati.
+- la Lite NON integra OCR, geofence nativo, widget o backup cloud
+  automatico; sono funzionalità della versione Android completa.
 
-Test software: sintassi HTML/JS e strutture ZIP; il collaudo su Android resta da completare.
+Controllare dopo aggiornamento: note e raccolte esistenti, ricerca,
+foto in lettura, caricamento offline e gestione backup.
