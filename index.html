@@ -2160,8 +2160,8 @@ function makeChainPart(n,number,total){
   if(typeof n.drawing==='string'&&n.drawing.startsWith('data:image/')){const wrap=document.createElement('div');wrap.className='read-media';const h=document.createElement('h2');h.textContent='Disegno';const img=document.createElement('img');img.className='read-drawing';img.src=n.drawing;img.alt='Disegno della parte '+number;wrap.append(h,img);block.append(wrap);}
   const photos=(n.photos||[]).filter(src=>typeof src==='string'&&src.startsWith('data:image/'));
   if(photos.length){const wrap=document.createElement('div');wrap.className='read-media';const h=document.createElement('h2');h.textContent='Foto';const gallery=document.createElement('div');gallery.className='read-photos';
-    onfimReadCarousel(n,gallery);
     wrap.append(h,gallery);block.append(wrap);
+    onfimReadCarousel(n,gallery);
   }
   if((n.audios||[]).length){const wrap=document.createElement('div');wrap.className='read-media';const h=document.createElement('h2');h.textContent='Registrazioni vocali';wrap.append(h);for(const a of n.audios){if(a&&typeof a.data==='string'&&a.data.startsWith('data:audio/'))wrap.append(buildAudioItem(a,false));}block.append(wrap);}
   onfimRenderFileRefs(n,block);
