@@ -1,0 +1,7 @@
+Onfim Lite PWA 0.8.18.2 — correzione recupero nota
+
+Corretto il collegamento del pulsante Recupera: nel pacchetto 0.8.18.1 la funzione JavaScript era presente nel file ausiliario index.js, non caricato dalla PWA, ma assente dallo script effettivamente incorporato in index.html. In 0.8.18.2 la funzione è inserita direttamente in index.html.
+
+Test previsto: crea una nota, verifica salvataggio, Impostazioni > Dati e backup > Crea copia ora, modifica e svuota la nota, attendi Salvataggio, esci; riapri e premi il pulsante orologio dopo Undo/Redo. Onfim deve presentare la conferma con anteprima e recuperare solo la nota corrente.
+
+Le copie restano nello stesso IndexedDB del browser e non vengono cancellate da questo aggiornamento.
