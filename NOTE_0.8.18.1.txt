@@ -1,0 +1,25 @@
+ONFIM 0.8.18.1 — RECUPERO RAPIDO DA BACKUP LOCALI
+
+Si basa su Onfim 0.8.18 senza cambiare il formato del database o dei backup.
+
+- Editor Testo: nuovo pulsante Recupera versione precedente, subito dopo Undo e Redo.
+- La ricerca si attiva soltanto quando richiesto dall’utente; esamina fino alle copie
+  disponibili, dalla più recente verso la più vecchia.
+- APK: cartella SAF selezionata in Impostazioni, stessi JSON usati dal backup 0.8.18.
+- PWA Lite: fino a cinque copie interne IndexedDB.
+- Recupera solo i contenuti della nota con lo stesso ID; i promemoria, lo stato riservato,
+  preferiti, fissate, dati dei collegamenti fra parti, raccolte e le altre note restano intatti.
+- Confronta contenuti, non la data dell’ultima modifica; non ripristina senza conferma.
+- Prima della conferma mostra data del backup, titolo, estratto del testo e numero di allegati.
+- Il salvataggio automatico continua a funzionare; Undo/Redo non cambia.
+
+LIMITI
+- Se la versione precedente non è presente nei backup, non può essere recuperata.
+- APK: è necessaria una cartella locale di backup ancora accessibile.
+- PWA: le copie interne sono nella memoria del browser e non equivalgono a backup esterni.
+- L’anteprima è sintetica; gli allegati non sono visualizzati nella finestra di conferma.
+- L’APK non è stato compilato in questo ambiente, né provato su dispositivo reale.
+- Test completi in Chromium bloccati dalle policy dell’ambiente di prova.
+
+NOTA: Questa revisione non ridisegna Impostazioni (ingranaggio).
+L’ottimizzazione dei backup in 0.8.18 non coincide con la semplificazione UI discussa.

@@ -1,0 +1,1 @@
+Onfim Lite PWA 0.8.18: massimo cinque copie interne, controllate ogni tre ore con app aperta; nessuna nuova copia se i dati non sono cambiati. Nessun backup cloud automatico: condividere/esportare il JSON manualmente. Le copie nel browser si perdono cancellando i dati del sito.

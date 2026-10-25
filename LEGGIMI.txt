@@ -1,4 +1,4 @@
-ONFIM Lite PWA 0.8.17
+ONFIM Lite PWA 0.8.18
 
 Installazione: estrarre tutti i file del presente ZIP nella stessa
 cartella del sito GitHub Pages, sostituendo quelli della versione precedente.
