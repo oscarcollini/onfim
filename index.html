@@ -6,8 +6,8 @@
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#f3f5f8" name="theme-color"/>
 <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACFElEQVR4nO2aXY5CIQyF62R24iZcjYtzNa5hErcxr84TTkP4azmlEDiJ0aiXth8UCvde3r8/b9pYX94OeOsA8HbAWweAtwPeOgC8HfDW9gC+PYxeb3fVda/nA+wJ0QVVCWqDkgoNoQvAqJ6M7SAhqFMgFbzFEM3ZRtlSTYI8+Nfz8XlZi9tApVzXKjCqx3M2ERCWXAaREJYEQISDsCwAIgwEl0JIq1qQmtVhiRFgOdkuMwJqELQpsMQIsNQ0IyDXg9a1himA2rBsCa7UBgIOFEBPwB5VJREYgGUQyA0Ql+kkeL3dm9bulnZa/yuVGQBUj4V2wgsNwQQAD77H6RxEJAQ4gOB0fGZQcjr1Gw+epxK6IIICiHO1p+f555ZRoE03MYBcT8Tfp3JWAiRci0ilkqAjIHY6/q1Fo06Xg0xXgVbFcCzO/nKCFEKStVyiEgjXU+EWpXJWmgap66esA3hg0iWw1BbR/xLI25nixkhJfDLUOh1PphbBExnVAUTUFTwvgPj71JshtNNxe1aCb4clZWtLe9aCzwESp0cXPSltfyi6PQBRCljOxiV7QRZ2XY/FczvK2v+QcgXgdS+AayiAGQKONXwEeAab0tBVYLbgiQAPSc2iIXeHZ+zB+OaL1Efoc4IaByRt16SxrX5SdKY06IEOe1Y4p9HVo1TmAGbX9puhA8DbAW8dAN4OeOsA8HbAW9sD+AOCbitmjicJ7wAAAABJRU5ErkJggg==" rel="icon" type="image/png"/>
-<title>onfim Lite 0.8.20 · Appunti</title>
-<link rel="manifest" href="./manifest.webmanifest?release=0.8.20"/>
+<title>onfim Lite 0.8.21 · Appunti</title>
+<link rel="manifest" href="./manifest.webmanifest?release=0.8.21"/>
 <meta name="theme-color" content="#222E38"/>
 <link rel="apple-touch-icon" href="./apple-touch-icon.png"/>
 <link rel="icon" type="image/png" href="./favicon.png"/>
@@ -1217,6 +1217,17 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 .appbar .brandname .onfim-wordmark{display:block;height:35px;width:auto;max-width:140px;object-fit:contain}
 @media(max-width:380px){.appbar .brandname .onfim-wordmark{height:33px}}
 
+
+/* 0.8.21 — promemoria alternativi: Quando / Dove, senza sovrapporre le due modalità */
+.onfim-reminder-mode{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:4px;background:#edf2f5;border:1px solid #d9e3e9;border-radius:13px;margin:12px 0 18px}
+.onfim-reminder-mode button{background:transparent;border:1px solid transparent;border-radius:9px;color:#3b5969;min-height:45px;padding:8px 12px;font-weight:650}
+.onfim-reminder-mode button[aria-selected="true"]{color:#222E38;background:#FFF6DA;border-color:#b7c9d1;box-shadow:0 1px 4px #222E381a}
+#onfimReminderTimePanel[hidden],#onfimReminderGeoPanel[hidden]{display:none!important}
+#onfimReminderGeoPanel #geoFold{border-top:0;margin-top:0}
+#onfimReminderGeoPanel #geoFold>summary{min-height:38px}
+.onfim-about-panel .hint{line-height:1.5}
+/* Keep the actions in reach while scrolling the geographical reminder. */
+.reminder-dialog .reminder-actions{position:sticky;bottom:-14px;background:#fff;padding:12px 0 0;z-index:5;border-top:1px solid #e1e8ec;margin-top:15px}
 </style>
 <!--  -->
 <meta name="theme-color" content="#222E38"/>
@@ -1416,7 +1427,8 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 <div class="panel"><h2>Cestino</h2><div class="settingsrow"><div><strong>Appunti eliminati</strong><p id="trashSettingsCount">Il Cestino conserva gli appunti finché non decidi di eliminarli definitivamente.</p></div><button id="openTrash" type="button">Apri</button></div></div>
 
 <div class="panel"><h2>Informazioni · browser</h2><p>Questa versione funziona offline e condivide gli appunti tramite file JSON con onfim Android, ma alcune funzioni richiedono l'APK:</p><ul class="lite-limit-list"><li><strong>Promemoria:</strong> nessuna sveglia affidabile con la PWA chiusa; puoi esportarli nel Calendario.</li><li><strong>Geofence:</strong> non disponibili in background; quelli importati restano nel backup senza attivarsi.</li><li><strong>Backup su Drive:</strong> manuale tramite Condividi; non automatico in background.</li><li><strong>Widget e notifiche native Android:</strong> non disponibili.</li><li><strong>Estrazione testo dalle fotografie (OCR):</strong> disponibile nell’APK completa. La Lite non incorpora un motore OCR.</li></ul></div>
-<footer class="onfim-colophon">onfim v0.8.20 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
+ <div class="panel onfim-about-panel"><h2>Informazioni su Onfim</h2><p class="hint">Onfim è stata realizzata con l'aiuto di ChatGPT. L'app non integra funzionalità di intelligenza artificiale: le note non vengono inviate a ChatGPT per essere elaborate.</p></div>
+ <footer class="onfim-colophon">onfim v0.8.21 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
 <section class="view" id="trashView" aria-label="Cestino">
   <div class="controls"><button id="backTrash" type="button">← Impostazioni</button></div>
   <div class="panel trash-panel"><div class="trash-head"><div><h2>Appunti eliminati</h2><p class="hint">Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.</p></div><button id="emptyTrash" class="danger" type="button">Svuota</button></div><p id="trashCount" class="small" role="status"></p><div id="trashList" class="trash-list"></div></div>
@@ -1435,7 +1447,11 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 </dialog>
 <dialog id="reminderDialog" class="onfim-compact-dialog reminder-dialog" aria-labelledby="reminderHeading">
  <div class="onfim-dialog-head"><h2 id="reminderHeading">Promemoria</h2><button id="reminderClose" type="button" class="dialog-cross" aria-label="Chiudi">×</button></div>
- <span class="reminder-section-name">Quando</span>
+ <div class="onfim-reminder-mode" role="tablist" aria-label="Tipo di promemoria">
+  <button type="button" id="onfimReminderWhen" role="tab" aria-controls="onfimReminderTimePanel" aria-selected="true">Quando</button>
+  <button type="button" id="onfimReminderWhere" role="tab" aria-controls="onfimReminderGeoPanel" aria-selected="false">Dove</button>
+ </div>
+ <div id="onfimReminderTimePanel" role="tabpanel" aria-labelledby="onfimReminderWhen">
  <div class="reminder-smart-picker" aria-label="Selezione rapida della scadenza">
   <div class="reminder-day-row" role="group" aria-label="Giorno">
    <button type="button" data-reminder-day="today">Oggi</button><button type="button" data-reminder-day="tomorrow">Domani</button><button type="button" data-reminder-day="other">Altra data</button>
@@ -1466,7 +1482,11 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
   </select>
   <p class="reminder-explainer" id="repeatInfo"></p>
  </div></details>
-<p class="small">I promemoria a orario della PWA non sono affidabili quando è chiusa.</p><p class="small lite-geo-note" id="liteGeoNotice" hidden>Questa nota contiene un geofence importato dall’APK. Rimane nel backup, ma non è attivo nella PWA.</p>
+<p class="small">I promemoria a orario della PWA non sono affidabili quando è chiusa.</p>
+ </div>
+ <div id="onfimReminderGeoPanel" role="tabpanel" aria-labelledby="onfimReminderWhere" hidden>
+ <p class="small">Scegli un luogo. Il promemoria geografico sostituisce quello orario.</p>
+ <p class="small lite-geo-note" id="liteGeoNotice" hidden>Questa nota contiene un geofence importato dall’APK. Rimane nel backup, ma non è attivo nella PWA.</p>
  <details id="geoFold" class="reminder-fold"><summary>Luogo <span class="fold-value">Ricerca o mappa</span></summary>
  <p class="reminder-explainer">Seleziona un punto sulla mappa oppure cercalo per indirizzo. <strong>Gli avvisi geografici non sono attivi nella PWA.</strong></p>
  <input type="checkbox" id="geoEnabled" class="hidden" tabindex="-1" aria-hidden="true">
@@ -1493,6 +1513,7 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
   <label class="label" for="geoTransition">Avvisami</label><select id="geoTransition"><option value="enter">Quando arrivo</option><option value="exit">Quando esco</option></select>
   <button id="geoRemove" type="button" class="geo-remove-action">Rimuovi luogo</button>
  </div></details>
+ </div>
 <div class="dialogbuttons reminder-actions"><button id="reminderRemove" type="button">Rimuovi</button><button id="reminderSave" class="primary" type="button">Salva</button></div>
 </dialog>
 <dialog id="geoExpandedDialog" aria-label="Mappa ingrandita"><div class="geo-expanded-top"><strong>Scegli il luogo</strong><button type="button" id="geoMapClose">✓ Fine</button></div><div id="geoExpandedDock"></div><p class="small">Trascina per spostare il mirino oppure tocca un punto. Conferma il punto nella finestra di selezione.</p></dialog>
@@ -1573,7 +1594,7 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 </dialog>
 <script>
 (()=>{'use strict';
-const $=id=>document.getElementById(id);const DB='appunti-prototipo-v1',STORE='notes',SNAPSTORE='localSnapshots',VERSION='0.8.20';
+const $=id=>document.getElementById(id);const DB='appunti-prototipo-v1',STORE='notes',SNAPSTORE='localSnapshots',VERSION='0.8.21';
 const LAST_EXPORT_KEY='onfim-last-json-export-v06',LAST_CHANGE_KEY='onfim-last-data-change-v06',BACKUP_MAX_AGE_DAYS=7;let db=null,note=null,images=[],photoMarks=[],drawData='',drawn=false,pen='#202a34',erasing=false,painting=false,last=null,saveTimer=0,dirty=false,saving=Promise.resolve(),knownTags=[],unlocked=false,audioClips=[],recorder=null,audioFinalizing=false,audioStarting=false,micStream=null,audioPieces=[],audioTick=null,audioStarted=0,audioPausedAt=0,audioPauseTotal=0,readId=null,editorFrom='list',reminderTimers=new Map(),selectionRange=null,toastTimer=0;
 let textHistory=[],textHistoryAt=0,textHistoryTimer=0,drawUndoHistory=[],drawRedoHistory=[],drawLoadGeneration=0;
 function toast(msg){const el=$('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2600);}
@@ -3095,7 +3116,7 @@ async function openReminderFor(source,fromList=false){
   $('reminderRepeat').value=root.reminderRepeat||'none';
   $('repeatFold').open=!!(root.reminderRepeat&&root.reminderRepeat!=='none');$('dateFold').open=!!root.reminder;$('moreQuickReminders').open=false;onfimChosenDay='today';onfimChosenPeriod='';$('reminderOtherDate').value='';onfimSmartApplied=false;
   onfimUpdateRepeatInfo();
-  fillGeo(root.geofence);onfimRefreshPresets();onfimUpdateReminderSelected();
+  fillGeo(root.geofence);onfimRefreshPresets();onfimUpdateReminderSelected();onfimSetReminderMode(root.geofence?.enabled?'where':'when');
   $('reminderRemove').disabled=!root.reminder&&!root.geofence?.enabled;
   $('reminderDialog').showModal();
   $('liteGeoNotice').hidden=!root.geofence?.enabled;
@@ -3105,6 +3126,19 @@ $('readReminderOption').onclick=async()=>{
   const all=await allNotes(),root=all.find(n=>n.id===readId);
   if(root)await openReminderFor(root,false);
 };
+// Stato dell'interfaccia soltanto: non modifica il promemoria finché non premi Salva.
+let onfimReminderMode='when';
+function onfimSetReminderMode(mode){
+ onfimReminderMode=mode==='where'?'where':'when';
+ const isWhere=onfimReminderMode==='where';
+ $('onfimReminderTimePanel').hidden=isWhere;
+ $('onfimReminderGeoPanel').hidden=!isWhere;
+ $('onfimReminderWhen').setAttribute('aria-selected',String(!isWhere));
+ $('onfimReminderWhere').setAttribute('aria-selected',String(isWhere));
+ if(isWhere){$('geoFold').open=true;$('geoFields').hidden=false;requestAnimationFrame(geoMapRender);}
+}
+$('onfimReminderWhen').onclick=()=>onfimSetReminderMode('when');
+$('onfimReminderWhere').onclick=()=>onfimSetReminderMode('where');
 $('reminderClose').onclick=()=>$('reminderDialog').close();
 async function saveReadReminder(value,geofence=null,repeat='none',base=''){
   const all=await allNotes(),root=all.find(n=>n.id===readId);
@@ -3120,16 +3154,24 @@ async function saveReadReminder(value,geofence=null,repeat='none',base=''){
   }catch(e){toast('Errore: promemoria non salvato');}
 }
 $('reminderSave').onclick=()=>{
- let value=$('readReminderValue').value;const repeat=$('reminderRepeat').value,base=value===reminderOriginalValue&&repeat===reminderOriginalRule?reminderOriginalBase:value;if(value&&repeat!=='none')value=onfimNextRepeat(value,repeat,Date.now(),base);
- if(value&&(!Number.isFinite(new Date(value).getTime())||new Date(value).getTime()<=Date.now())){toast('Scegli data e ora future');return;}
- let geo=null;
- if($('geoEnabled').checked){
-  if(!$('geoLat').value.trim()||!$('geoLon').value.trim()){toast('Inserisci le coordinate del luogo');return;}
-  geo=cleanGeofence({enabled:true,name:'',lat:Number($('geoLat').value),lon:Number($('geoLon').value),radius:Number($('geoRadius').value),transition:$('geoTransition').value,token:String(Date.now())});
-  if(!geo){toast('Coordinate non valide o raggio fuori da 100–10000 m');return;}
- }
- if(!value&&!geo&&!reminderOriginalValue&&!reminderOriginalHadGeo){toast('Scegli data e ora oppure un luogo');return;}
- void saveReadReminder(value,geo,repeat,base);
+  // Le due modalità sono esclusive: salvare una sostituisce l'altra.
+  if(onfimReminderMode==='where'){
+   if(!$('geoEnabled').checked||!$('geoLat').value.trim()||!$('geoLon').value.trim()){
+    toast('Scegli un luogo sulla mappa oppure inserisci le coordinate');return;
+   }
+   const geo=cleanGeofence({enabled:true,name:'',lat:Number($('geoLat').value),lon:Number($('geoLon').value),radius:Number($('geoRadius').value),transition:$('geoTransition').value,token:String(Date.now())});
+   if(!geo){toast('Coordinate non valide o raggio fuori da 100–10000 m');return;}
+   void saveReadReminder('',geo,'none','');return;
+  }
+  let value=$('readReminderValue').value;
+  if(!value){toast('Scegli una data e un orario');return;}
+  const repeat=$('reminderRepeat').value;
+  const base=value===reminderOriginalValue&&repeat===reminderOriginalRule?reminderOriginalBase:value;
+  if(repeat!=='none')value=onfimNextRepeat(value,repeat,Date.now(),base);
+  if(!value||!Number.isFinite(new Date(value).getTime())||new Date(value).getTime()<=Date.now()){
+   toast('Scegli data e ora future');return;
+  }
+  void saveReadReminder(value,null,repeat,base);
 };
 $('reminderRemove').onclick=()=>void saveReadReminder('',null,'none');
 $('readEditTop').onclick=()=>{closeReadMenu();$('editFromRead').click();};
@@ -3761,7 +3803,7 @@ window.addEventListener('resize',()=>{if($('reminderDialog').open&&$('geoEnabled
   if(incoming.title||incoming.text){window.onfimReceiveShare(incoming);query.search='';history.replaceState(null,'',query.pathname+query.hash);}}catch(e){alert('Impossibile aprire il database locale: '+(e.message||e));}})();
 
 // ONFIM 0.8.7 single-file preview. The original IndexedDB name and note IDs are unchanged.
-const ONFIM_PREVIEW_VERSION='0.8.20';
+const ONFIM_PREVIEW_VERSION='0.8.21';
 
 // CHECKLISTS: stored as an optional property on the note, carried by JSON backups.
 function onfimNormalizeChecklist(value){
@@ -3907,6 +3949,7 @@ function onfimLanguageCode(){
 }
 let onfimLang=onfimLanguageCode();
 Object.assign(ONFIM_UI_EN, {'✓ Applica':'✓ Apply','Dimensione':'Size','Spessore':'Thickness','Conferma testo':'Confirm text','Annulla testo':'Cancel text','Scrivi e posiziona il testo sul foglio':'Type and position text on the canvas','Scrivi e posiziona il testo sulla foto':'Type and position text on the photo','Imposta promemoria':'Set reminder','Non disponibile nell’Archivio':'Not available in Archive'});
+Object.assign(ONFIM_UI_EN,{'Dove':'Where','Quando':'When','Informazioni su Onfim':'About Onfim',"Onfim è stata realizzata con l'aiuto di ChatGPT. L'app non integra funzionalità di intelligenza artificiale: le note non vengono inviate a ChatGPT per essere elaborate.":'Onfim was developed with the help of ChatGPT. The app does not include AI features: notes are not sent to ChatGPT for processing.','Scegli un luogo. Il promemoria geografico sostituisce quello orario.':'Choose a location. A location reminder replaces the time reminder.'});
 Object.assign(ONFIM_UI_EN,{'Filtri:':'Filters:','＋ Nuova raccolta':'+ New collection','Nessuna raccolta':'No collections','Sposta su':'Move up','Sposta giù':'Move down','Rimuovi filtro':'Remove filter','Etichette selezionate':'Selected tags'});
 const onfimOriginalText=new WeakMap(),onfimOriginalAttrs=new WeakMap();
 const onfimSkippedUserText='#noteBody,#noteTitle,#readBody,#readTitle,#readPhotos,#readAudios,#readChecklist,#checklistEditorItems,#noteList .title,#noteList .preview,#noteList .chip,#joinOptions .join-title,#joinOptions .join-preview,.chain-part-title,.read-body,.read-footer,.chip,.audio-label,#linkedFileEditorList,#onfimTagSuggestions';
