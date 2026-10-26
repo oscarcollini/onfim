@@ -1119,7 +1119,7 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 #listView .home-tools{margin:0 0 1px}
 #listView .filter-pills{gap:6px}
 #listView .filter-pills>.filter-pill{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;min-width:42px;flex:0 0 42px!important;padding:0!important;border-radius:15px}
-#listView .filter-pills .filter-pill .oi{width:22px;height:22px;margin:0;flex:0 0 22px}
+#listView .filter-pills .filter-pill .oi{display:block;width:22px;height:22px;margin:0;flex:0 0 22px}
 #listView .onfim-collection-picker-label{position:relative;flex:1 1 103px;min-width:90px;max-width:143px}
 #listView #onfimCollectionPicker{display:block;width:100%;height:42px;min-height:42px;padding:0 24px 0 8px;border:1px solid #d7e0e4;border-radius:14px;background:#fff;color:#344c59;font-size:.81rem;text-overflow:ellipsis}
 #listView #searchPanel{height:42px;min-height:42px;min-width:80px;flex:2 1 94px}
@@ -1228,6 +1228,15 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 .onfim-about-panel .hint{line-height:1.5}
 /* Keep the actions in reach while scrolling the geographical reminder. */
 .reminder-dialog .reminder-actions{position:sticky;bottom:-14px;background:#fff;padding:12px 0 0;z-index:5;border-top:1px solid #e1e8ec;margin-top:15px}
+/* 0.8.21 — PWA HTML: one note-menu item, explicit download or Android share. */
+#onfimHtmlExportDialog{width:min(390px,calc(100vw - 28px));max-height:85dvh;overflow:auto;padding:19px}
+#onfimHtmlExportDialog .onfim-html-export-actions{display:grid;gap:10px;margin-top:13px}
+#onfimHtmlExportDialog .onfim-html-export-actions button{display:flex;align-items:center;gap:12px;text-align:left;min-height:52px;padding:11px 13px;border-radius:12px}
+#onfimHtmlExportDialog .onfim-html-export-actions button svg{flex:0 0 20px}
+#onfimHtmlExportDialog #onfimHtmlDownload{background:#FFF6DA;color:#222E38;border:1px solid #d5c9a6}
+#onfimHtmlExportDialog #onfimHtmlShare{background:#f3f7f8;color:#222E38;border:1px solid #dce3ea}
+#onfimHtmlExportDialog #onfimHtmlShare:disabled{opacity:.45}
+#onfimHtmlExportDialog #onfimHtmlExportFilename{overflow-wrap:anywhere}
 </style>
 <!--  -->
 <meta name="theme-color" content="#222E38"/>
@@ -1525,6 +1534,15 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
  <div class="geo-current-row"><button id="onfimPointCurrent" type="button">Usa posizione attuale</button></div>
  <p class="small" id="onfimPointStatus" role="status">La mappa richiede Internet; le coordinate si possono modificare anche offline.</p>
  <div class="dialogbuttons"><button type="button" id="onfimPointCancel">Annulla</button><button type="button" class="primary" id="onfimPointConfirm">Conferma posizione</button></div>
+</dialog>
+<dialog id="onfimHtmlExportDialog" aria-labelledby="onfimHtmlExportHeading">
+ <div class="onfim-dialog-head"><h2 id="onfimHtmlExportHeading">Nota HTML</h2><button id="onfimHtmlExportClose" type="button" class="dialog-cross" aria-label="Chiudi">×</button></div>
+ <p class="small" id="onfimHtmlExportFilename"></p>
+ <div class="onfim-html-export-actions">
+  <button id="onfimHtmlDownload" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg><span>Scarica HTML</span></button>
+  <button id="onfimHtmlShare" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.3M8.7 13.3l6.6 4.3"/></svg><span>Condividi HTML</span></button>
+ </div>
+ <p class="small" id="onfimHtmlExportHint">Scarica sul dispositivo oppure invia il file a un'altra app.</p>
 </dialog>
 <dialog id="shareInboxDialog" class="onfim-compact-dialog" aria-labelledby="shareInboxHeading">
  <div class="onfim-dialog-head"><h2 id="shareInboxHeading">Condividi con onfim</h2><button id="shareInboxClose" class="dialog-cross" type="button" aria-label="Chiudi">×</button></div>
@@ -3061,6 +3079,39 @@ ${content}</article><footer>
 
 </body></html>`;
 }
+// PWA: il pannello Condividi di Android non garantisce una destinazione "Salva".
+// La stessa voce della nota offre entrambe le azioni esplicitamente.
+let onfimPendingHtmlFile=null;
+const onfimHtmlDialog=$('onfimHtmlExportDialog');
+function onfimCloseHtmlExportDialog(){
+  if(onfimHtmlDialog.open)onfimHtmlDialog.close();
+}
+onfimHtmlDialog.addEventListener('close',()=>{onfimPendingHtmlFile=null;});
+$('onfimHtmlExportClose').onclick=onfimCloseHtmlExportDialog;
+$('onfimHtmlDownload').onclick=()=>{
+  const file=onfimPendingHtmlFile;
+  if(!file)return;
+  // Il clic sul bottone è un gesto utente: il browser può avviare il download.
+  download(file,file.name,'text/html;charset=utf-8');
+  onfimCloseHtmlExportDialog();
+  toast('Download HTML richiesto: verifica nei file scaricati');
+};
+$('onfimHtmlShare').onclick=async()=>{
+  const file=onfimPendingHtmlFile;
+  if(!file)return;
+  if(typeof navigator.share!=='function'||(navigator.canShare&&!navigator.canShare({files:[file]}))){
+    toast('Condivisione non disponibile: usa Scarica HTML');return;
+  }
+  try{
+    // Chiamata immediata in risposta al tocco, senza await intermedi.
+    await navigator.share({files:[file],title:file.name.replace(/\.html$/i,'')});
+    onfimCloseHtmlExportDialog();
+  }catch(err){
+    if(err?.name==='AbortError')return;
+    console.warn('Condivisione HTML non riuscita',err);
+    toast('Condivisione non riuscita. Puoi usare Scarica HTML.');
+  }
+};
 async function onfimExportNote(noteId){
   closeReadMenu();
   try{
@@ -3077,12 +3128,14 @@ async function onfimExportNote(noteId){
     if(mb>18&&!confirm('Questo HTML contiene allegati incorporati e occupa circa '+mb.toFixed(1)+' MB. Vuoi esportarlo comunque?'))return;
     const name=onfimShareFilename(root.title);
     const file=new File([html],name,{type:'text/html'});
-    if(typeof navigator.share==='function'&&(!navigator.canShare||navigator.canShare({files:[file]}))){
-      try{await navigator.share({files:[file],title:root.title||'Appunto'});return;}
-      catch(err){if(err?.name==='AbortError')return;console.warn('Condivisione file non disponibile',err);}
-    }
-    download(file,name,'text/html;charset=utf-8');
-    toast('Condivisione file non disponibile: HTML salvato per l’invio');
+    const canShare=typeof navigator.share==='function'&&(!navigator.canShare||navigator.canShare({files:[file]}));
+    onfimPendingHtmlFile=file;
+    $('onfimHtmlExportFilename').textContent=name;
+    $('onfimHtmlShare').disabled=!canShare;
+    $('onfimHtmlExportHint').textContent=canShare?
+      'Scarica il file sul dispositivo oppure condividilo con un’app.':
+      'Questo browser non consente di condividere file HTML, ma puoi scaricarli.';
+    if(!onfimHtmlDialog.open)onfimHtmlDialog.showModal();
   }catch(e){console.error('Esportazione HTML fallita',e);toast('Errore durante la creazione della pagina HTML');}
 }
 $('onfimShareHtml').onclick=()=>void onfimExportNote(readId);
