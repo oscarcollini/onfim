@@ -1,7 +1,0 @@
-ONFIM Lite PWA 0.8.19
-
-Estrarre TUTTI i file nella directory principale di GitHub Pages (sostituendo i precedenti). Non cancellare i dati del browser. L’ID PWA e il database locale sono invariati.
-
-Novità: Home a due righe con Home, Preferiti, Archivio (lucchetto chiuso), raccolte a menu e Cerca; titolo dinamico «Raccolta NOME»; checklist con Invio, completate visualizzate in fondo, anteprima delle prime due voci da fare; guida disegno bianco/puntini/quadretti dopo lo spessore, esclusa dal PNG esportato; palette identitaria #FFF6DA e #222E38; nuovo pulsante +; nome con legatura fi; footer HTML condiviso con «onfim» collegato a https://oscarcollini.github.io/onfim.
-
-Il programma non è stato testato su dispositivo Android reale in questa sessione: effettuare un backup JSON prima dell'aggiornamento.
