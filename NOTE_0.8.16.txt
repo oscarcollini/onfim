@@ -1,1 +1,0 @@
-Onfim Lite PWA 0.8.16: salvataggio automatico, Undo/Redo della sessione, editor senza tasto Salva. Nessuna modifica ai meccanismi di backup del browser, né sincronizzazione cloud aggiunta. Per pubblicare su GitHub Pages sostituire i file nella radice, conservando i dati locali.
