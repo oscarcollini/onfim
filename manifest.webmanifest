@@ -2,7 +2,7 @@
   "id": "./onfim-lite-app",
   "name": "onfim Lite — Appunti",
   "short_name": "onfim Lite",
-  "description": "Appunti offline con checklist, testo, disegni, foto, audio, promemoria e backup JSON. Italiano e inglese.",
+  "description": "Appunti offline con testo, checklist, disegni, foto, audio e backup JSON. Promemoria attivi solo con PWA aperta. Italiano e inglese.",
   "lang": "it",
   "start_url": "./index.html",
   "scope": "./",
