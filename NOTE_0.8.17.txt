@@ -1,8 +1,0 @@
-ONFIM Lite PWA 0.8.17
-
-- Corretto il layout della panoramica in modalità elenco: nelle schede con foto, l’anteprima testuale comincia subito sotto il titolo.
-- Corretta anche la disposizione dei riepiloghi per note composte e checklist, evitando sovrapposizioni.
-- Conservati salvataggio automatico, Undo/Redo, OCR dove disponibile e menu contestuale fotografie fornito dal browser.
-- Nessuna modifica al formato delle note, al database IndexedDB o ai backup della PWA.
-
-Pubblica i file dello ZIP nella radice del repository GitHub Pages esistente.
