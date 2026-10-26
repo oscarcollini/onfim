@@ -6,8 +6,8 @@
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#f3f5f8" name="theme-color"/>
 <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACFElEQVR4nO2aXY5CIQyF62R24iZcjYtzNa5hErcxr84TTkP4azmlEDiJ0aiXth8UCvde3r8/b9pYX94OeOsA8HbAWweAtwPeOgC8HfDW9gC+PYxeb3fVda/nA+wJ0QVVCWqDkgoNoQvAqJ6M7SAhqFMgFbzFEM3ZRtlSTYI8+Nfz8XlZi9tApVzXKjCqx3M2ERCWXAaREJYEQISDsCwAIgwEl0JIq1qQmtVhiRFgOdkuMwJqELQpsMQIsNQ0IyDXg9a1himA2rBsCa7UBgIOFEBPwB5VJREYgGUQyA0Ql+kkeL3dm9bulnZa/yuVGQBUj4V2wgsNwQQAD77H6RxEJAQ4gOB0fGZQcjr1Gw+epxK6IIICiHO1p+f555ZRoE03MYBcT8Tfp3JWAiRci0ilkqAjIHY6/q1Fo06Xg0xXgVbFcCzO/nKCFEKStVyiEgjXU+EWpXJWmgap66esA3hg0iWw1BbR/xLI25nixkhJfDLUOh1PphbBExnVAUTUFTwvgPj71JshtNNxe1aCb4clZWtLe9aCzwESp0cXPSltfyi6PQBRCljOxiV7QRZ2XY/FczvK2v+QcgXgdS+AayiAGQKONXwEeAab0tBVYLbgiQAPSc2iIXeHZ+zB+OaL1Efoc4IaByRt16SxrX5SdKY06IEOe1Y4p9HVo1TmAGbX9puhA8DbAW8dAN4OeOsA8HbAW9sD+AOCbitmjicJ7wAAAABJRU5ErkJggg==" rel="icon" type="image/png"/>
-<title>onfim Lite 0.8.22 · Appunti</title>
-<link rel="manifest" href="./manifest.webmanifest?release=0.8.22"/>
+<title>onfim Lite 0.8.23 · Appunti</title>
+<link rel="manifest" href="./manifest.webmanifest?release=0.8.23"/>
 <meta name="theme-color" content="#222E38"/>
 <link rel="apple-touch-icon" href="./apple-touch-icon.png"/>
 <link rel="icon" type="image/png" href="./favicon.png"/>
@@ -1218,7 +1218,7 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 @media(max-width:380px){.appbar .brandname .onfim-wordmark{height:33px}}
 
 
-/* 0.8.22 — promemoria alternativi: Quando / Dove, senza sovrapporre le due modalità */
+/* 0.8.23 — promemoria alternativi: Quando / Dove, senza sovrapporre le due modalità */
 .onfim-reminder-mode{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:4px;background:#edf2f5;border:1px solid #d9e3e9;border-radius:13px;margin:12px 0 18px}
 .onfim-reminder-mode button{background:transparent;border:1px solid transparent;border-radius:9px;color:#3b5969;min-height:45px;padding:8px 12px;font-weight:650}
 .onfim-reminder-mode button[aria-selected="true"]{color:#222E38;background:#FFF6DA;border-color:#b7c9d1;box-shadow:0 1px 4px #222E381a}
@@ -1229,7 +1229,7 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 #onfimLiteReminderNotice{margin:1px 0 12px;padding:10px 12px;border-left:3px solid #315B69;background:#F3F5F7;border-radius:5px;line-height:1.35}
 /* Keep the actions in reach while scrolling the geographical reminder. */
 .reminder-dialog .reminder-actions{position:sticky;bottom:-14px;background:#fff;padding:12px 0 0;z-index:5;border-top:1px solid #e1e8ec;margin-top:15px}
-/* 0.8.22 — PWA HTML: one note-menu item, explicit download or Android share. */
+/* 0.8.23 — PWA HTML: one note-menu item, explicit download or Android share. */
 #onfimHtmlExportDialog{width:min(390px,calc(100vw - 28px));max-height:85dvh;overflow:auto;padding:19px}
 #onfimHtmlExportDialog .onfim-html-export-actions{display:grid;gap:10px;margin-top:13px}
 #onfimHtmlExportDialog .onfim-html-export-actions button{display:flex;align-items:center;gap:12px;text-align:left;min-height:52px;padding:11px 13px;border-radius:12px}
@@ -1324,7 +1324,7 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 <button aria-label="Elenco puntato" aria-pressed="false" data-command="insertUnorderedList">•</button>
 <button aria-label="Annulla modifica testo" disabled="" id="textUndo" title="Annulla testo" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7 4 12l5 5M4 12h10c4 0 6 2.5 6 7"/></svg></button>
 <button aria-label="Ripristina modifica testo" disabled="" id="textRedo" title="Ripristina testo" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(24 0) scale(-1 1)"><path d="M9 7 4 12l5 5M4 12h10c4 0 6 2.5 6 7"/></g></svg></button>
-<button aria-label="Recupera una versione precedente dal backup" id="recoverNote" title="Recupera versione precedente dal backup" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg></button>
+<button aria-label="Recupera contenuto dal backup" id="recoverNote" title="Recupera dal backup (versioni meno recenti)" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg></button>
 </div>
 <div class="format-row format-colors" role="group" aria-label="Data, posizione, colori ed evidenziazione">
 <button id="insertJournalStamp" type="button" title="Inserisci data e ora nel testo" aria-label="Inserisci data e ora nel testo"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>
@@ -1438,7 +1438,7 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 
 <div class="panel"><h2>Informazioni · browser</h2><p>Questa versione funziona offline e condivide gli appunti tramite file JSON con onfim Android, ma alcune funzioni richiedono l'APK:</p><ul class="lite-limit-list"><li><strong>Promemoria:</strong> nessuna sveglia affidabile con la PWA chiusa; puoi esportarli nel Calendario.</li><li><strong>Geofence:</strong> non disponibili in background; quelli importati restano nel backup senza attivarsi.</li><li><strong>Backup su Drive:</strong> manuale tramite Condividi; non automatico in background.</li><li><strong>Widget e notifiche native Android:</strong> non disponibili.</li><li><strong>Estrazione testo dalle fotografie (OCR):</strong> disponibile nell’APK completa. La Lite non incorpora un motore OCR.</li></ul></div>
  <div class="panel onfim-about-panel"><h2>Informazioni su Onfim</h2><p class="hint">Onfim è stata sviluppata con l'assistenza di ChatGPT, ma non integra ChatGPT né servizi di intelligenza artificiale generativa. Nell'APK il riconoscimento del testo nelle immagini (OCR) avviene localmente sul dispositivo; la PWA Lite non include l'OCR.</p></div>
- <footer class="onfim-colophon">onfim v0.8.22 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
+ <footer class="onfim-colophon">onfim v0.8.23 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
 <section class="view" id="trashView" aria-label="Cestino">
   <div class="controls"><button id="backTrash" type="button">← Impostazioni</button></div>
   <div class="panel trash-panel"><div class="trash-head"><div><h2>Appunti eliminati</h2><p class="hint">Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.</p></div><button id="emptyTrash" class="danger" type="button">Svuota</button></div><p id="trashCount" class="small" role="status"></p><div id="trashList" class="trash-list"></div></div>
@@ -1614,9 +1614,9 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 </dialog>
 <script>
 (()=>{'use strict';
-const $=id=>document.getElementById(id);const DB='appunti-prototipo-v1',STORE='notes',SNAPSTORE='localSnapshots',VERSION='0.8.22';
+const $=id=>document.getElementById(id);const DB='appunti-prototipo-v1',STORE='notes',SNAPSTORE='localSnapshots',VERSION='0.8.23';
 const LAST_EXPORT_KEY='onfim-last-json-export-v06',LAST_CHANGE_KEY='onfim-last-data-change-v06',BACKUP_MAX_AGE_DAYS=7;let db=null,note=null,images=[],photoMarks=[],drawData='',drawn=false,pen='#202a34',erasing=false,painting=false,last=null,saveTimer=0,dirty=false,saving=Promise.resolve(),knownTags=[],unlocked=false,audioClips=[],recorder=null,audioFinalizing=false,audioStarting=false,micStream=null,audioPieces=[],audioTick=null,audioStarted=0,audioPausedAt=0,audioPauseTotal=0,readId=null,editorFrom='list',reminderTimers=new Map(),selectionRange=null,toastTimer=0;
-let textHistory=[],textHistoryAt=0,textHistoryTimer=0,drawUndoHistory=[],drawRedoHistory=[],drawLoadGeneration=0;
+let textHistory=[],textHistoryAt=0,textHistoryTimer=0,textHistoryBoundary=0,textPreviousSessionConfirmed=false,drawUndoHistory=[],drawRedoHistory=[],drawLoadGeneration=0;
 function toast(msg){const el=$('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2600);}
 function database(){return new Promise((res,rej)=>{const r=indexedDB.open(DB,1);r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains(STORE))r.result.createObjectStore(STORE,{keyPath:'id'});};r.onsuccess=()=>{db=r.result;res(db)};r.onerror=()=>rej(r.error);});}
 function allNotes(){return new Promise((res,rej)=>{const r=db.transaction(STORE).objectStore(STORE).getAll();r.onsuccess=()=>res(r.result||[]);r.onerror=()=>rej(r.error);});}
@@ -2152,7 +2152,7 @@ function markDirty(){
  const editorId=note.id;
  saveTimer=setTimeout(()=>{if(note?.id===editorId)void flushSave();},850);
 }
-function snapshot(){return{...note,title:$('noteTitle').value.trim(),text:sanitizeHTML($('noteBody').innerHTML),color:$('noteColor').value,tags:extractHashtags(txt($('noteBody').innerHTML)),reminder:$('reminder').value,reminderBase:$('reminder').value===note.reminder?(note.reminderBase||note.reminder):$('reminder').value,reminderRepeat:$('reminder').value?(note.reminderRepeat||'none'):'none',reserved:$('reserved').checked,photos:[...images],photoMarks:[...photoMarks],drawing:drawn?$('drawCanvas').toDataURL('image/png'):drawData,audios:[...audioClips],linkedFiles:[...onfimEditorLinks],updated:Date.now()};}
+function snapshot(){recordTextHistory(true);return{...note,_textUndoPrior:onfimRecentTextStates(),title:$('noteTitle').value.trim(),text:sanitizeHTML($('noteBody').innerHTML),color:$('noteColor').value,tags:extractHashtags(txt($('noteBody').innerHTML)),reminder:$('reminder').value,reminderBase:$('reminder').value===note.reminder?(note.reminderBase||note.reminder):$('reminder').value,reminderRepeat:$('reminder').value?(note.reminderRepeat||'none'):'none',reserved:$('reserved').checked,photos:[...images],photoMarks:[...photoMarks],drawing:drawn?$('drawCanvas').toDataURL('image/png'):drawData,audios:[...audioClips],linkedFiles:[...onfimEditorLinks],updated:Date.now()};}
 // Un'unica coda di scrittura: gli inserimenti successivi non possono essere
 // sovrascritti da un salvataggio precedente ancora in esecuzione.
 function flushSave(){
@@ -2199,8 +2199,8 @@ async function leaveEditor(){
  clearTimeout(saveTimer);clearTimeout(textHistoryTimer);
  dirty=false;$('saveState').textContent='';
  note=null;editorHasStoredCopy=false;drawLoadGeneration++;
- // Undo e Redo riguardano soltanto la sessione appena chiusa.
- textHistory=[];textHistoryAt=0;updateTextUndoUI();
+ // La breve cronologia testo resta salvata nella nota; svuotiamo soltanto la memoria dell’editor.
+ textHistory=[];textHistoryAt=0;textHistoryBoundary=0;textPreviousSessionConfirmed=false;updateTextUndoUI();
  if(editorFrom==='read'&&readId){
   const all=await allNotes(),root=all.find(n=>n.id===readId&&!n.deletedAt);
   if(root){await openRead(root);return;}
@@ -2577,9 +2577,55 @@ function onfimAutoListFromTyping(e){
   return true;
 }
 function applyCommand(command,value=null){restoreRange();document.execCommand(command,false,value);rememberRange();updateFormat();markDirty();recordTextHistory(true);updateTextMark();}
-function updateTextUndoUI(){$('textUndo').disabled=textHistoryAt<=0;$('textRedo').disabled=textHistoryAt>=textHistory.length-1;}
-function resetTextHistory(){clearTimeout(textHistoryTimer);textHistory=[$('noteBody').innerHTML];textHistoryAt=0;updateTextUndoUI();}
-function recordTextHistory(immediate=false){clearTimeout(textHistoryTimer);if(!immediate){textHistoryTimer=setTimeout(()=>recordTextHistory(true),420);return;}const html=$('noteBody').innerHTML;if(textHistory[textHistoryAt]===html)return;textHistory=textHistory.slice(0,textHistoryAt+1);textHistory.push(html);if(textHistory.length>60)textHistory.shift();textHistoryAt=textHistory.length-1;updateTextUndoUI();}
+// Cronologia breve del SOLO testo. Le 5 revisioni recenti sono conservate
+// nella stessa nota (senza duplicare foto, audio, disegni o interi backup).
+const ONFIM_TEXT_UNDO_LIMIT=5,ONFIM_TEXT_UNDO_MAX_CHARS=400000;
+function onfimRecentTextStates(){
+ const current=sanitizeHTML($('noteBody').innerHTML);
+ const previous=textHistory.slice(0,textHistoryAt+1).map(sanitizeHTML);
+ if(previous[previous.length-1]!==current)previous.push(current);
+ const result=[];let bytes=0;
+ for(let i=previous.length-2;i>=0&&result.length<ONFIM_TEXT_UNDO_LIMIT;i--){
+  const state=previous[i];
+  if(state===current||(result.length&&result[0]===state))continue;
+  if(bytes+state.length>ONFIM_TEXT_UNDO_MAX_CHARS)break;
+  bytes+=state.length;result.unshift(state);
+ }
+ return result;
+}
+function updateTextUndoUI(){
+ $('textUndo').disabled=textHistoryAt<=0;
+ $('textRedo').disabled=textHistoryAt>=textHistory.length-1;
+ const atBoundary=textHistoryBoundary>0&&textHistoryAt===textHistoryBoundary&&!textPreviousSessionConfirmed;
+ $('textUndo').title=atBoundary?'Annulla: continua nella sessione precedente':'Annulla testo';
+ $('textUndo').setAttribute('aria-label',$('textUndo').title);
+}
+function resetTextHistory(){
+ clearTimeout(textHistoryTimer);
+ const current=$('noteBody').innerHTML,prior=[];
+ const input=Array.isArray(note?._textUndoPrior)?note._textUndoPrior:[];
+ let chars=0;
+ for(const entry of input.slice(-ONFIM_TEXT_UNDO_LIMIT)){
+  if(typeof entry!=='string'||entry===current)continue;
+  const safe=sanitizeHTML(entry);
+  if(safe===current||(prior.length&&prior[prior.length-1]===safe))continue;
+  if(chars+safe.length>ONFIM_TEXT_UNDO_MAX_CHARS)continue;
+  prior.push(safe);chars+=safe.length;
+ }
+ textHistory=[...prior,current];textHistoryAt=textHistory.length-1;
+ textHistoryBoundary=textHistoryAt;textPreviousSessionConfirmed=false;
+ updateTextUndoUI();
+}
+function recordTextHistory(immediate=false){
+ clearTimeout(textHistoryTimer);
+ if(!immediate){textHistoryTimer=setTimeout(()=>recordTextHistory(true),420);return;}
+ const html=$('noteBody').innerHTML;
+ if(textHistory[textHistoryAt]===html)return;
+ textHistory=textHistory.slice(0,textHistoryAt+1);
+ textHistory.push(html);
+ if(textHistory.length>60){textHistory.shift();textHistoryBoundary=Math.max(0,textHistoryBoundary-1);}
+ textHistoryAt=textHistory.length-1;updateTextUndoUI();
+}
 // Recupero di emergenza: solo contenuti della nota, non permessi, raccolte o promemoria.
 const ONFIM_RECOVERY_FIELDS=['title','text','checklist','photos','photoMarks','drawing','audios','linkedFiles','color','tags'];
 function onfimRecoveryKey(n){
@@ -2622,21 +2668,34 @@ async function onfimRecoverNote(){
     const details=[candidate.title?'Titolo: '+candidate.title:'Senza titolo',
       preview?'Testo: '+preview.slice(0,650)+(preview.length>650?'…':''):'Testo vuoto',
       (candidate.photos||[]).length+' foto · '+(candidate.audios||[]).length+' audio'+(candidate.drawing?' · disegno':'')];
-    if(!confirm('Versione del '+date+'\n\n'+details.join('\n')+'\n\nRecuperare questo contenuto? Le altre note e i promemoria non verranno modificati.'))return;
+    if(!confirm('Recupero da BACKUP · '+date+'\n\n'+details.join('\n')+'\n\nRecuperare questo contenuto? Le altre note e i promemoria non verranno modificati.'))return;
     if(note?.id!==current.id)throw new Error('La nota aperta è cambiata.');
     const recovered={...current};
     for(const field of ONFIM_RECOVERY_FIELDS){if(Object.hasOwn(candidate,field))recovered[field]=candidate[field];else delete recovered[field];}
+    delete recovered._textUndoPrior; // La storia breve del testo corrente non appartiene al backup recuperato.
     recovered.updated=Date.now();
     await putNote(recovered);
     editorFrom=editorFrom||'list';
     editNote(recovered);
-    toast('Versione precedente recuperata.');
+    toast('Contenuto recuperato dal backup.');
   }catch(e){toast('Recupero non riuscito: '+(e.message||e));}
   finally{onfimRecoveryWorking=false;button.disabled=false;}
 }
 $('recoverNote').onclick=onfimRecoverNote;
 
-function textUndoOrRedo(direction){clearTimeout(textHistoryTimer);recordTextHistory(true);const next=textHistoryAt+direction;if(next<0||next>=textHistory.length)return;textHistoryAt=next;const el=$('noteBody');el.innerHTML=textHistory[textHistoryAt];el.focus();const sel=window.getSelection(),range=document.createRange();range.selectNodeContents(el);range.collapse(false);sel.removeAllRanges();sel.addRange(range);rememberRange();updateTextUndoUI();updateFormat();markDirty();updateTextMark();}
+function textUndoOrRedo(direction){
+ clearTimeout(textHistoryTimer);recordTextHistory(true);
+ const next=textHistoryAt+direction;
+ if(next<0||next>=textHistory.length)return;
+ if(direction<0&&textHistoryBoundary>0&&textHistoryAt===textHistoryBoundary&&!textPreviousSessionConfirmed){
+  if(!confirm('Hai raggiunto l’inizio delle modifiche di questa sessione.\n\nVuoi annullare anche gli ultimi passaggi precedenti alla chiusura della nota?\n\nPuoi usare Ripristina (Redo) per tornare avanti.'))return;
+  textPreviousSessionConfirmed=true;
+ }
+ textHistoryAt=next;
+ const el=$('noteBody');el.innerHTML=textHistory[textHistoryAt];el.focus();
+ const sel=window.getSelection(),range=document.createRange();range.selectNodeContents(el);range.collapse(false);sel.removeAllRanges();sel.addRange(range);
+ rememberRange();updateTextUndoUI();updateFormat();markDirty();updateTextMark();
+}
 
 // Text stamps are part of the same raster layer as pen marks; undo restores the previous raster.
 function onfimStampText(c,ctx,text,p,size,col){
@@ -3858,7 +3917,7 @@ window.addEventListener('resize',()=>{if($('reminderDialog').open&&$('geoEnabled
   if(incoming.title||incoming.text){window.onfimReceiveShare(incoming);query.search='';history.replaceState(null,'',query.pathname+query.hash);}}catch(e){alert('Impossibile aprire il database locale: '+(e.message||e));}})();
 
 // ONFIM 0.8.7 single-file preview. The original IndexedDB name and note IDs are unchanged.
-const ONFIM_PREVIEW_VERSION='0.8.22';
+const ONFIM_PREVIEW_VERSION='0.8.23';
 
 // CHECKLISTS: stored as an optional property on the note, carried by JSON backups.
 function onfimNormalizeChecklist(value){
