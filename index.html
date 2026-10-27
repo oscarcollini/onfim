@@ -6,8 +6,8 @@
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#f3f5f8" name="theme-color"/>
 <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACFElEQVR4nO2aXY5CIQyF62R24iZcjYtzNa5hErcxr84TTkP4azmlEDiJ0aiXth8UCvde3r8/b9pYX94OeOsA8HbAWweAtwPeOgC8HfDW9gC+PYxeb3fVda/nA+wJ0QVVCWqDkgoNoQvAqJ6M7SAhqFMgFbzFEM3ZRtlSTYI8+Nfz8XlZi9tApVzXKjCqx3M2ERCWXAaREJYEQISDsCwAIgwEl0JIq1qQmtVhiRFgOdkuMwJqELQpsMQIsNQ0IyDXg9a1himA2rBsCa7UBgIOFEBPwB5VJREYgGUQyA0Ql+kkeL3dm9bulnZa/yuVGQBUj4V2wgsNwQQAD77H6RxEJAQ4gOB0fGZQcjr1Gw+epxK6IIICiHO1p+f555ZRoE03MYBcT8Tfp3JWAiRci0ilkqAjIHY6/q1Fo06Xg0xXgVbFcCzO/nKCFEKStVyiEgjXU+EWpXJWmgap66esA3hg0iWw1BbR/xLI25nixkhJfDLUOh1PphbBExnVAUTUFTwvgPj71JshtNNxe1aCb4clZWtLe9aCzwESp0cXPSltfyi6PQBRCljOxiV7QRZ2XY/FczvK2v+QcgXgdS+AayiAGQKONXwEeAab0tBVYLbgiQAPSc2iIXeHZ+zB+OaL1Efoc4IaByRt16SxrX5SdKY06IEOe1Y4p9HVo1TmAGbX9puhA8DbAW8dAN4OeOsA8HbAW9sD+AOCbitmjicJ7wAAAABJRU5ErkJggg==" rel="icon" type="image/png"/>
-<title>onfim Lite 0.8.23 · Appunti</title>
-<link rel="manifest" href="./manifest.webmanifest?release=0.8.23"/>
+<title>onfim Lite 0.8.24 · Appunti</title>
+<link rel="manifest" href="./manifest.webmanifest?release=0.8.24"/>
 <meta name="theme-color" content="#222E38"/>
 <link rel="apple-touch-icon" href="./apple-touch-icon.png"/>
 <link rel="icon" type="image/png" href="./favicon.png"/>
@@ -1238,6 +1238,22 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 #onfimHtmlExportDialog #onfimHtmlShare{background:#f3f7f8;color:#222E38;border:1px solid #dce3ea}
 #onfimHtmlExportDialog #onfimHtmlShare:disabled{opacity:.45}
 #onfimHtmlExportDialog #onfimHtmlExportFilename{overflow-wrap:anywhere}
+
+/* 0.8.24 — Raccolte apribili sotto la navigazione principale. */
+#listView #onfimCollectionsToggle{display:flex;align-items:center;justify-content:center;gap:5px;flex:1 1 103px;min-width:84px;max-width:143px;height:42px;min-height:42px;padding:0 8px;border:1px solid #d7e0e4;border-radius:14px;background:#fff;color:#344c59;font-size:.81rem;white-space:nowrap}
+#listView #onfimCollectionsToggle[aria-expanded="true"]{background:#FFF6DA;border-color:#222E38;color:#222E38}
+#listView #onfimCollectionPicker.hidden{display:none!important}
+#listView #smartCollectionsNav{display:flex;align-items:center;gap:8px;margin:8px 0 0;padding:2px 0;min-width:0}
+#listView #smartCollectionsNav[hidden]{display:none!important}
+#listView #smartCollectionTabs{display:flex;overflow-x:auto;flex:1 1 auto;gap:7px;padding:1px 0 4px;min-width:0;scrollbar-width:thin}
+#listView #smartCollectionTabs button{white-space:nowrap;flex:0 0 auto;min-height:36px;border-radius:12px;padding:6px 11px}
+#listView #smartCollectionsNav .smart-manage{flex:0 0 38px;width:38px;height:38px;border-radius:12px}
+#listView .onfim-collection-picker-label{position:static;flex:1 1 103px;min-width:84px;max-width:143px}
+@media(max-width:395px){#listView #onfimCollectionsToggle{height:40px;min-height:40px;min-width:80px;padding:0 5px;font-size:.76rem}}
+#settingsView .onfim-native-backups .native-backup-group{padding:5px 0;border:0}
+#settingsView .onfim-native-backups .onfim-backup-state{padding:0;background:transparent;border:0;margin:2px 0 0}
+#settingsView .onfim-native-backups .settingsrow{border-top:1px solid var(--line);padding:9px 0}
+#settingsView .onfim-native-backups .onfim-history-storage{font-size:.8rem;color:var(--muted);line-height:1.45;margin:2px 0 10px}
 </style>
 <!--  -->
 <meta name="theme-color" content="#222E38"/>
@@ -1261,10 +1277,10 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 <button aria-pressed="false" class="filter-pill" data-filter-choice="reserved" type="button" aria-label="Archivio" title="Archivio"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></button>
 <select aria-label="Tipo appunti" class="hidden" id="filter"><option selected="" value="ordinary">Appunti</option>
 <option value="reserved">Archivio</option><option value="favorites">Preferiti</option></select>
-<label class="onfim-collection-picker-label"><span class="sr-only">Raccolte</span><select id="onfimCollectionPicker" aria-label="Raccolte"><option value="" selected>Raccolte</option></select></label><div id="searchPanel" class="home-search"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24" width="18"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><input aria-label="Cerca negli appunti" class="search" id="search" placeholder="Cerca…" type="search"/><button aria-label="Azzera ricerca" class="search-close hidden" id="searchClose" title="Azzera ricerca" type="button">×</button></div>
+<button class="onfim-collection-picker-label" id="onfimCollectionsToggle" type="button" aria-expanded="false" aria-controls="smartCollectionsNav">Raccolte <span aria-hidden="true">⌄</span></button><select id="onfimCollectionPicker" class="hidden" aria-hidden="true" tabindex="-1"><option value="">Raccolte</option></select><div id="searchPanel" class="home-search"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24" width="18"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><input aria-label="Cerca negli appunti" class="search" id="search" placeholder="Cerca…" type="search"/><button aria-label="Azzera ricerca" class="search-close hidden" id="searchClose" title="Azzera ricerca" type="button">×</button></div>
 </div>
 </div>
-<nav class="smart-collections-nav" id="smartCollectionsNav" aria-label="Raccolte dinamiche" style="display:none">
+<nav class="smart-collections-nav" id="smartCollectionsNav" aria-label="Raccolte dinamiche" hidden>
  <div id="smartCollectionTabs" class="smart-collection-tabs"></div>
  <button type="button" id="manageCollections" class="smart-manage" title="Gestisci raccolte" aria-label="Gestisci raccolte">＋</button>
 </nav>
@@ -1324,7 +1340,7 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 <button aria-label="Elenco puntato" aria-pressed="false" data-command="insertUnorderedList">•</button>
 <button aria-label="Annulla modifica testo" disabled="" id="textUndo" title="Annulla testo" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7 4 12l5 5M4 12h10c4 0 6 2.5 6 7"/></svg></button>
 <button aria-label="Ripristina modifica testo" disabled="" id="textRedo" title="Ripristina testo" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(24 0) scale(-1 1)"><path d="M9 7 4 12l5 5M4 12h10c4 0 6 2.5 6 7"/></g></svg></button>
-<button aria-label="Recupera contenuto dal backup" id="recoverNote" title="Recupera dal backup (versioni meno recenti)" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg></button>
+<button aria-label="Recupera ultima sessione" id="recoverNote" title="Recupera ultima sessione" type="button" disabled><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg></button>
 </div>
 <div class="format-row format-colors" role="group" aria-label="Data, posizione, colori ed evidenziazione">
 <button id="insertJournalStamp" type="button" title="Inserisci data e ora nel testo" aria-label="Inserisci data e ora nel testo"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>
@@ -1410,21 +1426,21 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 <div class="settingsrow"><div><strong>Promemoria nel calendario</strong><p>Esporta eventi .ics per importarli nel calendario Android, che potrà notificarti anche con Onfim chiusa.</p></div><button id="exportIcs">Esporta .ics</button></div><div class="settingsrow"><div><strong>Avvisi web</strong><p>Avvisa mentre onfim Lite è aperta. Con la PWA chiusa non sono garantiti.</p></div><button id="notifyButton">Abilita</button></div>
 </div>
 <div class="panel onfim-storage-panel"><h2>Dati e backup</h2>
-<div class="onfim-data-block"><h3>Salvataggio</h3>
+<div class="onfim-data-block"><h3>Salvataggio</h3><p id="onfimHistoryStorage" class="onfim-history-storage" role="status">Spazio cronologia: calcolo alla apertura delle Impostazioni…</p>
 <p class="hint">Gli appunti sono salvati automaticamente nel browser.</p>
 <div class="settingsrow"><div><strong>Conservazione persistente</strong><p id="storageStatus">Controllo permesso…</p></div><button id="persistButton" type="button">Richiedi</button></div>
 <p class="hint">Riduce il rischio di eliminazione automatica, ma non protegge dalla cancellazione dei dati del browser.</p>
 </div>
-<div class="onfim-data-block lite-backup-panel"><h3>Copie di sicurezza nel browser</h3>
-<p class="hint">Fino a 5 copie interne. Create durante l’uso solo quando gli appunti cambiano, al massimo una ogni 3 ore.</p>
+<div class="onfim-data-block lite-backup-panel"><h3>Copie nel browser</h3>
+<p class="hint">Fino a 5 copie automatiche, al massimo ogni 3 ore se ci sono modifiche.</p>
 <div class="backup-status" id="backupStatus" role="status">Stato copie: controllo…</div>
+<details><summary>Gestisci copie interne</summary>
 <div class="backup-local-list" id="localBackupList" role="status">Controllo copie interne…</div>
 <div class="onfim-backup-actions"><button id="makeSnapshot" type="button">Crea copia ora</button></div>
-<p class="small" id="snapshotStatus" role="status"></p>
-<p class="onfim-backup-warning">Le copie interne si perdono cancellando i dati del browser. Esportane una su file per conservarla altrove.</p>
+<p class="small" id="snapshotStatus" role="status"></p></details>
+<p class="onfim-backup-warning">Le copie interne si perdono cancellando i dati del browser: esporta il JSON fuori dalla PWA.</p>
 </div>
-<div class="onfim-data-block"><h3>Esporta e importa</h3>
-<p class="hint">Scarica o condividi un JSON fuori da Onfim; l'importazione aggiunge gli appunti mancanti e aggiorna quelli con lo stesso ID.</p>
+<div class="onfim-data-block"><h3>Importa ed esporta JSON</h3>
 <div class="settingsrow"><div><strong>Copia su file</strong></div><button id="exportJson">Scarica JSON</button></div>
 <div class="settingsrow"><div><strong>Invia copia</strong></div><button id="shareBackup" type="button">Condividi JSON</button></div>
 <div class="settingsrow"><div><strong>Da un file</strong></div><button id="importJson">Importa JSON</button><input accept=".json,application/json" class="hidden" id="jsonInput" type="file"/></div>
@@ -1438,7 +1454,7 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 
 <div class="panel"><h2>Informazioni · browser</h2><p>Questa versione funziona offline e condivide gli appunti tramite file JSON con onfim Android, ma alcune funzioni richiedono l'APK:</p><ul class="lite-limit-list"><li><strong>Promemoria:</strong> nessuna sveglia affidabile con la PWA chiusa; puoi esportarli nel Calendario.</li><li><strong>Geofence:</strong> non disponibili in background; quelli importati restano nel backup senza attivarsi.</li><li><strong>Backup su Drive:</strong> manuale tramite Condividi; non automatico in background.</li><li><strong>Widget e notifiche native Android:</strong> non disponibili.</li><li><strong>Estrazione testo dalle fotografie (OCR):</strong> disponibile nell’APK completa. La Lite non incorpora un motore OCR.</li></ul></div>
  <div class="panel onfim-about-panel"><h2>Informazioni su Onfim</h2><p class="hint">Onfim è stata sviluppata con l'assistenza di ChatGPT, ma non integra ChatGPT né servizi di intelligenza artificiale generativa. Nell'APK il riconoscimento del testo nelle immagini (OCR) avviene localmente sul dispositivo; la PWA Lite non include l'OCR.</p></div>
- <footer class="onfim-colophon">onfim v0.8.23 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
+ <footer class="onfim-colophon">onfim v0.8.24 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
 <section class="view" id="trashView" aria-label="Cestino">
   <div class="controls"><button id="backTrash" type="button">← Impostazioni</button></div>
   <div class="panel trash-panel"><div class="trash-head"><div><h2>Appunti eliminati</h2><p class="hint">Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.</p></div><button id="emptyTrash" class="danger" type="button">Svuota</button></div><p id="trashCount" class="small" role="status"></p><div id="trashList" class="trash-list"></div></div>
@@ -1614,7 +1630,7 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 </dialog>
 <script>
 (()=>{'use strict';
-const $=id=>document.getElementById(id);const DB='appunti-prototipo-v1',STORE='notes',SNAPSTORE='localSnapshots',VERSION='0.8.23';
+const $=id=>document.getElementById(id);const DB='appunti-prototipo-v1',STORE='notes',SNAPSTORE='localSnapshots',VERSION='0.8.24';
 const LAST_EXPORT_KEY='onfim-last-json-export-v06',LAST_CHANGE_KEY='onfim-last-data-change-v06',BACKUP_MAX_AGE_DAYS=7;let db=null,note=null,images=[],photoMarks=[],drawData='',drawn=false,pen='#202a34',erasing=false,painting=false,last=null,saveTimer=0,dirty=false,saving=Promise.resolve(),knownTags=[],unlocked=false,audioClips=[],recorder=null,audioFinalizing=false,audioStarting=false,micStream=null,audioPieces=[],audioTick=null,audioStarted=0,audioPausedAt=0,audioPauseTotal=0,readId=null,editorFrom='list',reminderTimers=new Map(),selectionRange=null,toastTimer=0;
 let textHistory=[],textHistoryAt=0,textHistoryTimer=0,textHistoryBoundary=0,textPreviousSessionConfirmed=false,drawUndoHistory=[],drawRedoHistory=[],drawLoadGeneration=0;
 function toast(msg){const el=$('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2600);}
@@ -1889,7 +1905,7 @@ function previewAllowed(n){return !n.reserved||unlocked;}
     const root=groupRootFor(n,all);
     if(!ordinary.has(root.id))ordinary.set(root.id,{root,parts:chainMembers(root,all)});
   }
-  const choices=[{id:'home',name:'Home'},...smartCollections.map(c=>({id:'c:'+c.id,name:c.name})),{id:'all',name:'Tutti'}];
+  const choices=[...smartCollections.map(c=>({id:'c:'+c.id,name:c.name}))];
   if(!choices.some(c=>c.id===smartActive))smartActive='home';
   for(const c of choices){
     const b=document.createElement('button');b.type='button';b.textContent=c.name;
@@ -2152,7 +2168,7 @@ function markDirty(){
  const editorId=note.id;
  saveTimer=setTimeout(()=>{if(note?.id===editorId)void flushSave();},850);
 }
-function snapshot(){recordTextHistory(true);return{...note,_textUndoPrior:onfimRecentTextStates(),title:$('noteTitle').value.trim(),text:sanitizeHTML($('noteBody').innerHTML),color:$('noteColor').value,tags:extractHashtags(txt($('noteBody').innerHTML)),reminder:$('reminder').value,reminderBase:$('reminder').value===note.reminder?(note.reminderBase||note.reminder):$('reminder').value,reminderRepeat:$('reminder').value?(note.reminderRepeat||'none'):'none',reserved:$('reserved').checked,photos:[...images],photoMarks:[...photoMarks],drawing:drawn?$('drawCanvas').toDataURL('image/png'):drawData,audios:[...audioClips],linkedFiles:[...onfimEditorLinks],updated:Date.now()};}
+function snapshot(){const data={...note,_onfimUndoSession:onfimSessionToSave(),title:$('noteTitle').value.trim(),text:sanitizeHTML($('noteBody').innerHTML),color:$('noteColor').value,tags:extractHashtags(txt($('noteBody').innerHTML)),reminder:$('reminder').value,reminderBase:$('reminder').value===note.reminder?(note.reminderBase||note.reminder):$('reminder').value,reminderRepeat:$('reminder').value?(note.reminderRepeat||'none'):'none',reserved:$('reserved').checked,photos:[...images],photoMarks:[...photoMarks],drawing:drawn?$('drawCanvas').toDataURL('image/png'):drawData,audios:[...audioClips],linkedFiles:[...onfimEditorLinks],updated:Date.now()};delete data._textUndoPrior;return data;}
 // Un'unica coda di scrittura: gli inserimenti successivi non possono essere
 // sovrascritti da un salvataggio precedente ancora in esecuzione.
 function flushSave(){
@@ -2266,7 +2282,7 @@ async function startAudioRecording(){
 async function importAudioFiles(files){for(const f of files){if(!f.type.startsWith('audio/'))continue;if(f.size>MAX_AUDIO_BYTES){toast('Audio troppo grande (limite 10 MB): '+f.name);continue;}try{const data=await fileAsDataURL(f);audioClips.push({id:uid(),name:f.name||'Audio allegato',data,created:Date.now()});markDirty();}catch(e){toast('Errore audio: '+e.message);}}renderAudioGallery();}
 
 function photoList(){const host=$('photoGallery');host.replaceChildren();onfimUpdateMediaTab();images.forEach((src,i)=>{const card=document.createElement('div');card.className='photo';const img=document.createElement('img');img.src=src;img.alt='Foto allegata';const del=document.createElement('button');del.type='button';del.className='remove-photo';del.textContent='×';del.title='Rimuovi foto';del.onclick=()=>{images.splice(i,1);photoMarks.splice(i,1);photoList();markDirty();};const edit=document.createElement('button');edit.type='button';edit.className='edit-photo';edit.innerHTML='<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>';edit.setAttribute('aria-label','Modifica segni sulla fotografia');edit.title='Modifica segni';edit.onclick=()=>openPhotoMarkup(i);if(/^data:image\/gif;/i.test(src)){edit.classList.add('hidden');edit.disabled=true;edit.title='Le GIF animate non si possono annotare';}card.append(img);if(photoMarks[i]){const mark=document.createElement('img');mark.src=photoMarks[i];mark.className='photo-mark-preview';mark.alt='';card.append(mark);}card.append(del,edit);host.append(card);});}
-function editNote(n,allowPart=true){editorHasStoredCopy=!!allowPart;$('addPartEditor').classList.toggle('hidden',!allowPart);$('noteTitle').placeholder='Titolo (facoltativo)';clearTimeout(saveTimer);dirty=false;note={...n};images=[...(n.photos||[])];photoMarks=Array.isArray(n.photoMarks)?images.map((_,i)=>typeof n.photoMarks[i]==='string'?n.photoMarks[i]:''):images.map(()=>'');$('noteTitle').value=n.title||'';$('editorDates').textContent=noteDates(n);$('noteBody').innerHTML=sanitizeHTML(migratedText(n));selectionRange=null;lastHighlightAction=null;resetTextHistory();const colorSelect=$('noteColor');colorSelect.querySelector('[data-legacy-color]')?.remove();if(n.color&&![...colorSelect.options].some(o=>o.value===n.color)){const o=new Option('Colore precedente',n.color);o.dataset.legacyColor='1';colorSelect.add(o);}colorSelect.value=n.color||'#ffffff';updateNoteColorButton();$('reminder').value=n.reminder||'';$('reserved').checked=!!n.reserved;audioClips=Array.isArray(n.audios)?n.audios.filter(a=>a&&typeof a.data==='string'&&a.data.startsWith('data:audio/')):[];$('audioRecorderControls').classList.add('hidden');$('audioStatus').classList.add('hidden');$('audioClock').textContent='00:00';recordingUI();onfimEditorLinks=Array.isArray(n.linkedFiles)?n.linkedFiles.map(f=>({...f})):[];onfimRenderEditorLinks();renderAudioGallery();$('saveState').textContent='';$('deleteNote').classList.toggle('hidden',!n.title&&!n.text&&!(n.photos||[]).length&&!n.drawing&&!(n.audios||[]).length&&!n.persisted);photoList();showDrawing(n.drawing||'');updateTextMark();chooseTab('text');updateFormat();view('editView');}
+function editNote(n,allowPart=true){editorHasStoredCopy=!!allowPart;$('addPartEditor').classList.toggle('hidden',!allowPart);$('noteTitle').placeholder='Titolo (facoltativo)';clearTimeout(saveTimer);dirty=false;note={...n};images=[...(n.photos||[])];photoMarks=Array.isArray(n.photoMarks)?images.map((_,i)=>typeof n.photoMarks[i]==='string'?n.photoMarks[i]:''):images.map(()=>'');$('noteTitle').value=n.title||'';$('editorDates').textContent=noteDates(n);$('noteBody').innerHTML=sanitizeHTML(migratedText(n));selectionRange=null;lastHighlightAction=null;const colorSelect=$('noteColor');colorSelect.querySelector('[data-legacy-color]')?.remove();if(n.color&&![...colorSelect.options].some(o=>o.value===n.color)){const o=new Option('Colore precedente',n.color);o.dataset.legacyColor='1';colorSelect.add(o);}colorSelect.value=n.color||'#ffffff';updateNoteColorButton();resetTextHistory();$('reminder').value=n.reminder||'';$('reserved').checked=!!n.reserved;audioClips=Array.isArray(n.audios)?n.audios.filter(a=>a&&typeof a.data==='string'&&a.data.startsWith('data:audio/')):[];$('audioRecorderControls').classList.add('hidden');$('audioStatus').classList.add('hidden');$('audioClock').textContent='00:00';recordingUI();onfimEditorLinks=Array.isArray(n.linkedFiles)?n.linkedFiles.map(f=>({...f})):[];onfimRenderEditorLinks();renderAudioGallery();$('saveState').textContent='';$('deleteNote').classList.toggle('hidden',!n.title&&!n.text&&!(n.photos||[]).length&&!n.drawing&&!(n.audios||[]).length&&!n.persisted);photoList();showDrawing(n.drawing||'');updateTextMark();chooseTab('text');updateFormat();view('editView');}
 function newNote(){editorFrom='list';const n=emptyNote();n.reserved=$('filter').value==='reserved'&&unlocked;n.favorite=$('filter').value==='favorites';editNote(n,false);$('deleteNote').classList.add('hidden');$('noteTitle').focus();}
 // Un carosello per ciascuna sezione fotografica della nota aperta (anche composta).
 // Non tocca la galleria dell'editor, le miniature Home o l'HTML condiviso.
@@ -2577,124 +2593,149 @@ function onfimAutoListFromTyping(e){
   return true;
 }
 function applyCommand(command,value=null){restoreRange();document.execCommand(command,false,value);rememberRange();updateFormat();markDirty();recordTextHistory(true);updateTextMark();}
-// Cronologia breve del SOLO testo. Le 5 revisioni recenti sono conservate
-// nella stessa nota (senza duplicare foto, audio, disegni o interi backup).
-const ONFIM_TEXT_UNDO_LIMIT=5,ONFIM_TEXT_UNDO_MAX_CHARS=400000;
-function onfimRecentTextStates(){
- const current=sanitizeHTML($('noteBody').innerHTML);
- const previous=textHistory.slice(0,textHistoryAt+1).map(sanitizeHTML);
- if(previous[previous.length-1]!==current)previous.push(current);
- const result=[];let bytes=0;
- for(let i=previous.length-2;i>=0&&result.length<ONFIM_TEXT_UNDO_LIMIT;i--){
-  const state=previous[i];
-  if(state===current||(result.length&&result[0]===state))continue;
-  if(bytes+state.length>ONFIM_TEXT_UNDO_MAX_CHARS)break;
-  bytes+=state.length;result.unshift(state);
+// 0.8.24 — Cronologia per azioni e ultima sessione conclusa.
+// Salvataggio automatico indipendente dai checkpoint Undo/Redo.
+// Le revisioni conservano solo testo HTML, titolo, colore scheda e checklist:
+// immagini/audio/disegni NON sono copiati nei checkpoint.
+const ONFIM_HISTORY_LIMIT=60,ONFIM_HISTORY_MAX_BYTES=1024*1024;
+let onfimLastSession=[],onfimHistoryRecovering=false,onfimInputPhase='';
+function onfimEditorState(){
+ return {text:sanitizeHTML($('noteBody').innerHTML),title:$('noteTitle').value.trim(),
+  color:$('noteColor').value,checklist:onfimNormalizeChecklist(onfimChecklistDraft).filter(x=>x.text.trim())};
+}
+function onfimCleanState(x,reference){
+ if(!x||typeof x!=='object')return null;
+ const state={text:sanitizeHTML(typeof x.text==='string'?x.text:''),
+  title:String(x.title??reference.title??'').slice(0,200),
+  color:typeof x.color==='string'?x.color:reference.color,
+  checklist:onfimNormalizeChecklist(x.checklist??reference.checklist)};
+ return state;
+}
+function onfimHistorySame(a,b){return !!a&&!!b&&JSON.stringify(a)===JSON.stringify(b);}
+function onfimHistoryBytes(value){return new TextEncoder().encode(JSON.stringify(value)).length;}
+function onfimLimitHistory(states){
+ const seen=[];
+ for(const s of states){if(!s)continue;if(!seen.length||!onfimHistorySame(seen[seen.length-1],s))seen.push(s);}
+ // Prima versione sempre protetta (per cancellazioni accidentali), poi ultimi passi.
+ if(seen.length>ONFIM_HISTORY_LIMIT)seen.splice(1,seen.length-ONFIM_HISTORY_LIMIT);
+ while(seen.length>2&&onfimHistoryBytes(seen)>ONFIM_HISTORY_MAX_BYTES)seen.splice(1,1);
+ return seen;
+}
+function onfimSizeLabel(bytes){if(bytes>=1024*1024)return (bytes/1024/1024).toFixed(2)+' MB';if(bytes>=1024)return (bytes/1024).toFixed(1)+' KB';return bytes+' B';}
+async function onfimMeasureHistory(){
+ const label=$('onfimHistoryStorage');if(!label)return;
+ try{
+  const all=await allNotes();let notes=0,history=0,tracked=0;
+  for(const n of all){
+   const copy={...n};delete copy._onfimUndoSession;delete copy._textUndoPrior;
+   notes+=onfimHistoryBytes(copy);
+   const raw=Array.isArray(n._onfimUndoSession)?n._onfimUndoSession:(Array.isArray(n._textUndoPrior)?n._textUndoPrior:[]);
+   if(raw.length){history+=onfimHistoryBytes(raw);tracked++;}
+  }
+  label.textContent='Spazio dati note: '+onfimSizeLabel(notes)+' · Cronologia: '+onfimSizeLabel(history)+
+   ' ('+(notes?(history/notes*100).toFixed(1):'0')+'% dei dati correnti) · '+tracked+' note con revisioni. Misura del JSON non compresso, inclusi gli allegati nelle note.';
+ }catch(e){label.textContent='Impossibile misurare la cronologia: '+(e.message||e);}
+}
+function onfimSessionToSave(){
+ const steps=textHistory.slice(0,textHistoryAt+1);
+ const now=onfimEditorState();
+ if(!steps.length||!onfimHistorySame(steps[steps.length-1],now))steps.push(now);
+ return onfimLimitHistory(steps);
+}
+function resetTextHistory(){
+ const state=onfimEditorState(),stored=Array.isArray(note?._onfimUndoSession)?note._onfimUndoSession:[];
+ const legacy=Array.isArray(note?._textUndoPrior)?note._textUndoPrior:[];
+ onfimLastSession=onfimLimitHistory(stored.map(s=>onfimCleanState(s,state)).filter(Boolean));
+ if(!onfimLastSession.length&&legacy.length){
+  onfimLastSession=onfimLimitHistory([...legacy.slice(-5).map(text=>onfimCleanState({...state,text},state)),state]);
  }
- return result;
+ // La sessione attuale parte indipendente dalla precedente, fino a «Recupera».
+ textHistory=[state];textHistoryAt=0;textHistoryBoundary=0;
+ textPreviousSessionConfirmed=false;onfimHistoryRecovering=false;onfimInputPhase='';
+ updateTextUndoUI();
 }
 function updateTextUndoUI(){
  $('textUndo').disabled=textHistoryAt<=0;
  $('textRedo').disabled=textHistoryAt>=textHistory.length-1;
- const atBoundary=textHistoryBoundary>0&&textHistoryAt===textHistoryBoundary&&!textPreviousSessionConfirmed;
- $('textUndo').title=atBoundary?'Annulla: continua nella sessione precedente':'Annulla testo';
- $('textUndo').setAttribute('aria-label',$('textUndo').title);
-}
-function resetTextHistory(){
- clearTimeout(textHistoryTimer);
- const current=$('noteBody').innerHTML,prior=[];
- const input=Array.isArray(note?._textUndoPrior)?note._textUndoPrior:[];
- let chars=0;
- for(const entry of input.slice(-ONFIM_TEXT_UNDO_LIMIT)){
-  if(typeof entry!=='string'||entry===current)continue;
-  const safe=sanitizeHTML(entry);
-  if(safe===current||(prior.length&&prior[prior.length-1]===safe))continue;
-  if(chars+safe.length>ONFIM_TEXT_UNDO_MAX_CHARS)continue;
-  prior.push(safe);chars+=safe.length;
- }
- textHistory=[...prior,current];textHistoryAt=textHistory.length-1;
- textHistoryBoundary=textHistoryAt;textPreviousSessionConfirmed=false;
- updateTextUndoUI();
+ const available=onfimLastSession.length>1;
+ $('recoverNote').disabled=!available;
+ $('recoverNote').title=available?'Recupera i passaggi dell’ultima sessione':'Nessuna sessione precedente recuperabile';
+ $('recoverNote').setAttribute('aria-label',$('recoverNote').title);
 }
 function recordTextHistory(immediate=false){
  clearTimeout(textHistoryTimer);
- if(!immediate){textHistoryTimer=setTimeout(()=>recordTextHistory(true),420);return;}
- const html=$('noteBody').innerHTML;
- if(textHistory[textHistoryAt]===html)return;
+ // Nessun timer: è il confine dell'azione (spazio, punteggiatura, formato ecc.) a registrare lo stato.
+ if(!immediate)return;
+ const state=onfimEditorState();
+ if(onfimHistorySame(textHistory[textHistoryAt],state))return;
  textHistory=textHistory.slice(0,textHistoryAt+1);
- textHistory.push(html);
- if(textHistory.length>60){textHistory.shift();textHistoryBoundary=Math.max(0,textHistoryBoundary-1);}
- textHistoryAt=textHistory.length-1;updateTextUndoUI();
+ textHistory.push(state);
+ if(textHistory.length>ONFIM_HISTORY_LIMIT){textHistory.shift();textHistoryBoundary=Math.max(0,textHistoryBoundary-1);}
+ textHistoryAt=textHistory.length-1;
+ updateTextUndoUI();
 }
-// Recupero di emergenza: solo contenuti della nota, non permessi, raccolte o promemoria.
-const ONFIM_RECOVERY_FIELDS=['title','text','checklist','photos','photoMarks','drawing','audios','linkedFiles','color','tags'];
-function onfimRecoveryKey(n){
-  function canonical(value){
-    if(Array.isArray(value))return value.map(canonical);
-    if(value&&typeof value==='object')return Object.fromEntries(Object.keys(value).sort().map(k=>[k,canonical(value[k])]));
-    return value===undefined?null:value;
-  }
-  return JSON.stringify(ONFIM_RECOVERY_FIELDS.map(key=>canonical(n?.[key]??null)));
+function onfimTextBeforeInput(e){
+ if(e.isComposing)return;
+ const type=e.inputType||'';
+ const phase=type.startsWith('delete')?'delete':'insert';
+ // Quando si passa da inserimento a cancellazione (o viceversa), fissa la fase precedente.
+ if(onfimInputPhase&&onfimInputPhase!==phase)recordTextHistory(true);
+ onfimInputPhase=phase;
 }
-let onfimRecoveryWorking=false;
-async function onfimFindPreviousVersion(current){
-  if(typeof window.OnfimAndroid!=='undefined'){
-    if(typeof OnfimAndroid.findPreviousNote!=='function')throw new Error('Aggiorna il contenitore Android per usare il recupero.');
-    const response=JSON.parse(OnfimAndroid.findPreviousNote(current.id,JSON.stringify(current)));
-    if(response.error)throw new Error(response.error);
-    return response.found?response:null;
-  }
-  if(!snapshotDb)throw new Error('Copie interne non disponibili nel browser.');
-  const copies=(await snapshotStoreAll()).sort((a,b)=>b.id-a.id),fingerprint=onfimRecoveryKey(current);
-  for(const copy of copies){
-    const old=(copy.notes||[]).find(x=>x?.id===current.id);
-    if(old&&!old.deletedAt&&onfimRecoveryKey(old)!==fingerprint)return {found:true,note:old,createdAt:copy.createdAt||new Date(copy.id).toISOString()};
-  }
-  return null;
+function onfimTextAfterInput(e){
+ if(e.isComposing)return;
+ const type=e.inputType||'';
+ const value=e.data||'';
+ if(type==='insertText'){
+  if(/[\s.,;:!?]/u.test(value))recordTextHistory(true);
+ }else if(type.startsWith('insertComposition')){
+  // Chiusura composizione gestita da compositionend.
+ }else if(type.startsWith('delete')){
+  // Ripetuti Backspace sono un'unica azione, ma una selezione cancellata è uno step.
+  if(onfimDeletedSelection){recordTextHistory(true);onfimDeletedSelection=false;}
+ }else{
+  // Incolla, Invio, trascinamento, correttore e sostituzione sono azioni uniche.
+  recordTextHistory(true);
+ }
+}
+let onfimDeletedSelection=false;
+function onfimBeforeDelete(e){
+ const sel=window.getSelection();
+ onfimDeletedSelection=!!(e.inputType||'').startsWith('delete')&&!!sel&&!sel.isCollapsed;
+ onfimTextBeforeInput(e);
+}
+function onfimRestoreEditorState(state){
+ $('noteBody').innerHTML=state.text;$('noteTitle').value=state.title;
+ $('noteColor').value=state.color;updateNoteColorButton();
+ onfimChecklistDraft=onfimNormalizeChecklist(state.checklist);onfimChecklistEditorRender();
+ const el=$('noteBody');el.focus();
+ const sel=window.getSelection(),range=document.createRange();range.selectNodeContents(el);range.collapse(false);
+ sel.removeAllRanges();sel.addRange(range);
+ rememberRange();updateFormat();updateTextMark();
 }
 async function onfimRecoverNote(){
-  if(onfimRecoveryWorking||!note)return;
-  onfimRecoveryWorking=true;
-  const button=$('recoverNote');button.disabled=true;
-  try{
-    if(isRecording()){toast('Ferma la registrazione prima del recupero.');return;}
-    if(!(await ensureEditorSaved()))return;
-    const current=note,old=await onfimFindPreviousVersion(current);
-    if(!old?.note){toast(old?.reason||'Nessuna versione differente nei backup disponibili.');return;}
-    const candidate=old.note;
-    const stamp=new Date(old.createdAt||old.date||0);
-    const date=Number.isFinite(stamp.getTime())?stamp.toLocaleString('it-IT'):'data non disponibile';
-    const preview=txt(candidate.text||'').trim();
-    const details=[candidate.title?'Titolo: '+candidate.title:'Senza titolo',
-      preview?'Testo: '+preview.slice(0,650)+(preview.length>650?'…':''):'Testo vuoto',
-      (candidate.photos||[]).length+' foto · '+(candidate.audios||[]).length+' audio'+(candidate.drawing?' · disegno':'')];
-    if(!confirm('Recupero da BACKUP · '+date+'\n\n'+details.join('\n')+'\n\nRecuperare questo contenuto? Le altre note e i promemoria non verranno modificati.'))return;
-    if(note?.id!==current.id)throw new Error('La nota aperta è cambiata.');
-    const recovered={...current};
-    for(const field of ONFIM_RECOVERY_FIELDS){if(Object.hasOwn(candidate,field))recovered[field]=candidate[field];else delete recovered[field];}
-    delete recovered._textUndoPrior; // La storia breve del testo corrente non appartiene al backup recuperato.
-    recovered.updated=Date.now();
-    await putNote(recovered);
-    editorFrom=editorFrom||'list';
-    editNote(recovered);
-    toast('Contenuto recuperato dal backup.');
-  }catch(e){toast('Recupero non riuscito: '+(e.message||e));}
-  finally{onfimRecoveryWorking=false;button.disabled=false;}
+ if(onfimHistoryRecovering||!note||onfimLastSession.length<2)return;
+ if(isRecording()){toast('Ferma la registrazione prima del recupero.');return;}
+ recordTextHistory(true);
+ if(!confirm('Recuperare i passaggi dell’ultima sessione?\n\nLa nota si aprirà nello stato con cui era stata chiusa. Usa Annulla per tornare indietro e Ripristina per tornare avanti.'))return;
+ const now=textHistory.slice(0,textHistoryAt+1),old=onfimLastSession;
+ // La fine della vecchia sessione corrisponde all'inizio di quella corrente.
+ const joined=onfimHistorySame(old[old.length-1],now[0])?[...old,...now.slice(1)]:[...old,...now];
+ const pastEnd=old.length-1;
+ textHistory=onfimLimitHistory(joined);
+ const retained=onfimHistorySame(textHistory[0],old[0]);
+ textHistoryAt=Math.min(retained?pastEnd:0,textHistory.length-1);
+ onfimHistoryRecovering=true;
+ onfimRestoreEditorState(textHistory[textHistoryAt]);updateTextUndoUI();
+ markDirty();toast('Sessione precedente: usa Annulla per recuperare i passaggi.');
 }
-$('recoverNote').onclick=onfimRecoverNote;
-
+$('recoverNote').onclick=()=>void onfimRecoverNote();
 function textUndoOrRedo(direction){
- clearTimeout(textHistoryTimer);recordTextHistory(true);
+ recordTextHistory(true);
  const next=textHistoryAt+direction;
  if(next<0||next>=textHistory.length)return;
- if(direction<0&&textHistoryBoundary>0&&textHistoryAt===textHistoryBoundary&&!textPreviousSessionConfirmed){
-  if(!confirm('Hai raggiunto l’inizio delle modifiche di questa sessione.\n\nVuoi annullare anche gli ultimi passaggi precedenti alla chiusura della nota?\n\nPuoi usare Ripristina (Redo) per tornare avanti.'))return;
-  textPreviousSessionConfirmed=true;
- }
  textHistoryAt=next;
- const el=$('noteBody');el.innerHTML=textHistory[textHistoryAt];el.focus();
- const sel=window.getSelection(),range=document.createRange();range.selectNodeContents(el);range.collapse(false);sel.removeAllRanges();sel.addRange(range);
- rememberRange();updateTextUndoUI();updateFormat();markDirty();updateTextMark();
+ onfimRestoreEditorState(textHistory[next]);updateTextUndoUI();markDirty();
 }
 
 // Text stamps are part of the same raster layer as pen marks; undo restores the previous raster.
@@ -2928,7 +2969,12 @@ async function exportJSON(){try{
   await refreshBackupStatus();
   $('settingsStatus').textContent='Download avviato. Verifica che il file JSON sia stato effettivamente salvato sul dispositivo o su Drive.';
 }catch(e){$('settingsStatus').textContent='Errore nell’esportazione: '+e.message;}}
-async function importJSON(file){try{const data=JSON.parse(await file.text());if(!Array.isArray(data.notes)|| !['appunti-backup','onfim-backup'].includes(data.format))throw new Error('Formato JSON non riconosciuto.');if(!confirm('Importare '+data.notes.length+' appunti? Gli ID già presenti saranno aggiornati; gli altri verranno aggiunti.'))return;if(dirty)throw new Error('Prima salva o chiudi l’appunto in modifica.');const existing=await allNotes();if(existing.length&&!await makeLocalSnapshot('prima-importazione',true))throw new Error('Non è stato possibile creare una copia preventiva: esporta un JSON e riprova.');let count=0;const imported=[];for(const n of data.notes){if(!n?.id||typeof n!=='object')continue;const cleaned={id:String(n.id),title:String(n.title||''),text:sanitizeHTML(n.text),checklist:onfimNormalizeChecklist(n.checklist),color:String(n.color||'#ffffff'),tags:Array.isArray(n.tags)?n.tags.map(String):[],photos:Array.isArray(n.photos)?n.photos.filter(s=>typeof s==='string'&&s.startsWith('data:image/')):[],photoMarks:Array.isArray(n.photoMarks)?n.photoMarks.map(s=>typeof s==='string'&&(s===''||s.startsWith('data:image/'))?s:''):[],drawing:typeof n.drawing==='string'&&n.drawing.startsWith('data:image/')?n.drawing:'',reminder:String(n.reminder||''),reminderRepeat:['none','daily','weekly','monthly','weekday','monday','tuesday','wednesday','thursday','friday','saturday','sunday'].includes(n.reminderRepeat)?n.reminderRepeat:'none',reminderBase:typeof n.reminderBase==='string'?n.reminderBase:String(n.reminder||''),geofence:cleanGeofence(n.geofence),reserved:!!n.reserved,favorite:!!n.favorite,pinned:!!n.pinned,created:Number(n.created)||Date.now(),updated:Number(n.updated)||Date.now(),audios:Array.isArray(n.audios)?n.audios.filter(a=>a&&typeof a.data==='string'&&a.data.startsWith('data:audio/')&&a.data.length<=Math.ceil(MAX_AUDIO_BYTES*1.4)).map(a=>({id:String(a.id||uid()),name:String(a.name||'Registrazione'),data:a.data,created:Number(a.created)||Date.now()})):[],chainRoot:typeof n.chainRoot==='string'?n.chainRoot:'',chainOrder:Number.isFinite(Number(n.chainOrder))?Number(n.chainOrder):0,manualOrder:Number.isSafeInteger(Number(n.manualOrder))&&Number(n.manualOrder)>0?Number(n.manualOrder):0,linkedFiles:Array.isArray(n.linkedFiles)?n.linkedFiles.filter(f=>f&&typeof f.uri==='string'&&/^content:\/\//.test(f.uri)&&f.uri.length<4096).slice(0,15).map(f=>({uri:f.uri,name:String(f.name||'Documento').slice(0,180),type:String(f.type||'').slice(0,120),size:Number(f.size)||0})):[]};if(Number(n.deletedAt)>0){cleaned.deletedAt=Number(n.deletedAt);cleaned.trashBatchId=typeof n.trashBatchId==='string'&&n.trashBatchId?n.trashBatchId:cleaned.id;}imported.push(cleaned);count++;}await putNotesBatch(imported);
+async function importJSON(file){try{const data=JSON.parse(await file.text());if(!Array.isArray(data.notes)|| !['appunti-backup','onfim-backup'].includes(data.format))throw new Error('Formato JSON non riconosciuto.');if(!confirm('Importare '+data.notes.length+' appunti? Gli ID già presenti saranno aggiornati; gli altri verranno aggiunti.'))return;if(dirty)throw new Error('Prima salva o chiudi l’appunto in modifica.');const existing=await allNotes();if(existing.length&&!await makeLocalSnapshot('prima-importazione',true))throw new Error('Non è stato possibile creare una copia preventiva: esporta un JSON e riprova.');let count=0;const imported=[];for(const n of data.notes){if(!n?.id||typeof n!=='object')continue;const cleaned={id:String(n.id),title:String(n.title||''),text:sanitizeHTML(n.text),checklist:onfimNormalizeChecklist(n.checklist),color:String(n.color||'#ffffff'),tags:Array.isArray(n.tags)?n.tags.map(String):[],photos:Array.isArray(n.photos)?n.photos.filter(s=>typeof s==='string'&&s.startsWith('data:image/')):[],photoMarks:Array.isArray(n.photoMarks)?n.photoMarks.map(s=>typeof s==='string'&&(s===''||s.startsWith('data:image/'))?s:''):[],drawing:typeof n.drawing==='string'&&n.drawing.startsWith('data:image/')?n.drawing:'',reminder:String(n.reminder||''),reminderRepeat:['none','daily','weekly','monthly','weekday','monday','tuesday','wednesday','thursday','friday','saturday','sunday'].includes(n.reminderRepeat)?n.reminderRepeat:'none',reminderBase:typeof n.reminderBase==='string'?n.reminderBase:String(n.reminder||''),geofence:cleanGeofence(n.geofence),reserved:!!n.reserved,favorite:!!n.favorite,pinned:!!n.pinned,created:Number(n.created)||Date.now(),updated:Number(n.updated)||Date.now(),audios:Array.isArray(n.audios)?n.audios.filter(a=>a&&typeof a.data==='string'&&a.data.startsWith('data:audio/')&&a.data.length<=Math.ceil(MAX_AUDIO_BYTES*1.4)).map(a=>({id:String(a.id||uid()),name:String(a.name||'Registrazione'),data:a.data,created:Number(a.created)||Date.now()})):[],chainRoot:typeof n.chainRoot==='string'?n.chainRoot:'',chainOrder:Number.isFinite(Number(n.chainOrder))?Number(n.chainOrder):0,manualOrder:Number.isSafeInteger(Number(n.manualOrder))&&Number(n.manualOrder)>0?Number(n.manualOrder):0,linkedFiles:Array.isArray(n.linkedFiles)?n.linkedFiles.filter(f=>f&&typeof f.uri==='string'&&/^content:\/\//.test(f.uri)&&f.uri.length<4096).slice(0,15).map(f=>({uri:f.uri,name:String(f.name||'Documento').slice(0,180),type:String(f.type||'').slice(0,120),size:Number(f.size)||0})):[]};if(Number(n.deletedAt)>0){cleaned.deletedAt=Number(n.deletedAt);cleaned.trashBatchId=typeof n.trashBatchId==='string'&&n.trashBatchId?n.trashBatchId:cleaned.id;}// Conserva la sola cronologia recente, validata e limitata (nessuna copia dei media).
+ if(Array.isArray(n._onfimUndoSession)){
+  const reference={title:cleaned.title,text:cleaned.text,color:cleaned.color,checklist:cleaned.checklist};
+  cleaned._onfimUndoSession=onfimLimitHistory(n._onfimUndoSession.map(x=>onfimCleanState(x,reference)).filter(Boolean));
+ }
+ imported.push(cleaned);count++;}await putNotesBatch(imported);
  if(data.reminderDayparts&&typeof data.reminderDayparts==='object'){
   for(const key of ['morning','afternoon'])if(onfimValidQuickTime(data.reminderDayparts[key]))onfimQuickTimes[key]=data.reminderDayparts[key];
   localStorage.setItem(ONFIM_QUICK_TIMES_KEY,JSON.stringify(onfimQuickTimes));
@@ -3217,7 +3263,7 @@ $('noteColorButton').onclick=()=>{updateNoteColorButton();$('noteColorDialog').s
 $('noteColorClose').onclick=()=>$('noteColorDialog').close();
 for(const b of document.querySelectorAll('[data-note-color]'))b.onclick=()=>{
   $('noteColor').value=b.dataset.noteColor;
-  updateNoteColorButton();markDirty();$('noteColorDialog').close();
+  updateNoteColorButton();markDirty();recordTextHistory(true);$('noteColorDialog').close();
 };
 let reminderOpenedFromList=false,reminderOriginalValue='',reminderOriginalRule='none',reminderOriginalBase='',reminderOriginalHadGeo=false;
 async function openReminderFor(source,fromList=false){
@@ -3357,13 +3403,17 @@ $('searchClose').onclick=()=>{
   $('search').value='';$('searchClose').classList.add('hidden');
   $('search').focus();renderNotes();
 };
-$('addButton').onclick=async()=>{if($('editView').classList.contains('show')){await leaveEditor();if($('editView').classList.contains('show'))return;}newNote();};$('settingsButton').onclick=async()=>{if($('editView').classList.contains('show')){await leaveEditor();if($('editView').classList.contains('show'))return;}if($('filter').value==='reserved')lockArchive();view('settingsView');void refreshBackupStatus();void checkPersistentStorage();void renderLocalSnapshots();};$('backEditor').onclick=leaveEditor;$('backSettings').onclick=async()=>{await reload();view('listView')};$('deleteNote').onclick=async()=>{if(isRecording()){toast('Ferma prima la registrazione.');return;}if(!note)return;if(note.reserved&&!await checkPin())return;if(!confirmMoveToTrash(note.chainRoot?1:chainMembers(note,await allNotes()).length))return;await safeDeleteNote(note);note=null;dirty=false;clearTimeout(saveTimer);await reload();await scheduleReminders();view('listView');toast('Spostato nel Cestino');};
+$('addButton').onclick=async()=>{if($('editView').classList.contains('show')){await leaveEditor();if($('editView').classList.contains('show'))return;}newNote();};$('settingsButton').onclick=async()=>{if($('editView').classList.contains('show')){await leaveEditor();if($('editView').classList.contains('show'))return;}if($('filter').value==='reserved')lockArchive();view('settingsView');void onfimMeasureHistory();void refreshBackupStatus();void checkPersistentStorage();void renderLocalSnapshots();};$('backEditor').onclick=leaveEditor;$('backSettings').onclick=async()=>{await reload();view('listView')};$('deleteNote').onclick=async()=>{if(isRecording()){toast('Ferma prima la registrazione.');return;}if(!note)return;if(note.reserved&&!await checkPin())return;if(!confirmMoveToTrash(note.chainRoot?1:chainMembers(note,await allNotes()).length))return;await safeDeleteNote(note);note=null;dirty=false;clearTimeout(saveTimer);await reload();await scheduleReminders();view('listView');toast('Spostato nel Cestino');};
 function closeCardMenus(){document.querySelectorAll('.card.menu-open').forEach(c=>c.classList.remove('menu-open'));document.querySelectorAll('.card-popup').forEach(p=>p.classList.add('hidden'));document.querySelectorAll('.card-more[aria-expanded="true"]').forEach(b=>b.setAttribute('aria-expanded','false'));}
 document.addEventListener('click',e=>{if(!e.target.closest('.card-menu'))closeCardMenus();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCardMenus();});
 function lockArchive(){unlocked=false;if($('filter').value==='reserved')$('filter').value='ordinary';$('readBody').replaceChildren();$('readPhotos').replaceChildren();$('readAudios').replaceChildren();$('chainParts').replaceChildren();syncFilterPills();}
 function syncFilterPills(){for(const b of document.querySelectorAll('[data-filter-choice]')){const on=b.dataset.filterChoice===$('filter').value;b.classList.toggle('selected',on);b.setAttribute('aria-pressed',String(on));}}
 for(const b of document.querySelectorAll('[data-filter-choice]'))b.onclick=async()=>{if(b.dataset.filterChoice==='reserved'&&!await checkPin())return;if(b.dataset.filterChoice==='ordinary'&&$('filter').value==='reserved')unlocked=false;onfimActiveTags.clear();onfimTagReturnView=null;if(b.dataset.filterChoice==='ordinary')smartActive='home';$('filter').value=b.dataset.filterChoice;syncFilterPills();await showTags();renderNotes();};
+$('onfimCollectionsToggle').onclick=()=>{
+ const nav=$('smartCollectionsNav'),open=nav.hidden;nav.hidden=!open;
+ $('onfimCollectionsToggle').setAttribute('aria-expanded',String(open));
+};
 $('onfimCollectionPicker').onchange=async function(){
  if(this.value==='manage'){this.selectedIndex=0;$('manageCollections').click();return;}
  if(!this.value)return;
@@ -3380,7 +3430,7 @@ if(oldSortPref&&[...$('sortOrder').options].some(o=>o.value===oldSortPref))$('so
 $('sortOrder').onchange=()=>{localStorage.setItem('onfim-sort-order',$('sortOrder').value);renderNotes();};$('filter').onchange=async()=>{if($('filter').value==='reserved'&&!await checkPin())$('filter').value='ordinary';onfimActiveTags.clear();onfimTagReturnView=null;syncFilterPills();await showTags();renderNotes();};
 for(const b of document.querySelectorAll('[data-tab]'))b.onclick=()=>chooseTab(b.dataset.tab);
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&dirty&&note)void flushSave();});
-$('noteTitle').oninput=markDirty;for(const id of ['noteColor','reminder'])$(id).onchange=markDirty;
+$('noteTitle').oninput=()=>{markDirty();};$('noteTitle').addEventListener('change',()=>recordTextHistory(true));for(const id of ['noteColor','reminder'])$(id).onchange=()=>{markDirty();if(id==='noteColor')recordTextHistory(true);};
 
  function onfimTagAutofill(){
   const host=$('onfimTagSuggestions');host.replaceChildren();host.classList.add('hidden');
@@ -3413,7 +3463,7 @@ $('noteTitle').oninput=markDirty;for(const id of ['noteColor','reminder'])$(id).
    host.style.top=(below+desired>bottom?Math.max(8,rect.top-desired-6):below)+'px';
   }
  }
-$('reserved').onchange=async()=>{if($('reserved').checked){$('reserved').checked=false;const ok=await checkPin();if(ok)$('reserved').checked=true;}markDirty();};$('noteBody').oninput=e=>{lastHighlightAction=null;if(onfimAutoListFromTyping(e))return;markDirty();recordTextHistory();updateTextMark();onfimTagAutofill();onfimUpdatePointEdit();};$('textUndo').onclick=()=>textUndoOrRedo(-1);$('textRedo').onclick=()=>textUndoOrRedo(1);document.addEventListener('selectionchange',()=>{rememberRange();if(document.activeElement===$('noteBody')){updateFormat();onfimUpdatePointEdit();}});
+$('reserved').onchange=async()=>{if($('reserved').checked){$('reserved').checked=false;const ok=await checkPin();if(ok)$('reserved').checked=true;}markDirty();};$('noteBody').addEventListener('beforeinput',onfimBeforeDelete);$('noteBody').addEventListener('compositionend',()=>{recordTextHistory(true);markDirty();});$('noteBody').oninput=e=>{lastHighlightAction=null;if(onfimAutoListFromTyping(e))return;markDirty();onfimTextAfterInput(e);updateTextMark();onfimTagAutofill();onfimUpdatePointEdit();};$('textUndo').onclick=()=>textUndoOrRedo(-1);$('textRedo').onclick=()=>textUndoOrRedo(1);document.addEventListener('selectionchange',()=>{rememberRange();if(document.activeElement===$('noteBody')){updateFormat();onfimUpdatePointEdit();}});
 for(const b of document.querySelectorAll('[data-command]')){b.addEventListener('pointerdown',e=>e.preventDefault());b.onclick=()=>applyCommand(b.dataset.command);}
 for(const b of document.querySelectorAll('[data-ink]')){b.addEventListener('pointerdown',e=>e.preventDefault());b.onclick=()=>{applyCommand('foreColor',b.dataset.ink);document.querySelectorAll('[data-ink]').forEach(x=>x.classList.toggle('selected',x===b));};}
 // Three highlighting swatches are always visible. With the same selected
@@ -3531,7 +3581,7 @@ $('emptyTrash').onclick=async()=>{
 };
 $('exportJson').onclick=exportJSON;
 $('shareBackup').onclick=shareBackupViaAndroid;
-$('makeSnapshot').onclick=async()=>{if(dirty){snapshotUpdateStatus('Salva o chiudi la nota prima della copia.');return;}const ok=await makeLocalSnapshot('manuale',true);snapshotUpdateStatus(ok?'Copia creata: esportala anche fuori dal browser.':'Copia non riuscita: verifica spazio e presenza di appunti.');};$('backupReminderAction').onclick=()=>{view('settingsView');void refreshBackupStatus();void renderLocalSnapshots();};$('persistButton').onclick=requestPersistentStorage;$('importJson').onclick=()=>$('jsonInput').click();$('jsonInput').onchange=e=>{if(e.target.files[0])importJSON(e.target.files[0]);};$('exportIcs').onclick=exportICS;
+$('makeSnapshot').onclick=async()=>{if(dirty){snapshotUpdateStatus('Salva o chiudi la nota prima della copia.');return;}const ok=await makeLocalSnapshot('manuale',true);snapshotUpdateStatus(ok?'Copia creata: esportala anche fuori dal browser.':'Copia non riuscita: verifica spazio e presenza di appunti.');};$('backupReminderAction').onclick=()=>{view('settingsView');void onfimMeasureHistory();void refreshBackupStatus();void renderLocalSnapshots();};$('persistButton').onclick=requestPersistentStorage;$('importJson').onclick=()=>$('jsonInput').click();$('jsonInput').onchange=e=>{if(e.target.files[0])importJSON(e.target.files[0]);};$('exportIcs').onclick=exportICS;
 $('notifyButton').onclick=async()=>{if(!('Notification'in window)){$('settingsStatus').textContent='Notifiche web non supportate da questo browser.';return;}try{const p=await Notification.requestPermission();$('settingsStatus').textContent=p==='granted'?'Permesso concesso. L’avviso resta comunque non garantito a pagina chiusa.':'Permesso non concesso.';}catch(e){$('settingsStatus').textContent='Impossibile chiedere il permesso: '+e.message;}};
 $('audioRecord').onclick=()=>{$('audioRecorderControls').classList.remove('hidden');$('audioStatus').classList.remove('hidden');$('audioStatus').textContent='Premi Registra per iniziare.';recordingUI();};
 $('audioStart').onclick=()=>void startAudioRecording();
@@ -3936,21 +3986,21 @@ function onfimChecklistEditorRender(){
  for(const item of [...onfimChecklistDraft].sort((a,b)=>Number(a.done)-Number(b.done))){
   const row=document.createElement('div');row.className='onfim-checklist-line';
   const checked=document.createElement('input');checked.type='checkbox';checked.checked=item.done;checked.setAttribute('aria-label','Voce completata');
-  checked.onchange=()=>{item.done=checked.checked;onfimChecklistEditorRender();markDirty();};
+  checked.onchange=()=>{item.done=checked.checked;onfimChecklistEditorRender();markDirty();recordTextHistory(true);};
   const field=document.createElement('input');field.type='text';field.maxLength=500;field.placeholder='Voce della lista';field.value=item.text;
-  field.oninput=()=>{item.text=field.value;markDirty();};
+  field.oninput=()=>{item.text=field.value;markDirty();};field.onblur=()=>recordTextHistory(true);
   field.onkeydown=e=>{if(e.key!=='Enter'||e.isComposing)return;e.preventDefault();if(onfimChecklistDraft.length>=300){toast('Limite di 300 voci raggiunto');return;}
    const index=onfimChecklistDraft.findIndex(x=>x.id===item.id);const next={id:uid(),text:'',done:false};onfimChecklistDraft.splice(index+1,0,next);
-   onfimChecklistEditorRender();markDirty();const newField=[...$('checklistEditorItems').querySelectorAll('input[type="text"]')].find(x=>x.dataset.checkId===next.id);newField?.focus();};
+   onfimChecklistEditorRender();markDirty();recordTextHistory(true);const newField=[...$('checklistEditorItems').querySelectorAll('input[type="text"]')].find(x=>x.dataset.checkId===next.id);newField?.focus();};
   field.dataset.checkId=item.id;
   const del=document.createElement('button');del.type='button';del.textContent='×';del.title='Rimuovi voce';del.setAttribute('aria-label','Rimuovi voce');
-  del.onclick=()=>{onfimChecklistDraft=onfimChecklistDraft.filter(x=>x.id!==item.id);onfimChecklistEditorRender();markDirty();};
+  del.onclick=()=>{onfimChecklistDraft=onfimChecklistDraft.filter(x=>x.id!==item.id);onfimChecklistEditorRender();markDirty();recordTextHistory(true);};
   row.append(checked,field,del);host.append(row);
  }
 }
 $('addChecklistItem').onclick=()=>{
  if(onfimChecklistDraft.length>=300){toast('Limite di 300 voci raggiunto');return;}
- onfimChecklistDraft.push({id:uid(),text:'',done:false});onfimChecklistEditorRender();markDirty();
+ onfimChecklistDraft.push({id:uid(),text:'',done:false});onfimChecklistEditorRender();markDirty();recordTextHistory(true);
  const inputs=$('checklistEditorItems').querySelectorAll('input[type="text"]');inputs[inputs.length-1]?.focus();
 };
 const onfimPreviousEditNote=editNote;
