@@ -1,4 +1,4 @@
-onfim Lite PWA — 0.8.27
+onfim Lite PWA — 0.8.28
 
 Modifiche dalla 0.8.26:
 - Audio mostrato nella scheda come media, non tra gli hashtag.
