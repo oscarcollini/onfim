@@ -1,16 +1,11 @@
-onfim Lite PWA — 0.8.26
+onfim Lite PWA — 0.8.27
 
-Novità rispetto alla 0.8.25:
-1. In lettura, frecce delle foto e indicatore 1/N sulla riga «Foto».
-2. Matita «Modifica» nella barra superiore fissa durante la lettura, senza duplicati.
-3. Ricerca multi-termine AND, conservando la corrispondenza parziale di ogni termine:
-   «mont gite» trova una nota con «Montajur» e «gite» anche separati.
-4. Il pulsante + crea sempre una nota standard, anche nelle viste Preferiti e Archivio.
-5. Promemoria: nel menu Ripeti restano Mai, Ogni giorno, Ogni settimana,
-   Ogni mese e Ogni lunedì–venerdì. Ogni settimana usa il giorno scelto.
+Modifiche dalla 0.8.26:
+- Audio mostrato nella scheda come media, non tra gli hashtag.
+- Indicatore di più media con secondo strato giallo identitario #FFF6DA.
+- Sfondo puntini della guida disegno: passo 22 px, raggio 1 px, opacità 45%.
+- Nell’editor compare «Recupera fotografia rimossa» dopo una cancellazione: ripristina
+  foto e annotazioni, finché l’editor resta aperto e prima della successiva cancellazione.
 
-Nessuna modifica al salvataggio automatico, ai backup, alla cronologia, alle
-icone o alle funzioni multimediali. Cache PWA aggiornata per l'installazione.
-
-Pubblicare il contenuto dello ZIP nella stessa directory GitHub Pages.
-Prima di aggiornare, conservare un backup JSON degli appunti.
+Distribuire il contenuto di questo ZIP nella directory GitHub Pages esistente.
+È stato incrementato il cache name del service worker. Fare backup JSON prima di pubblicare.

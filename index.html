@@ -6,8 +6,8 @@
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#f3f5f8" name="theme-color"/>
 <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACFElEQVR4nO2aXY5CIQyF62R24iZcjYtzNa5hErcxr84TTkP4azmlEDiJ0aiXth8UCvde3r8/b9pYX94OeOsA8HbAWweAtwPeOgC8HfDW9gC+PYxeb3fVda/nA+wJ0QVVCWqDkgoNoQvAqJ6M7SAhqFMgFbzFEM3ZRtlSTYI8+Nfz8XlZi9tApVzXKjCqx3M2ERCWXAaREJYEQISDsCwAIgwEl0JIq1qQmtVhiRFgOdkuMwJqELQpsMQIsNQ0IyDXg9a1himA2rBsCa7UBgIOFEBPwB5VJREYgGUQyA0Ql+kkeL3dm9bulnZa/yuVGQBUj4V2wgsNwQQAD77H6RxEJAQ4gOB0fGZQcjr1Gw+epxK6IIICiHO1p+f555ZRoE03MYBcT8Tfp3JWAiRci0ilkqAjIHY6/q1Fo06Xg0xXgVbFcCzO/nKCFEKStVyiEgjXU+EWpXJWmgap66esA3hg0iWw1BbR/xLI25nixkhJfDLUOh1PphbBExnVAUTUFTwvgPj71JshtNNxe1aCb4clZWtLe9aCzwESp0cXPSltfyi6PQBRCljOxiV7QRZ2XY/FczvK2v+QcgXgdS+AayiAGQKONXwEeAab0tBVYLbgiQAPSc2iIXeHZ+zB+OaL1Efoc4IaByRt16SxrX5SdKY06IEOe1Y4p9HVo1TmAGbX9puhA8DbAW8dAN4OeOsA8HbAW9sD+AOCbitmjicJ7wAAAABJRU5ErkJggg==" rel="icon" type="image/png"/>
-<title>onfim Lite 0.8.26 · Appunti</title>
-<link rel="manifest" href="./manifest.webmanifest?release=0.8.26"/>
+<title>onfim Lite 0.8.27 · Appunti</title>
+<link rel="manifest" href="./manifest.webmanifest?release=0.8.27"/>
 <meta name="theme-color" content="#222E38"/>
 <link rel="apple-touch-icon" href="./apple-touch-icon.png"/>
 <link rel="icon" type="image/png" href="./favicon.png"/>
@@ -1132,7 +1132,7 @@ body.onfim-drawing #drawTab .drawframe canvas{box-shadow:none!important}
 /* drawing guide overlay never touches the bitmap, undo history or exported PNG */
 #drawTab .drawframe{position:relative}
 #drawTab .drawframe::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;background:transparent}
-#drawTab .drawframe.onfim-guide-dots::after{background-image:radial-gradient(circle,#89979e 0.7px,transparent 1px);background-size:14px 14px;opacity:.30}
+#drawTab .drawframe.onfim-guide-dots::after{background-image:radial-gradient(circle,#89979e 1px,transparent 1px);background-size:22px 22px;opacity:.45}
 #drawTab .drawframe.onfim-guide-grid::after{background-image:linear-gradient(to right,#acb6bc 1px,transparent 1px),linear-gradient(to bottom,#acb6bc 1px,transparent 1px);background-size:22px 22px;opacity:.27}
 #drawTab #onfimDrawingGuide{width:34px;height:34px;min-width:34px;flex:0 0 34px;padding:5px;background:#fff;border:1px solid #c4d2da;border-radius:10px;color:#222E38;display:grid;place-items:center}
 #drawTab #onfimDrawingGuide svg{width:23px;height:23px}
@@ -1278,11 +1278,18 @@ body{padding-top:calc(55px + env(safe-area-inset-top))}
   .appbar #settingsButton{min-width:42px;min-height:42px}
 }
 
-/* 0.8.26: navigazione delle fotografie sulla riga del titolo, non sotto l'immagine. */
+/* 0.8.27: navigazione delle fotografie sulla riga del titolo, non sotto l'immagine. */
 #readView .onfim-photo-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;min-width:0}
 #readView .onfim-photo-heading>h2{margin:0;flex:0 0 auto}
 #readView .onfim-photo-heading .onfim-photo-controls{display:flex;align-items:center;justify-content:flex-end;gap:7px;margin:0;flex:0 0 auto}
 #readView .onfim-photo-heading .onfim-photo-controls button{width:36px;height:34px;min-height:34px}
+
+/* 0.8.27 — multimedia previews, reversible photo removal, precise paper guide. */
+.cardthumb.onfim-multi-thumb{box-shadow:-5px 5px 0 -1px #FFF6DA,-5px 5px 0 0 var(--line);border:1px solid var(--line);}
+.onfim-card-audio{order:3;display:flex;align-items:center;gap:5px;max-width:100%;font-size:.77rem;color:var(--ink);background:#fff9e9;border:1px solid var(--line);border-radius:9px;padding:7px 9px;margin:5px 0 0;width:max-content}
+.cards.list-layout .card .onfim-card-audio{grid-column:1;grid-row:4;align-self:start;margin:2px 0 0}
+.onfim-photo-restore{margin:8px 0 4px;background:#FFF6DA;color:#222E38;border:1px solid #b8bdc1;border-radius:9px;padding:8px 11px}
+#drawTab .drawframe.onfim-guide-dots::after{background-image:radial-gradient(circle,#89979e 1px,transparent 1px);background-size:22px 22px;opacity:.45}
 </style>
 <!--  -->
 <meta name="theme-color" content="#222E38"/>
@@ -1483,7 +1490,7 @@ body{padding-top:calc(55px + env(safe-area-inset-top))}
 
 <div class="panel"><h2>Informazioni · browser</h2><p>Questa versione funziona offline e condivide gli appunti tramite file JSON con onfim Android, ma alcune funzioni richiedono l'APK:</p><ul class="lite-limit-list"><li><strong>Promemoria:</strong> nessuna sveglia affidabile con la PWA chiusa; puoi esportarli nel Calendario.</li><li><strong>Geofence:</strong> non disponibili in background; quelli importati restano nel backup senza attivarsi.</li><li><strong>Backup su Drive:</strong> manuale tramite Condividi; non automatico in background.</li><li><strong>Widget e notifiche native Android:</strong> non disponibili.</li><li><strong>Estrazione testo dalle fotografie (OCR):</strong> disponibile nell’APK completa. La Lite non incorpora un motore OCR.</li></ul></div>
  <div class="panel onfim-about-panel"><h2>Informazioni su Onfim</h2><p class="hint">Onfim è stata sviluppata con l'assistenza di ChatGPT, ma non integra ChatGPT né servizi di intelligenza artificiale generativa. Nell'APK il riconoscimento del testo nelle immagini (OCR) avviene localmente sul dispositivo; la PWA Lite non include l'OCR.</p></div>
- <footer class="onfim-colophon">onfim v0.8.26 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
+ <footer class="onfim-colophon">onfim v0.8.27 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
 <section class="view" id="trashView" aria-label="Cestino">
   <div class="controls"><button id="backTrash" type="button">← Impostazioni</button></div>
   <div class="panel trash-panel"><div class="trash-head"><div><h2>Appunti eliminati</h2><p class="hint">Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.</p></div><button id="emptyTrash" class="danger" type="button">Svuota</button></div><p id="trashCount" class="small" role="status"></p><div id="trashList" class="trash-list"></div></div>
@@ -1655,7 +1662,7 @@ body{padding-top:calc(55px + env(safe-area-inset-top))}
 </dialog>
 <script>
 (()=>{'use strict';
-const $=id=>document.getElementById(id);const DB='appunti-prototipo-v1',STORE='notes',SNAPSTORE='localSnapshots',VERSION='0.8.26';
+const $=id=>document.getElementById(id);const DB='appunti-prototipo-v1',STORE='notes',SNAPSTORE='localSnapshots',VERSION='0.8.27';
 const LAST_EXPORT_KEY='onfim-last-json-export-v06',LAST_CHANGE_KEY='onfim-last-data-change-v06',BACKUP_MAX_AGE_DAYS=7;let db=null,note=null,images=[],photoMarks=[],drawData='',drawn=false,pen='#202a34',erasing=false,painting=false,last=null,saveTimer=0,dirty=false,saving=Promise.resolve(),knownTags=[],unlocked=false,audioClips=[],recorder=null,audioFinalizing=false,audioStarting=false,micStream=null,audioPieces=[],audioTick=null,audioStarted=0,audioPausedAt=0,audioPauseTotal=0,readId=null,editorFrom='list',reminderTimers=new Map(),selectionRange=null,toastTimer=0;
 let textHistory=[],textHistoryAt=0,textHistoryTimer=0,textHistoryBoundary=0,textPreviousSessionConfirmed=false,drawUndoHistory=[],drawRedoHistory=[],drawLoadGeneration=0;
 function toast(msg){const el=$('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2600);}
@@ -2074,9 +2081,10 @@ async function renderNotes(){
     if(allowed){
       const picSource=parts.find(p=>(p.photos||[]).some(s=>typeof s==='string'&&s.startsWith('data:image/'))||(typeof p.drawing==='string'&&p.drawing.startsWith('data:image/')))||n;
       const picture=(picSource.photos||[]).find(s=>typeof s==='string'&&s.startsWith('data:image/'))||(typeof picSource.drawing==='string'&&picSource.drawing.startsWith('data:image/')?picSource.drawing:'');
-      if(picture){const thumb=document.createElement('img');thumb.className='cardthumb'+(picture===picSource.drawing?' drawing':'');thumb.src=picture;thumb.alt=picture===picSource.drawing?'Disegno':'Fotografia';thumb.loading='lazy';el.append(thumb);
+      if(picture){const thumb=document.createElement('img');thumb.className='cardthumb'+(picture===picSource.drawing?' drawing':'');thumb.src=picture;thumb.alt=picture===picSource.drawing?'Disegno':'Fotografia';thumb.loading='lazy';el.append(thumb);if(parts.reduce((sum,p)=>sum+(p.photos||[]).length+(p.drawing?1:0)+(p.audios||[]).length,0)>1){thumb.classList.add('onfim-multi-thumb');}
         if(picture!==picSource.drawing&&picSource.photoMarks?.length){const index=(picSource.photos||[]).indexOf(picture),overlay=picSource.photoMarks[index];if(typeof overlay==='string'&&overlay.startsWith('data:image/')){const composite=document.createElement('canvas'),context=composite.getContext('2d');const source=new Image(),paint=new Image();source.onload=()=>{composite.width=source.naturalWidth;composite.height=source.naturalHeight;context.drawImage(source,0,0);paint.onload=()=>{context.drawImage(paint,0,0,composite.width,composite.height);thumb.src=composite.toDataURL('image/jpeg',0.83);};paint.src=overlay;};source.src=picture;}}}
     }
+    if(allowed){const audioCount=parts.reduce((sum,p)=>sum+(p.audios||[]).length,0);if(audioCount){const aud=document.createElement('div');aud.className='onfim-card-audio';aud.textContent='🎙 '+(audioCount===1?'Audio':'Audio · '+audioCount);aud.title=audioCount+' registrazioni audio';el.append(aud);}}
     const meta=document.createElement('div');meta.className='meta';
     if(n.reserved){const b=document.createElement('span');b.className='chip';b.textContent='🔒';b.title='Archivio';meta.append(b);}
     if(allowed){const uniqueTags=[...new Set(parts.flatMap(noteTags))];meta.dataset.totalTags=String(uniqueTags.length);for(const t of uniqueTags.slice(0,3)){
@@ -2093,7 +2101,7 @@ async function renderNotes(){
         more.setAttribute('aria-label',remaining.length+' altre etichette');
         meta.append(more);
       }
-      const voiceCount=parts.reduce((sum,p)=>sum+(p.audios||[]).length,0);if(voiceCount){const voice=document.createElement('span');voice.className='chip';voice.textContent='🎙 '+voiceCount;meta.append(voice);}}
+      }
     if(allowed&&(n.favorite||n.pinned)){
       const status=document.createElement('span');status.className='card-status';
       if(n.pinned){const marker=document.createElement('span');marker.className='card-status-pin';marker.innerHTML=ONFIM_ICONS.pin;marker.title='Fissato in alto';marker.setAttribute('aria-label','Fissato in alto');status.append(marker);}
@@ -2315,8 +2323,9 @@ async function startAudioRecording(){
 }
 async function importAudioFiles(files){for(const f of files){if(!f.type.startsWith('audio/'))continue;if(f.size>MAX_AUDIO_BYTES){toast('Audio troppo grande (limite 10 MB): '+f.name);continue;}try{const data=await fileAsDataURL(f);audioClips.push({id:uid(),name:f.name||'Audio allegato',data,created:Date.now()});markDirty();}catch(e){toast('Errore audio: '+e.message);}}renderAudioGallery();}
 
-function photoList(){const host=$('photoGallery');host.replaceChildren();onfimUpdateMediaTab();images.forEach((src,i)=>{const card=document.createElement('div');card.className='photo';const img=document.createElement('img');img.src=src;img.alt='Foto allegata';const del=document.createElement('button');del.type='button';del.className='remove-photo';del.textContent='×';del.title='Rimuovi foto';del.onclick=()=>{images.splice(i,1);photoMarks.splice(i,1);photoList();markDirty();};const edit=document.createElement('button');edit.type='button';edit.className='edit-photo';edit.innerHTML='<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>';edit.setAttribute('aria-label','Modifica segni sulla fotografia');edit.title='Modifica segni';edit.onclick=()=>openPhotoMarkup(i);if(/^data:image\/gif;/i.test(src)){edit.classList.add('hidden');edit.disabled=true;edit.title='Le GIF animate non si possono annotare';}card.append(img);if(photoMarks[i]){const mark=document.createElement('img');mark.src=photoMarks[i];mark.className='photo-mark-preview';mark.alt='';card.append(mark);}card.append(del,edit);host.append(card);});}
-function editNote(n,allowPart=true){editorHasStoredCopy=!!allowPart;$('addPartEditor').classList.toggle('hidden',!allowPart);$('noteTitle').placeholder='Titolo (facoltativo)';clearTimeout(saveTimer);dirty=false;note={...n};images=[...(n.photos||[])];photoMarks=Array.isArray(n.photoMarks)?images.map((_,i)=>typeof n.photoMarks[i]==='string'?n.photoMarks[i]:''):images.map(()=>'');$('noteTitle').value=n.title||'';$('editorDates').textContent=noteDates(n);$('noteBody').innerHTML=sanitizeHTML(migratedText(n));selectionRange=null;lastHighlightAction=null;const colorSelect=$('noteColor');colorSelect.querySelector('[data-legacy-color]')?.remove();if(n.color&&![...colorSelect.options].some(o=>o.value===n.color)){const o=new Option('Colore precedente',n.color);o.dataset.legacyColor='1';colorSelect.add(o);}colorSelect.value=n.color||'#ffffff';updateNoteColorButton();resetTextHistory();$('reminder').value=n.reminder||'';$('reserved').checked=!!n.reserved;audioClips=Array.isArray(n.audios)?n.audios.filter(a=>a&&typeof a.data==='string'&&a.data.startsWith('data:audio/')):[];$('audioRecorderControls').classList.add('hidden');$('audioStatus').classList.add('hidden');$('audioClock').textContent='00:00';recordingUI();onfimEditorLinks=Array.isArray(n.linkedFiles)?n.linkedFiles.map(f=>({...f})):[];onfimRenderEditorLinks();renderAudioGallery();$('saveState').textContent='';$('deleteNote').classList.toggle('hidden',!n.title&&!n.text&&!(n.photos||[]).length&&!n.drawing&&!(n.audios||[]).length&&!n.persisted);photoList();showDrawing(n.drawing||'');updateTextMark();chooseTab('text');updateFormat();view('editView');}
+let onfimRemovedPhoto=null;
+function photoList(){const host=$('photoGallery');const old=$('onfimRestorePhoto');if(old)old.remove();if(onfimRemovedPhoto&&onfimRemovedPhoto.noteId===note?.id){const restore=document.createElement('button');restore.type='button';restore.id='onfimRestorePhoto';restore.className='onfim-photo-restore';restore.textContent='↶ Recupera fotografia rimossa';restore.onclick=()=>{const last=onfimRemovedPhoto;onfimRemovedPhoto=null;const at=Math.min(last.index,images.length);images.splice(at,0,last.image);photoMarks.splice(at,0,last.mark);photoList();markDirty();};host.before(restore);} host.replaceChildren();onfimUpdateMediaTab();images.forEach((src,i)=>{const card=document.createElement('div');card.className='photo';const img=document.createElement('img');img.src=src;img.alt='Foto allegata';const del=document.createElement('button');del.type='button';del.className='remove-photo';del.textContent='×';del.title='Rimuovi foto';del.onclick=()=>{onfimRemovedPhoto={noteId:note?.id,index:i,image:images[i],mark:photoMarks[i]||''};images.splice(i,1);photoMarks.splice(i,1);photoList();markDirty();};const edit=document.createElement('button');edit.type='button';edit.className='edit-photo';edit.innerHTML='<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>';edit.setAttribute('aria-label','Modifica segni sulla fotografia');edit.title='Modifica segni';edit.onclick=()=>openPhotoMarkup(i);if(/^data:image\/gif;/i.test(src)){edit.classList.add('hidden');edit.disabled=true;edit.title='Le GIF animate non si possono annotare';}card.append(img);if(photoMarks[i]){const mark=document.createElement('img');mark.src=photoMarks[i];mark.className='photo-mark-preview';mark.alt='';card.append(mark);}card.append(del,edit);host.append(card);});}
+function editNote(n,allowPart=true){onfimRemovedPhoto=null;editorHasStoredCopy=!!allowPart;$('addPartEditor').classList.toggle('hidden',!allowPart);$('noteTitle').placeholder='Titolo (facoltativo)';clearTimeout(saveTimer);dirty=false;note={...n};images=[...(n.photos||[])];photoMarks=Array.isArray(n.photoMarks)?images.map((_,i)=>typeof n.photoMarks[i]==='string'?n.photoMarks[i]:''):images.map(()=>'');$('noteTitle').value=n.title||'';$('editorDates').textContent=noteDates(n);$('noteBody').innerHTML=sanitizeHTML(migratedText(n));selectionRange=null;lastHighlightAction=null;const colorSelect=$('noteColor');colorSelect.querySelector('[data-legacy-color]')?.remove();if(n.color&&![...colorSelect.options].some(o=>o.value===n.color)){const o=new Option('Colore precedente',n.color);o.dataset.legacyColor='1';colorSelect.add(o);}colorSelect.value=n.color||'#ffffff';updateNoteColorButton();resetTextHistory();$('reminder').value=n.reminder||'';$('reserved').checked=!!n.reserved;audioClips=Array.isArray(n.audios)?n.audios.filter(a=>a&&typeof a.data==='string'&&a.data.startsWith('data:audio/')):[];$('audioRecorderControls').classList.add('hidden');$('audioStatus').classList.add('hidden');$('audioClock').textContent='00:00';recordingUI();onfimEditorLinks=Array.isArray(n.linkedFiles)?n.linkedFiles.map(f=>({...f})):[];onfimRenderEditorLinks();renderAudioGallery();$('saveState').textContent='';$('deleteNote').classList.toggle('hidden',!n.title&&!n.text&&!(n.photos||[]).length&&!n.drawing&&!(n.audios||[]).length&&!n.persisted);photoList();showDrawing(n.drawing||'');updateTextMark();chooseTab('text');updateFormat();view('editView');}
 function newNote(){editorFrom='list';const n=emptyNote();n.reserved=false;n.favorite=false;editNote(n,false);$('deleteNote').classList.add('hidden');$('noteTitle').focus();}
 // Un carosello per ciascuna sezione fotografica della nota aperta (anche composta).
 // Non tocca la galleria dell'editor, le miniature Home o l'HTML condiviso.
