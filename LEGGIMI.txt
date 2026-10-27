@@ -1,16 +1,16 @@
-onfim Lite PWA — v0.8.25
+onfim Lite PWA — 0.8.26
 
-Modifica: testata più compatta (52 px su smartphone e 55 px su schermi grandi).
-Il marchio nella barra non è più dentro un quadratino: soltanto il foglio
-con bordo e volto in #FFF6DA sullo sfondo #222E38; tratti invariati.
-Ingombro e funzionalità dell'ingranaggio e scritta «onfim» invariati.
+Novità rispetto alla 0.8.25:
+1. In lettura, frecce delle foto e indicatore 1/N sulla riga «Foto».
+2. Matita «Modifica» nella barra superiore fissa durante la lettura, senza duplicati.
+3. Ricerca multi-termine AND, conservando la corrispondenza parziale di ogni termine:
+   «mont gite» trova una nota con «Montajur» e «gite» anche separati.
+4. Il pulsante + crea sempre una nota standard, anche nelle viste Preferiti e Archivio.
+5. Promemoria: nel menu Ripeti restano Mai, Ogni giorno, Ogni settimana,
+   Ogni mese e Ogni lunedì–venerdì. Ogni settimana usa il giorno scelto.
 
-Base: Lite 0.8.24 CORRETTA, con le correzioni apportate da Work alla
-cronologia Undo/Redo e le traduzioni inglesi integrate.
-
-L'unica modifica ai file tecnici della PWA è il nome della cache offline:
-serve per aggiornare una PWA già installata senza toccare le note locali.
-Nessuna modifica a icone PWA, widget, salvataggio automatico o backup.
+Nessuna modifica al salvataggio automatico, ai backup, alla cronologia, alle
+icone o alle funzioni multimediali. Cache PWA aggiornata per l'installazione.
 
 Pubblicare il contenuto dello ZIP nella stessa directory GitHub Pages.
-Prima di aggiornare è prudente conservare il normale backup JSON.
+Prima di aggiornare, conservare un backup JSON degli appunti.
