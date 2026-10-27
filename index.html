@@ -2592,7 +2592,7 @@ function onfimAutoListFromTyping(e){
   rememberRange();markDirty();recordTextHistory(true);updateFormat();updateTextMark();
   return true;
 }
-function applyCommand(command,value=null){restoreRange();document.execCommand(command,false,value);rememberRange();updateFormat();markDirty();recordTextHistory(true);updateTextMark();}
+function applyCommand(command,value=null){recordTextHistory(true);restoreRange();document.execCommand(command,false,value);rememberRange();updateFormat();markDirty();recordTextHistory(true);updateTextMark();}
 // 0.8.24 — Cronologia per azioni e ultima sessione conclusa.
 // Salvataggio automatico indipendente dai checkpoint Undo/Redo.
 // Le revisioni conservano solo testo HTML, titolo, colore scheda e checklist:
@@ -2606,19 +2606,26 @@ function onfimEditorState(){
 function onfimCleanState(x,reference){
  if(!x||typeof x!=='object')return null;
  const state={text:sanitizeHTML(typeof x.text==='string'?x.text:''),
-  title:String(x.title??reference.title??'').slice(0,200),
+  title:String(x.title??reference.title??''),
   color:typeof x.color==='string'?x.color:reference.color,
   checklist:onfimNormalizeChecklist(x.checklist??reference.checklist)};
  return state;
 }
 function onfimHistorySame(a,b){return !!a&&!!b&&JSON.stringify(a)===JSON.stringify(b);}
 function onfimHistoryBytes(value){return new TextEncoder().encode(JSON.stringify(value)).length;}
-function onfimLimitHistory(states){
+function onfimLimitHistory(states,focus=null){
  const seen=[];
  for(const s of states){if(!s)continue;if(!seen.length||!onfimHistorySame(seen[seen.length-1],s))seen.push(s);}
- // Prima versione sempre protetta (per cancellazioni accidentali), poi ultimi passi.
- if(seen.length>ONFIM_HISTORY_LIMIT)seen.splice(1,seen.length-ONFIM_HISTORY_LIMIT);
- while(seen.length>2&&onfimHistoryBytes(seen)>ONFIM_HISTORY_MAX_BYTES)seen.splice(1,1);
+ // Preserva lo stato iniziale, finale e quello selezionato nel recupero.
+ // Se la dimensione impone di conservare solo due stati, lo stato selezionato
+ // ha priorità sul più antico; l'ultimo rimane comunque recuperabile.
+ function trim(){
+  let index=seen.findIndex((state,i)=>i>0&&i<seen.length-1&&state!==focus);
+  if(index<0)index=0;
+  seen.splice(index,1);
+ }
+ while(seen.length>ONFIM_HISTORY_LIMIT)trim();
+ while(seen.length>2&&onfimHistoryBytes(seen)>ONFIM_HISTORY_MAX_BYTES)trim();
  return seen;
 }
 function onfimSizeLabel(bytes){if(bytes>=1024*1024)return (bytes/1024/1024).toFixed(2)+' MB';if(bytes>=1024)return (bytes/1024).toFixed(1)+' KB';return bytes+' B';}
@@ -2717,14 +2724,13 @@ async function onfimRecoverNote(){
  if(onfimHistoryRecovering||!note||onfimLastSession.length<2)return;
  if(isRecording()){toast('Ferma la registrazione prima del recupero.');return;}
  recordTextHistory(true);
- if(!confirm('Recuperare i passaggi dell’ultima sessione?\n\nLa nota si aprirà nello stato con cui era stata chiusa. Usa Annulla per tornare indietro e Ripristina per tornare avanti.'))return;
+ if(!confirm(onfimLang==='en'?'Recover the last session’s steps?\n\nThe note will open as it was when that session was closed. Use Undo to go back and Redo to move forward.':'Recuperare i passaggi dell’ultima sessione?\n\nLa nota si aprirà nello stato con cui era stata chiusa. Usa Annulla per tornare indietro e Ripristina per tornare avanti.'))return;
  const now=textHistory.slice(0,textHistoryAt+1),old=onfimLastSession;
  // La fine della vecchia sessione corrisponde all'inizio di quella corrente.
  const joined=onfimHistorySame(old[old.length-1],now[0])?[...old,...now.slice(1)]:[...old,...now];
- const pastEnd=old.length-1;
- textHistory=onfimLimitHistory(joined);
- const retained=onfimHistorySame(textHistory[0],old[0]);
- textHistoryAt=Math.min(retained?pastEnd:0,textHistory.length-1);
+ const pastFinal=old[old.length-1];
+ textHistory=onfimLimitHistory(joined,pastFinal);
+ textHistoryAt=textHistory.indexOf(pastFinal);
  onfimHistoryRecovering=true;
  onfimRestoreEditorState(textHistory[textHistoryAt]);updateTextUndoUI();
  markDirty();toast('Sessione precedente: usa Annulla per recuperare i passaggi.');
@@ -3463,7 +3469,7 @@ $('noteTitle').oninput=()=>{markDirty();};$('noteTitle').addEventListener('chang
    host.style.top=(below+desired>bottom?Math.max(8,rect.top-desired-6):below)+'px';
   }
  }
-$('reserved').onchange=async()=>{if($('reserved').checked){$('reserved').checked=false;const ok=await checkPin();if(ok)$('reserved').checked=true;}markDirty();};$('noteBody').addEventListener('beforeinput',onfimBeforeDelete);$('noteBody').addEventListener('compositionend',()=>{recordTextHistory(true);markDirty();});$('noteBody').oninput=e=>{lastHighlightAction=null;if(onfimAutoListFromTyping(e))return;markDirty();onfimTextAfterInput(e);updateTextMark();onfimTagAutofill();onfimUpdatePointEdit();};$('textUndo').onclick=()=>textUndoOrRedo(-1);$('textRedo').onclick=()=>textUndoOrRedo(1);document.addEventListener('selectionchange',()=>{rememberRange();if(document.activeElement===$('noteBody')){updateFormat();onfimUpdatePointEdit();}});
+$('reserved').onchange=async()=>{if($('reserved').checked){$('reserved').checked=false;const ok=await checkPin();if(ok)$('reserved').checked=true;}markDirty();};$('noteBody').addEventListener('beforeinput',onfimBeforeDelete);$('noteBody').addEventListener('blur',()=>recordTextHistory(true));$('noteBody').addEventListener('compositionend',()=>{recordTextHistory(true);markDirty();});$('noteBody').oninput=e=>{lastHighlightAction=null;if(onfimAutoListFromTyping(e))return;markDirty();onfimTextAfterInput(e);updateTextMark();onfimTagAutofill();onfimUpdatePointEdit();};$('textUndo').onclick=()=>textUndoOrRedo(-1);$('textRedo').onclick=()=>textUndoOrRedo(1);document.addEventListener('selectionchange',()=>{rememberRange();if(document.activeElement===$('noteBody')){updateFormat();onfimUpdatePointEdit();}});
 for(const b of document.querySelectorAll('[data-command]')){b.addEventListener('pointerdown',e=>e.preventDefault());b.onclick=()=>applyCommand(b.dataset.command);}
 for(const b of document.querySelectorAll('[data-ink]')){b.addEventListener('pointerdown',e=>e.preventDefault());b.onclick=()=>{applyCommand('foreColor',b.dataset.ink);document.querySelectorAll('[data-ink]').forEach(x=>x.classList.toggle('selected',x===b));};}
 // Three highlighting swatches are always visible. With the same selected
@@ -4115,11 +4121,23 @@ let onfimLang=onfimLanguageCode();
 Object.assign(ONFIM_UI_EN, {'✓ Applica':'✓ Apply','Dimensione':'Size','Spessore':'Thickness','Conferma testo':'Confirm text','Annulla testo':'Cancel text','Scrivi e posiziona il testo sul foglio':'Type and position text on the canvas','Scrivi e posiziona il testo sulla foto':'Type and position text on the photo','Imposta promemoria':'Set reminder','Non disponibile nell’Archivio':'Not available in Archive'});
 Object.assign(ONFIM_UI_EN,{'Dove':'Where','Quando':'When','Informazioni su Onfim':'About Onfim',"Onfim è stata sviluppata con l'assistenza di ChatGPT, ma non integra ChatGPT né servizi di intelligenza artificiale generativa. Nell'APK il riconoscimento del testo nelle immagini (OCR) avviene localmente sul dispositivo; la PWA Lite non include l'OCR.":'Onfim was developed with the assistance of ChatGPT, but does not integrate ChatGPT or generative AI services. In the Android app, text recognition in images (OCR) runs locally on the device; the Lite PWA does not include OCR.','Scegli un luogo. Il promemoria geografico sostituisce quello orario.':'Choose a location. A location reminder replaces the time reminder.','Nella PWA i promemoria orari possono funzionare solo mentre l’app è aperta; quelli geografici non sono attivi. Per ricevere notifiche anche ad app chiusa utilizza l’APK Android, con le autorizzazioni necessarie.':'In the PWA, time reminders can work only while the app is open; location reminders are inactive. For notifications when the app is closed, use the Android APK and grant the required permissions.'});
 Object.assign(ONFIM_UI_EN,{'Filtri:':'Filters:','＋ Nuova raccolta':'+ New collection','Nessuna raccolta':'No collections','Sposta su':'Move up','Sposta giù':'Move down','Rimuovi filtro':'Remove filter','Etichette selezionate':'Selected tags'});
+Object.assign(ONFIM_UI_EN,{
+ "Recupera ultima sessione":"Recover last session",
+ "Recupera i passaggi dell’ultima sessione":"Recover the last session’s steps",
+ "Nessuna sessione precedente recuperabile":"No previous session to recover",
+ "Sessione precedente: usa Annulla per recuperare i passaggi.":"Previous session: use Undo to recover its steps.",
+ "Salvataggio automatico attivo.":"Automatic saving is active.",
+ "Spazio cronologia: calcolo alla apertura delle Impostazioni…":"History size: calculated when Settings opens…",
+ "I backup includono le note riservate in chiaro.":"Backups include private notes without encryption.",
+ "JSON: i file esterni non sono inclusi; note con lo stesso ID vengono sovrascritte.":"JSON: external files are not included; notes with the same ID are overwritten."
+});
 const onfimOriginalText=new WeakMap(),onfimOriginalAttrs=new WeakMap();
 const onfimSkippedUserText='#noteBody,#noteTitle,#readBody,#readTitle,#readPhotos,#readAudios,#readChecklist,#checklistEditorItems,#noteList .title,#noteList .preview,#noteList .chip,#joinOptions .join-title,#joinOptions .join-preview,.chain-part-title,.read-body,.read-footer,.chip,.audio-label,#linkedFileEditorList,#onfimTagSuggestions';
 function onfimSkipLocaleNode(el){return !el||!!el.closest('script,style,'+onfimSkippedUserText);}
 function onfimEnglishText(v){
- const match=(pattern,text)=>{const m=v.match(pattern);return m?text(...m.slice(1)):null;};
+ if(v.startsWith('Spazio dati note: '))return v.replace('Spazio dati note: ','Note data: ').replace(' · Cronologia: ',' · History: ').replace('% dei dati correnti)','% of current data)').replace(' note con revisioni. Misura del JSON non compresso, inclusi gli allegati nelle note.',' notes with revisions. Uncompressed JSON measurement, including note attachments.');
+ if(v.startsWith('Impossibile misurare la cronologia: '))return v.replace('Impossibile misurare la cronologia: ','Could not measure history: ');
+  const match=(pattern,text)=>{const m=v.match(pattern);return m?text(...m.slice(1)):null;};
  return ONFIM_UI_EN[v]||
   match(/^Ultima esportazione avviata: (.+)\. Alcuni appunti sono stati modificati dopo: crea un nuovo backup\.$/,d=>'Last export started: '+d+'. Some notes have changed since then; make a new backup.')||
   match(/^Ultima esportazione avviata: (.+) \(oltre 7 giorni fa\)\. È consigliato un nuovo backup\.$/,d=>'Last export started: '+d+' (more than 7 days ago). A new backup is recommended.')||
