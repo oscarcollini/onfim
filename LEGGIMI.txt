@@ -1,0 +1,16 @@
+onfim Lite PWA — v0.8.25
+
+Modifica: testata più compatta (52 px su smartphone e 55 px su schermi grandi).
+Il marchio nella barra non è più dentro un quadratino: soltanto il foglio
+con bordo e volto in #FFF6DA sullo sfondo #222E38; tratti invariati.
+Ingombro e funzionalità dell'ingranaggio e scritta «onfim» invariati.
+
+Base: Lite 0.8.24 CORRETTA, con le correzioni apportate da Work alla
+cronologia Undo/Redo e le traduzioni inglesi integrate.
+
+L'unica modifica ai file tecnici della PWA è il nome della cache offline:
+serve per aggiornare una PWA già installata senza toccare le note locali.
+Nessuna modifica a icone PWA, widget, salvataggio automatico o backup.
+
+Pubblicare il contenuto dello ZIP nella stessa directory GitHub Pages.
+Prima di aggiornare è prudente conservare il normale backup JSON.
