@@ -1299,6 +1299,28 @@ body{padding-top:calc(55px + env(safe-area-inset-top))}
 .card-direct-action[data-action="bell"][data-reminder-kind="none"],.read-direct-action[data-action="bell"][data-reminder-kind="none"]{color:#8497a4!important}
 .card-direct-action[data-action="bell"][data-reminder-kind="time"],.card-direct-action[data-action="bell"][data-reminder-kind="geo"],.read-direct-action[data-action="bell"][data-reminder-kind="time"],.read-direct-action[data-action="bell"][data-reminder-kind="geo"]{color:#157d9b!important}
 .card-direct-action[data-action="bell"][data-reminder-kind="time"] svg,.card-direct-action[data-action="bell"][data-reminder-kind="geo"] svg,.read-direct-action[data-action="bell"][data-reminder-kind="time"] svg,.read-direct-action[data-action="bell"][data-reminder-kind="geo"] svg{fill:none!important;stroke:currentColor!important}
+
+/* 0.8.29: stile anteprime copiato da APK 0.8.28 verificato */
+/* 0.8.28 correzione: l'audio e' un'anteprima multimediale, non una etichetta. */
+.card .onfim-media-thumbs{order:3;display:flex;align-items:stretch;gap:8px;width:100%;min-width:0;flex-wrap:wrap}
+.card .onfim-media-thumbs>.cardthumb{flex:1 1 100px;min-width:0;width:auto;max-width:100%;margin:0;border:1px solid #222E38!important;}
+.card .onfim-media-thumbs>.onfim-audio-thumb{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;background:#FFF6DA;color:#222E38;min-height:76px;aspect-ratio:16/9;border-radius:10px;border:1px solid #222E38!important;position:relative;overflow:visible;}
+.card .onfim-audio-thumb .onfim-audio-symbol{display:block;width:40px;height:40px;flex:none;color:#222E38}
+.cards.list-layout .card .onfim-audio-thumb .onfim-audio-symbol{width:34px;height:34px}
+.cards.list-layout .card .onfim-media-thumbs:has(> :nth-child(2)) .onfim-audio-symbol{width:20px;height:20px}
+.card .onfim-media-thumbs>.onfim-multi-thumb{box-shadow:-8px 8px 0 -1px #FFF6DA,-8px 8px 0 -0.5px #222E38}
+.cards.list-layout .card .onfim-media-thumbs{grid-column:2;grid-row:1;align-self:start;justify-self:center;width:66px;max-width:66px;gap:3px;flex-wrap:nowrap;flex-direction:column}
+.cards.list-layout .card .onfim-media-thumbs>.cardthumb{flex:0 0 auto;width:66px!important;height:65px!important;max-height:65px!important;aspect-ratio:1}
+.cards.list-layout .card .onfim-media-thumbs:has(> :nth-child(2))>.cardthumb{height:38px!important;max-height:38px!important}
+.cards.list-layout .card .onfim-media-thumbs>.onfim-audio-thumb{flex:0 0 auto;width:66px!important;min-height:0;height:65px!important;max-height:65px!important;aspect-ratio:auto}
+.cards.list-layout .card .onfim-media-thumbs:has(> :nth-child(2))>.onfim-audio-thumb{height:24px!important;max-height:24px!important;gap:2px;flex-direction:row}
+.cards.list-layout .card .onfim-media-thumbs:has(> :nth-child(2)) .onfim-audio-symbol{font-size:.9rem}
+.cards.list-layout .card .onfim-media-thumbs:has(> :nth-child(2)) .onfim-audio-count{font-size:.6rem}
+
+
+/* onfim 0.8.28: bordo uniforme tra miniatura e foglio posteriore */
+.cardthumb.onfim-multi-thumb,.card .onfim-media-thumbs>.onfim-multi-thumb{box-shadow:-8px 8px 0 -1px #FFF6DA,-8px 8px 0 -0.5px #222E38!important;}
+
 </style>
 <!--  -->
 <meta name="theme-color" content="#222E38"/>
@@ -3269,44 +3291,6 @@ footer button:focus-visible{outline:2px solid #315b69;outline-offset:2px}.export
 
 /* onfim 0.8.29: bordo uniforme tra miniatura e foglio posteriore */
 .cardthumb.onfim-multi-thumb,.card .onfim-media-thumbs>.onfim-multi-thumb{box-shadow:-8px 8px 0 -1px #FFF6DA,-8px 8px 0 -0.5px #222E38!important;}
-/* PWA: audio proporzionato a una miniatura, non a una fotografia a tutta larghezza */
-.cards:not(.list-layout) .card .onfim-media-thumbs>.onfim-audio-thumb{flex:0 0 100px;width:100px;max-width:100px;height:100px;max-height:100px;min-height:0;aspect-ratio:1;}
-.cards:not(.list-layout) .card .onfim-audio-thumb .onfim-audio-symbol{width:42px;height:42px;}
-
-/* 0.8.29 — audio PWA: miniatura compatta, centrata, come riferimento APK verificato. */
-.cards:not(.list-layout) .card .onfim-media-thumbs>.onfim-audio-thumb {
-  box-sizing:border-box!important; display:flex!important; flex:0 0 100px!important;
-  width:100px!important;max-width:100px!important;min-width:100px!important;
-  height:100px!important;max-height:100px!important;min-height:100px!important;
-  aspect-ratio:1/1!important;align-items:center!important;justify-content:center!important;
-  flex-direction:column!important;gap:0!important;
-  padding:0!important;margin:0 auto!important;position:relative!important;
-  background:#FFF6DA!important;color:#222E38!important;
-  border:1px solid #222E38!important;border-radius:10px!important;
-}
-.cards.list-layout .card .onfim-media-thumbs>.onfim-audio-thumb {
-  box-sizing:border-box!important;display:flex!important;flex:0 0 100px!important;
-  width:100px!important;max-width:100px!important;min-width:100px!important;
-  height:100px!important;max-height:100px!important;min-height:100px!important;
-  aspect-ratio:1/1!important;align-items:center!important;justify-content:center!important;
-  flex-direction:column!important;gap:0!important;
-  padding:0!important;margin:0!important;position:relative!important;
-  background:#FFF6DA!important;color:#222E38!important;
-  border:1px solid #222E38!important;border-radius:10px!important;
-}
-.card .onfim-media-thumbs>.onfim-audio-thumb>.onfim-audio-symbol {
-  display:block!important;position:static!important;flex:0 0 auto!important;
-  width:34px!important;height:34px!important;min-width:34px!important;min-height:34px!important;
-  margin:0!important;align-self:center!important;stroke:currentColor!important;fill:none!important;
-}
-/* Misti: conserva la miniatura minore prevista per il gruppo di media. */
-.cards.list-layout .card .onfim-media-thumbs:has(> :nth-child(2))>.onfim-audio-thumb{
-  width:76px!important;min-width:76px!important;max-width:76px!important;
-  height:41px!important;min-height:41px!important;max-height:41px!important;
-}
-.cards.list-layout .card .onfim-media-thumbs:has(> :nth-child(2))>.onfim-audio-thumb>.onfim-audio-symbol{
-  width:20px!important;height:20px!important;min-width:20px!important;min-height:20px!important;
-}
 </style></head><body><main><article class="sheet"><header class="header"><h1>${htmlEscape(title)}</h1>
 <div class="meta">Creato: ${htmlEscape(when)} · Modificato: ${htmlEscape(latest)}</div></header>
 ${content}</article><footer>
