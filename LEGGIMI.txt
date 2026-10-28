@@ -25,3 +25,10 @@ AGGIORNAMENTO ICONE (SENZA CAMBIO VERSIONE)
 - Stella attiva: stessa geometria SVG approvata, solo contorno oro #B77C0A.
 - Le due icone sono identiche ai file SVG dell’anteprima approvata (puntina-proposta.svg, stella-proposta.svg).
 - Nessuna modifica al pin geografico blu, orologio, campanella o alla posizione della matita.
+
+CORREZIONE INTERLINEA TESTO 0.8.29 (stesso numero versione)
+- Note scritte con brevi righe separate da Invio: interlinea 1.35 nell’editor e nella lettura.
+- Rimossi i margini automatici tra i paragrafi, senza cancellare gli a capo o le righe vuote intenzionali.
+- Adeguata l’interlinea del testo nelle schede griglia/elenco.
+- Nessuna modifica al contenuto o al salvataggio delle note, alle checklist, ai media o alle icone.
+- Nuova chiave cache PWA per forzare l’aggiornamento del CSS.

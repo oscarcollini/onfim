@@ -1321,6 +1321,17 @@ body{padding-top:calc(55px + env(safe-area-inset-top))}
 /* onfim 0.8.28: bordo uniforme tra miniatura e foglio posteriore */
 .cardthumb.onfim-multi-thumb,.card .onfim-media-thumbs>.onfim-multi-thumb{box-shadow:-8px 8px 0 -1px #FFF6DA,-8px 8px 0 -0.5px #222E38!important;}
 
+
+/* Onfim 0.8.29 — righe brevi separate da Invio: interlinea compatta, senza alterare gli a capo.
+   Solo testo della nota in editor, lettura (anche note composte) e anteprime.
+   Non modificare checklist, titoli, foto/disegni o dati salvati. */
+#noteBody.editor,
+.read-body{line-height:1.35;}
+#noteBody.editor p,
+.read-body p{margin-top:0;margin-bottom:0;}
+.card .preview,
+.cards.list-layout .card .preview{line-height:1.35;}
+
 </style>
 <!--  -->
 <meta name="theme-color" content="#222E38"/>
