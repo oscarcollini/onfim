@@ -6,8 +6,8 @@
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#f3f5f8" name="theme-color"/>
 <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACFElEQVR4nO2aXY5CIQyF62R24iZcjYtzNa5hErcxr84TTkP4azmlEDiJ0aiXth8UCvde3r8/b9pYX94OeOsA8HbAWweAtwPeOgC8HfDW9gC+PYxeb3fVda/nA+wJ0QVVCWqDkgoNoQvAqJ6M7SAhqFMgFbzFEM3ZRtlSTYI8+Nfz8XlZi9tApVzXKjCqx3M2ERCWXAaREJYEQISDsCwAIgwEl0JIq1qQmtVhiRFgOdkuMwJqELQpsMQIsNQ0IyDXg9a1himA2rBsCa7UBgIOFEBPwB5VJREYgGUQyA0Ql+kkeL3dm9bulnZa/yuVGQBUj4V2wgsNwQQAD77H6RxEJAQ4gOB0fGZQcjr1Gw+epxK6IIICiHO1p+f555ZRoE03MYBcT8Tfp3JWAiRci0ilkqAjIHY6/q1Fo06Xg0xXgVbFcCzO/nKCFEKStVyiEgjXU+EWpXJWmgap66esA3hg0iWw1BbR/xLI25nixkhJfDLUOh1PphbBExnVAUTUFTwvgPj71JshtNNxe1aCb4clZWtLe9aCzwESp0cXPSltfyi6PQBRCljOxiV7QRZ2XY/FczvK2v+QcgXgdS+AayiAGQKONXwEeAab0tBVYLbgiQAPSc2iIXeHZ+zB+OaL1Efoc4IaByRt16SxrX5SdKY06IEOe1Y4p9HVo1TmAGbX9puhA8DbAW8dAN4OeOsA8HbAW9sD+AOCbitmjicJ7wAAAABJRU5ErkJggg==" rel="icon" type="image/png"/>
-<title>onfim Lite 0.8.28 · Appunti</title>
-<link rel="manifest" href="./manifest.webmanifest?release=0.8.28"/>
+<title>onfim Lite 0.8.29 · Appunti</title>
+<link rel="manifest" href="./manifest.webmanifest?release=0.8.29"/>
 <meta name="theme-color" content="#222E38"/>
 <link rel="apple-touch-icon" href="./apple-touch-icon.png"/>
 <link rel="icon" type="image/png" href="./favicon.png"/>
@@ -1278,19 +1278,30 @@ body{padding-top:calc(55px + env(safe-area-inset-top))}
   .appbar #settingsButton{min-width:42px;min-height:42px}
 }
 
-/* 0.8.28: navigazione delle fotografie sulla riga del titolo, non sotto l'immagine. */
+/* 0.8.29: navigazione delle fotografie sulla riga del titolo, non sotto l'immagine. */
 #readView .onfim-photo-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;min-width:0}
 #readView .onfim-photo-heading>h2{margin:0;flex:0 0 auto}
 #readView .onfim-photo-heading .onfim-photo-controls{display:flex;align-items:center;justify-content:flex-end;gap:7px;margin:0;flex:0 0 auto}
 #readView .onfim-photo-heading .onfim-photo-controls button{width:36px;height:34px;min-height:34px}
 
-/* 0.8.28 — multimedia previews, reversible photo removal, precise paper guide. */
+/* 0.8.29 — multimedia previews, reversible photo removal, precise paper guide. */
 .cardthumb{border:1px solid #222E38!important;}
 .cardthumb.onfim-multi-thumb{box-shadow:-8px 8px 0 -1px #FFF6DA,-8px 8px 0 -0.5px #222E38;}
 .onfim-card-audio{order:3;display:flex;align-items:center;gap:5px;max-width:100%;font-size:.77rem;color:var(--ink);background:#fff9e9;border:1px solid var(--line);border-radius:9px;padding:7px 9px;margin:5px 0 0;width:max-content}
 .cards.list-layout .card .onfim-card-audio{grid-column:1;grid-row:4;align-self:start;margin:2px 0 0}
 .onfim-photo-restore{margin:8px 0 4px;background:#FFF6DA;color:#222E38;border:1px solid #b8bdc1;border-radius:9px;padding:8px 11px}
 #drawTab .drawframe.onfim-guide-dots::after{background-image:radial-gradient(circle,#89979e 1px,transparent 1px);background-size:22px 22px;opacity:.45}
+
+/* 0.8.29: lettura -> pulsante principale flottante */
+#onfimReadEditFab{display:grid;place-items:center;padding:0;z-index:21}
+#onfimReadEditFab.hidden{display:none!important}
+#onfimReadEditFab svg{width:28px;height:28px;color:#222E38}
+.card-direct-action[data-action="bell"][data-reminder-kind="none"],.read-direct-action[data-action="bell"][data-reminder-kind="none"]{color:#8497a4!important}
+.card-direct-action[data-action="bell"][data-reminder-kind="time"],.card-direct-action[data-action="bell"][data-reminder-kind="geo"],.read-direct-action[data-action="bell"][data-reminder-kind="time"],.read-direct-action[data-action="bell"][data-reminder-kind="geo"]{color:#157d9b!important}
+.card-direct-action[data-action="bell"][data-reminder-kind="time"] svg,.card-direct-action[data-action="bell"][data-reminder-kind="geo"] svg,.read-direct-action[data-action="bell"][data-reminder-kind="time"] svg,.read-direct-action[data-action="bell"][data-reminder-kind="geo"] svg{fill:none!important;stroke:currentColor!important}
+.cards:not(.list-layout) .card .onfim-media-thumbs>.onfim-audio-thumb{flex:1 1 100%!important;width:100%!important;max-width:100%!important;height:auto!important;max-height:none!important;min-height:0!important;aspect-ratio:16/9!important;background:#FFF6DA!important}
+.cards:not(.list-layout) .card .onfim-audio-thumb .onfim-audio-symbol{width:29px!important;height:29px!important}
+.cards.list-layout .card .onfim-audio-thumb .onfim-audio-symbol{width:29px!important;height:29px!important}
 </style>
 <!--  -->
 <meta name="theme-color" content="#222E38"/>
@@ -1305,7 +1316,7 @@ body{padding-top:calc(55px + env(safe-area-inset-top))}
 <button id="readEditTop" class="appbar-icon hidden" type="button" aria-label="Modifica la prima parte" title="Modifica"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button>
 <button aria-label="Impostazioni" class="appbar-icon" id="settingsButton" title="Impostazioni" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M9.955,4.369 L10.298,2.349 L13.702,2.349 L14.045,4.369 L15.950,5.158 L17.621,3.972 L20.028,6.379 L18.842,8.050 L19.631,9.955 L21.651,10.298 L21.651,13.702 L19.631,14.045 L18.842,15.950 L20.028,17.621 L17.621,20.028 L15.950,18.842 L14.045,19.631 L13.702,21.651 L10.298,21.651 L9.955,19.631 L8.050,18.842 L6.379,20.028 L3.972,17.621 L5.158,15.950 L4.369,14.045 L2.349,13.702 L2.349,10.298 L4.369,9.955 L5.158,8.050 L3.972,6.379 L6.379,3.972 L8.050,5.158 Z"></path><circle cx="12" cy="12" r="3.1"></circle></svg></button>
 </div>
-</header><button aria-label="Nuovo appunto" class="fab primary" id="addButton" title="Nuovo appunto"><span class="onfim-widget-plus" aria-hidden="true"></span></button>
+</header><button aria-label="Nuovo appunto" class="fab primary" id="addButton" title="Nuovo appunto"><span class="onfim-widget-plus" aria-hidden="true"></span></button><button type="button" id="onfimReadEditFab" class="fab primary hidden" aria-label="Modifica appunto" title="Modifica appunto"><svg aria-hidden="true" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button>
 <main class="wrap">
 <section class="view show" id="listView">
 <div class="home-tools">
@@ -1491,7 +1502,7 @@ body{padding-top:calc(55px + env(safe-area-inset-top))}
 
 <div class="panel"><h2>Informazioni · browser</h2><p>Questa versione funziona offline e condivide gli appunti tramite file JSON con onfim Android, ma alcune funzioni richiedono l'APK:</p><ul class="lite-limit-list"><li><strong>Promemoria:</strong> nessuna sveglia affidabile con la PWA chiusa; puoi esportarli nel Calendario.</li><li><strong>Geofence:</strong> non disponibili in background; quelli importati restano nel backup senza attivarsi.</li><li><strong>Backup su Drive:</strong> manuale tramite Condividi; non automatico in background.</li><li><strong>Widget e notifiche native Android:</strong> non disponibili.</li><li><strong>Estrazione testo dalle fotografie (OCR):</strong> disponibile nell’APK completa. La Lite non incorpora un motore OCR.</li></ul></div>
  <div class="panel onfim-about-panel"><h2>Informazioni su Onfim</h2><p class="hint">Onfim è stata sviluppata con l'assistenza di ChatGPT, ma non integra ChatGPT né servizi di intelligenza artificiale generativa. Nell'APK il riconoscimento del testo nelle immagini (OCR) avviene localmente sul dispositivo; la PWA Lite non include l'OCR.</p></div>
- <footer class="onfim-colophon">onfim v0.8.28 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
+ <footer class="onfim-colophon">onfim v0.8.29 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
 <section class="view" id="trashView" aria-label="Cestino">
   <div class="controls"><button id="backTrash" type="button">← Impostazioni</button></div>
   <div class="panel trash-panel"><div class="trash-head"><div><h2>Appunti eliminati</h2><p class="hint">Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.</p></div><button id="emptyTrash" class="danger" type="button">Svuota</button></div><p id="trashCount" class="small" role="status"></p><div id="trashList" class="trash-list"></div></div>
@@ -1569,7 +1580,7 @@ body{padding-top:calc(55px + env(safe-area-inset-top))}
   </div>
   <div class="geo-current-row"><button id="geoCurrent" type="button">Usa posizione attuale</button></div>
   <div class="geo-coordinates"><label>Latitudine<input id="geoLat" type="number" step="any" min="-90" max="90" placeholder=""></label><label>Longitudine<input id="geoLon" type="number" step="any" min="-180" max="180" placeholder=""></label></div>
-  <label class="label" for="geoRadius">Raggio (metri)</label><input id="geoRadius" type="number" min="100" max="10000" step="50" value="200">
+  <label class="label" for="geoRadius">Raggio: 100 metri (fisso)</label><input id="geoRadius" type="hidden" value="100">
   <label class="label" for="geoTransition">Avvisami</label><select id="geoTransition"><option value="enter">Quando arrivo</option><option value="exit">Quando esco</option></select>
   <button id="geoRemove" type="button" class="geo-remove-action">Rimuovi luogo</button>
  </div></details>
@@ -1663,7 +1674,7 @@ body{padding-top:calc(55px + env(safe-area-inset-top))}
 </dialog>
 <script>
 (()=>{'use strict';
-const $=id=>document.getElementById(id);const DB='appunti-prototipo-v1',STORE='notes',SNAPSTORE='localSnapshots',VERSION='0.8.28';
+const $=id=>document.getElementById(id);const DB='appunti-prototipo-v1',STORE='notes',SNAPSTORE='localSnapshots',VERSION='0.8.29';
 const LAST_EXPORT_KEY='onfim-last-json-export-v06',LAST_CHANGE_KEY='onfim-last-data-change-v06',BACKUP_MAX_AGE_DAYS=7;let db=null,note=null,images=[],photoMarks=[],drawData='',drawn=false,pen='#202a34',erasing=false,painting=false,last=null,saveTimer=0,dirty=false,saving=Promise.resolve(),knownTags=[],unlocked=false,audioClips=[],recorder=null,audioFinalizing=false,audioStarting=false,micStream=null,audioPieces=[],audioTick=null,audioStarted=0,audioPausedAt=0,audioPauseTotal=0,readId=null,editorFrom='list',reminderTimers=new Map(),selectionRange=null,toastTimer=0;
 let textHistory=[],textHistoryAt=0,textHistoryTimer=0,textHistoryBoundary=0,textPreviousSessionConfirmed=false,drawUndoHistory=[],drawRedoHistory=[],drawLoadGeneration=0;
 function toast(msg){const el=$('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2600);}
@@ -1801,12 +1812,13 @@ function view(id){
   const home=id==='listView';
   ['listView','readView','editView','settingsView','trashView'].forEach(x=>$(x).classList.toggle('show',x===id));
   $('addButton').classList.toggle('hidden',!home);
+  $('onfimReadEditFab').classList.toggle('hidden',id!=='readView');
   $('topBrand').classList.toggle('hidden',!home);
   $('topBack').classList.toggle('hidden',home);
   $('topBarTitle').classList.toggle('hidden',home);
   $('topBarTitle').textContent=({readView:'Appunto',editView:'Modifica',settingsView:'Impostazioni',trashView:'Cestino'})[id]||'';
   $('settingsButton').classList.toggle('hidden',!home);
-   $('readEditTop').classList.toggle('hidden',id!=='readView');
+   $('readEditTop').classList.add('hidden');
   window.scrollTo(0,0);
   if(id==='editView'&&$('drawTab').classList.contains('shown'))requestAnimationFrame(fitDrawingCanvas);
 }
@@ -2125,7 +2137,7 @@ async function renderNotes(){
     quickReminder.innerHTML='<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>';
     quickReminder.setAttribute('aria-label','Promemoria per '+(n.title||'appunto'));
     quickReminder.title='Promemoria';
-    if(parts.some(onfimReminderActive))quickReminder.classList.add('has-reminder');else quickReminder.classList.add('hidden');
+    if(parts.some(onfimReminderActive)){quickReminder.classList.add('has-reminder');quickReminder.innerHTML=onfimReminderSvg(onfimReminderKind(parts));}else quickReminder.classList.add('hidden');
     quickReminder.onclick=async e=>{e.stopPropagation();closeCardMenus();await openReminderFor(n,true);};
     const more=document.createElement('button');more.type='button';more.className='card-more';more.setAttribute('aria-label','Opzioni per '+(n.title||'appunto'));more.setAttribute('aria-expanded','false');more.innerHTML=ONFIM_ICONS.more;
     const popup=document.createElement('div');popup.className='card-popup hidden';
@@ -2166,6 +2178,7 @@ async function renderNotes(){
     });
     if(n.reserved){directStar.disabled=true;directStar.title='Non disponibile nell’Archivio';}
     const directBell=directAction('bell','Promemoria',hasReminder,async()=>await openReminderFor(n,true));
+    const cardReminderKind=onfimReminderKind(parts);directBell.innerHTML=onfimReminderSvg(cardReminderKind);directBell.dataset.reminderKind=cardReminderKind;directBell.setAttribute('aria-label',cardReminderKind==='geo'?'Promemoria luogo':cardReminderKind==='time'?'Promemoria orario':'Imposta promemoria');
     bar.append(directPin,directStar,directBell);el.append(bar);
     more.onclick=e=>{e.stopPropagation();const wasOpen=!popup.classList.contains('hidden');closeCardMenus();if(!wasOpen){popup.classList.remove('hidden');el.classList.add('menu-open');more.setAttribute('aria-expanded','true');}};
     const open=async()=>{if(n.reserved&&!await checkPin())return;await openRead(n);};
@@ -2407,7 +2420,7 @@ async function openRead(n){
   }
   if(n.reminder||n.geofence?.enabled){
     const button=document.createElement('button');button.type='button';button.className='read-reminder-link';
-    button.innerHTML=ONFIM_ICONS.bell;
+    button.innerHTML=onfimReminderSvg(onfimReminderKind(parts));
     const label=document.createElement('span');const when=new Date(n.reminder);
     label.textContent=n.reminder&&!Number.isNaN(when.getTime())?'Promemoria: '+when.toLocaleString('it-IT')+' · Modifica':'Promemoria geografico · Modifica';
     button.append(label);button.title='Modifica o rimuovi il promemoria';
@@ -2431,7 +2444,7 @@ async function openRead(n){
   $('readDetachOption').classList.toggle('hidden',parts.length<=1);
   $('readDeleteOption').querySelector('span').textContent=parts.length>1?'Sposta appunto nel Cestino':'Sposta nel Cestino';
   for(const [key,isOn] of [['Pin',!!n.pinned],['Star',!!n.favorite],['Bell',!!(parts.some(onfimReminderActive))]]){
-    const btn=$('readQuick'+key);btn.setAttribute('aria-pressed',String(isOn));
+    const btn=$('readQuick'+key);btn.setAttribute('aria-pressed',String(isOn));if(key==='Bell'){const rk=onfimReminderKind(parts);btn.innerHTML=onfimReminderSvg(rk);btn.dataset.reminderKind=rk;btn.setAttribute('aria-label',rk==='geo'?'Promemoria luogo':rk==='time'?'Promemoria orario':'Imposta promemoria');}
     const unavailable=key==='Star'&&!!n.reserved;btn.disabled=unavailable;
     const act=key==='Pin'?(isOn?'Rimuovi da Fissati':'Fissa in alto'):key==='Star'?(isOn?'Rimuovi dai Preferiti':'Aggiungi ai Preferiti'):(isOn?'Modifica promemoria':'Imposta promemoria');
     btn.title=unavailable?'Non disponibile nell’Archivio':act;btn.setAttribute('aria-label',btn.title);
@@ -2445,6 +2458,8 @@ async function openRead(n){
 // La lettura concatenata usa gli stessi contenuti salvati delle note semplici.
 // Ogni parte e' ancora modificabile indipendentemente nell'editor normale.
 const ONFIM_ICONS={pin:'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 5 5-4 1-3 4-1 4-4-4-4-1 5-5 1-4zM9 15l-5 6"/></svg>',pencil:'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',more:'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>',star:'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3 1.2-6.8-5-4.9 6.9-1Z"/></svg>',archive:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V7a4 4 0 0 1 8 0v3\"/></svg>",restore:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"5\" y=\"10\" width=\"14\" height=\"11\" rx=\"2\"/><path d=\"M8 10V7a4 4 0 0 1 7-2.65\"/></svg>",bell:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9\"/><path d=\"M10 21h4\"/></svg>",plus:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 5v14M5 12h14\"/></svg>",trash:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15M10 10v7M14 10v7\"/></svg>",up:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 19V5m-6 6 6-6 6 6\"/></svg>",down:"<svg class=\"oi\" aria-hidden=\"true\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.85\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 5v14m-6-6 6 6 6-6\"/></svg>"};
+function onfimReminderKind(parts){const active=(parts||[]).filter(p=>onfimReminderActive(p));return active.some(p=>p.geofence?.enabled)?'geo':active.some(p=>!!p.reminder)?'time':'none';}
+function onfimReminderSvg(kind){return kind==='geo'?'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></svg>':kind==='time'?'<svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>':ONFIM_ICONS.bell;}
 function makeChainPart(n,number,total){
   const block=document.createElement('section');block.className='chain-part';
   const head=document.createElement('div');head.className='chain-part-head';
@@ -3237,7 +3252,7 @@ footer button:focus-visible{outline:2px solid #315b69;outline-offset:2px}.export
 @media(max-width:500px){body{padding:12px 9px 35px}.sheet{border-radius:13px;padding:19px 16px}.note-text{font-size:13.5px}}
 @media print{body{background:#fff;padding:0}.sheet{box-shadow:none;border-radius:0;padding:0;background:#fff}.part{break-inside:auto}.photo,.audio-entry{break-inside:avoid}footer{padding-top:25px}}
 
-/* 0.8.28 correzione: l'audio e' un'anteprima multimediale, non una etichetta. */
+/* 0.8.29 correzione: l'audio e' un'anteprima multimediale, non una etichetta. */
 .card .onfim-media-thumbs{order:3;display:flex;align-items:stretch;gap:8px;width:100%;min-width:0;flex-wrap:wrap}
 .card .onfim-media-thumbs>.cardthumb{flex:1 1 100px;min-width:0;width:auto;max-width:100%;margin:0;border:1px solid #222E38!important;}
 .card .onfim-media-thumbs>.onfim-audio-thumb{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;background:#FFF6DA;color:#222E38;min-height:76px;aspect-ratio:16/9;border-radius:10px;border:1px solid #222E38!important;position:relative;overflow:visible;}
@@ -3255,7 +3270,7 @@ footer button:focus-visible{outline:2px solid #315b69;outline-offset:2px}.export
 @media(max-width:380px){.cards.list-layout .card .onfim-media-thumbs{width:62px;max-width:62px}.cards.list-layout .card .onfim-media-thumbs>.cardthumb,.cards.list-layout .card .onfim-media-thumbs>.onfim-audio-thumb{width:62px}}
 
 
-/* onfim 0.8.28: bordo uniforme tra miniatura e foglio posteriore */
+/* onfim 0.8.29: bordo uniforme tra miniatura e foglio posteriore */
 .cardthumb.onfim-multi-thumb,.card .onfim-media-thumbs>.onfim-multi-thumb{box-shadow:-8px 8px 0 -1px #FFF6DA,-8px 8px 0 -0.5px #222E38!important;}
 /* PWA: audio proporzionato a una miniatura, non a una fotografia a tutta larghezza */
 .cards:not(.list-layout) .card .onfim-media-thumbs>.onfim-audio-thumb{flex:0 0 100px;width:100px;max-width:100px;height:100px;max-height:100px;min-height:0;aspect-ratio:1;}
@@ -3402,8 +3417,8 @@ $('reminderSave').onclick=()=>{
    if(!$('geoEnabled').checked||!$('geoLat').value.trim()||!$('geoLon').value.trim()){
     toast('Scegli un luogo sulla mappa oppure inserisci le coordinate');return;
    }
-   const geo=cleanGeofence({enabled:true,name:'',lat:Number($('geoLat').value),lon:Number($('geoLon').value),radius:Number($('geoRadius').value),transition:$('geoTransition').value,token:String(Date.now())});
-   if(!geo){toast('Coordinate non valide o raggio fuori da 100–10000 m');return;}
+   const geo=cleanGeofence({enabled:true,name:'',lat:Number($('geoLat').value),lon:Number($('geoLon').value),radius:100,transition:$('geoTransition').value,token:String(Date.now())});
+   if(!geo){toast('Coordinate non valide');return;}
    void saveReadReminder('',geo,'none','');return;
   }
   let value=$('readReminderValue').value;
@@ -3475,7 +3490,8 @@ document.addEventListener('pointerdown',e=>{if(!e.target.closest('.chain-options
   if(!$('readPopup').classList.contains('hidden')&&!e.target.closest('.read-menu-host'))closeReadMenu();
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeReadMenu();});
-$('editFromRead').onclick=async()=>{const target=(await allNotes()).find(n=>n.id===readId);if(!target){toast('Appunto non trovato');await reload();view('listView');return;}if(target.reserved&&!unlocked&&!await checkPin())return;editorFrom='read';editNote(target);};
+$('onfimReadEditFab').onclick=()=>{$('editFromRead').click();};
+ $('editFromRead').onclick=async()=>{const target=(await allNotes()).find(n=>n.id===readId);if(!target){toast('Appunto non trovato');await reload();view('listView');return;}if(target.reserved&&!unlocked&&!await checkPin())return;editorFrom='read';editNote(target);};
 // Onfim 0.7.7: app-style navigation and compact home controls.
 $('topBack').onclick=async()=>{
   if($('editView').classList.contains('show')){await leaveEditor();return;}
@@ -3688,11 +3704,11 @@ $('managePin').onclick=async()=>{
 window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue='';}});
 // Browser adapter: original IndexedDB functions above remain authoritative.
 // Geofences imported from APK remain in JSON but are not monitored here.
-function cleanGeofence(g){if(!g||!g.enabled)return null;const lat=Number(g.lat),lon=Number(g.lon),radius=Number(g.radius);if(!Number.isFinite(lat)||lat< -90||lat>90||!Number.isFinite(lon)||lon< -180||lon>180||!Number.isFinite(radius)||radius<100||radius>10000)return null;return{enabled:true,name:String(g.name||''),lat,lon,radius,transition:g.transition==='exit'?'exit':'enter',token:String(g.token||'imported')};}
+function cleanGeofence(g){if(!g||!g.enabled)return null;const lat=Number(g.lat),lon=Number(g.lon),radius=100;if(!Number.isFinite(lat)||lat< -90||lat>90||!Number.isFinite(lon)||lon< -180||lon>180||!Number.isFinite(radius)||radius<100||radius>10000)return null;return{enabled:true,name:String(g.name||''),lat,lon,radius,transition:g.transition==='exit'?'exit':'enter',token:String(g.token||'imported')};}
 function fillGeo(g){
  const v=cleanGeofence(g);$('geoEnabled').checked=!!v;$('geoFields').hidden=false;
  $('geoLat').value=v?.lat??'';$('geoLon').value=v?.lon??'';
- $('geoRadius').value=v?.radius||200;$('geoTransition').value=v?.transition||'enter';
+ $('geoRadius').value=100;$('geoTransition').value=v?.transition||'enter';
  $('geoFold').open=!!v;if(v){onfimGeoCenter(v.lat,v.lon,15,false);}else{onfimGeoCenter(42.5,12.5,6,false);}
  requestAnimationFrame(geoMapRender);
 }

@@ -9,3 +9,5 @@ Modifiche dalla 0.8.26:
 
 Distribuire il contenuto di questo ZIP nella directory GitHub Pages esistente.
 È stato incrementato il cache name del service worker. Fare backup JSON prima di pubblicare.
+
+0.8.29: pulsante matita flottante, icone promemoria, raggio 100m fisso, miniatura audio compatta.
