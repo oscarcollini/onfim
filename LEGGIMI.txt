@@ -18,3 +18,10 @@ Gli appunti restano in IndexedDB e non sono inclusi in questo archivio: prima di
 aggiornare, è raccomandato un backup JSON.
 Controlli automatici: sintassi JS, integrità ZIP e posizione del pulsante in
 Chromium con note sintetiche brevi/lunghe. Non sostituiscono il test sul telefono.
+
+AGGIORNAMENTO ICONE (SENZA CAMBIO VERSIONE)
+- Puntina e stella inattive: restano grigie, solo contorno.
+- Puntina attiva: sagoma simmetrica SVG approvata, solo contorno rosso #CF3541.
+- Stella attiva: stessa geometria SVG approvata, solo contorno oro #B77C0A.
+- Le due icone sono identiche ai file SVG dell’anteprima approvata (puntina-proposta.svg, stella-proposta.svg).
+- Nessuna modifica al pin geografico blu, orologio, campanella o alla posizione della matita.

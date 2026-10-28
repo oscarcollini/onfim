@@ -1,5 +1,5 @@
 /* onfim Lite 0.8.29-matita-dinamica — cache solo dell'applicazione, mai degli appunti */
-const CACHE='onfim-shell-lite-v0.8.29-matita-dinamica-20261028';
+const CACHE='onfim-shell-lite-v0.8.29-icone-contorno-20261028';
 const ASSETS=['./index.html','./manifest.webmanifest','./favicon.png','./icon-192.png','./icon-512.png','./maskable-192.png','./maskable-512.png','./apple-touch-icon.png'];
 const ROOT=new URL('./',self.location.href).pathname;
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()));});
