@@ -11,3 +11,5 @@ Distribuire il contenuto di questo ZIP nella directory GitHub Pages esistente.
 È stato incrementato il cache name del service worker. Fare backup JSON prima di pubblicare.
 
 0.8.29: pulsante matita flottante, icone promemoria, raggio 100m fisso, miniatura audio compatta.
+
+PWA 0.8.29: correzione audio miniature 100x100 crema, microfono SVG centrato 34px. Sorgente di riferimento estetico: APK 0.8.28 verificato.
