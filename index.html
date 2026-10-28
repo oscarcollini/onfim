@@ -1832,6 +1832,7 @@ function view(id){
   ['listView','readView','editView','settingsView','trashView'].forEach(x=>$(x).classList.toggle('show',x===id));
   $('addButton').classList.toggle('hidden',!home);
   $('onfimReadEditFab').classList.toggle('hidden',id!=='readView');
+  if(id==='readView')onfimScheduleReadFabPosition();
   $('topBrand').classList.toggle('hidden',!home);
   $('topBack').classList.toggle('hidden',home);
   $('topBarTitle').classList.toggle('hidden',home);
@@ -1841,6 +1842,34 @@ function view(id){
   window.scrollTo(0,0);
   if(id==='editView'&&$('drawTab').classList.contains('shown'))requestAnimationFrame(fitDrawingCanvas);
 }
+
+// Onfim 0.8.29: matita allineata al + Home, ma sotto la nota quando piu' corta.
+// Non sposta elementi della nota; non modifica il modello dati o le azioni.
+let onfimReadFabPositionFrame=0;
+function onfimPositionReadFab(){
+  const fab=$('onfimReadEditFab'),note=$('readNote');
+  if(!fab||!note||!$('readView').classList.contains('show')||fab.classList.contains('hidden'))return;
+  const homeFab=$('addButton');
+  // Il limite inferiore usa il bottom CSS reale del +, inclusa la safe area.
+  const homeBottom=Number.parseFloat(getComputedStyle(homeFab).bottom);
+  const bottomOffset=Number.isFinite(homeBottom)?homeBottom:17;
+  const limitTop=window.innerHeight-bottomOffset-fab.offsetHeight;
+  const belowNote=note.getBoundingClientRect().bottom+12;
+  fab.style.bottom='auto';
+  fab.style.top=Math.round(Math.min(belowNote,limitTop))+'px';
+}
+function onfimScheduleReadFabPosition(){
+  if(onfimReadFabPositionFrame)return;
+  onfimReadFabPositionFrame=requestAnimationFrame(()=>{
+    onfimReadFabPositionFrame=0;
+    onfimPositionReadFab();
+  });
+}
+window.addEventListener('scroll',onfimScheduleReadFabPosition,{passive:true});
+window.addEventListener('resize',onfimScheduleReadFabPosition,{passive:true});
+if(window.visualViewport)window.visualViewport.addEventListener('resize',onfimScheduleReadFabPosition,{passive:true});
+if('ResizeObserver' in window)new ResizeObserver(onfimScheduleReadFabPosition).observe($('readNote'));
+
 // Gli hashtag sono parte del testo: Unicode, senza distinzione fra maiuscole/minuscole.
 // Le vecchie etichette restano leggibili e vengono trascritte nel testo quando la nota viene modificata.
 function normalizedTag(v){return String(v||'').normalize('NFC').toLocaleLowerCase('it-IT');}
