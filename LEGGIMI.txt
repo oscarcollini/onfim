@@ -1,34 +1,10 @@
-onfim Lite PWA 0.8.29 — CORREZIONE MATITA DINAMICA
+onfim Lite PWA 0.8.30 — pulizia dei sorgenti
 
-Contenuto completo per GitHub Pages: pubblicare i file alla radice della PWA.
+Pacchetto completo: index.html, sw.js, manifest e icone. Pubblicare tutti i file insieme nella stessa cartella HTTPS già usata dalla PWA; mantenere origine e percorso per conservare l'archivio IndexedDB e le preferenze correnti.
 
-Modifica di questa revisione, senza cambiare il numero 0.8.29:
-- Apertura nota breve: matita 12 px sotto il bordo inferiore della scheda, allineata a destra.
-- Nota lunga: matita visibile nell’angolo inferiore destro, esattamente come il + nella Home.
-- Scorrendo verso il termine della nota, la matita risale fino alla posizione naturale sotto la scheda.
-- Stesse dimensioni, colori, forma e azione della matita precedente.
+Rimossi vecchi sistemi di note concatenate, adattatori di prototipi, CSS e codice non più usati. Conservati salvataggio automatico, checklist, raccolte, PIN a quattro cifre, audio/foto/disegni, backup JSON corrente, tre copie interne e share target.
+Corrette selezione delle coordinate e mutua esclusione tra promemoria orario e di luogo. Nessun nuovo sistema di notifiche o geofence in background.
 
-Restano le precedenti correzioni della 0.8.29: audio PWA allineato alle miniature
-Android 0.8.28 verificate; icone promemoria (campanella grigia/orologio blu/pin blu);
-raggio luogo 100 m fisso; logo e altre funzioni preesistenti.
+Le note sono nel browser; cancellarne i dati o cambiare origine può rimuovere l'archivio. Le copie interne non sostituiscono un backup JSON esterno. Le differenze rispetto all'APK Android restano intenzionali.
 
-Non sostituire l'HTML Android con quello della PWA. Per Android usare il distinto pacchetto patch per Work.
-Aggiornato il nome della cache del service worker per caricare la nuova interfaccia.
-Gli appunti restano in IndexedDB e non sono inclusi in questo archivio: prima di
-aggiornare, è raccomandato un backup JSON.
-Controlli automatici: sintassi JS, integrità ZIP e posizione del pulsante in
-Chromium con note sintetiche brevi/lunghe. Non sostituiscono il test sul telefono.
-
-AGGIORNAMENTO ICONE (SENZA CAMBIO VERSIONE)
-- Puntina e stella inattive: restano grigie, solo contorno.
-- Puntina attiva: sagoma simmetrica SVG approvata, solo contorno rosso #CF3541.
-- Stella attiva: stessa geometria SVG approvata, solo contorno oro #B77C0A.
-- Le due icone sono identiche ai file SVG dell’anteprima approvata (puntina-proposta.svg, stella-proposta.svg).
-- Nessuna modifica al pin geografico blu, orologio, campanella o alla posizione della matita.
-
-CORREZIONE INTERLINEA TESTO 0.8.29 (stesso numero versione)
-- Note scritte con brevi righe separate da Invio: interlinea 1.35 nell’editor e nella lettura.
-- Rimossi i margini automatici tra i paragrafi, senza cancellare gli a capo o le righe vuote intenzionali.
-- Adeguata l’interlinea del testo nelle schede griglia/elenco.
-- Nessuna modifica al contenuto o al salvataggio delle note, alle checklist, ai media o alle icone.
-- Nuova chiave cache PWA per forzare l’aggiornamento del CSS.
+Consultare il rapporto Onfim_0.8.30_rapporto.md per il dettaglio degli interventi e dei test. Nessuna pubblicazione online effettuata da questo pacchetto.
