@@ -6,8 +6,8 @@
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#f3f5f8" name="theme-color"/>
 <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACFElEQVR4nO2aXY5CIQyF62R24iZcjYtzNa5hErcxr84TTkP4azmlEDiJ0aiXth8UCvde3r8/b9pYX94OeOsA8HbAWweAtwPeOgC8HfDW9gC+PYxeb3fVda/nA+wJ0QVVCWqDkgoNoQvAqJ6M7SAhqFMgFbzFEM3ZRtlSTYI8+Nfz8XlZi9tApVzXKjCqx3M2ERCWXAaREJYEQISDsCwAIgwEl0JIq1qQmtVhiRFgOdkuMwJqELQpsMQIsNQ0IyDXg9a1himA2rBsCa7UBgIOFEBPwB5VJREYgGUQyA0Ql+kkeL3dm9bulnZa/yuVGQBUj4V2wgsNwQQAD77H6RxEJAQ4gOB0fGZQcjr1Gw+epxK6IIICiHO1p+f555ZRoE03MYBcT8Tfp3JWAiRci0ilkqAjIHY6/q1Fo06Xg0xXgVbFcCzO/nKCFEKStVyiEgjXU+EWpXJWmgap66esA3hg0iWw1BbR/xLI25nixkhJfDLUOh1PphbBExnVAUTUFTwvgPj71JshtNNxe1aCb4clZWtLe9aCzwESp0cXPSltfyi6PQBRCljOxiV7QRZ2XY/FczvK2v+QcgXgdS+AayiAGQKONXwEeAab0tBVYLbgiQAPSc2iIXeHZ+zB+OaL1Efoc4IaByRt16SxrX5SdKY06IEOe1Y4p9HVo1TmAGbX9puhA8DbAW8dAN4OeOsA8HbAW9sD+AOCbitmjicJ7wAAAABJRU5ErkJggg==" rel="icon" type="image/png"/>
-<title>onfim Lite 0.9.1 · Appunti</title>
-<link rel="manifest" href="./manifest.webmanifest?release=0.9.1"/>
+<title>onfim Lite 0.9.5 · Appunti</title>
+<link rel="manifest" href="./manifest.webmanifest?release=0.9.5"/>
 <meta name="theme-color" content="#222E38"/>
 <link rel="apple-touch-icon" href="./apple-touch-icon.png"/>
 <link rel="icon" type="image/png" href="./favicon.png"/>
@@ -6077,6 +6077,10 @@ body {
 #settingsView .onfim-about-panel details summary::-webkit-details-marker{display:none}
 #settingsView .onfim-about-panel details summary::after {content:'▼';display:inline-block;font-size:15px;margin-left:8px}
 #settingsView .onfim-about-panel details[open] summary::after {content:'▲'}
+
+/* Collegamento ufficiale all'APK; nessuna modifica ai comandi esistenti. */
+#settingsView .onfim-apk-download { flex-shrink:0; display:inline-block; border:1px solid #CFDAE0; border-radius:10px; padding:9px 12px; background:#fff; color:#315B69; font-size:.85rem; font-weight:600; text-decoration:none; white-space:nowrap; }
+#settingsView .onfim-apk-download:focus-visible { outline:2px solid #315B69; outline-offset:2px; }
 </style>
 <!--  -->
 <meta name="theme-color" content="#222E38"/>
@@ -6272,9 +6276,10 @@ body {
 <div class="panel onfim-about-panel"><h2>Informazioni</h2>
 <p id="onfimHistoryStorage" class="onfim-history-storage" role="status">Spazio cronologia: calcolo alla apertura delle Impostazioni…</p>
 <p class="hint">Onfim funziona offline; PWA e APK possono scambiarsi dati tramite JSON.</p>
-<details><summary>Limiti della versione Lite</summary><ul class="lite-limit-list"><li>Promemoria orari: con la PWA chiusa le notifiche non sono affidabili.</li><li>Promemoria di luogo: nessun rilevamento in background.</li><li>Backup cloud: tramite Condividi, non automatici in background.</li><li>Widget e notifiche native Android non disponibili.</li><li>OCR: disponibile nell’APK, non nella PWA Lite.</li></ul></details>
+<details><summary>Limiti della versione Lite</summary><ul class="lite-limit-list"><li>Promemoria orari: con la PWA chiusa le notifiche non sono affidabili.</li><li>Promemoria di luogo: nessun rilevamento in background.</li><li>Backup cloud: tramite Condividi, non automatici in background.</li><li>Widget e notifiche native Android non disponibili.</li></ul></details>
+<div class="settingsrow onfim-apk-download-row"><div><strong>Onfim per Android</strong><p>Scarica o aggiorna l’APK da GitHub.</p></div><a id="onfimApkDownload" class="onfim-apk-download" href="https://github.com/oscarcollini/onfim/releases/latest/download/onfim.apk" target="_blank" rel="noopener noreferrer" aria-label="Scarica l’APK di Onfim per Android">Scarica APK ↗</a></div>
 <details><summary>Su Onfim</summary><p>Onfim è stata sviluppata con l’assistenza di ChatGPT. Non integra ChatGPT né servizi di IA generativa.</p></details></div>
-<footer class="onfim-colophon">onfim v0.9.1 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
+<footer class="onfim-colophon">onfim v0.9.5 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
 <section class="view" id="trashView" aria-label="Cestino">
   <div class="controls"><button id="backTrash" type="button">← Impostazioni</button></div>
   <div class="panel trash-panel"><div class="trash-head"><div><h2>Appunti eliminati</h2><p class="hint">Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.</p></div><button id="emptyTrash" class="danger" type="button">Svuota</button></div><p id="trashCount" class="small" role="status"></p><div id="trashList" class="trash-list"></div></div>
@@ -6620,7 +6625,7 @@ function extractHashtags(content){
 function onfimTagLabel(tag){return tag==='📆'||tag==='📍'?tag:'#'+tag;}
 // Riferimenti @ riconoscibili anche nei vecchi backup: nessuna migrazione IndexedDB.
 // Le date devono essere reali, le coordinate rispettare latitudine e longitudine.
-const ONFIM_DATE_PATTERN=/(^|[^\p{L}\p{N}_@])@(\d{2})\/(\d{2})\/(\d{4})(?:-(\d{2}):(\d{2}))?(?![\d/:.\-])/gu;
+const ONFIM_DATE_PATTERN=/(^|[^\p{L}\p{N}_@])@(\d{2})([/.])(\d{2})\3(\d{4})(?:-(\d{2}):(\d{2}))?(?![\d/:.\-])/gu;
 const ONFIM_POINT_PATTERN=/(^|[^\p{L}\p{N}_@])@(\d{1,2}(?:\.\d{1,6})?)([NS]),(\d{1,3}(?:\.\d{1,6})?)([EW])(?![\p{L}\p{N}_.])/gu;
 function onfimValidDate(d,m,y,h,mi){
  const day=Number(d),month=Number(m),year=Number(y);
@@ -6637,7 +6642,7 @@ function onfimFindRefs(text,kind){
  const result=[],pattern=kind==='date'?ONFIM_DATE_PATTERN:ONFIM_POINT_PATTERN;
  pattern.lastIndex=0;
  for(const m of String(text||'').matchAll(pattern)){
-  if(kind==='date'&&!onfimValidDate(m[2],m[3],m[4],m[5],m[6]))continue;
+  if(kind==='date'&&!onfimValidDate(m[2],m[4],m[5],m[6],m[7]))continue;
   const point=kind==='point'?onfimPointFromMatch(m):null;
   if(kind==='point'&&!point)continue;
   const start=m.index+m[1].length;
@@ -8757,7 +8762,12 @@ function onfimFormatRepeat(rule){
  const valid=Number.isFinite(d.getTime());
  if(rule==='none')return english?'Never (once)':'Mai (una volta)';
  if(rule==='daily')return english?'Every day':'Ogni giorno';
- if(rule==='weekly')return english?'Every week':'Ogni settimana';
+ if(rule==='weekly'){
+  if(!valid)return english?'Choose a date':'Scegli una data';
+  const daysIT=['domenica','lunedì','martedì','mercoledì','giovedì','venerdì','sabato'];
+  const daysEN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  return english?'Every '+daysEN[d.getDay()]:'Ogni '+daysIT[d.getDay()];
+ }
  if(rule==='monthly'){
   if(!valid)return english?'Choose a date':'Scegli una data';
   const day=d.getDate();
@@ -8775,7 +8785,7 @@ function onfimUpdateRepeatInfo(){
  const rule=$('reminderRepeat').value;
  const options=$('reminderRepeat').options;
  for(const o of options){
-  if(o.value==='monthly'||o.value==='monthly_weekday')o.textContent=onfimFormatRepeat(o.value);
+  if(o.value==='weekly'||o.value==='monthly'||o.value==='monthly_weekday')o.textContent=onfimFormatRepeat(o.value);
  }
  $('repeatFoldLabel').textContent=onfimFormatRepeat(rule);
  const hasGeo=$('geoEnabled').checked;
@@ -9012,10 +9022,10 @@ Object.assign(ONFIM_UI_EN,{
   'Promemoria di luogo: nessun rilevamento in background.':'Location reminders: no background detection.',
   'Backup cloud: tramite Condividi, non automatici in background.':'Cloud backups: via Share, not automatic in background.',
   'Widget e notifiche native Android non disponibili.':'Android widgets and native notifications are unavailable.',
-  'OCR: disponibile nell’APK, non nella PWA Lite.':'OCR: available in the APK, not in the Lite PWA.',
+  
   'Su Onfim':'About Onfim',
   'Onfim è stata sviluppata con l’assistenza di ChatGPT. Non integra ChatGPT né servizi di IA generativa.':'Onfim was developed with the assistance of ChatGPT. It does not include ChatGPT or generative AI services.',
-  'Nell’APK il riconoscimento del testo nelle immagini (OCR) avviene sul dispositivo.':'In the APK, image text recognition (OCR) runs on the device.',
+  
   'Le note si salvano automaticamente.':'Notes are saved automatically.',
   'Fino a 10 copie, verificate ogni 3 ore in caso di modifiche.':'Up to 10 copies, checked every 3 hours when changes exist.',
   'Copia dell’ultimo backup locale, ogni 24 ore se cambiato.':'Copy of the latest local backup, every 24 hours if it has changed.',
@@ -9076,6 +9086,14 @@ function onfimTranslateTree(root){
 }
 
 function onfimApplyLanguage(){onfimLang=onfimLanguageCode();document.documentElement.lang=onfimLang;onfimExtraRefreshUI();onfimTranslateTree(document.body);onfimUpdateRepeatInfo();onfimUpdateReminderSelected();}
+
+// Il link rimane stabile fra le release. Nella WebView Android apre il browser esterno.
+$('onfimApkDownload').addEventListener('click',event=>{
+ if(window.OnfimAndroid&&typeof OnfimAndroid.openExternalLink==='function'){
+  event.preventDefault();OnfimAndroid.openExternalLink(event.currentTarget.href);
+ }
+});
+Object.assign(ONFIM_UI_EN,{'Onfim per Android':'Onfim for Android','Scarica o aggiorna l’APK da GitHub.':'Download or update the APK from GitHub.','Scarica APK ↗':'Download APK ↗','Scarica l’APK di Onfim per Android':'Download Onfim APK for Android'});
 $('onfimLanguage').value=localStorage.getItem(ONFIM_LANG_KEY)||'auto';
 $('onfimLanguage').onchange=()=>{localStorage.setItem(ONFIM_LANG_KEY,$('onfimLanguage').value);onfimApplyLanguage();};
 let onfimLocalizePending=false;
