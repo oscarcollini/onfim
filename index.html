@@ -3384,12 +3384,13 @@ body.onfim-drawing #editorDates {
   display: none;
 }
 .reminder-fold summary::after {
-  content: '⌄';
-  font-size: 1.2rem;
+  content: '▼';
+  font-size: 15px;
+  line-height: 1;
   margin-left: 5px;
 }
 .reminder-fold[open] summary::after {
-  content: '⌃';
+  content: '▲';
 }
 .fold-value {
   font-size: .76rem;
@@ -6066,6 +6067,16 @@ body {
 #reminderDialog #dateFold.hidden{display:none!important}
 @media(max-width:359px){#reminderDialog .onfim-dual-picker{column-gap:7px}#reminderDialog .onfim-choice-column{padding:7px 5px}#reminderDialog .onfim-choice-column button{font-size:.81rem}}
 
+
+/* Triangoli di apertura/chiusura più evidenti; nessun cambiamento al layout. */
+#listView #onfimCollectionsToggle [aria-hidden="true"] {font-size:17px;line-height:1;vertical-align:middle}
+.onfim-collection-toggle {font-size:inherit;}
+.onfim-collection-order button {font-size:16px;line-height:1.2}
+.reminder-fold summary::after{font-size:15px;line-height:1}
+#settingsView .onfim-about-panel details summary {list-style:none}
+#settingsView .onfim-about-panel details summary::-webkit-details-marker{display:none}
+#settingsView .onfim-about-panel details summary::after {content:'▼';display:inline-block;font-size:15px;margin-left:8px}
+#settingsView .onfim-about-panel details[open] summary::after {content:'▲'}
 </style>
 <!--  -->
 <meta name="theme-color" content="#222E38"/>
@@ -6090,7 +6101,7 @@ body {
 <button aria-pressed="false" class="filter-pill" data-filter-choice="reserved" type="button" aria-label="Archivio" title="Archivio"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></button>
 <select aria-label="Tipo appunti" class="hidden" id="filter"><option selected="" value="ordinary">Appunti</option>
 <option value="reserved">Archivio</option><option value="favorites">Preferiti</option></select>
-<button class="onfim-collection-picker-label" id="onfimCollectionsToggle" type="button" aria-expanded="false" aria-controls="smartCollectionsNav">Raccolte <span aria-hidden="true">▾</span></button><select id="onfimCollectionPicker" class="hidden" aria-hidden="true" tabindex="-1"><option value="">Raccolte</option></select><div id="searchPanel" class="home-search"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24" width="18"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><input aria-label="Cerca negli appunti" class="search" id="search" placeholder="Cerca…" type="search"/><button aria-label="Azzera ricerca" class="search-close hidden" id="searchClose" title="Azzera ricerca" type="button">×</button></div>
+<button class="onfim-collection-picker-label" id="onfimCollectionsToggle" type="button" aria-expanded="false" aria-controls="smartCollectionsNav">Raccolte <span aria-hidden="true">▼</span></button><select id="onfimCollectionPicker" class="hidden" aria-hidden="true" tabindex="-1"><option value="">Raccolte</option></select><div id="searchPanel" class="home-search"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24" width="18"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><input aria-label="Cerca negli appunti" class="search" id="search" placeholder="Cerca…" type="search"/><button aria-label="Azzera ricerca" class="search-close hidden" id="searchClose" title="Azzera ricerca" type="button">×</button></div>
 </div>
 </div>
 <nav class="smart-collections-nav" id="smartCollectionsNav" aria-label="Raccolte dinamiche" hidden>
@@ -6311,10 +6322,12 @@ body {
  <details id="repeatFold" class="reminder-fold"><summary>Ripeti <span id="repeatFoldLabel" class="fold-value">Mai</span></summary>
  <div class="reminder-recurrence" id="recurrenceSection">
   <label class="label" for="reminderRepeat">Frequenza</label>
-  <select id="reminderRepeat" aria-label="Ripetizione del promemoria">
-    <option value="none">Mai (una volta)</option><option value="daily">Ogni giorno</option>
-    <option value="weekly">Ogni settimana</option><option value="monthly">Ogni mese</option>
-    <option value="weekday">Ogni lunedì–venerdì</option>
+    <select id="reminderRepeat" aria-label="Ripetizione del promemoria">
+    <option value="none">Mai (una volta)</option>
+    <option value="daily">Ogni giorno</option>
+    <option value="weekly">Ogni settimana</option>
+    <option value="monthly">Ogni mese lo stesso giorno</option>
+    <option value="monthly_weekday">Ogni mese lo stesso giorno della settimana</option>
   </select>
   <p class="reminder-explainer" id="repeatInfo"></p>
  </div></details>
@@ -6714,7 +6727,7 @@ function previewAllowed(n){return !n.reserved||unlocked;}
   const collectionActive=$('filter').value==='ordinary'&&smartActive.startsWith('c:');
   toggle.dataset.collectionActive=String(collectionActive);
   const expanded=toggle.getAttribute('aria-expanded')==='true';
-  const arrow=toggle.querySelector('[aria-hidden="true"]');if(arrow)arrow.textContent=expanded?'▴':'▾';
+  const arrow=toggle.querySelector('[aria-hidden="true"]');if(arrow)arrow.textContent=expanded?'▲':'▼';
  }
  async function onfimRenderCollections(){
   const host=$('smartCollectionTabs'),oldScroll=host.scrollLeft;host.replaceChildren();
@@ -6763,10 +6776,10 @@ function previewAllowed(n){return !n.reserved||unlocked;}
     const item=document.createElement('section');item.className='smart-collection-item onfim-collection-compact';
     const head=document.createElement('div');head.className='smart-collection-item-head';
     const toggle=document.createElement('button');toggle.type='button';toggle.className='onfim-collection-toggle';
-    toggle.setAttribute('aria-expanded','false');toggle.textContent=c.name+'  ▾';
+    toggle.setAttribute('aria-expanded','false');toggle.textContent=c.name+'  ▼';
     const controls=document.createElement('div');controls.className='onfim-collection-order';
-    appendButton(controls,'↑',()=>onfimMoveCollection(i,-1),i===0).title='Sposta su';
-    appendButton(controls,'↓',()=>onfimMoveCollection(i,1),i===smartCollections.length-1).title='Sposta giù';
+    appendButton(controls,'▲',()=>onfimMoveCollection(i,-1),i===0).title='Sposta su';
+    appendButton(controls,'▼',()=>onfimMoveCollection(i,1),i===smartCollections.length-1).title='Sposta giù';
     const count=document.createElement('small');count.className='onfim-collection-count';count.textContent='';head.append(toggle,count,controls);item.append(head);item.dataset.collectionId=c.id;
     const details=document.createElement('div');details.className='onfim-collection-details hidden';
     const tags=document.createElement('p');tags.textContent=c.tags.map(onfimTagLabel).join(' · ');
@@ -6779,7 +6792,7 @@ function previewAllowed(n){return !n.reserved||unlocked;}
     appendButton(actions,'Modifica hashtag',()=>{const answer=prompt('Hashtag della raccolta '+c.name+' (separati da spazio o virgola)',c.tags.map(onfimTagLabel).join(' '));if(answer===null)return;const parsed=onfimParseCollectionTags(answer);if(!parsed.length){toast('Inserisci almeno un hashtag');return;}c.tags=parsed;onfimSaveCollections();onfimCollectionsDialogRender();});
     appendButton(actions,'Elimina',()=>{if(!confirm('Eliminare la raccolta “'+c.name+'”? Le note non verranno eliminate.'))return;smartCollections=smartCollections.filter(x=>x.id!==c.id);if(smartActive==='c:'+c.id)smartActive='home';onfimSaveCollections();onfimCollectionsDialogRender();},false,'danger');
     details.append(tags,hide,actions);item.append(details);host.append(item);
-    toggle.onclick=()=>{const open=details.classList.toggle('hidden');toggle.setAttribute('aria-expanded',String(!open));toggle.textContent=c.name+(open?'  ▾':'  ▴');};
+    toggle.onclick=()=>{const open=details.classList.toggle('hidden');toggle.setAttribute('aria-expanded',String(!open));toggle.textContent=c.name+(open?'  ▼':'  ▲');};
   });
   void allNotes().then(notes=>{
     const groups=new Map();
@@ -7730,7 +7743,7 @@ async function exportJSON(){try{
   await refreshBackupStatus();
   $('settingsStatus').textContent='Download avviato. Verifica che il file JSON sia stato effettivamente salvato sul dispositivo o su Drive.';
 }catch(e){$('settingsStatus').textContent='Errore nell’esportazione: '+e.message;}}
-async function importJSON(file){try{const data=JSON.parse(await file.text());if(!Array.isArray(data.notes)|| data.format!=='appunti-backup')throw new Error('Formato JSON non riconosciuto.');if(!confirm('Importare '+data.notes.length+' appunti? Gli ID già presenti saranno aggiornati; gli altri verranno aggiunti.'))return;if(dirty)throw new Error('Prima salva o chiudi l’appunto in modifica.');const existing=await allNotes();if(existing.length&&!await makeLocalSnapshot('prima-importazione',true))throw new Error('Non è stato possibile creare una copia preventiva: esporta un JSON e riprova.');let count=0;const imported=[];for(const n of data.notes){if(!n?.id||typeof n!=='object')continue;const cleaned={id:String(n.id),title:String(n.title||''),text:sanitizeHTML(n.text),checklist:onfimNormalizeChecklist(n.checklist),color:String(n.color||'#ffffff'),tags:Array.isArray(n.tags)?n.tags.map(String):[],photos:Array.isArray(n.photos)?n.photos.filter(s=>typeof s==='string'&&s.startsWith('data:image/')):[],photoMarks:Array.isArray(n.photoMarks)?n.photoMarks.map(s=>typeof s==='string'&&(s===''||s.startsWith('data:image/'))?s:''):[],drawing:typeof n.drawing==='string'&&n.drawing.startsWith('data:image/')?n.drawing:'',reminder:String(n.reminder||''),reminderRepeat:['none','daily','weekly','monthly','weekday','monday','tuesday','wednesday','thursday','friday','saturday','sunday'].includes(n.reminderRepeat)?n.reminderRepeat:'none',reminderBase:typeof n.reminderBase==='string'?n.reminderBase:String(n.reminder||''),geofence:cleanGeofence(n.geofence),reserved:!!n.reserved,favorite:!!n.favorite,pinned:!!n.pinned,created:Number(n.created)||Date.now(),updated:Number(n.updated)||Date.now(),audios:Array.isArray(n.audios)?n.audios.filter(a=>a&&typeof a.data==='string'&&a.data.startsWith('data:audio/')&&a.data.length<=Math.ceil(MAX_AUDIO_BYTES*1.4)).map(a=>({id:String(a.id||uid()),name:String(a.name||'Registrazione'),data:a.data,created:Number(a.created)||Date.now()})):[],manualOrder:Number.isSafeInteger(Number(n.manualOrder))&&Number(n.manualOrder)>0?Number(n.manualOrder):0,linkedFiles:Array.isArray(n.linkedFiles)?n.linkedFiles.filter(f=>f&&typeof f.uri==='string'&&/^content:\/\//.test(f.uri)&&f.uri.length<4096).slice(0,15).map(f=>({uri:f.uri,name:String(f.name||'Documento').slice(0,180),type:String(f.type||'').slice(0,120),size:Number(f.size)||0})):[]};if(Number(n.deletedAt)>0){cleaned.deletedAt=Number(n.deletedAt);cleaned.trashBatchId=typeof n.trashBatchId==='string'&&n.trashBatchId?n.trashBatchId:cleaned.id;}// Conserva la sola cronologia recente, validata e limitata (nessuna copia dei media).
+async function importJSON(file){try{const data=JSON.parse(await file.text());if(!Array.isArray(data.notes)|| data.format!=='appunti-backup')throw new Error('Formato JSON non riconosciuto.');if(!confirm('Importare '+data.notes.length+' appunti? Gli ID già presenti saranno aggiornati; gli altri verranno aggiunti.'))return;if(dirty)throw new Error('Prima salva o chiudi l’appunto in modifica.');const existing=await allNotes();if(existing.length&&!await makeLocalSnapshot('prima-importazione',true))throw new Error('Non è stato possibile creare una copia preventiva: esporta un JSON e riprova.');let count=0;const imported=[];for(const n of data.notes){if(!n?.id||typeof n!=='object')continue;const cleaned={id:String(n.id),title:String(n.title||''),text:sanitizeHTML(n.text),checklist:onfimNormalizeChecklist(n.checklist),color:String(n.color||'#ffffff'),tags:Array.isArray(n.tags)?n.tags.map(String):[],photos:Array.isArray(n.photos)?n.photos.filter(s=>typeof s==='string'&&s.startsWith('data:image/')):[],photoMarks:Array.isArray(n.photoMarks)?n.photoMarks.map(s=>typeof s==='string'&&(s===''||s.startsWith('data:image/'))?s:''):[],drawing:typeof n.drawing==='string'&&n.drawing.startsWith('data:image/')?n.drawing:'',reminder:String(n.reminder||''),reminderRepeat:['none','daily','weekly','monthly','monthly_weekday','weekday','monday','tuesday','wednesday','thursday','friday','saturday','sunday'].includes(n.reminderRepeat)?n.reminderRepeat:'none',reminderBase:typeof n.reminderBase==='string'?n.reminderBase:String(n.reminder||''),geofence:cleanGeofence(n.geofence),reserved:!!n.reserved,favorite:!!n.favorite,pinned:!!n.pinned,created:Number(n.created)||Date.now(),updated:Number(n.updated)||Date.now(),audios:Array.isArray(n.audios)?n.audios.filter(a=>a&&typeof a.data==='string'&&a.data.startsWith('data:audio/')&&a.data.length<=Math.ceil(MAX_AUDIO_BYTES*1.4)).map(a=>({id:String(a.id||uid()),name:String(a.name||'Registrazione'),data:a.data,created:Number(a.created)||Date.now()})):[],manualOrder:Number.isSafeInteger(Number(n.manualOrder))&&Number(n.manualOrder)>0?Number(n.manualOrder):0,linkedFiles:Array.isArray(n.linkedFiles)?n.linkedFiles.filter(f=>f&&typeof f.uri==='string'&&/^content:\/\//.test(f.uri)&&f.uri.length<4096).slice(0,15).map(f=>({uri:f.uri,name:String(f.name||'Documento').slice(0,180),type:String(f.type||'').slice(0,120),size:Number(f.size)||0})):[]};if(Number(n.deletedAt)>0){cleaned.deletedAt=Number(n.deletedAt);cleaned.trashBatchId=typeof n.trashBatchId==='string'&&n.trashBatchId?n.trashBatchId:cleaned.id;}// Conserva la sola cronologia recente, validata e limitata (nessuna copia dei media).
  if(Array.isArray(n._onfimUndoSession)){
   const reference={title:cleaned.title,text:cleaned.text,color:cleaned.color,checklist:cleaned.checklist};
   cleaned._onfimUndoSession=onfimLimitHistory(n._onfimUndoSession.map(x=>onfimCleanState(x,reference)).filter(Boolean));
@@ -7759,7 +7772,54 @@ async function importJSON(file){try{const data=JSON.parse(await file.text());if(
 function icsEscape(s){return String(s||'').replace(/\\/g,'\\\\').replace(/\r?\n/g,'\\n').replace(/[;,]/g,m=>'\\'+m);}
 async function exportICS(){const notes=(await allNotes()).filter(n=>!n.deletedAt&&n.reminder&&!Number.isNaN(new Date(n.reminder).getTime()));if(!notes.length){$('settingsStatus').textContent='Nessun promemoria da esportare.';return;}const stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');const out=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Onfim//Promemoria//IT','CALSCALE:GREGORIAN','METHOD:PUBLISH'];for(const n of notes){const t=n.reminder.replace(/[-:]/g,'').replace('T','T');const local=t.length===13?t+'00':t;out.push('BEGIN:VEVENT','UID:'+n.id.replace(/[^a-zA-Z0-9-]/g,'-')+'@onfim.local','DTSTAMP:'+stamp,'DTSTART:'+local,'DTEND:'+local,'SUMMARY:'+icsEscape('Onfim: '+(n.reserved?'Appunto riservato':(n.title||'Promemoria'))),...onfimIcsRepeat(n),'DESCRIPTION:'+icsEscape(n.reserved?'Apri gli appunti riservati in Onfim.':txt(n.text).slice(0,300)),'BEGIN:VALARM','TRIGGER:PT0M','ACTION:DISPLAY','DESCRIPTION:Promemoria Onfim','END:VALARM','END:VEVENT');}out.push('END:VCALENDAR');download(out.join('\r\n')+'\r\n','onfim-promemoria.ics','text/calendar;charset=utf-8');$('settingsStatus').textContent='Esportati '+notes.length+' promemoria. Importa il file nel calendario Android; l’importazione non si aggiorna automaticamente.';}
 async function tryNotify(title){const msg='Promemoria onfim: '+title;try{if('Notification'in window&&Notification.permission==='granted'){if('serviceWorker'in navigator&&location.protocol.startsWith('http')){const reg=await navigator.serviceWorker.ready;await reg.showNotification(msg,{body:'Apri onfim per leggere la nota.'});return;}new Notification(msg);return;}}catch{}alert(msg+'\n\nPer notifiche a pagina chiusa, esporta il promemoria nel calendario Android.');}
-async function scheduleReminders(){for(const t of reminderTimers.values())clearTimeout(t);reminderTimers.clear();const notes=await allNotes();for(const n of notes){if(n.deletedAt)continue;const wait=new Date(n.reminder).getTime()-Date.now();if(!n.reminder||!Number.isFinite(wait)||wait<=0||wait>2147480000)continue;const t=setTimeout(async()=>{tryNotify(n.reserved?'Appunto riservato':(n.title||'Appunto'));reminderTimers.delete(n.id);const repeat=n.reminderRepeat||'none';if(repeat!=='none'){const next=onfimNextRepeat(n.reminder,repeat,Date.now(),n.reminderBase||n.reminder);if(next){await putNote({...n,reminder:next,updated:Date.now()});await scheduleReminders();}}},wait);reminderTimers.set(n.id,t);}}
+// I timer del browser non accettano attese oltre ~24,8 giorni. Per le scadenze
+// lontane si effettua una verifica intermedia; le ricorrenze perse a PWA chiusa
+// avanzano alla prima occorrenza futura quando l'app torna attiva.
+const ONFIM_MAX_REMINDER_WAIT=86400000; // controllo almeno una volta al giorno, quando aperta
+let onfimReminderScheduleGeneration=0;
+async function scheduleReminders(){
+ const generation=++onfimReminderScheduleGeneration;
+ for(const t of reminderTimers.values())clearTimeout(t);
+ reminderTimers.clear();
+ if(!db)return;
+ const notes=await allNotes();
+ if(generation!==onfimReminderScheduleGeneration)return;
+ const now=Date.now(),revised=[];
+ for(const n of notes){
+  if(n.deletedAt||!n.reminder)continue;
+  const due=new Date(n.reminder).getTime(),repeat=n.reminderRepeat||'none';
+  if(!Number.isFinite(due)||due>now||repeat==='none')continue;
+  const next=onfimNextRepeat(n.reminder,repeat,now,n.reminderBase||n.reminder);
+  if(next){const updated={...n,reminder:next,reminderBase:n.reminderBase||n.reminder};revised.push(updated);Object.assign(n,updated);}
+ }
+ if(revised.length){
+  await putNotesBatch(revised);
+  if(generation!==onfimReminderScheduleGeneration)return;
+  if($('listView')?.classList.contains('show'))await renderNotes();
+ }
+ for(const n of notes){
+  if(n.deletedAt||!n.reminder)continue;
+  const wait=new Date(n.reminder).getTime()-Date.now();
+  if(!Number.isFinite(wait)||wait<=0)continue;
+  const delay=Math.min(wait,ONFIM_MAX_REMINDER_WAIT);
+  const t=setTimeout(async()=>{
+   if(generation!==onfimReminderScheduleGeneration)return;
+   reminderTimers.delete(n.id);
+   // Al termine del controllo intermedio si pianifica il tratto successivo.
+   if(new Date(n.reminder).getTime()>Date.now()+1000){void scheduleReminders();return;}
+   try{
+    const current=(await allNotes()).find(x=>x.id===n.id);
+    if(!current||current.deletedAt||current.reminder!==n.reminder)return;
+    await tryNotify(current.reserved?'Appunto riservato':(current.title||'Appunto'));
+   }finally{void scheduleReminders();}
+  },delay);
+  reminderTimers.set(n.id,t);
+ }
+}
+// Non invia notifiche retroattive: alla riapertura riprende dalla scadenza futura.
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)void scheduleReminders();});
+window.addEventListener('pageshow',()=>{void scheduleReminders();});
+window.addEventListener('focus',()=>{if(!document.hidden)void scheduleReminders();});
 
 // Copy the contents of an explicit source note into a chosen destination.
 // The source is moved into the recoverable Cestino in the same batch.
@@ -8568,22 +8628,36 @@ function onfimLocalDateTime(d){const p=v=>String(v).padStart(2,'0');return `${d.
  function onfimApplySmartChoice(){
   if(!onfimChosenPeriod)return;
   const date=onfimPresetDate(onfimChosenPeriod);
-  if(!date){$('readReminderValue').value='';onfimSmartApplied=false;onfimUpdateReminderSelected();return;}
+  if(!date){$('readReminderValue').value='';onfimSmartApplied=false;onfimUpdateRepeatInfo();onfimUpdateReminderSelected();return;}
   if(date<=new Date()){
    // Non accettare una scadenza passata, anche se la scorciatoia è visibile.
-   $('readReminderValue').value='';onfimSmartApplied=false;onfimUpdateReminderSelected();return;
+   $('readReminderValue').value='';onfimSmartApplied=false;onfimUpdateRepeatInfo();onfimUpdateReminderSelected();return;
   }
   $('readReminderValue').value=onfimLocalDateTime(date);onfimSmartApplied=true;
   onfimUpdateRepeatInfo();onfimUpdateReminderSelected();
  }
+ // Il primo tocco su «Altra data/ora» apre direttamente il selettore nativo.
+ // showPicker deve essere invocato nello stesso gesto utente (senza await/raf).
+ function onfimOpenNativeQuickPicker(id){
+  const input=$(id);
+  try{
+   if(typeof input.showPicker==='function'){
+    // Forza il ricalcolo dopo la rimozione di .hidden: il campo deve essere renderizzato.
+    void input.offsetWidth;
+    input.showPicker();return;
+   }
+  }catch(e){console.debug('Selettore nativo non disponibile',e);}
+  // Fallback per browser senza showPicker: il campo resta accessibile e modificabile.
+  input.focus();
+ }
  for(const b of document.querySelectorAll('[data-reminder-day]'))b.addEventListener('click',()=>{
   onfimChosenDay=b.dataset.reminderDay;onfimRefreshPresets();onfimApplySmartChoice();
-  if(onfimChosenDay==='other'&&!$('reminderOtherDate').value)$('reminderOtherDate').focus();
+  if(onfimChosenDay==='other')onfimOpenNativeQuickPicker('reminderOtherDate');
  });
  $('reminderOtherDate').addEventListener('change',()=>{onfimRefreshPresets();onfimApplySmartChoice();});
  for(const b of document.querySelectorAll('[data-reminder-period]'))b.addEventListener('click',()=>{
   onfimChosenPeriod=b.dataset.reminderPeriod;onfimRefreshPresets();onfimApplySmartChoice();
-  if(onfimChosenPeriod==='other'&&!$('reminderOtherTime').value)$('reminderOtherTime').focus();
+  if(onfimChosenPeriod==='other')onfimOpenNativeQuickPicker('reminderOtherTime');
  });
  $('reminderOtherTime').addEventListener('change',()=>{onfimRefreshPresets();onfimApplySmartChoice();});
  for(const [id,key] of [['onfimTimeMorning','morning'],['onfimTimeAfternoon','afternoon'],['extraPresetTime','third']]){
@@ -8598,22 +8672,93 @@ function onfimLocalDateTime(d){const p=v=>String(v).padStart(2,'0');return `${d.
 function onfimUpdateReminderSelected(){const v=$('readReminderValue').value,d=v?new Date(v):null;
  $('chosenReminderDate').textContent=d&&Number.isFinite(+d)?d.toLocaleDateString(onfimCurrentLocale(),{weekday:'short',day:'numeric',month:'short',year:'numeric'})+' · '+d.toLocaleTimeString(onfimCurrentLocale(),{hour:'2-digit',minute:'2-digit'}):onfimLang==='en'?'Choose a future date and time':'Scegli una data e un’ora future';
 }
+function onfimMonthlyWeekdayDescriptor(date,english=false){
+ const d=new Date(date);if(!Number.isFinite(+d))return english?'same weekday of month':'stesso giorno della settimana';
+ const nth=Math.ceil(d.getDate()/7),last=nth===5;
+ const daysIT=['domenica','lunedì','martedì','mercoledì','giovedì','venerdì','sabato'];
+ const daysEN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+ const ordinalIT=['','primo','secondo','terzo','quarto'];
+ const ordinalEN=['','first','second','third','fourth'];
+ return english?(last?'last ':ordinalEN[nth]+' ')+daysEN[d.getDay()]:(last?'l’ultimo ':'il '+ordinalIT[nth]+' ')+daysIT[d.getDay()];
+}
+function onfimMonthlyDate(year,month,anchor,weekdayRule){
+ const target=new Date(year,month,1,anchor.getHours(),anchor.getMinutes(),0,0);
+ const lastDay=new Date(year,month+1,0).getDate();
+ if(weekdayRule){
+  const weekday=anchor.getDay(),nth=Math.ceil(anchor.getDate()/7);
+  const first=1+(weekday-target.getDay()+7)%7;
+  let day=first+(nth-1)*7;
+  // Una quinta occorrenza equivale all'ultima: così non si salta un mese.
+  if(day>lastDay)day-=7;
+  target.setDate(day);
+ }else target.setDate(Math.min(anchor.getDate(),lastDay));
+ return target;
+}
 function onfimNextRepeat(value,rule,after=Date.now(),anchor=value){
  if(!value||!rule||rule==='none')return '';
- const first=new Date(value),base=new Date(anchor),now=new Date(after);if(!Number.isFinite(+first))return '';
+ const first=new Date(value),base=new Date(anchor),now=new Date(after);
+ if(!Number.isFinite(+first))return '';
+ const origin=Number.isFinite(+base)?base:first;
+ const monthly=rule==='monthly'||rule==='monthly_weekday';
  const day0=new Date(first.getFullYear(),first.getMonth(),first.getDate()),day1=new Date(now.getFullYear(),now.getMonth(),now.getDate());
- let steps=rule==='monthly'?Math.max(0,(now.getFullYear()-first.getFullYear())*12+now.getMonth()-first.getMonth()):Math.max(0,Math.round((day1-day0)/86400000));if(rule==='weekly')steps=Math.floor(steps/7);
- for(let i=0;i<10;i++,steps++){
-  const candidate=new Date(first);if(rule==='monthly'){candidate.setDate(1);candidate.setMonth(first.getMonth()+steps);candidate.setDate(Math.min(Number.isFinite(+base)?base.getDate():first.getDate(),new Date(candidate.getFullYear(),candidate.getMonth()+1,0).getDate()));}else candidate.setDate(first.getDate()+steps*(rule==='weekly'?7:1));
-  if(candidate<first)continue;const day=candidate.getDay(),allowed=rule==='weekday'?day>=1&&day<=5:rule in ONFIM_REPEAT_DAYS?day===ONFIM_REPEAT_DAYS[rule]:true;
+ let steps=monthly?Math.max(0,(now.getFullYear()-first.getFullYear())*12+now.getMonth()-first.getMonth()):Math.max(0,Math.round((day1-day0)/86400000));
+ if(rule==='weekly')steps=Math.floor(steps/7);
+ for(let i=0;i<14;i++,steps++){
+  let candidate;
+  if(monthly){
+   const originMonth=first.getFullYear()*12+first.getMonth()+steps;
+   candidate=onfimMonthlyDate(Math.floor(originMonth/12),originMonth%12,origin,rule==='monthly_weekday');
+  }else{
+   candidate=new Date(first);candidate.setDate(first.getDate()+steps*(rule==='weekly'?7:1));
+  }
+  if(candidate<first)continue;
+  const day=candidate.getDay(),allowed=rule==='weekday'?day>=1&&day<=5:rule in ONFIM_REPEAT_DAYS?day===ONFIM_REPEAT_DAYS[rule]:true;
   if(+candidate>after&&allowed)return onfimLocalDateTime(candidate);
- }return '';
+ }
+ return '';
 }
-function onfimIcsRepeat(n){const days={monday:'MO',tuesday:'TU',wednesday:'WE',thursday:'TH',friday:'FR',saturday:'SA',sunday:'SU'};let rule={daily:'DAILY',weekly:'WEEKLY',weekday:'WEEKLY;BYDAY=MO,TU,WE,TH,FR',monthly:'MONTHLY;BYMONTHDAY='+new Date(n.reminderBase||n.reminder).getDate()+',-1;BYSETPOS=1'}[n.reminderRepeat];if(days[n.reminderRepeat])rule='WEEKLY;BYDAY='+days[n.reminderRepeat];return rule?['RRULE:FREQ='+rule]:[];}
-function onfimFormatRepeat(rule){const names={daily:'ogni giorno',weekly:'ogni settimana',monthly:'ogni mese',weekday:'lun–ven',monday:'ogni lunedì',tuesday:'ogni martedì',wednesday:'ogni mercoledì',thursday:'ogni giovedì',friday:'ogni venerdì',saturday:'ogni sabato',sunday:'ogni domenica'};return names[rule]||'';}
-function onfimUpdateRepeatInfo(){const rule=$('reminderRepeat').value;
-  $('repeatFoldLabel').textContent=rule==='none'?'Mai':onfimFormatRepeat(rule);
-  const hasGeo=$('geoEnabled').checked;$('recurrenceSection').classList.toggle('hidden',hasGeo&&!$('readReminderValue').value);$('repeatInfo').textContent=rule==='none'?'Una sola volta.':`Ripetizione ${onfimFormatRepeat(rule)}. In Lite funziona soltanto con la PWA aperta.`;}
+function onfimIcsRepeat(n){
+ const days={monday:'MO',tuesday:'TU',wednesday:'WE',thursday:'TH',friday:'FR',saturday:'SA',sunday:'SU'};
+ const base=new Date(n.reminderBase||n.reminder);
+ const dayCodes=['SU','MO','TU','WE','TH','FR','SA'];
+ let rule={daily:'DAILY',weekly:'WEEKLY',weekday:'WEEKLY;BYDAY=MO,TU,WE,TH,FR'}[n.reminderRepeat];
+ if(Number.isFinite(+base)){
+  if(n.reminderRepeat==='monthly')rule='MONTHLY;BYMONTHDAY='+base.getDate()+',-1;BYSETPOS=1';
+  if(n.reminderRepeat==='monthly_weekday'){
+   const nth=Math.ceil(base.getDate()/7),pos=nth===5?-1:nth;
+   rule='MONTHLY;BYDAY='+pos+dayCodes[base.getDay()];
+  }
+ }
+ if(days[n.reminderRepeat])rule='WEEKLY;BYDAY='+days[n.reminderRepeat];
+ return rule?['RRULE:FREQ='+rule]:[];
+}
+function onfimFormatRepeat(rule){
+ const english=onfimCurrentLocale().toLowerCase().startsWith('en');
+ const value=$('readReminderValue').value||reminderOriginalBase||reminderOriginalValue;
+ // Per una ricorrenza salvata e già avanzata, l'ordine nel mese deriva
+ // dalla prima data scelta, non dalla nuova occorrenza (es. ultimo giovedì).
+ const anchored=(rule===reminderOriginalRule && value===reminderOriginalValue);
+ const d=new Date(anchored?(reminderOriginalBase||value):value);
+ if(rule==='none')return english?'Never':'Mai';
+ if(rule==='daily')return english?'Every day':'Ogni giorno';
+ if(rule==='weekly')return english?'Every week':'Ogni settimana';
+ if(rule==='monthly')return Number.isFinite(+d)?(english?'Monthly on day ':'Ogni mese il ')+d.getDate():(english?'Monthly on same date':'Ogni mese lo stesso giorno');
+ if(rule==='monthly_weekday')return (english?'Monthly on ':'Ogni mese ')+onfimMonthlyWeekdayDescriptor(d,english);
+ return ({weekday:'lun–ven',monday:'ogni lunedì',tuesday:'ogni martedì',wednesday:'ogni mercoledì',thursday:'ogni giovedì',friday:'ogni venerdì',saturday:'ogni sabato',sunday:'ogni domenica'})[rule]||'';
+}
+function onfimUpdateRepeatInfo(){
+ const rule=$('reminderRepeat').value;
+ const english=onfimCurrentLocale().toLowerCase().startsWith('en');
+ const options=$('reminderRepeat').options;
+ for(const o of options){
+  if(o.value==='monthly'||o.value==='monthly_weekday')o.textContent=onfimFormatRepeat(o.value);
+ }
+ $('repeatFoldLabel').textContent=onfimFormatRepeat(rule);
+ const hasGeo=$('geoEnabled').checked;
+ $('recurrenceSection').classList.toggle('hidden',hasGeo&&!$('readReminderValue').value);
+ const desc=onfimFormatRepeat(rule);
+ $('repeatInfo').textContent=rule==='none'?'':(english?'Repeats: ':'Ripete: ')+desc+'.';
+}
 $('readReminderValue').addEventListener('input',()=>{onfimChosenPeriod='';onfimSmartApplied=false;onfimRefreshPresets();onfimUpdateRepeatInfo();onfimUpdateReminderSelected();});$('reminderRepeat').addEventListener('change',onfimUpdateRepeatInfo);
 function onfimReminderActive(n){return !!(n.geofence?.enabled||(n.reminder&&(new Date(n.reminder).getTime()>Date.now()||(n.reminderRepeat&&n.reminderRepeat!=='none'))));}
 function onfimRenderFileRefs(n,container){
@@ -8763,7 +8908,7 @@ const ONFIM_EXTRA_PRESET_KEY='onfim-custom-preset-v1';
 function onfimExtraRead(){
  try{const v=JSON.parse(localStorage.getItem(ONFIM_EXTRA_PRESET_KEY)||'{}');
   const days=Number.isInteger(Number(v.days))&&Number(v.days)>=1&&Number(v.days)<=365?Number(v.days):7;
-  return {days:!v.mode&&days===3?7:v.mode==='off'&&days===3?7:days};
+  return {days};
  }catch{return {days:7};}
 }
 let onfimExtra=onfimExtraRead();

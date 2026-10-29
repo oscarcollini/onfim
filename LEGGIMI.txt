@@ -1,0 +1,50 @@
+ONFIM LITE PWA 0.9.0 — Revisione interfaccia e promemoria
+=======================================================
+
+Questo ZIP è la versione PWA completa per GitHub Pages. Sovrascrivere i file
+preesistenti del sito (non creare cartelle o file di documentazione per ogni
+revisione). L'unico documento da mantenere è questo LEGGIMI.txt.
+
+Base: 0.8.30 consolidata e verificata da Work. La versione 0.9.0 include
+la riorganizzazione di Impostazioni, Raccolte, backup e Promemoria.
+
+PROMEMORIA
+- Data e ora in due colonne indipendenti, ognuna incorniciata.
+- Tre scorciatoie per la data (Oggi, Domani, Fra N giorni) più Altra data;
+  tre orari configurabili più Altra ora. Default N=7, non disattivabile.
+- Altra data e Altra ora provano ad aprire subito il selettore nativo;
+  se il browser non supporta showPicker, rimane un campo modificabile.
+- Ripeti: Mai, ogni giorno, ogni settimana, ogni mese il giorno N,
+  ogni mese il N-esimo giorno della settimana scelto (es. secondo martedì).
+  Se il giorno scelto è la quinta occorrenza, si usa l'ultima occorrenza
+  nei mesi successivi che ne hanno solo quattro.
+- Le ricorrenze scadute mentre la PWA era chiusa avanzano alla prossima
+  occorrenza futura al ritorno in primo piano; non generano notifiche
+  retroattive. Le scadenze lontane vengono verificate a intervalli di 24h
+  finché la PWA rimane aperta.
+- Con la PWA CHIUSA, le notifiche NON sono garantite. I promemoria
+  geografici non vengono monitorati in background dalla PWA.
+- L'esportazione ICS usa regole calendariali specifiche per le due
+  modalità mensili; l'importazione effettiva va comunque verificata.
+
+INTERFACCIA
+- Impostazioni riorganizzate, testi IT/EN asciugati, Informazioni
+  unificate e Cestino con icona e contatore; nessuna scadenza nel Cestino.
+- Banner backup PWA compatto, conservando le condizioni di avviso.
+- Raccolte evidenziate in giallo Onfim #FFF6DA quando barra aperta o
+  filtro attivo; Home torna bianca quando è attiva una Raccolta.
+- Pannelli espandibili e Raccolte con triangoli su/giù più visibili.
+- Tab Dove: ricerca, latitudine/longitudine e posizione attuale su righe
+  compatte; rimossi i controlli/testi ridondanti.
+
+DATI
+- Non è modificata la struttura base delle note né il nome del database.
+- Import/export JSON resta nel formato Onfim corrente, con nuovo codice
+  'monthly_weekday' per la ripetizione mensile su giorno della settimana.
+- Prima di aggiornare, conservare una copia JSON esterna degli appunti.
+
+TEST
+- Sintassi JavaScript verificata con Node.
+- Verificati tramite test logici secondo martedì, terzo giovedì,
+  ultimo giovedì, fine mese e regole ICS.
+- Le verifiche su dispositivo e notifiche effettive restano da eseguire.
