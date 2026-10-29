@@ -1,11 +1,11 @@
-ONFIM LITE PWA 0.9.0 — Revisione interfaccia e promemoria
+ONFIM LITE PWA 0.9.1 — Revisione interfaccia e promemoria
 =======================================================
 
 Questo ZIP è la versione PWA completa per GitHub Pages. Sovrascrivere i file
 preesistenti del sito (non creare cartelle o file di documentazione per ogni
 revisione). L'unico documento da mantenere è questo LEGGIMI.txt.
 
-Base: 0.8.30 consolidata e verificata da Work. La versione 0.9.0 include
+Base: 0.8.30 consolidata e verificata da Work. La versione 0.9.1 include
 la riorganizzazione di Impostazioni, Raccolte, backup e Promemoria.
 
 PROMEMORIA
@@ -48,3 +48,26 @@ TEST
 - Verificati tramite test logici secondo martedì, terzo giovedì,
   ultimo giovedì, fine mese e regole ICS.
 - Le verifiche su dispositivo e notifiche effettive restano da eseguire.
+
+RIFINITURA TESTI RIPETIZIONI (0.9.1)
+- Le opzioni mensili mostrano la data concreta, per esempio «Il 15 di ogni mese» / «Il secondo martedì di ogni mese».
+- Rimossi «Frequenza» e l’avviso descrittivo duplicato sotto il selettore.
+- Non cambia il calcolo delle ricorrenze o la struttura dati.
+
+ICONA PROMEMORIA RICORRENTE — B CON FRECCIA APERTA
+- Una sola scadenza: normale orologio blu.
+- Ricorrenza: orologio blu con parte della circonferenza a freccia a sinistra.
+- Freccia B approvata: apertura ampliata tra coda e punta e tra le due ali.
+- Nessun cambiamento nella logica dei promemoria o nei dati delle note.
+- Il colore effettivo nell'app è gestito da currentColor (#157D9B nello stato attivo).
+
+
+CORREZIONI 0.9.1 — TESTI DELLE RIPETIZIONI E ICONA
+- Le opzioni mensili mostrano il giorno specifico scelto, con articoli e
+  ordinali corretti: «Il 1° di ogni mese», «La terza domenica di ogni mese»,
+  «L’ultima domenica di ogni mese». Etichette inglesi equivalenti.
+- Menu Ripeti senza «Frequenza» e senza spiegazione ridondante sotto la scelta.
+- L'icona per promemoria ricorrente usa la variante B approvata: orologio
+  blu con freccia aperta a sinistra; geometria verificata identica al riferimento.
+- Il calcolo delle scadenze, la memorizzazione e le altre funzioni non cambiano.
+- Prima di sostituire la PWA su GitHub, esportare un backup JSON.
