@@ -1,0 +1,27 @@
+ONFIM PWA Lite 0.9.0 — bozza revisione Promemoria «Quando»
+
+Base: bozza PWA Lite 0.9.0 corretta 2. Non è la release finale.
+
+MODIFICHE
+- Due colonne indipendenti e incorniciate: Data e Ora.
+- Data: Oggi, Domani, Fra N giorni (predefinito 7), Altra data.
+- Ora: tre orari modificabili in Impostazioni (predefiniti 09:00, 13:00, 17:00), Altra ora.
+- Terza scorciatoia SEMPRE attiva: eliminati la disattivazione, il giorno fisso della settimana e il selettore del tipo.
+- I vecchi valori N esplicitamente personalizzati vengono mantenuti; i vecchi 3 giorni in modalità disattivata diventano 7.
+- Testo della scadenza scelta in evidenza, senza un secondo selettore data+ora.
+- Tab Dove: eliminata l'etichetta visibile ridondante «Cerca un luogo» (conservato nome accessibile) e rimosso il pulsante «Rimuovi luogo» con la sua chiusura della sezione.
+- Tutte le altre modifiche alla bozza 0.9.0 (Impostazioni, backup PWA, Raccolte, ecc.) mantenute.
+- Traduzioni IT/EN aggiornate per i nuovi controlli.
+
+VERIFICHE ESEGUITE
+- Sintassi JavaScript verificata con Node.
+- Test automatici Chromium a 320, 360 e 390 px, più inglese a 360 px.
+- Interazione Fra 7 giorni + terzo orario = scadenza futura corretta.
+- Interazione data libera + ora libera = scadenza corretta.
+- Preservazione di configurazioni esistenti e terza scorciatoia visibile anche dopo una vecchia impostazione «disattivata».
+- Integrità ZIP verificata.
+
+NON VERIFICATO
+- Prove funzionali complete su telefono (notifiche e backup reali).
+- Correzioni delle ripetizioni PWA ancora da sviluppare/testare: la gestione del limite dei timer e il recupero delle ricorrenze dopo una chiusura prolungata restano punti aperti già concordati.
+- APK Android: non modificato in questa fase, come richiesto.

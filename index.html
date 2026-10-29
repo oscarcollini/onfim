@@ -6046,6 +6046,26 @@ body {
  #settingsView #presetSettingsPanel .onfim-extra-config .onfim-extra-fields:not(.hidden){display:grid;grid-column:1 / -1;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
  #reminderDialog .onfim-reminder-shortcuts button{font-size:.68rem}
 }
+
+/* ONFIM 0.9.0 — scadenza: due colonne indipendenti, 3 scelte rapide + libera */
+#settingsView .onfim-presets-settings{display:flex;flex-direction:column;gap:9px;margin:9px 0 13px}
+#settingsView .onfim-time-presets-settings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+#settingsView .onfim-time-presets-settings label{display:flex;flex-direction:column;gap:5px;min-width:0;padding:9px 6px;background:#F8FAFB;border:1px solid var(--line);border-radius:11px;font-size:.86rem;font-weight:600}
+#settingsView .onfim-time-presets-settings input[type=time]{box-sizing:border-box;width:100%;min-width:0;max-width:100%;margin:0;padding:5px 2px;min-height:39px;font-size:.86rem}
+#settingsView .onfim-days-preset{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#F8FAFB;border:1px solid var(--line);border-radius:11px;padding:8px 11px;font-size:.88rem;font-weight:600}
+#settingsView .onfim-days-preset input{width:70px;max-width:80px;box-sizing:border-box;min-height:38px;font-size:.95rem;padding:5px 8px}
+#reminderDialog .onfim-dual-picker{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:12px;margin:8px 0 7px;align-items:stretch}
+#reminderDialog .onfim-choice-column{min-width:0;margin:0;padding:8px 9px 10px;border:1px solid #C8D4DC;border-radius:13px;display:flex;flex-direction:column;gap:7px}
+#reminderDialog .onfim-choice-column legend{font-weight:700;padding:0 5px;font-size:.93rem;color:#304451}
+#reminderDialog .onfim-choice-column button{flex:0 0 auto;display:flex;align-items:center;justify-content:center;width:100%;min-width:0;min-height:42px;padding:8px 3px;border:1px solid #CFDAE0;border-radius:10px;background:#F5F8FA;color:#304F5D;font-size:.87rem;font-weight:600;line-height:1.25;text-align:center}
+#reminderDialog .onfim-choice-column button[aria-pressed=true]{background:#FFF6DA;border:2px solid #BBA96A;color:#222E38;padding:7px 2px}
+#reminderDialog .onfim-choice-column input{box-sizing:border-box;width:100%;min-width:0;min-height:40px;margin:0;padding:4px 3px;font-size:.84rem}
+#reminderDialog .onfim-choice-column input.hidden{display:none!important}
+#reminderDialog .onfim-picked-deadline{display:flex;align-items:center;justify-content:center;gap:7px;padding:8px 5px 11px;min-height:30px;font-size:.95rem;font-weight:650;color:#243F4D;text-align:center}
+#reminderDialog .onfim-picked-deadline svg{flex-shrink:0}
+#reminderDialog #dateFold.hidden{display:none!important}
+@media(max-width:359px){#reminderDialog .onfim-dual-picker{column-gap:7px}#reminderDialog .onfim-choice-column{padding:7px 5px}#reminderDialog .onfim-choice-column button{font-size:.81rem}}
+
 </style>
 <!--  -->
 <meta name="theme-color" content="#222E38"/>
@@ -6223,23 +6243,14 @@ body {
 <div class="panel settings-reminder-times" id="presetSettingsPanel">
  <h2>Promemoria</h2>
 
- <div class="reminder-time-grid onfim-settings-shortcuts">
-   <label for="onfimTimeMorning">Mattina<input type="time" id="onfimTimeMorning" value="09:00"></label>
-   <label for="onfimTimeAfternoon">Pomeriggio<input type="time" id="onfimTimeAfternoon" value="15:00"></label>
-   <div class="onfim-extra-panel">
-    <button type="button" id="extraPresetDisclosure" aria-expanded="false" aria-controls="extraPresetEditor" aria-label="Configura terza scorciatoia"><strong>Terza</strong><small id="extraPresetPreview"></small><span class="onfim-extra-triangle" aria-hidden="true">▾</span></button>
-   </div>
+ <div class="onfim-presets-settings" aria-label="Scorciatoie promemoria">
+  <div class="onfim-time-presets-settings">
+   <label for="onfimTimeMorning">Ora 1<input type="time" id="onfimTimeMorning" value="09:00"></label>
+   <label for="onfimTimeAfternoon">Ora 2<input type="time" id="onfimTimeAfternoon" value="13:00"></label>
+   <label for="extraPresetTime">Ora 3<input type="time" id="extraPresetTime" value="17:00"></label>
   </div>
-  <div class="onfim-extra-config hidden" id="extraPresetEditor">
-    <label class="label" for="extraPresetMode">Tipo
-     <select id="extraPresetMode"><option value="off">Disattivata</option><option value="daypart">Altro orario</option><option value="days">Fra N giorni</option><option value="weekday">Prossimo giorno</option></select>
-    </label>
-    <div id="extraPresetOptions" class="onfim-extra-fields hidden">
-     <label id="extraPresetDaysLabel" class="label hidden" for="extraPresetDays">Giorni <input id="extraPresetDays" type="number" min="1" max="365" value="3"></label>
-     <label id="extraPresetWeekdayLabel" class="label hidden" for="extraPresetWeekday">Giorno <select id="extraPresetWeekday"><option value="1">Lunedì</option><option value="2">Martedì</option><option value="3">Mercoledì</option><option value="4">Giovedì</option><option value="5">Venerdì</option><option value="6">Sabato</option><option value="0">Domenica</option></select></label>
-     <label class="label" for="extraPresetTime">Ora <input id="extraPresetTime" type="time" value="20:00"></label>
-    </div>
-  </div>
+  <label class="onfim-days-preset" for="extraPresetDays">Scorciatoia giorni <input type="number" id="extraPresetDays" min="1" max="365" value="7"></label>
+ </div>
 <div class="settingsrow"><div><strong>Promemoria nel calendario</strong><p>Esporta un file .ics da aggiungere al calendario.</p></div><button id="exportIcs">Esporta .ics</button></div><div class="settingsrow"><div><strong>Avvisi web</strong><p>Funziona con la PWA aperta; ad app chiusa le notifiche non sono garantite.</p></div><button id="notifyButton">Abilita</button></div>
 </div>
 <div class="panel"><h2>Privacy e sicurezza</h2><p class="notice">Il PIN limita l’accesso all’Archivio, ma non cifra le note.</p><div class="settingsrow"><div><strong>PIN dell’Archivio</strong><p>Imposta o cambia il PIN.</p></div><button id="managePin">Gestisci</button></div><div class="settingsrow"><div><strong>Blocca Archivio</strong><p>Richiede di nuovo il PIN per accedere all’Archivio.</p></div><button id="lockPin">Blocca</button></div></div>
@@ -6277,23 +6288,25 @@ body {
  </div>
  <p id="onfimLiteReminderNotice" class="small" role="note">Nella PWA i promemoria orari funzionano solo ad app aperta; quelli geografici non sono attivi. Per gli avvisi in background usa l’APK Android.</p>
  <div id="onfimReminderTimePanel" role="tabpanel" aria-labelledby="onfimReminderWhen">
- <div class="reminder-smart-picker" aria-label="Selezione rapida della scadenza">
-  <div class="reminder-day-row" role="group" aria-label="Giorno">
-   <button type="button" data-reminder-day="today">Oggi</button><button type="button" data-reminder-day="tomorrow">Domani</button><button type="button" data-reminder-day="other">Altra data</button>
-  </div>
-  <input type="date" id="reminderOtherDate" class="hidden" aria-label="Altra data">
-  <div class="onfim-reminder-shortcuts" role="group" aria-label="Scorciatoie orario">
-  <div class="reminder-period-row">
-   <button type="button" data-reminder-period="morning">Mattina <small data-period-time="morning">09:00</small></button>
-   <button type="button" data-reminder-period="afternoon">Pomeriggio <small data-period-time="afternoon">15:00</small></button>
-</div>
-  <div class="onfim-extra-choice" id="extraReminderRow"><button type="button" id="extraReminderButton" class="hidden">Terza scelta</button></div>
-  </div>
-  <p id="reminderSmartHint" class="sr-only" aria-live="polite">Scegli giorno e fascia oraria.</p>
+ <div class="onfim-dual-picker" aria-label="Scadenza del promemoria">
+  <fieldset class="onfim-choice-column" aria-label="Data"><legend>Data</legend>
+    <button type="button" data-reminder-day="today">Oggi</button>
+    <button type="button" data-reminder-day="tomorrow">Domani</button>
+    <button type="button" data-reminder-day="days" id="onfimDaysPreset">Fra 7 giorni</button>
+    <button type="button" data-reminder-day="other">Altra data</button>
+    <input type="date" id="reminderOtherDate" class="hidden" aria-label="Data personalizzata">
+  </fieldset>
+  <fieldset class="onfim-choice-column" aria-label="Ora"><legend>Ora</legend>
+    <button type="button" data-reminder-period="morning" data-period-time="morning">09:00</button>
+    <button type="button" data-reminder-period="afternoon" data-period-time="afternoon">13:00</button>
+    <button type="button" data-reminder-period="third" data-period-time="third">17:00</button>
+    <button type="button" data-reminder-period="other">Altra ora</button>
+    <input type="time" id="reminderOtherTime" class="hidden" aria-label="Ora personalizzata">
+  </fieldset>
  </div>
- <details id="dateFold" class="reminder-fold"><summary>Data e ora libera <span id="chosenReminderDate" class="fold-value">Nessuna data</span></summary>
- <label class="label" for="readReminderValue">Data e ora</label><input id="readReminderValue" type="datetime-local"/>
- </details>
+ <p id="reminderSmartHint" class="sr-only" aria-live="polite">Scegli una data e un'ora.</p>
+ <div class="onfim-picked-deadline" role="status" aria-live="polite"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18m-9 4v3m-2-2h4"/></svg><span id="chosenReminderDate">Seleziona data e ora</span></div>
+ <details id="dateFold" class="hidden"><summary>Modifica data e ora</summary><input id="readReminderValue" type="datetime-local" aria-label="Scadenza del promemoria"/></details>
  <details id="moreQuickReminders" class="hidden"><summary>Scelte aggiuntive</summary></details>
  <details id="repeatFold" class="reminder-fold"><summary>Ripeti <span id="repeatFoldLabel" class="fold-value">Mai</span></summary>
  <div class="reminder-recurrence" id="recurrenceSection">
@@ -6312,7 +6325,7 @@ body {
  <details id="geoFold" class="reminder-fold"><summary>Luogo <span class="fold-value">Ricerca o mappa</span></summary>
  <input type="checkbox" id="geoEnabled" class="hidden" tabindex="-1" aria-hidden="true">
  <div id="geoFields" hidden>
-  <label class="label" for="geoSearch">Cerca un luogo</label>
+  <label class="sr-only" for="geoSearch">Cerca un luogo</label>
   <div class="geo-search-bar"><input id="geoSearch" type="search" placeholder="Cerca un indirizzo o una località" autocomplete="off"><button id="geoSearchGo" type="button" aria-label="Cerca indirizzo" title="Cerca indirizzo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.5"/><path d="m16 16 5 5"/></svg></button></div>
   <div id="geoSearchStatus" class="small" role="status" aria-live="polite"></div>
   <div class="onfim-geo-inline-coords" aria-label="Coordinate del promemoria">
@@ -6335,7 +6348,6 @@ body {
   </div>
   <input id="geoRadius" type="hidden" value="100">
   <label class="label" for="geoTransition">Avvisami</label><select id="geoTransition"><option value="enter">Quando arrivo</option><option value="exit">Quando esco</option></select>
-  <button id="geoRemove" type="button" class="geo-remove-action">Rimuovi luogo</button>
  </div></details>
  </div>
 <div class="dialogbuttons reminder-actions"><button id="reminderRemove" type="button">Rimuovi promemoria</button><button id="reminderSave" class="primary" type="button">Salva</button></div>
@@ -7725,14 +7737,14 @@ async function importJSON(file){try{const data=JSON.parse(await file.text());if(
  }
  imported.push(cleaned);count++;}await putNotesBatch(imported);
  if(data.reminderDayparts&&typeof data.reminderDayparts==='object'){
-  for(const key of ['morning','afternoon'])if(onfimValidQuickTime(data.reminderDayparts[key]))onfimQuickTimes[key]=data.reminderDayparts[key];
+  for(const key of ['morning','afternoon','third'])if(onfimValidQuickTime(data.reminderDayparts[key]))onfimQuickTimes[key]=data.reminderDayparts[key];
   localStorage.setItem(ONFIM_QUICK_TIMES_KEY,JSON.stringify(onfimQuickTimes));
-  $('onfimTimeMorning').value=onfimQuickTimes.morning;$('onfimTimeAfternoon').value=onfimQuickTimes.afternoon;
+  $('onfimTimeMorning').value=onfimQuickTimes.morning;$('onfimTimeAfternoon').value=onfimQuickTimes.afternoon;$('extraPresetTime').value=onfimQuickTimes.third;
  }
  if(data.customReminderPreset&&typeof data.customReminderPreset==='object'){
   const c=data.customReminderPreset;
-  if(['off','daypart','days','weekday'].includes(c.mode)&&Number.isInteger(Number(c.days))&&Number(c.days)>=1&&Number(c.days)<=365&&Number(c.weekday)>=0&&Number(c.weekday)<=6&&onfimValidQuickTime(c.time)){
-   onfimExtra={mode:c.mode,days:Number(c.days),weekday:Number(c.weekday),time:c.time};
+  if(Number.isInteger(Number(c.days))&&Number(c.days)>=1&&Number(c.days)<=365){
+   onfimExtra={days:Number(c.days)};
    localStorage.setItem(ONFIM_EXTRA_PRESET_KEY,JSON.stringify(onfimExtra));onfimExtraRefreshUI();
   }
  }
@@ -8019,7 +8031,7 @@ async function openReminderFor(source,fromList=false){
   readId=root.id;
   $('readReminderValue').value=root.reminder||'';reminderOriginalValue=root.reminder||'';reminderOriginalRule=root.reminderRepeat||'none';reminderOriginalBase=root.reminderBase||root.reminder||'';
   $('reminderRepeat').value=root.reminderRepeat||'none';
-  $('repeatFold').open=!!(root.reminderRepeat&&root.reminderRepeat!=='none');$('dateFold').open=!!root.reminder;$('moreQuickReminders').open=false;onfimChosenDay='today';onfimChosenPeriod='';$('reminderOtherDate').value='';onfimSmartApplied=false;
+  $('repeatFold').open=!!(root.reminderRepeat&&root.reminderRepeat!=='none');$('dateFold').open=false;$('moreQuickReminders').open=false;onfimChosenDay='today';onfimChosenPeriod='';$('reminderOtherDate').value='';$('reminderOtherTime').value='';onfimSmartApplied=false;onfimSyncSavedReminder(root.reminder||'');
   onfimUpdateRepeatInfo();
   fillGeo(root.geofence);onfimRefreshPresets();onfimUpdateReminderSelected();onfimSetReminderMode(root.geofence?.enabled?'where':'when');
   $('reminderRemove').disabled=!root.reminder&&!root.geofence?.enabled;
@@ -8377,7 +8389,7 @@ $('geoMap').addEventListener('pointercancel',()=>{onfimGeoDown=null;});
 $('geoMapZoomIn').onclick=()=>onfimGeoCenter(onfimGeo.lat,onfimGeo.lon,onfimGeo.z+1,false);
 $('geoMapZoomOut').onclick=()=>onfimGeoCenter(onfimGeo.lat,onfimGeo.lon,onfimGeo.z-1,false);
 $('geoFold').ontoggle=()=>{if($('geoFold').open){$('geoFields').hidden=false;requestAnimationFrame(geoMapRender);}};
-$('geoRemove').onclick=()=>{$('geoEnabled').checked=false;$('geoLat').value='';$('geoLon').value='';$('geoFold').open=false;onfimUpdateRepeatInfo();toast('Luogo rimosso');};
+
 for(const id of ['geoLat','geoLon'])$(id).addEventListener('change',()=>{const lat=Number($('geoLat').value),lon=Number($('geoLon').value);if($('geoLat').value&&$('geoLon').value&&Math.abs(lat)<=90&&Math.abs(lon)<=180)onfimGeoCenter(lat,lon,onfimGeo.z,true);});
 $('geoCurrent').onclick=()=>{if(!navigator.geolocation){$('geoSearchStatus').textContent='Localizzazione non disponibile';return;}navigator.geolocation.getCurrentPosition(p=>{onfimGeoCenter(p.coords.latitude,p.coords.longitude,16);$('geoSearchStatus').textContent='Posizione rilevata';},e=>{$('geoSearchStatus').textContent='Posizione non disponibile: '+e.message;},{enableHighAccuracy:false,timeout:10000,maximumAge:120000});};
 let onfimLastGeoSearch=0;
@@ -8475,14 +8487,14 @@ async function renderLocalSnapshots(){
            // Le vecchie copie possono avere soltanto le note: in quel caso non tocchiamo le raccolte.
            if(Array.isArray(snap.smartCollections)){smartCollections=onfimCleanCollections(snap.smartCollections);localStorage.setItem(ONFIM_COLLECTIONS_KEY,JSON.stringify(smartCollections));smartActive='home';}
            if(snap.reminderDayparts&&typeof snap.reminderDayparts==='object'){
-             for(const key of ['morning','afternoon'])if(onfimValidQuickTime(snap.reminderDayparts[key]))onfimQuickTimes[key]=snap.reminderDayparts[key];
+             for(const key of ['morning','afternoon','third'])if(onfimValidQuickTime(snap.reminderDayparts[key]))onfimQuickTimes[key]=snap.reminderDayparts[key];
              localStorage.setItem(ONFIM_QUICK_TIMES_KEY,JSON.stringify(onfimQuickTimes));
-             $('onfimTimeMorning').value=onfimQuickTimes.morning;$('onfimTimeAfternoon').value=onfimQuickTimes.afternoon;
+             $('onfimTimeMorning').value=onfimQuickTimes.morning;$('onfimTimeAfternoon').value=onfimQuickTimes.afternoon;$('extraPresetTime').value=onfimQuickTimes.third;
            }
            if(snap.customReminderPreset&&typeof snap.customReminderPreset==='object'){
              const c=snap.customReminderPreset;
-             if(['off','daypart','days','weekday'].includes(c.mode)&&Number.isInteger(Number(c.days))&&Number(c.days)>=1&&Number(c.days)<=365&&Number(c.weekday)>=0&&Number(c.weekday)<=6&&onfimValidQuickTime(c.time)){
-               onfimExtra={mode:c.mode,days:Number(c.days),weekday:Number(c.weekday),time:c.time};localStorage.setItem(ONFIM_EXTRA_PRESET_KEY,JSON.stringify(onfimExtra));onfimExtraRefreshUI();
+             if(Number.isInteger(Number(c.days))&&Number(c.days)>=1&&Number(c.days)<=365){
+   onfimExtra={days:Number(c.days)};localStorage.setItem(ONFIM_EXTRA_PRESET_KEY,JSON.stringify(onfimExtra));onfimExtraRefreshUI();
              }
            }
            unlocked=false;readId=null;note=null;
@@ -8500,7 +8512,7 @@ function replaceAllNotes(notes){return new Promise((res,rej)=>{const tx=db.trans
 const ONFIM_REPEAT_DAYS={sunday:0,monday:1,tuesday:2,wednesday:3,thursday:4,friday:5,saturday:6};
 function onfimLocalDateTime(d){const p=v=>String(v).padStart(2,'0');return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;}
  const ONFIM_QUICK_TIMES_KEY='onfim-reminder-daypart-times-v1';
- const ONFIM_DEFAULT_QUICK_TIMES={morning:'09:00',afternoon:'15:00'};
+ const ONFIM_DEFAULT_QUICK_TIMES={morning:'09:00',afternoon:'13:00',third:'17:00'};
  function onfimValidQuickTime(v){return typeof v==='string'&&/^([01]\d|2[0-3]):[0-5]\d$/.test(v);}
  function onfimLoadQuickTimes(){
   try{const o=JSON.parse(localStorage.getItem(ONFIM_QUICK_TIMES_KEY)||'{}');
@@ -8510,8 +8522,9 @@ function onfimLocalDateTime(d){const p=v=>String(v).padStart(2,'0');return `${d.
  let onfimQuickTimes=onfimLoadQuickTimes();
  let onfimChosenDay='today',onfimChosenPeriod='',onfimSmartApplied=false;
  function onfimSelectedDayDate(now=new Date()){
-  const d=new Date(now);
+  const d=new Date(now);d.setHours(0,0,0,0);
   if(onfimChosenDay==='tomorrow')d.setDate(d.getDate()+1);
+  if(onfimChosenDay==='days')d.setDate(d.getDate()+onfimExtra.days);
   if(onfimChosenDay==='other'){
    const raw=$('reminderOtherDate').value;if(!raw)return null;
    const [y,m,dd]=raw.split('-').map(Number);if(!y||!m||!dd)return null;
@@ -8521,37 +8534,59 @@ function onfimLocalDateTime(d){const p=v=>String(v).padStart(2,'0');return `${d.
   return d;
  }
  function onfimPresetDate(period,now=new Date()){
-  const d=onfimSelectedDayDate(now);if(!d)return null;
-  const [h,m]=onfimQuickTimes[period].split(':').map(Number);
-  d.setHours(h,m,0,0);return d;
+  const d=onfimSelectedDayDate(now);if(!d||!period)return null;
+  const clock=period==='other'?$('reminderOtherTime').value:onfimQuickTimes[period];
+  if(!onfimValidQuickTime(clock))return null;
+  const [h,m]=clock.split(':').map(Number);d.setHours(h,m,0,0);return d;
+ }
+ function onfimSyncSavedReminder(value){
+  if(!value||!Number.isFinite(+new Date(value)))return;
+  const saved=new Date(value),now=new Date(),start=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const target=new Date(saved.getFullYear(),saved.getMonth(),saved.getDate());
+  const diff=Math.round((target-start)/86400000);
+  onfimChosenDay=diff===0?'today':diff===1?'tomorrow':diff===onfimExtra.days?'days':'other';
+  if(onfimChosenDay==='other')$('reminderOtherDate').value=value.slice(0,10);
+  const clock=value.slice(11,16);
+  onfimChosenPeriod=Object.entries(onfimQuickTimes).find(([k,v])=>v===clock)?.[0]||'other';
+  if(onfimChosenPeriod==='other')$('reminderOtherTime').value=clock;
  }
  function onfimRefreshPresets(){
   const now=new Date();
+  $('onfimDaysPreset').textContent=onfimLang==='en'?'In '+onfimExtra.days+' days':'Fra '+onfimExtra.days+' '+(onfimExtra.days===1?'giorno':'giorni');
   for(const b of document.querySelectorAll('[data-reminder-day]'))b.setAttribute('aria-pressed',String(b.dataset.reminderDay===onfimChosenDay));
   $('reminderOtherDate').classList.toggle('hidden',onfimChosenDay!=='other');
+  $('reminderOtherTime').classList.toggle('hidden',onfimChosenPeriod!=='other');
   for(const b of document.querySelectorAll('[data-reminder-period]')){
-   const period=b.dataset.reminderPeriod,d=onfimPresetDate(period,now);
-   b.disabled=!d||d<=now;
+   const period=b.dataset.reminderPeriod;
    b.setAttribute('aria-pressed',String(period===onfimChosenPeriod));
-   const display=document.querySelector('[data-period-time="'+period+'"]');if(display)display.textContent=onfimQuickTimes[period];
+   if(period!=='other')b.textContent=onfimQuickTimes[period];
+   // Non impedire un orario passato se l'utente deve prima scegliere un altro giorno.
+   b.disabled=false;
   }
-  if(onfimChosenPeriod&&document.querySelector('[data-reminder-period="'+onfimChosenPeriod+'"]')?.disabled){onfimChosenPeriod='';for(const b of document.querySelectorAll('[data-reminder-period]'))b.setAttribute('aria-pressed','false');}
-  $('reminderSmartHint').textContent=onfimChosenDay==='today'?'Le fasce orarie già trascorse non sono disponibili.':onfimChosenDay==='other'&&!$('reminderOtherDate').value?'Scegli una data.':'Scegli Mattina o Pomeriggio.';
- onfimExtraRefreshUI();}
+  $('reminderSmartHint').textContent=onfimChosenDay==='other'&&!$('reminderOtherDate').value?'Scegli la data.':'Scegli una data e un’ora.';
+ }
  function onfimApplySmartChoice(){
   if(!onfimChosenPeriod)return;
-  const date=onfimPresetDate(onfimChosenPeriod);if(!date||date<=new Date()){toast('Scegli una data e un orario futuri');onfimRefreshPresets();return;}
+  const date=onfimPresetDate(onfimChosenPeriod);
+  if(!date){$('readReminderValue').value='';onfimSmartApplied=false;onfimUpdateReminderSelected();return;}
+  if(date<=new Date()){
+   // Non accettare una scadenza passata, anche se la scorciatoia è visibile.
+   $('readReminderValue').value='';onfimSmartApplied=false;onfimUpdateReminderSelected();return;
+  }
   $('readReminderValue').value=onfimLocalDateTime(date);onfimSmartApplied=true;
-  $('dateFold').open=false;onfimUpdateRepeatInfo();onfimUpdateReminderSelected();
+  onfimUpdateRepeatInfo();onfimUpdateReminderSelected();
  }
  for(const b of document.querySelectorAll('[data-reminder-day]'))b.addEventListener('click',()=>{
-  onfimChosenDay=b.dataset.reminderDay;onfimRefreshPresets();if(!onfimChosenPeriod&&onfimSmartApplied){$('readReminderValue').value='';onfimSmartApplied=false;onfimUpdateReminderSelected();onfimUpdateRepeatInfo();}onfimApplySmartChoice();
+  onfimChosenDay=b.dataset.reminderDay;onfimRefreshPresets();onfimApplySmartChoice();
+  if(onfimChosenDay==='other'&&!$('reminderOtherDate').value)$('reminderOtherDate').focus();
  });
  $('reminderOtherDate').addEventListener('change',()=>{onfimRefreshPresets();onfimApplySmartChoice();});
  for(const b of document.querySelectorAll('[data-reminder-period]'))b.addEventListener('click',()=>{
-  if(b.disabled)return;onfimChosenPeriod=b.dataset.reminderPeriod;onfimRefreshPresets();onfimApplySmartChoice();
+  onfimChosenPeriod=b.dataset.reminderPeriod;onfimRefreshPresets();onfimApplySmartChoice();
+  if(onfimChosenPeriod==='other'&&!$('reminderOtherTime').value)$('reminderOtherTime').focus();
  });
- for(const [id,key] of [['onfimTimeMorning','morning'],['onfimTimeAfternoon','afternoon']]){
+ $('reminderOtherTime').addEventListener('change',()=>{onfimRefreshPresets();onfimApplySmartChoice();});
+ for(const [id,key] of [['onfimTimeMorning','morning'],['onfimTimeAfternoon','afternoon'],['extraPresetTime','third']]){
   const input=$(id);input.value=onfimQuickTimes[key];
   input.addEventListener('change',()=>{
    if(!onfimValidQuickTime(input.value)){input.value=onfimQuickTimes[key];toast('Orario non valido');return;}
@@ -8561,7 +8596,7 @@ function onfimLocalDateTime(d){const p=v=>String(v).padStart(2,'0');return `${d.
   });
  }
 function onfimUpdateReminderSelected(){const v=$('readReminderValue').value,d=v?new Date(v):null;
- $('chosenReminderDate').textContent=d&&Number.isFinite(+d)?d.toLocaleDateString(onfimCurrentLocale(),{day:'numeric',month:'short'})+' · '+d.toLocaleTimeString(onfimCurrentLocale(),{hour:'2-digit',minute:'2-digit'}):'Nessuna data';
+ $('chosenReminderDate').textContent=d&&Number.isFinite(+d)?d.toLocaleDateString(onfimCurrentLocale(),{weekday:'short',day:'numeric',month:'short',year:'numeric'})+' · '+d.toLocaleTimeString(onfimCurrentLocale(),{hour:'2-digit',minute:'2-digit'}):onfimLang==='en'?'Choose a future date and time':'Scegli una data e un’ora future';
 }
 function onfimNextRepeat(value,rule,after=Date.now(),anchor=value){
  if(!value||!rule||rule==='none')return '';
@@ -8723,83 +8758,39 @@ function onfimReadChecklistHost(n){
  return host;
 }
 
-// OPTIONAL SMART PRESET: computes a normal datetime-local, never a new recurrence rule.
+// Onfim 0.9: numero giorni della terza data rapida; sempre attiva.
 const ONFIM_EXTRA_PRESET_KEY='onfim-custom-preset-v1';
 function onfimExtraRead(){
  try{const v=JSON.parse(localStorage.getItem(ONFIM_EXTRA_PRESET_KEY)||'{}');
-  return {mode:['off','daypart','days','weekday'].includes(v.mode)?v.mode:'off',days:Math.max(1,Math.min(365,Number(v.days)||3)),weekday:Number.isInteger(+v.weekday)&&+v.weekday>=0&&+v.weekday<=6?+v.weekday:4,time:onfimValidQuickTime(v.time)?v.time:'20:00'};
- }catch{return {mode:'off',days:3,weekday:4,time:'20:00'};}
+  const days=Number.isInteger(Number(v.days))&&Number(v.days)>=1&&Number(v.days)<=365?Number(v.days):7;
+  return {days:!v.mode&&days===3?7:v.mode==='off'&&days===3?7:days};
+ }catch{return {days:7};}
 }
 let onfimExtra=onfimExtraRead();
-const onfimWeekdayIt=['Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato'];
-function onfimExtraTitle(){
- if(onfimLang!=='en'){return onfimExtra.mode==='daypart'?'Altro orario · '+onfimExtra.time:onfimExtra.mode==='days'?'Fra '+onfimExtra.days+' '+(onfimExtra.days===1?'giorno':'giorni')+' · '+onfimExtra.time:onfimExtra.mode==='weekday'?'Prossimo '+onfimWeekdayIt[onfimExtra.weekday].toLowerCase()+' · '+onfimExtra.time:'';}
- const t=onfimExtra.time,days=onfimExtra.days;
- return onfimExtra.mode==='daypart'?'Other time · '+t:onfimExtra.mode==='days'?'In '+days+' '+(days===1?'day':'days')+' · '+t:onfimExtra.mode==='weekday'?'Next '+['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][onfimExtra.weekday]+' · '+t:'';
-}
-function onfimExtraDate(now=new Date()){
- if(onfimExtra.mode==='off')return null;
- const d=onfimExtra.mode==='daypart'?onfimSelectedDayDate(now):new Date(now);
- if(!d)return null;
- if(onfimExtra.mode==='days')d.setDate(d.getDate()+onfimExtra.days);
- if(onfimExtra.mode==='weekday'){
-  // "Prossimo giovedì" is strictly the next occurrence (not today).
-  const delta=(onfimExtra.weekday-d.getDay()+7)%7||7;d.setDate(d.getDate()+delta);
- }
- const [h,m]=onfimExtra.time.split(':').map(Number);d.setHours(h,m,0,0);
- return d;
-}
-function onfimExtraShortTitle(){
- const cfg=onfimExtra, en=onfimLang==='en';
- if(cfg.mode==='days')return '+'+cfg.days+(en?'d':'g')+' · '+cfg.time;
- if(cfg.mode==='weekday')return (en?['Sun','Mon','Tue','Wed','Thu','Fri','Sat']:['Dom','Lun','Mar','Mer','Gio','Ven','Sab'])[cfg.weekday]+' · '+cfg.time;
- return cfg.mode==='daypart'?cfg.time:'';
-}
 function onfimExtraRefreshUI(){
- const cfg=onfimExtra;
- $('extraPresetMode').value=cfg.mode;
- $('extraPresetDays').value=cfg.days;
- $('extraPresetWeekday').value=String(cfg.weekday);
- $('extraPresetTime').value=cfg.time;
- $('extraPresetOptions').classList.toggle('hidden',cfg.mode==='off');
- $('extraPresetDaysLabel').classList.toggle('hidden',cfg.mode!=='days');
- $('extraPresetWeekdayLabel').classList.toggle('hidden',cfg.mode!=='weekday');
- $('extraPresetPreview').textContent=onfimExtraTitle();
- const b=$('extraReminderButton');b.classList.toggle('hidden',cfg.mode==='off');
- const fullLabel=onfimExtraTitle();
- b.textContent=onfimExtraShortTitle();b.title=fullLabel;b.setAttribute('aria-label',fullLabel);
- const d=onfimExtraDate();b.disabled=!d||d<=new Date();
+ $('extraPresetDays').value=onfimExtra.days;
+ if($('onfimDaysPreset'))onfimRefreshPresets();
 }
-for(const id of ['extraPresetMode','extraPresetDays','extraPresetWeekday','extraPresetTime']){
- $(id).addEventListener('change',()=>{
-  const mode=$('extraPresetMode').value,days=Number($('extraPresetDays').value),weekday=Number($('extraPresetWeekday').value),time=$('extraPresetTime').value;
-  if(!Number.isInteger(days)||days<1||days>365||!onfimValidQuickTime(time)){toast('Controlla giorni e orario');onfimExtraRefreshUI();return;}
-  onfimExtra={mode,days,weekday,time};localStorage.setItem(ONFIM_EXTRA_PRESET_KEY,JSON.stringify(onfimExtra));onfimExtraRefreshUI();
- });
-}
-$('extraReminderButton').onclick=()=>{
- const date=onfimExtraDate();if(!date||date<=new Date()){toast('La scadenza deve essere futura');return;}
- onfimChosenPeriod='';onfimSmartApplied=false;onfimRefreshPresets();
- $('readReminderValue').value=onfimLocalDateTime(date);
- onfimUpdateRepeatInfo();onfimUpdateReminderSelected();$('dateFold').open=false;
-};
-
+$('extraPresetDays').addEventListener('change',()=>{
+ const days=Number($('extraPresetDays').value);
+ if(!Number.isInteger(days)||days<1||days>365){toast('Scegli un numero di giorni fra 1 e 365');onfimExtraRefreshUI();return;}
+ onfimExtra={days};localStorage.setItem(ONFIM_EXTRA_PRESET_KEY,JSON.stringify(onfimExtra));onfimExtraRefreshUI();
+});
 onfimExtraRefreshUI();
-// Configurazione separata dalla riga compatta delle tre scorciatoie.
-$('extraPresetDisclosure').onclick=()=>{
- const editor=$('extraPresetEditor'),isExpanded=$('extraPresetDisclosure').getAttribute('aria-expanded')==='true';
- editor.classList.toggle('hidden',isExpanded);
- $('extraPresetDisclosure').setAttribute('aria-expanded',String(!isExpanded));
- const arrow=$('extraPresetDisclosure').querySelector('.onfim-extra-triangle');if(arrow)arrow.textContent=isExpanded?'▾':'▴';
-};
-
-
 
 // Source exportJSON and shareBackupFile payloads are modified in the generated source to carry customReminderPreset.
 
 // LOCALE: one UI, two string dictionaries; system-language default plus explicit override.
 
 const ONFIM_UI_EN={"Esporta JSON":"Export JSON","Importa JSON":"Import JSON","Link a file esterni":"Links to external files","Informazioni sui file esterni":"About external files","Proteggi dati":"Protect data","Crea copia ora":"Create snapshot now","Tutti":"All","Tutte":"All","Tutti gli appunti":"All notes","Testo":"Text","Inserisci testo nel disegno":"Insert text on drawing","Inserisci testo sulla fotografia":"Insert text on photo","Scrivi, poi tocca o trascina sul foglio":"Type, then tap or drag on the canvas","Scrivi, poi tocca o trascina sulla foto":"Type, then tap or drag on the photo","Scorrimento verticale fotografia":"Photo vertical scroll","Scorri fotografia":"Scroll photo","Nessun backup JSON registrato. Esporta una copia prima di cancellare i dati dell’app.":"No JSON backup recorded. Export a copy before clearing app data.","La data registra la richiesta di esportazione, non la verifica che il file sia stato effettivamente salvato.":"The date records when export was requested, not confirmation that the file was saved.","Cancellare il disegno?":"Clear drawing?","Nessun backup registrato. Non ci sono ancora appunti.":"No backups yet; there are no notes.","Nessuna copia interna: verrà creata durante l’uso, se ci sono appunti.":"No local snapshots yet. A snapshot will be created when notes are available.","Non supportato dal browser in uso.":"Not supported by this browser.","Archivio vuoto":"Archive empty","Nessun preferito":"No favorites","Nessun appunto":"No notes","Premi ＋ per crearne uno.":"Press + to create one.","Aggiungi una stella a un appunto dal menu ⋮.":"Star a note using the ⋮ menu.","Puoi spostare qui gli appunti dal menu ⋮.":"Move notes here using the ⋮ menu.","Modifica nota":"Edit note","Appunti":"Notes","Preferiti":"Favorites","Archivio":"Archive","Filtri":"Filters","Etichette":"Tags","Azzera":"Clear","Modificati di recente":"Recently edited","Creati di recente":"Recently created","Modificati meno di recente":"Least recently edited","Creati meno di recente":"Oldest first","Titolo A–Z":"Title A–Z","Titolo Z–A":"Title Z–A","Backup":"Backup","I tuoi appunti":"Your notes","Indietro":"Back","Lettura":"Reading","Fissa in alto":"Pin to top","Promemoria":"Reminders","Condividi nota":"Share note","Aggiungi a un’altra nota":"Add to another note","Sposta in Archivio":"Move to archive","Elimina appunto":"Delete note","Disegno":"Drawing","Foto":"Photos","Registrazioni vocali":"Voice recordings","Preferito":"Favorite","Modifica":"Edit","← Appunti":"← Notes","Audio":"Audio","Foglio da disegno":"Drawing canvas","Ingrandisci":"Expand","Riduci":"Reduce","Penna":"Pen","Gomma":"Eraser","Spessore":"Thickness","Cancella":"Clear","Le fotografie vengono ridimensionate. Le GIF non si possono annotare.":"Photos may be resized. Animated GIFs cannot be annotated.","● Registra":"● Record","Pausa":"Pause","■ Stop":"■ Stop","Per registrare, autorizza il microfono quando richiesto.":"Allow microphone access to make a recording.","Dettagli":"Details","Colore della nota":"Note color","Bianco":"White","Rosso":"Red","Azzurro":"Light blue","Giallo":"Yellow","Verde":"Green","Grigio":"Gray","Blu":"Blue","Nero":"Black","Scrivi #etichetta nel testo per organizzare la nota.":"Use #tags in the text to organize notes.","Nell’Archivio 🔒 (accesso con PIN)":"In the archive 🔒 (PIN protected)","↗ Collega file":"↗ Link file","Il backup non include i file esterni.":"External files are not included in backups.","Elimina":"Delete","Chiudi":"Close","Salva":"Save","Lingua / Language":"Language / Lingua","Lingua dell’interfaccia":"Interface language","Scegli una lingua oppure segui quella del dispositivo.":"Choose a language or use the device language.","Automatica":"Automatic","Italiano":"Italian","Orari utilizzati per Mattina e Pomeriggio.":"Times used for Morning and Afternoon.","Mattina":"Morning","Pomeriggio":"Afternoon","Le modifiche valgono per i nuovi promemoria.":"Changes affect new reminders.","Terza scorciatoia (facoltativa)":"Third shortcut (optional)","Tipo":"Type","Disattivata":"Disabled","Altro momento della giornata":"Another time of day","Fra un numero di giorni":"After a number of days","Prossimo giorno della settimana":"Next weekday","Fra quanti giorni":"After how many days","Giorno":"Day","Ora":"Time","Lunedì":"Monday","Martedì":"Tuesday","Mercoledì":"Wednesday","Giovedì":"Thursday","Venerdì":"Friday","Sabato":"Saturday","Domenica":"Sunday","Promemoria nel calendario":"Calendar reminders","Esporta eventi .ics per importarli nel calendario Android, che potrà notificarti anche con Onfim chiusa.":"Export .ics events to your calendar so you can be notified even when Onfim is closed.","Esporta .ics":"Export .ics","Avvisi web":"Web notifications","Avvisa mentre onfim Lite è aperta. Con la PWA chiusa non sono garantiti.":"Notifications while Onfim is open. Background alerts are not guaranteed.","Abilita":"Enable","Dati e backup":"Data & backups","Esporta":"Export","Importa":"Import","Condividi":"Share","Copie interne":"Local snapshots","Controllo copie interne…":"Checking local snapshots…","Archiviazione persistente":"Persistent storage","Controllo permesso…":"Checking permission…","Privacy e sicurezza":"Privacy & security","Il PIN non cifra gli appunti. I backup JSON includono anche quelli riservati in chiaro. Conservali con attenzione.":"The PIN does not encrypt notes. JSON backups contain private notes as readable text.","PIN dell’Archivio":"Archive PIN","Serve per aprire e visualizzare l’Archivio.":"Required to open the private archive.","Gestisci":"Manage","Blocca Archivio":"Lock archive","Chiude la sessione dell’Archivio e richiede nuovamente il PIN.":"Locks the archive until the PIN is entered again.","Blocca":"Lock","Cestino":"Trash","Appunti eliminati":"Deleted notes","Il Cestino conserva gli appunti finché non decidi di eliminarli definitivamente.":"Deleted notes remain in Trash until permanently removed.","Apri":"Open","Informazioni · browser":"About · browser","Questa versione funziona offline e condivide gli appunti tramite file JSON con onfim Android, ma alcune funzioni richiedono l'APK:":"This browser version works offline and exchanges notes with the Android app through JSON, but some features require the APK:","Promemoria:":"Reminders:","nessuna sveglia affidabile con la PWA chiusa; puoi esportarli nel Calendario.":"background alerts are not guaranteed; you can export events to your calendar.","Geofence:":"Location alerts:","non disponibili in background; quelli importati restano nel backup senza attivarsi.":"not active in the background; imported location settings remain in backups.","Backup su Drive:":"Drive backup:","manuale tramite Condividi; non automatico in background.":"manual through Share, not automatic in the background.","Widget e notifiche native Android:":"Widget and native Android notifications:","non disponibili.":"unavailable.","Estrazione testo dalle fotografie (OCR):":"Extract text from photos (OCR):","disponibile nell’APK completa. La Lite non incorpora un motore OCR.":"Available in the full Android app. Lite does not include an OCR engine.","← Impostazioni":"← Settings","Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.":"Deleted notes remain here until emptied. Reminders in Trash do not trigger alerts.","Svuota":"Empty","Colore della scheda":"Card color","Il colore si applica alla scheda.":"The color applies to the card.","Quando":"When","Oggi":"Today","Domani":"Tomorrow","Altra data":"Another date","Scegli giorno e fascia oraria.":"Choose a day and time of day.","Data e ora libera":"Custom date & time","Nessuna data":"No date","Data e ora":"Date & time","Scelte aggiuntive":"Additional choices","Ripeti":"Repeat","Mai":"Never","Ogni giorno della data scelta":"Repeat on the selected weekday","Frequenza":"Frequency","Mai (una volta)":"Never (once)","Ogni giorno":"Every day","Ogni settimana":"Every week","Ogni mese":"Every month","Ogni lunedì–venerdì":"Every weekday","Ogni lunedì":"Every Monday","Ogni martedì":"Every Tuesday","Ogni mercoledì":"Every Wednesday","Ogni giovedì":"Every Thursday","Ogni venerdì":"Every Friday","Ogni sabato":"Every Saturday","Ogni domenica":"Every Sunday","Questa nota contiene un geofence importato dall’APK. Rimane nel backup, ma non è attivo nella PWA.":"This note has an imported location alert. It stays in backups but is inactive in the browser.","Luogo":"Location","Ricerca o mappa":"Search or map","Seleziona un punto sulla mappa oppure cercalo per indirizzo.":"Select a map point or search for an address.","Gli avvisi geografici non sono attivi nella PWA.":"Location alerts are not active in the browser.","Cerca indirizzo o località":"Search for address or place","Ricerca online, solo quando premi Cerca.":"Online search starts only when you press Search.","Scegli sulla mappa":"Choose on map","⛶ Ingrandisci":"⛶ Expand","Il mirino al centro indica il punto scelto. Tocca o trascina la mappa.":"The crosshair marks the selected point. Tap or drag the map.","· La mappa necessita di Internet":"· Maps require internet","Usa posizione attuale":"Use current location","Latitudine":"Latitude","Longitudine":"Longitude","Avvisami":"Notify me","Quando arrivo":"When arriving","Quando esco":"When leaving","Rimuovi luogo":"Remove location","Rimuovi":"Remove","Scegli il luogo":"Choose location","✓ Fine":"✓ Done","Condividi con onfim":"Share with Onfim","Il contenuto verrà aperto in un nuovo appunto: potrai completarlo e salvarlo normalmente.":"The shared content will open as a new note.","Annulla":"Cancel","Crea appunto":"Create note","Scegli dove aggiungere il contenuto. L’originale sarà spostato nel Cestino, senza trasferire promemoria o impostazioni.":"Choose where to add the content. The original is moved to Trash; reminders and settings are not transferred.","Raccolte dinamiche":"Smart collections","Le note restano nell’archivio. La raccolta mostra automaticamente gli appunti che contengono almeno uno degli hashtag scelti.":"Notes stay in the archive. Collections show notes matching any selected tag.","Nuova raccolta":"New collection","Hashtag (separati da spazio o virgola)":"Hashtags (space or comma separated)","Nascondi queste note dalla Home":"Hide these notes from Home","Crea raccolta":"Create collection","PIN Archivio":"Archive PIN","PIN di 4 cifre":"4-digit PIN","Annota fotografia":"Annotate photo","Salva segni":"Save annotations","I segni vengono conservati separatamente dalla foto originale.":"Annotations are saved separately from the original photo.","Colore della penna":"Pen color","I sette colori di onfim":"Seven Onfim colors","Oppure regola un colore personalizzato":"Or choose a custom color","Tonalità":"Hue","Saturazione":"Saturation","Luminosità":"Lightness","Codice colore":"Color code","Usa colore":"Use color","Checklist":"Checklist","＋ Aggiungi voce":"＋ Add item","Voce della lista":"List item","Voce completata":"Item completed","Rimuovi voce":"Remove item","Cerca negli appunti":"Search notes","Titolo (facoltativo)":"Title (optional)","Scrivi qui…":"Write here…","Nuovo appunto":"New note","Grassetto":"Bold","Corsivo":"Italic","Sottolineato":"Underline","Barrato":"Strikethrough","Elenco puntato":"Bulleted list","Evidenziatore viola":"Purple highlighter","Annulla modifica testo":"Undo text","Ripristina modifica testo":"Redo text","Testo nero":"Black text","Testo rosso":"Red text","Testo blu":"Blue text","Testo verde":"Green text","Inserisci data e ora nel testo":"Insert date and time","Personalizza colore":"Custom color","Galleria":"Gallery","Fotocamera":"Camera","Ingrandisci foglio":"Expand canvas","Senza titolo":"Untitled","Scegli una data.":"Choose a date.","Scegli Mattina o Pomeriggio.":"Choose Morning or Afternoon.","Le fasce orarie già trascorse non sono disponibili.":"Past times today are unavailable.","Scegli data e ora future":"Choose a future date and time","Promemoria salvato":"Reminder saved","Promemoria rimosso":"Reminder removed","Appunto vuoto":"Empty note","Rimuovi dai Preferiti":"Remove from Favorites","Aggiungi ai Preferiti":"Add to Favorites","Rimuovi da Fissati":"Unpin","Fissato in alto":"Pinned","Sposta nel Cestino":"Move to Trash","Rimosso dai Preferiti":"Removed from Favorites","Aggiunto ai Preferiti":"Added to Favorites","Appunto non trovato":"Note not found","Voce non trovata":"Item not found","Limite di 300 voci raggiunto":"300-item limit reached","Non è stato possibile aggiornare la lista":"Could not update checklist","Altro orario":"Other time","Terza scelta":"Third choice","Fra":"In","giorni":"days","giorno":"day","Prossimo":"Next"};
+Object.assign(ONFIM_UI_EN,{
+ "Ora 1":"Time 1","Ora 2":"Time 2","Ora 3":"Time 3",
+ "Scorciatoia giorni":"Day shortcut","Data":"Date","Altra ora":"Custom time",
+ "Data personalizzata":"Custom date","Ora personalizzata":"Custom time",
+ "Scadenza del promemoria":"Reminder due date","Seleziona data e ora":"Choose date and time",
+ "Scegli una data e un'ora.":"Choose a date and a time.",
+ "Modifica data e ora":"Edit date and time"
+});
 function onfimCurrentLocale(){return onfimLang==='en'?'en-GB':'it-IT';}
 function onfimLanguageCode(){
  const configured=localStorage.getItem(ONFIM_LANG_KEY)||'auto';
@@ -8915,7 +8906,7 @@ function onfimTranslateTree(root){
  }
 }
 
-function onfimApplyLanguage(){onfimLang=onfimLanguageCode();document.documentElement.lang=onfimLang;onfimExtraRefreshUI();onfimTranslateTree(document.body);}
+function onfimApplyLanguage(){onfimLang=onfimLanguageCode();document.documentElement.lang=onfimLang;onfimExtraRefreshUI();onfimTranslateTree(document.body);onfimUpdateReminderSelected();}
 $('onfimLanguage').value=localStorage.getItem(ONFIM_LANG_KEY)||'auto';
 $('onfimLanguage').onchange=()=>{localStorage.setItem(ONFIM_LANG_KEY,$('onfimLanguage').value);onfimApplyLanguage();};
 let onfimLocalizePending=false;
