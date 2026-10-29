@@ -1,9 +1,0 @@
-Verifiche suggerite:
-1. Apri Impostazioni: verifica ordine e Cestino, Informazioni, terza scorciatoia, IT/EN.
-2. Controlla banner backup PWA, se una copia è necessaria.
-3. Apri Promemoria > Quando con terza scorciatoia attiva e disattiva, su schermo stretto e largo.
-4. Apri Promemoria > Dove: ricerca, Usa posizione attuale, mappa, Ingrandisci, coordinate manuali, Rimuovi luogo e Rimuovi promemoria. Il raggio resta 100 m fisso.
-5. Seleziona Raccolta, chiudi la barra e verifica filtro persistente e pulsante Raccolte crema; premi Home per tornare alla panoramica.
-6. Controlla che backup JSON, note, media, checklist, Cestino e promemoria preesistenti rimangano invariati.
-
-Test tecnici effettuati: sintassi JavaScript, layout CSS a 360/390/720 px con HTML reale, controlli basilari su interazioni Raccolte e tab Promemoria con storage simulato, traduzione inglese delle nuove etichette. Non è un test funzionale completo su telefono.
