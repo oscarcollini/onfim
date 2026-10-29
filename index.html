@@ -6,8 +6,8 @@
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#f3f5f8" name="theme-color"/>
 <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACFElEQVR4nO2aXY5CIQyF62R24iZcjYtzNa5hErcxr84TTkP4azmlEDiJ0aiXth8UCvde3r8/b9pYX94OeOsA8HbAWweAtwPeOgC8HfDW9gC+PYxeb3fVda/nA+wJ0QVVCWqDkgoNoQvAqJ6M7SAhqFMgFbzFEM3ZRtlSTYI8+Nfz8XlZi9tApVzXKjCqx3M2ERCWXAaREJYEQISDsCwAIgwEl0JIq1qQmtVhiRFgOdkuMwJqELQpsMQIsNQ0IyDXg9a1himA2rBsCa7UBgIOFEBPwB5VJREYgGUQyA0Ql+kkeL3dm9bulnZa/yuVGQBUj4V2wgsNwQQAD77H6RxEJAQ4gOB0fGZQcjr1Gw+epxK6IIICiHO1p+f555ZRoE03MYBcT8Tfp3JWAiRci0ilkqAjIHY6/q1Fo06Xg0xXgVbFcCzO/nKCFEKStVyiEgjXU+EWpXJWmgap66esA3hg0iWw1BbR/xLI25nixkhJfDLUOh1PphbBExnVAUTUFTwvgPj71JshtNNxe1aCb4clZWtLe9aCzwESp0cXPSltfyi6PQBRCljOxiV7QRZ2XY/FczvK2v+QcgXgdS+AayiAGQKONXwEeAab0tBVYLbgiQAPSc2iIXeHZ+zB+OaL1Efoc4IaByRt16SxrX5SdKY06IEOe1Y4p9HVo1TmAGbX9puhA8DbAW8dAN4OeOsA8HbAW9sD+AOCbitmjicJ7wAAAABJRU5ErkJggg==" rel="icon" type="image/png"/>
-<title>onfim Lite 0.8.30 · Appunti</title>
-<link rel="manifest" href="./manifest.webmanifest?release=0.8.30"/>
+<title>onfim Lite 0.9.0 · Appunti</title>
+<link rel="manifest" href="./manifest.webmanifest?release=0.9.0"/>
 <meta name="theme-color" content="#222E38"/>
 <link rel="apple-touch-icon" href="./apple-touch-icon.png"/>
 <link rel="icon" type="image/png" href="./favicon.png"/>
@@ -5998,6 +5998,54 @@ body {
 #geoExpandedDialog .geo-map-header{margin-bottom:6px}
 #geoExpandedDialog .geo-map-attribution{font-size:.62rem}
 .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+
+/* 0.9.0 bozza 2: controlli scorciatoie veramente compatti */
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0 7px;align-items:stretch
+}
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts>label,
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts>.onfim-extra-panel{
+ min-width:0;width:auto;max-width:none;flex:none;padding:7px 6px;border-radius:10px
+}
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts>label{gap:5px;font-size:.76rem}
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts>label input[type=time]{min-width:0;width:100%;font-size:.78rem;padding:6px 2px;min-height:38px}
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts .onfim-extra-panel{display:flex;justify-content:stretch;padding:0}
+#extraPresetDisclosure{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:100%;min-width:0;min-height:68px;padding:5px 3px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+#extraPresetDisclosure strong{font-size:.78rem;line-height:1.2}
+#extraPresetDisclosure small{font-size:.66rem;line-height:1.15;color:var(--muted);overflow:hidden;max-width:100%;text-overflow:ellipsis;white-space:nowrap}
+#extraPresetDisclosure .onfim-extra-triangle{font-size:.85rem;line-height:1;color:var(--muted)}
+#settingsView #presetSettingsPanel .onfim-extra-config{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,112px);gap:6px;align-items:end;background:#f8fafb;border:1px solid var(--line);border-radius:11px;padding:9px;margin:0 0 12px}
+#settingsView #presetSettingsPanel .onfim-extra-config:has(#extraPresetDaysLabel:not(.hidden)),
+#settingsView #presetSettingsPanel .onfim-extra-config:has(#extraPresetWeekdayLabel:not(.hidden)){grid-template-columns:minmax(0,1fr) minmax(0,56px) minmax(0,112px)}
+#settingsView #presetSettingsPanel .onfim-extra-config>.label{font-size:.72rem;margin:0;min-width:0}
+#settingsView #presetSettingsPanel .onfim-extra-config select,
+#settingsView #presetSettingsPanel .onfim-extra-config input{width:100%;min-width:0;max-width:100%;box-sizing:border-box;margin-top:4px;min-height:36px;font-size:.78rem;padding-left:5px;padding-right:3px}
+#settingsView #presetSettingsPanel .onfim-extra-config .onfim-extra-fields:not(.hidden){display:contents}
+#settingsView #presetSettingsPanel .onfim-extra-config .onfim-extra-fields{margin:0;min-width:0}
+#settingsView #presetSettingsPanel .onfim-extra-config .onfim-extra-fields>.label{font-size:.70rem;min-width:0;line-height:1.2}
+
+#reminderDialog .onfim-reminder-shortcuts{display:flex;flex-wrap:nowrap;gap:5px;min-width:0}
+#reminderDialog .onfim-reminder-shortcuts .reminder-period-row button,
+#reminderDialog .onfim-reminder-shortcuts #extraReminderRow{flex:1 1 0;min-width:0;width:0;margin:0}
+#reminderDialog .onfim-reminder-shortcuts button{box-sizing:border-box;min-width:0;font-size:.74rem;line-height:1.16;padding:6px 3px;min-height:45px}
+#reminderDialog .onfim-reminder-shortcuts button small{font-size:.66rem;white-space:nowrap}
+#reminderDialog .onfim-reminder-shortcuts #extraReminderButton{font-size:.73rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:6px 2px;min-height:45px}
+#reminderDialog #geoFields .onfim-geo-inline-coords{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 42px;gap:7px;margin:7px 0 8px;align-items:stretch}
+#reminderDialog #geoFields .onfim-geo-inline-coords label{display:block;min-width:0;margin:0}
+#reminderDialog #geoFields .onfim-geo-inline-coords input{width:100%;height:42px;min-width:0;box-sizing:border-box;padding:6px 7px;margin:0;font-size:.82rem}
+#reminderDialog #geoFields .onfim-geo-inline-coords #geoCurrent{width:42px;min-width:42px;min-height:42px;padding:7px;display:grid;place-items:center;margin:0;color:#315766}
+#reminderDialog #geoFields .onfim-geo-inline-coords #geoCurrent svg{display:block}
+#listView #onfimCollectionsToggle [aria-hidden="true"]{display:inline-block;font-size:.75rem;line-height:1;vertical-align:middle}
+@media (max-width:355px){
+ #settingsView #presetSettingsPanel .onfim-settings-shortcuts{gap:4px}
+ #settingsView #presetSettingsPanel .onfim-settings-shortcuts>label{font-size:.70rem;padding:6px 3px}
+ #settingsView #presetSettingsPanel .onfim-settings-shortcuts>label input[type=time]{font-size:.73rem}
+ #settingsView #presetSettingsPanel .onfim-extra-config{grid-template-columns:minmax(0,1fr) minmax(0,80px)}
+ #settingsView #presetSettingsPanel .onfim-extra-config:has(#extraPresetDaysLabel:not(.hidden)),
+ #settingsView #presetSettingsPanel .onfim-extra-config:has(#extraPresetWeekdayLabel:not(.hidden)){grid-template-columns:minmax(0,1fr) minmax(0,80px)}
+ #settingsView #presetSettingsPanel .onfim-extra-config .onfim-extra-fields:not(.hidden){display:grid;grid-column:1 / -1;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ #reminderDialog .onfim-reminder-shortcuts button{font-size:.68rem}
+}
 </style>
 <!--  -->
 <meta name="theme-color" content="#222E38"/>
@@ -6022,7 +6070,7 @@ body {
 <button aria-pressed="false" class="filter-pill" data-filter-choice="reserved" type="button" aria-label="Archivio" title="Archivio"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></button>
 <select aria-label="Tipo appunti" class="hidden" id="filter"><option selected="" value="ordinary">Appunti</option>
 <option value="reserved">Archivio</option><option value="favorites">Preferiti</option></select>
-<button class="onfim-collection-picker-label" id="onfimCollectionsToggle" type="button" aria-expanded="false" aria-controls="smartCollectionsNav">Raccolte <span aria-hidden="true">⌄</span></button><select id="onfimCollectionPicker" class="hidden" aria-hidden="true" tabindex="-1"><option value="">Raccolte</option></select><div id="searchPanel" class="home-search"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24" width="18"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><input aria-label="Cerca negli appunti" class="search" id="search" placeholder="Cerca…" type="search"/><button aria-label="Azzera ricerca" class="search-close hidden" id="searchClose" title="Azzera ricerca" type="button">×</button></div>
+<button class="onfim-collection-picker-label" id="onfimCollectionsToggle" type="button" aria-expanded="false" aria-controls="smartCollectionsNav">Raccolte <span aria-hidden="true">▾</span></button><select id="onfimCollectionPicker" class="hidden" aria-hidden="true" tabindex="-1"><option value="">Raccolte</option></select><div id="searchPanel" class="home-search"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24" width="18"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><input aria-label="Cerca negli appunti" class="search" id="search" placeholder="Cerca…" type="search"/><button aria-label="Azzera ricerca" class="search-close hidden" id="searchClose" title="Azzera ricerca" type="button">×</button></div>
 </div>
 </div>
 <nav class="smart-collections-nav" id="smartCollectionsNav" aria-label="Raccolte dinamiche" hidden>
@@ -6176,17 +6224,22 @@ body {
  <h2>Promemoria</h2>
 
  <div class="reminder-time-grid onfim-settings-shortcuts">
-  <label for="onfimTimeMorning">Mattina<input type="time" id="onfimTimeMorning" value="09:00"></label>
-  <label for="onfimTimeAfternoon">Pomeriggio<input type="time" id="onfimTimeAfternoon" value="15:00"></label>
- <div class="onfim-extra-panel">
- <div class="onfim-checklist-head"><strong>Terza scorciatoia</strong><small id="extraPresetPreview"></small></div>
- <label class="label" for="extraPresetMode">Tipo</label>
- <select id="extraPresetMode"><option value="off">Disattivata</option><option value="daypart">Altro momento della giornata</option><option value="days">Fra un numero di giorni</option><option value="weekday">Prossimo giorno della settimana</option></select>
- <div id="extraPresetOptions" class="onfim-extra-fields hidden">
-  <label id="extraPresetDaysLabel" class="label hidden" for="extraPresetDays">Fra quanti giorni <input id="extraPresetDays" type="number" min="1" max="365" value="3"></label>
-  <label id="extraPresetWeekdayLabel" class="label hidden" for="extraPresetWeekday">Giorno <select id="extraPresetWeekday"><option value="1">Lunedì</option><option value="2">Martedì</option><option value="3">Mercoledì</option><option value="4">Giovedì</option><option value="5">Venerdì</option><option value="6">Sabato</option><option value="0">Domenica</option></select></label>
-  <label class="label" for="extraPresetTime">Ora <input id="extraPresetTime" type="time" value="20:00"></label>
- </div></div></div>
+   <label for="onfimTimeMorning">Mattina<input type="time" id="onfimTimeMorning" value="09:00"></label>
+   <label for="onfimTimeAfternoon">Pomeriggio<input type="time" id="onfimTimeAfternoon" value="15:00"></label>
+   <div class="onfim-extra-panel">
+    <button type="button" id="extraPresetDisclosure" aria-expanded="false" aria-controls="extraPresetEditor" aria-label="Configura terza scorciatoia"><strong>Terza</strong><small id="extraPresetPreview"></small><span class="onfim-extra-triangle" aria-hidden="true">▾</span></button>
+   </div>
+  </div>
+  <div class="onfim-extra-config hidden" id="extraPresetEditor">
+    <label class="label" for="extraPresetMode">Tipo
+     <select id="extraPresetMode"><option value="off">Disattivata</option><option value="daypart">Altro orario</option><option value="days">Fra N giorni</option><option value="weekday">Prossimo giorno</option></select>
+    </label>
+    <div id="extraPresetOptions" class="onfim-extra-fields hidden">
+     <label id="extraPresetDaysLabel" class="label hidden" for="extraPresetDays">Giorni <input id="extraPresetDays" type="number" min="1" max="365" value="3"></label>
+     <label id="extraPresetWeekdayLabel" class="label hidden" for="extraPresetWeekday">Giorno <select id="extraPresetWeekday"><option value="1">Lunedì</option><option value="2">Martedì</option><option value="3">Mercoledì</option><option value="4">Giovedì</option><option value="5">Venerdì</option><option value="6">Sabato</option><option value="0">Domenica</option></select></label>
+     <label class="label" for="extraPresetTime">Ora <input id="extraPresetTime" type="time" value="20:00"></label>
+    </div>
+  </div>
 <div class="settingsrow"><div><strong>Promemoria nel calendario</strong><p>Esporta un file .ics da aggiungere al calendario.</p></div><button id="exportIcs">Esporta .ics</button></div><div class="settingsrow"><div><strong>Avvisi web</strong><p>Funziona con la PWA aperta; ad app chiusa le notifiche non sono garantite.</p></div><button id="notifyButton">Abilita</button></div>
 </div>
 <div class="panel"><h2>Privacy e sicurezza</h2><p class="notice">Il PIN limita l’accesso all’Archivio, ma non cifra le note.</p><div class="settingsrow"><div><strong>PIN dell’Archivio</strong><p>Imposta o cambia il PIN.</p></div><button id="managePin">Gestisci</button></div><div class="settingsrow"><div><strong>Blocca Archivio</strong><p>Richiede di nuovo il PIN per accedere all’Archivio.</p></div><button id="lockPin">Blocca</button></div></div>
@@ -6199,7 +6252,7 @@ body {
 <p class="hint">Onfim funziona offline; PWA e APK possono scambiarsi dati tramite JSON.</p>
 <details><summary>Limiti della versione Lite</summary><ul class="lite-limit-list"><li>Promemoria orari: con la PWA chiusa le notifiche non sono affidabili.</li><li>Promemoria di luogo: nessun rilevamento in background.</li><li>Backup cloud: tramite Condividi, non automatici in background.</li><li>Widget e notifiche native Android non disponibili.</li><li>OCR: disponibile nell’APK, non nella PWA Lite.</li></ul></details>
 <details><summary>Su Onfim</summary><p>Onfim è stata sviluppata con l’assistenza di ChatGPT. Non integra ChatGPT né servizi di IA generativa.</p></details></div>
-<footer class="onfim-colophon">onfim v0.8.30 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
+<footer class="onfim-colophon">onfim v0.9.0 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
 <section class="view" id="trashView" aria-label="Cestino">
   <div class="controls"><button id="backTrash" type="button">← Impostazioni</button></div>
   <div class="panel trash-panel"><div class="trash-head"><div><h2>Appunti eliminati</h2><p class="hint">Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.</p></div><button id="emptyTrash" class="danger" type="button">Svuota</button></div><p id="trashCount" class="small" role="status"></p><div id="trashList" class="trash-list"></div></div>
@@ -6262,8 +6315,12 @@ body {
   <label class="label" for="geoSearch">Cerca un luogo</label>
   <div class="geo-search-bar"><input id="geoSearch" type="search" placeholder="Cerca un indirizzo o una località" autocomplete="off"><button id="geoSearchGo" type="button" aria-label="Cerca indirizzo" title="Cerca indirizzo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.5"/><path d="m16 16 5 5"/></svg></button></div>
   <div id="geoSearchStatus" class="small" role="status" aria-live="polite"></div>
+  <div class="onfim-geo-inline-coords" aria-label="Coordinate del promemoria">
+   <label for="geoLat"><span class="sr-only">Latitudine</span><input id="geoLat" type="number" step="any" min="-90" max="90" placeholder="Latitudine" aria-label="Latitudine" inputmode="decimal"></label>
+   <label for="geoLon"><span class="sr-only">Longitudine</span><input id="geoLon" type="number" step="any" min="-180" max="180" placeholder="Longitudine" aria-label="Longitudine" inputmode="decimal"></label>
+   <button id="geoCurrent" type="button" title="Usa posizione attuale" aria-label="Usa posizione attuale"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></svg></button>
+  </div>
   <div id="geoSearchResults" class="geo-search-results" role="list"></div>
-  <div class="geo-current-row"><button id="geoCurrent" type="button">Usa posizione attuale</button></div>
   <div id="geoMapHome">
    <div class="geo-map-frame" id="geoMapFrame">
     <div class="geo-map-header"><strong>Scegli sulla mappa</strong><button id="geoMapExpand" type="button" aria-label="Ingrandisci mappa">⛶ Ingrandisci</button></div>
@@ -6276,8 +6333,7 @@ body {
     <div class="geo-map-attribution">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> · La mappa necessita di Internet</div>
    </div>
   </div>
-  <details class="onfim-coordinate-fold"><summary>Coordinate manuali</summary><div class="geo-coordinates"><label>Latitudine<input id="geoLat" type="number" step="any" min="-90" max="90" placeholder=""></label><label>Longitudine<input id="geoLon" type="number" step="any" min="-180" max="180" placeholder=""></label></div></details>
-  <span class="onfim-fixed-radius">Raggio: 100 m (fisso)</span><input id="geoRadius" type="hidden" value="100">
+  <input id="geoRadius" type="hidden" value="100">
   <label class="label" for="geoTransition">Avvisami</label><select id="geoTransition"><option value="enter">Quando arrivo</option><option value="exit">Quando esco</option></select>
   <button id="geoRemove" type="button" class="geo-remove-action">Rimuovi luogo</button>
  </div></details>
@@ -6646,7 +6702,7 @@ function previewAllowed(n){return !n.reserved||unlocked;}
   const collectionActive=$('filter').value==='ordinary'&&smartActive.startsWith('c:');
   toggle.dataset.collectionActive=String(collectionActive);
   const expanded=toggle.getAttribute('aria-expanded')==='true';
-  const arrow=toggle.querySelector('[aria-hidden="true"]');if(arrow)arrow.textContent=expanded?'⌃':'⌄';
+  const arrow=toggle.querySelector('[aria-hidden="true"]');if(arrow)arrow.textContent=expanded?'▴':'▾';
  }
  async function onfimRenderCollections(){
   const host=$('smartCollectionTabs'),oldScroll=host.scrollLeft;host.replaceChildren();
@@ -8693,6 +8749,12 @@ function onfimExtraDate(now=new Date()){
  const [h,m]=onfimExtra.time.split(':').map(Number);d.setHours(h,m,0,0);
  return d;
 }
+function onfimExtraShortTitle(){
+ const cfg=onfimExtra, en=onfimLang==='en';
+ if(cfg.mode==='days')return '+'+cfg.days+(en?'d':'g')+' · '+cfg.time;
+ if(cfg.mode==='weekday')return (en?['Sun','Mon','Tue','Wed','Thu','Fri','Sat']:['Dom','Lun','Mar','Mer','Gio','Ven','Sab'])[cfg.weekday]+' · '+cfg.time;
+ return cfg.mode==='daypart'?cfg.time:'';
+}
 function onfimExtraRefreshUI(){
  const cfg=onfimExtra;
  $('extraPresetMode').value=cfg.mode;
@@ -8704,7 +8766,9 @@ function onfimExtraRefreshUI(){
  $('extraPresetWeekdayLabel').classList.toggle('hidden',cfg.mode!=='weekday');
  $('extraPresetPreview').textContent=onfimExtraTitle();
  const b=$('extraReminderButton');b.classList.toggle('hidden',cfg.mode==='off');
- b.textContent=onfimExtraTitle();const d=onfimExtraDate();b.disabled=!d||d<=new Date();
+ const fullLabel=onfimExtraTitle();
+ b.textContent=onfimExtraShortTitle();b.title=fullLabel;b.setAttribute('aria-label',fullLabel);
+ const d=onfimExtraDate();b.disabled=!d||d<=new Date();
 }
 for(const id of ['extraPresetMode','extraPresetDays','extraPresetWeekday','extraPresetTime']){
  $(id).addEventListener('change',()=>{
@@ -8721,6 +8785,13 @@ $('extraReminderButton').onclick=()=>{
 };
 
 onfimExtraRefreshUI();
+// Configurazione separata dalla riga compatta delle tre scorciatoie.
+$('extraPresetDisclosure').onclick=()=>{
+ const editor=$('extraPresetEditor'),isExpanded=$('extraPresetDisclosure').getAttribute('aria-expanded')==='true';
+ editor.classList.toggle('hidden',isExpanded);
+ $('extraPresetDisclosure').setAttribute('aria-expanded',String(!isExpanded));
+ const arrow=$('extraPresetDisclosure').querySelector('.onfim-extra-triangle');if(arrow)arrow.textContent=isExpanded?'▾':'▴';
+};
 
 
 
@@ -8758,6 +8829,11 @@ Object.assign(ONFIM_UI_EN,{
   'Backup di oltre 7 giorni':'Backup over 7 days old',
   'Lingua':'Language',
   'Terza scorciatoia':'Third shortcut',
+  'Terza':'Third',
+  'Configura terza scorciatoia':'Configure third shortcut',
+  'Fra N giorni':'In N days',
+  'Prossimo giorno':'Next weekday',
+  'Giorni':'Days',
   'Appunti eliminati':'Deleted notes',
   'Gli appunti si salvano automaticamente.':'Notes are saved automatically.',
   'Riduce alcune cancellazioni automatiche, ma non protegge se elimini i dati del browser.':'Reduces automatic data removal, but not deletion of browser data.',
