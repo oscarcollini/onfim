@@ -501,16 +501,39 @@ dialog p {
   }
 }
 .backup-reminder {
-  margin: 12px 0 4px;
+  margin: 8px 0 2px;
+  padding: 6px 9px 6px 11px;
+  min-height: 44px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  gap: 9px;
+}
+.backup-reminder-icon {
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  color: #42606F;
+}
+.backup-reminder-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: .83rem;
+  font-weight: 600;
+  line-height: 1.25;
 }
 .backup-reminder button {
-  flex-shrink: 0;
+  flex: 0 0 auto;
   background: #fff;
   color: var(--ink);
+  border: 1px solid #D5E1E7;
+  border-radius: 9px;
+  padding: 6px 12px;
+  min-height: 32px;
+  font-size: .82rem;
+  line-height: 1.2;
 }
 .backup-status {
   border: 1px solid var(--line);
@@ -5579,7 +5602,8 @@ body.onfim-drawing #drawTab .drawframe canvas {
   font-size: .81rem;
   white-space: nowrap;
 }
-#listView #onfimCollectionsToggle[aria-expanded="true"] {
+#listView #onfimCollectionsToggle[aria-expanded="true"],
+#listView #onfimCollectionsToggle[data-collection-active="true"] {
   background: #FFF6DA;
   border-color: #222E38;
   color: #222E38;
@@ -5884,6 +5908,96 @@ body {
 .cards.list-layout .card .preview {
   line-height: 1.35;
 }
+
+/* ONFIM 0.9.0 (bozza Impostazioni): solo area Settings */
+#settingsView .settingsrow{padding-top:10px;padding-bottom:10px}
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts{
+  display:flex;flex-wrap:wrap;align-items:stretch;gap:9px;margin:9px 0 12px;
+}
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts>label,
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts>.onfim-extra-panel{
+  flex:1 1 136px;min-width:132px;max-width:100%;box-sizing:border-box;
+  background:#F8FAFB;border:1px solid var(--line);border-radius:12px;padding:10px;margin:0;
+}
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts>label{
+  display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:7px;
+  font-size:.83rem;font-weight:550;line-height:1.3;
+}
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts>label input[type=time]{
+  width:100%;min-width:0;min-height:39px;box-sizing:border-box;margin:0;
+}
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts .onfim-extra-panel{
+  display:flex;flex-direction:column;gap:6px;
+}
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts .onfim-checklist-head{
+  display:flex;flex-wrap:wrap;gap:3px 7px;margin:0;
+}
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts .onfim-checklist-head strong{
+  font-size:.83rem;line-height:1.35;
+}
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts .onfim-checklist-head small{
+  font-size:.73rem;line-height:1.25;
+}
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts .onfim-extra-panel>.label{
+  font-size:.73rem;margin:0;
+}
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts .onfim-extra-panel select{
+  width:100%;max-width:100%;min-width:0;box-sizing:border-box;
+}
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts .onfim-extra-fields{
+  display:flex;flex-direction:column;gap:7px;margin-top:3px;
+}
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts .onfim-extra-fields label{
+  flex:none;min-width:0;max-width:100%;
+}
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts .onfim-extra-fields input,
+#settingsView #presetSettingsPanel .onfim-settings-shortcuts .onfim-extra-fields select{
+  max-width:100%;box-sizing:border-box;
+}
+#settingsView .onfim-trash-row{gap:12px}
+#settingsView .onfim-trash-symbol{
+  display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;
+  border:1px solid var(--line);border-radius:12px;background:#F7F9FA;color:#596B76;
+}
+#settingsView .onfim-trash-symbol svg{display:block;width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#settingsView .onfim-trash-copy{flex:1;min-width:0}
+#settingsView .onfim-about-panel .onfim-history-storage{font-size:.81rem;color:var(--muted);line-height:1.5;margin:7px 0 12px}
+#settingsView .onfim-about-panel details{border-top:1px solid var(--line);padding:9px 0}
+#settingsView .onfim-about-panel details summary{cursor:pointer;font-weight:600;font-size:.88rem}
+#settingsView .onfim-about-panel details p,#settingsView .onfim-about-panel details li{font-size:.82rem;line-height:1.5}
+#settingsView .onfim-about-panel .lite-limit-list{margin:8px 0 0;padding-left:20px}
+
+
+/* 0.9.0 draft · Reminder layout and collections — visual only */
+@media (min-width:640px){#reminderDialog.onfim-compact-dialog{max-width:560px;width:min(560px,calc(100vw - 32px))}}
+#reminderDialog .onfim-reminder-shortcuts{display:flex;gap:7px;flex-wrap:wrap;margin:2px 0 4px;align-items:stretch}
+#reminderDialog .onfim-reminder-shortcuts .reminder-period-row{display:contents}
+#reminderDialog .onfim-reminder-shortcuts .reminder-period-row button,
+#reminderDialog .onfim-reminder-shortcuts #extraReminderRow{flex:1 1 126px;min-width:0;margin:0;}
+#reminderDialog .onfim-reminder-shortcuts #extraReminderButton{min-height:39px;height:100%;width:100%;padding:7px 8px;font-size:.85rem;margin:0}
+#reminderDialog .reminder-smart-picker{gap:7px;margin:4px 0 8px}
+#reminderDialog .onfim-reminder-shortcuts button{min-height:39px}
+#reminderDialog .reminder-fold{margin-top:6px;margin-bottom:5px}
+#reminderDialog #onfimLiteReminderNotice{padding:8px 10px;margin:0 0 10px;font-size:.80rem;line-height:1.35}
+#reminderDialog #geoFold .geo-map{height:168px}
+#reminderDialog #geoFold .geo-map-frame{padding:10px;margin:9px 0 4px}
+#reminderDialog #geoFold .geo-map-header{margin-bottom:7px}
+#reminderDialog #geoSearchStatus:empty{display:none}
+#reminderDialog #geoFields .geo-current-row{margin:7px 0}
+#reminderDialog #geoFields #geoCurrent{min-height:36px;padding:7px 10px;width:100%}
+#reminderDialog #geoFields .geo-search-bar{margin:0}
+#reminderDialog #geoFields .onfim-coordinate-fold{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:8px 0 8px;padding:0}
+#reminderDialog #geoFields .onfim-coordinate-fold summary{cursor:pointer;padding:9px 2px;font-size:.83rem;font-weight:600;color:#365364}
+#reminderDialog #geoFields .onfim-coordinate-fold .geo-coordinates{padding:3px 0 9px}
+#reminderDialog #geoFields .onfim-fixed-radius{display:block;color:var(--muted);font-size:.78rem;margin:5px 0 10px}
+#reminderDialog #geoFields .geo-remove-action{min-height:36px;margin-top:10px;padding:7px 12px}
+#reminderDialog #geoFields .geo-map-attribution{font-size:.62rem}
+#reminderDialog .reminder-actions #reminderRemove{white-space:nowrap;font-size:.80rem}
+#geoExpandedDialog .geo-expanded-hint{font-size:.75rem;margin:5px 2px 0}
+#geoExpandedDialog .geo-map-frame{padding:8px}
+#geoExpandedDialog .geo-map-header{margin-bottom:6px}
+#geoExpandedDialog .geo-map-attribution{font-size:.62rem}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 </style>
 <!--  -->
 <meta name="theme-color" content="#222E38"/>
@@ -5916,7 +6030,7 @@ body {
  <button type="button" id="manageCollections" class="smart-manage" title="Gestisci raccolte" aria-label="Gestisci raccolte">＋</button>
 </nav>
 <div id="onfimActiveTagBar" class="onfim-active-tags hidden" role="region" aria-label="Etichette selezionate"><span>Filtri:</span><div id="onfimActiveTagItems" class="onfim-active-tag-items"></div><button id="onfimActiveTagsClear" type="button">Azzera</button></div>
-<div class="notice backup-reminder hidden" id="backupReminder" role="status"><span id="backupReminderText"></span><button id="backupReminderAction" type="button">Backup</button></div>
+<div class="notice backup-reminder hidden" id="backupReminder" role="status"><svg class="backup-reminder-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M9 3v6h7V4M9 21v-7h6v7"/></svg><span class="backup-reminder-label" id="backupReminderText"></span><button id="backupReminderAction" type="button">Backup</button></div>
 <div class="sectionline onfim-notes-heading"><h2 id="homeHeading">I tuoi appunti</h2>
 <div class="home-view-actions"><span class="small" id="noteCount"></span>
 <div class="note-view-switch" role="group" aria-label="Ordinamento e visualizzazione degli appunti">
@@ -6034,57 +6148,58 @@ body {
 <div class="file-link-editor" id="fileLinkPanel"><div class="file-link-intro"><span>Link a file esterni</span><button id="pickLinkedFile" type="button" title="Collega un file senza copiarlo in onfim">↗ Collega file</button><details class="file-link-help"><summary aria-label="Informazioni sui file esterni" title="Informazioni sui file esterni">ⓘ</summary><p class="file-link-subtitle" id="linkFileExplanation">Il backup non include i file esterni.</p></details></div><div class="linked-file-list" id="linkedFileEditorList"></div></div>
 <div class="hidden" aria-hidden="true"><button class="danger hidden" id="deleteNote" type="button">Elimina</button></div>
 </section>
-<section class="view" id="settingsView"><div class="controls"><button id="backSettings">← Appunti</button></div><div class="panel onfim-language-panel"><h2>Lingua / Language</h2>
-<div class="settingsrow"><div><strong>Lingua dell’interfaccia</strong><p>Scegli una lingua oppure segui quella del dispositivo.</p></div>
-<select id="onfimLanguage" aria-label="Lingua"><option value="auto">Automatica</option><option value="it">Italiano</option><option value="en">English</option></select></div></div>
-<div class="panel settings-reminder-times" id="presetSettingsPanel">
- <h2>Promemoria</h2>
- <p class="hint">Orari utilizzati per Mattina e Pomeriggio.</p>
- <div class="reminder-time-grid">
-  <label for="onfimTimeMorning">Mattina<input type="time" id="onfimTimeMorning" value="09:00"></label>
-  <label for="onfimTimeAfternoon">Pomeriggio<input type="time" id="onfimTimeAfternoon" value="15:00"></label>
- </div>
- <p class="reminder-explainer">Le modifiche valgono per i nuovi promemoria.</p><div class="onfim-extra-panel">
- <div class="onfim-checklist-head"><strong>Terza scorciatoia (facoltativa)</strong><small id="extraPresetPreview"></small></div>
- <label class="label" for="extraPresetMode">Tipo</label>
- <select id="extraPresetMode"><option value="off">Disattivata</option><option value="daypart">Altro momento della giornata</option><option value="days">Fra un numero di giorni</option><option value="weekday">Prossimo giorno della settimana</option></select>
- <div id="extraPresetOptions" class="onfim-extra-fields hidden">
-  <label id="extraPresetDaysLabel" class="label hidden" for="extraPresetDays">Fra quanti giorni <input id="extraPresetDays" type="number" min="1" max="365" value="3"></label>
-  <label id="extraPresetWeekdayLabel" class="label hidden" for="extraPresetWeekday">Giorno <select id="extraPresetWeekday"><option value="1">Lunedì</option><option value="2">Martedì</option><option value="3">Mercoledì</option><option value="4">Giovedì</option><option value="5">Venerdì</option><option value="6">Sabato</option><option value="0">Domenica</option></select></label>
-  <label class="label" for="extraPresetTime">Ora <input id="extraPresetTime" type="time" value="20:00"></label>
- </div></div>
-<div class="settingsrow"><div><strong>Promemoria nel calendario</strong><p>Esporta eventi .ics per importarli nel calendario Android, che potrà notificarti anche con Onfim chiusa.</p></div><button id="exportIcs">Esporta .ics</button></div><div class="settingsrow"><div><strong>Avvisi web</strong><p>Avvisa mentre onfim Lite è aperta. Con la PWA chiusa non sono garantiti.</p></div><button id="notifyButton">Abilita</button></div>
-</div>
-<div class="panel onfim-storage-panel"><h2>Dati e backup</h2>
-<div class="onfim-data-block"><h3>Salvataggio</h3><p id="onfimHistoryStorage" class="onfim-history-storage" role="status">Spazio cronologia: calcolo alla apertura delle Impostazioni…</p>
-<p class="hint">Gli appunti sono salvati automaticamente nel browser.</p>
+<section class="view" id="settingsView"><div class="controls"><button id="backSettings">← Appunti</button></div><div class="panel onfim-storage-panel"><h2>Dati e backup</h2>
+<div class="onfim-data-block"><h3>Salvataggio</h3>
+<p class="hint">Gli appunti si salvano automaticamente.</p>
 <div class="settingsrow"><div><strong>Conservazione persistente</strong><p id="storageStatus">Controllo permesso…</p></div><button id="persistButton" type="button">Richiedi</button></div>
-<p class="hint">Riduce il rischio di eliminazione automatica, ma non protegge dalla cancellazione dei dati del browser.</p>
+<p class="hint">Riduce alcune cancellazioni automatiche, ma non protegge se elimini i dati del browser.</p>
 </div>
 <div class="onfim-data-block lite-backup-panel"><h3>Copie nel browser</h3>
-<p class="hint">Fino a 5 copie automatiche, al massimo ogni 3 ore se ci sono modifiche.</p>
+<p class="hint">Fino a 5 copie automatiche, ogni 3 ore se ci sono modifiche.</p>
 <div class="backup-status" id="backupStatus" role="status">Stato copie: controllo…</div>
 <details><summary>Gestisci copie interne</summary>
 <div class="backup-local-list" id="localBackupList" role="status">Controllo copie interne…</div>
 <div class="onfim-backup-actions"><button id="makeSnapshot" type="button">Crea copia ora</button></div>
 <p class="small" id="snapshotStatus" role="status"></p></details>
-<p class="onfim-backup-warning">Le copie interne si perdono cancellando i dati del browser: esporta il JSON fuori dalla PWA.</p>
+<p class="onfim-backup-warning">Le copie nel browser si perdono cancellando i suoi dati. Conserva un JSON anche fuori dalla PWA.</p>
 </div>
 <div class="onfim-data-block"><h3>Importa ed esporta JSON</h3>
 <div class="settingsrow"><div><strong>Copia su file</strong></div><button id="exportJson">Scarica JSON</button></div>
 <div class="settingsrow"><div><strong>Invia copia</strong></div><button id="shareBackup" type="button">Condividi JSON</button></div>
 <div class="settingsrow"><div><strong>Da un file</strong></div><button id="importJson">Importa JSON</button><input accept=".json,application/json" class="hidden" id="jsonInput" type="file"/></div>
 <p class="small" id="settingsStatus" role="status"></p>
-<p class="onfim-backup-warning">I file JSON includono anche l'Archivio, senza cifratura, e non contengono i file esterni collegati.</p>
+<p class="onfim-backup-warning">Il JSON non cifra le note riservate e non comprende i file esterni collegati.</p>
 </div>
 </div>
-<div class="panel"><h2>Privacy e sicurezza</h2><p class="notice">Il PIN non cifra gli appunti. I backup JSON includono anche quelli riservati in chiaro. Conservali con attenzione.</p><div class="settingsrow"><div><strong>PIN dell’Archivio</strong><p>Serve per aprire e visualizzare l’Archivio.</p></div><button id="managePin">Gestisci</button></div><div class="settingsrow"><div><strong>Blocca Archivio</strong><p>Chiude la sessione dell’Archivio e richiede nuovamente il PIN.</p></div><button id="lockPin">Blocca</button></div></div>
+<div class="panel onfim-trash-panel"><h2>Cestino</h2><div class="settingsrow onfim-trash-row"><span class="onfim-trash-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15M10 10v7M14 10v7"/></svg></span><div class="onfim-trash-copy"><strong>Appunti eliminati</strong><p id="trashSettingsCount" role="status">0 appunti nel Cestino</p></div><button id="openTrash" type="button">Apri</button></div></div>
+<div class="panel settings-reminder-times" id="presetSettingsPanel">
+ <h2>Promemoria</h2>
 
-<div class="panel"><h2>Cestino</h2><div class="settingsrow"><div><strong>Appunti eliminati</strong><p id="trashSettingsCount">Il Cestino conserva gli appunti finché non decidi di eliminarli definitivamente.</p></div><button id="openTrash" type="button">Apri</button></div></div>
+ <div class="reminder-time-grid onfim-settings-shortcuts">
+  <label for="onfimTimeMorning">Mattina<input type="time" id="onfimTimeMorning" value="09:00"></label>
+  <label for="onfimTimeAfternoon">Pomeriggio<input type="time" id="onfimTimeAfternoon" value="15:00"></label>
+ <div class="onfim-extra-panel">
+ <div class="onfim-checklist-head"><strong>Terza scorciatoia</strong><small id="extraPresetPreview"></small></div>
+ <label class="label" for="extraPresetMode">Tipo</label>
+ <select id="extraPresetMode"><option value="off">Disattivata</option><option value="daypart">Altro momento della giornata</option><option value="days">Fra un numero di giorni</option><option value="weekday">Prossimo giorno della settimana</option></select>
+ <div id="extraPresetOptions" class="onfim-extra-fields hidden">
+  <label id="extraPresetDaysLabel" class="label hidden" for="extraPresetDays">Fra quanti giorni <input id="extraPresetDays" type="number" min="1" max="365" value="3"></label>
+  <label id="extraPresetWeekdayLabel" class="label hidden" for="extraPresetWeekday">Giorno <select id="extraPresetWeekday"><option value="1">Lunedì</option><option value="2">Martedì</option><option value="3">Mercoledì</option><option value="4">Giovedì</option><option value="5">Venerdì</option><option value="6">Sabato</option><option value="0">Domenica</option></select></label>
+  <label class="label" for="extraPresetTime">Ora <input id="extraPresetTime" type="time" value="20:00"></label>
+ </div></div></div>
+<div class="settingsrow"><div><strong>Promemoria nel calendario</strong><p>Esporta un file .ics da aggiungere al calendario.</p></div><button id="exportIcs">Esporta .ics</button></div><div class="settingsrow"><div><strong>Avvisi web</strong><p>Funziona con la PWA aperta; ad app chiusa le notifiche non sono garantite.</p></div><button id="notifyButton">Abilita</button></div>
+</div>
+<div class="panel"><h2>Privacy e sicurezza</h2><p class="notice">Il PIN limita l’accesso all’Archivio, ma non cifra le note.</p><div class="settingsrow"><div><strong>PIN dell’Archivio</strong><p>Imposta o cambia il PIN.</p></div><button id="managePin">Gestisci</button></div><div class="settingsrow"><div><strong>Blocca Archivio</strong><p>Richiede di nuovo il PIN per accedere all’Archivio.</p></div><button id="lockPin">Blocca</button></div></div>
 
-<div class="panel"><h2>Informazioni · browser</h2><p>Questa versione funziona offline e condivide gli appunti tramite file JSON con onfim Android, ma alcune funzioni richiedono l'APK:</p><ul class="lite-limit-list"><li><strong>Promemoria:</strong> nessuna sveglia affidabile con la PWA chiusa; puoi esportarli nel Calendario.</li><li><strong>Geofence:</strong> non disponibili in background; quelli importati restano nel backup senza attivarsi.</li><li><strong>Backup su Drive:</strong> manuale tramite Condividi; non automatico in background.</li><li><strong>Widget e notifiche native Android:</strong> non disponibili.</li><li><strong>Estrazione testo dalle fotografie (OCR):</strong> disponibile nell’APK completa. La Lite non incorpora un motore OCR.</li></ul></div>
- <div class="panel onfim-about-panel"><h2>Informazioni su Onfim</h2><p class="hint">Onfim è stata sviluppata con l'assistenza di ChatGPT, ma non integra ChatGPT né servizi di intelligenza artificiale generativa. Nell'APK il riconoscimento del testo nelle immagini (OCR) avviene localmente sul dispositivo; la PWA Lite non include l'OCR.</p></div>
- <footer class="onfim-colophon">onfim v0.8.30 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
+<div class="panel onfim-language-panel"><h2>Lingua</h2>
+<div class="settingsrow"><div><strong>Lingua dell’interfaccia</strong></div>
+<select id="onfimLanguage" aria-label="Lingua"><option value="auto">Automatica</option><option value="it">Italiano</option><option value="en">English</option></select></div></div>
+<div class="panel onfim-about-panel"><h2>Informazioni</h2>
+<p id="onfimHistoryStorage" class="onfim-history-storage" role="status">Spazio cronologia: calcolo alla apertura delle Impostazioni…</p>
+<p class="hint">Onfim funziona offline; PWA e APK possono scambiarsi dati tramite JSON.</p>
+<details><summary>Limiti della versione Lite</summary><ul class="lite-limit-list"><li>Promemoria orari: con la PWA chiusa le notifiche non sono affidabili.</li><li>Promemoria di luogo: nessun rilevamento in background.</li><li>Backup cloud: tramite Condividi, non automatici in background.</li><li>Widget e notifiche native Android non disponibili.</li><li>OCR: disponibile nell’APK, non nella PWA Lite.</li></ul></details>
+<details><summary>Su Onfim</summary><p>Onfim è stata sviluppata con l’assistenza di ChatGPT. Non integra ChatGPT né servizi di IA generativa.</p></details></div>
+<footer class="onfim-colophon">onfim v0.8.30 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
 <section class="view" id="trashView" aria-label="Cestino">
   <div class="controls"><button id="backTrash" type="button">← Impostazioni</button></div>
   <div class="panel trash-panel"><div class="trash-head"><div><h2>Appunti eliminati</h2><p class="hint">Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.</p></div><button id="emptyTrash" class="danger" type="button">Svuota</button></div><p id="trashCount" class="small" role="status"></p><div id="trashList" class="trash-list"></div></div>
@@ -6107,19 +6222,21 @@ body {
   <button type="button" id="onfimReminderWhen" role="tab" aria-controls="onfimReminderTimePanel" aria-selected="true">Quando</button>
   <button type="button" id="onfimReminderWhere" role="tab" aria-controls="onfimReminderGeoPanel" aria-selected="false">Dove</button>
  </div>
- <p id="onfimLiteReminderNotice" class="small" role="note">Nella PWA i promemoria orari possono funzionare solo mentre l’app è aperta; quelli geografici non sono attivi. Per ricevere notifiche anche ad app chiusa utilizza l’APK Android, con le autorizzazioni necessarie.</p>
+ <p id="onfimLiteReminderNotice" class="small" role="note">Nella PWA i promemoria orari funzionano solo ad app aperta; quelli geografici non sono attivi. Per gli avvisi in background usa l’APK Android.</p>
  <div id="onfimReminderTimePanel" role="tabpanel" aria-labelledby="onfimReminderWhen">
  <div class="reminder-smart-picker" aria-label="Selezione rapida della scadenza">
   <div class="reminder-day-row" role="group" aria-label="Giorno">
    <button type="button" data-reminder-day="today">Oggi</button><button type="button" data-reminder-day="tomorrow">Domani</button><button type="button" data-reminder-day="other">Altra data</button>
   </div>
   <input type="date" id="reminderOtherDate" class="hidden" aria-label="Altra data">
-  <div class="reminder-period-row" role="group" aria-label="Fascia oraria">
+  <div class="onfim-reminder-shortcuts" role="group" aria-label="Scorciatoie orario">
+  <div class="reminder-period-row">
    <button type="button" data-reminder-period="morning">Mattina <small data-period-time="morning">09:00</small></button>
    <button type="button" data-reminder-period="afternoon">Pomeriggio <small data-period-time="afternoon">15:00</small></button>
 </div>
   <div class="onfim-extra-choice" id="extraReminderRow"><button type="button" id="extraReminderButton" class="hidden">Terza scelta</button></div>
-  <p id="reminderSmartHint" class="small">Scegli giorno e fascia oraria.</p>
+  </div>
+  <p id="reminderSmartHint" class="sr-only" aria-live="polite">Scegli giorno e fascia oraria.</p>
  </div>
  <details id="dateFold" class="reminder-fold"><summary>Data e ora libera <span id="chosenReminderDate" class="fold-value">Nessuna data</span></summary>
  <label class="label" for="readReminderValue">Data e ora</label><input id="readReminderValue" type="datetime-local"/>
@@ -6138,16 +6255,15 @@ body {
 
  </div>
  <div id="onfimReminderGeoPanel" role="tabpanel" aria-labelledby="onfimReminderWhere" hidden>
- <p class="small">Scegli un luogo. Il promemoria geografico sostituisce quello orario.</p>
- <p class="small lite-geo-note" id="liteGeoNotice" hidden>Questa nota contiene un geofence importato dall’APK. Rimane nel backup, ma non è attivo nella PWA.</p>
+ <p class="sr-only" id="liteGeoNotice" hidden>Luogo importato: non attivo nella PWA.</p>
  <details id="geoFold" class="reminder-fold"><summary>Luogo <span class="fold-value">Ricerca o mappa</span></summary>
- <p class="reminder-explainer">Seleziona un punto sulla mappa oppure cercalo per indirizzo. <strong>Gli avvisi geografici non sono attivi nella PWA.</strong></p>
  <input type="checkbox" id="geoEnabled" class="hidden" tabindex="-1" aria-hidden="true">
  <div id="geoFields" hidden>
-  <label class="label" for="geoSearch">Cerca indirizzo o località</label>
+  <label class="label" for="geoSearch">Cerca un luogo</label>
   <div class="geo-search-bar"><input id="geoSearch" type="search" placeholder="Cerca un indirizzo o una località" autocomplete="off"><button id="geoSearchGo" type="button" aria-label="Cerca indirizzo" title="Cerca indirizzo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.5"/><path d="m16 16 5 5"/></svg></button></div>
-  <div id="geoSearchStatus" class="small" role="status">Ricerca online, solo quando premi Cerca.</div>
+  <div id="geoSearchStatus" class="small" role="status" aria-live="polite"></div>
   <div id="geoSearchResults" class="geo-search-results" role="list"></div>
+  <div class="geo-current-row"><button id="geoCurrent" type="button">Usa posizione attuale</button></div>
   <div id="geoMapHome">
    <div class="geo-map-frame" id="geoMapFrame">
     <div class="geo-map-header"><strong>Scegli sulla mappa</strong><button id="geoMapExpand" type="button" aria-label="Ingrandisci mappa">⛶ Ingrandisci</button></div>
@@ -6160,16 +6276,15 @@ body {
     <div class="geo-map-attribution">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> · La mappa necessita di Internet</div>
    </div>
   </div>
-  <div class="geo-current-row"><button id="geoCurrent" type="button">Usa posizione attuale</button></div>
-  <div class="geo-coordinates"><label>Latitudine<input id="geoLat" type="number" step="any" min="-90" max="90" placeholder=""></label><label>Longitudine<input id="geoLon" type="number" step="any" min="-180" max="180" placeholder=""></label></div>
-  <label class="label" for="geoRadius">Raggio: 100 metri (fisso)</label><input id="geoRadius" type="hidden" value="100">
+  <details class="onfim-coordinate-fold"><summary>Coordinate manuali</summary><div class="geo-coordinates"><label>Latitudine<input id="geoLat" type="number" step="any" min="-90" max="90" placeholder=""></label><label>Longitudine<input id="geoLon" type="number" step="any" min="-180" max="180" placeholder=""></label></div></details>
+  <span class="onfim-fixed-radius">Raggio: 100 m (fisso)</span><input id="geoRadius" type="hidden" value="100">
   <label class="label" for="geoTransition">Avvisami</label><select id="geoTransition"><option value="enter">Quando arrivo</option><option value="exit">Quando esco</option></select>
   <button id="geoRemove" type="button" class="geo-remove-action">Rimuovi luogo</button>
  </div></details>
  </div>
-<div class="dialogbuttons reminder-actions"><button id="reminderRemove" type="button">Rimuovi</button><button id="reminderSave" class="primary" type="button">Salva</button></div>
+<div class="dialogbuttons reminder-actions"><button id="reminderRemove" type="button">Rimuovi promemoria</button><button id="reminderSave" class="primary" type="button">Salva</button></div>
 </dialog>
-<dialog id="geoExpandedDialog" aria-label="Mappa ingrandita"><div class="geo-expanded-top"><strong>Scegli il luogo</strong><button type="button" id="geoMapClose">✓ Fine</button></div><div id="geoExpandedDock"></div><p class="small">Trascina per spostare il mirino oppure tocca un punto. Conferma il punto nella finestra di selezione.</p></dialog>
+<dialog id="geoExpandedDialog" aria-label="Mappa ingrandita"><div class="geo-expanded-top"><strong>Scegli il luogo</strong><button type="button" id="geoMapClose">✓ Fine</button></div><div id="geoExpandedDock"></div><p class="small geo-expanded-hint">Sposta la mappa o tocca il punto desiderato.</p></dialog>
 <dialog id="onfimPointDialog" aria-labelledby="onfimPointHeading" class="onfim-point-dialog">
  <h2 id="onfimPointHeading">Modifica posizione</h2>
  <p class="small">Sposta il mirino sulla mappa, modifica le coordinate o usa il GPS. Nessun promemoria viene attivato.</p>
@@ -6526,6 +6641,13 @@ function previewAllowed(n){return !n.reserved||unlocked;}
  function onfimSaveCollections(){localStorage.setItem(ONFIM_COLLECTIONS_KEY,JSON.stringify(smartCollections));recordDataChange();void onfimRenderCollections().then(renderNotes);}
  function onfimCollectionMatches(group,c){const tags=onfimTagsOfGroup(group);return c.tags.some(t=>tags.has(t));}
  function onfimCollectionHidden(group){return smartCollections.some(c=>c.hideHome&&onfimCollectionMatches(group,c));}
+ function onfimSyncCollectionsToggle(){
+  const toggle=$('onfimCollectionsToggle');if(!toggle)return;
+  const collectionActive=$('filter').value==='ordinary'&&smartActive.startsWith('c:');
+  toggle.dataset.collectionActive=String(collectionActive);
+  const expanded=toggle.getAttribute('aria-expanded')==='true';
+  const arrow=toggle.querySelector('[aria-hidden="true"]');if(arrow)arrow.textContent=expanded?'⌃':'⌄';
+ }
  async function onfimRenderCollections(){
   const host=$('smartCollectionTabs'),oldScroll=host.scrollLeft;host.replaceChildren();
   const all=await allNotes(),ordinary=new Map();
@@ -6534,6 +6656,7 @@ function previewAllowed(n){return !n.reserved||unlocked;}
   }
   const choices=[...smartCollections.map(c=>({id:'c:'+c.id,name:c.name}))];
   if(!choices.some(c=>c.id===smartActive))smartActive='home';
+  onfimSyncCollectionsToggle();
   for(const c of choices){
     const b=document.createElement('button');b.type='button';b.textContent=c.name;
     if(c.id.startsWith('c:')){const def=smartCollections.find(x=>x.id===c.id.slice(2));
@@ -6542,7 +6665,7 @@ function previewAllowed(n){return !n.reserved||unlocked;}
     }
     b.dataset.kind=c.id.startsWith('c:')?'collection':'main';
     b.setAttribute('aria-pressed',String(c.id===smartActive));
-    b.onclick=()=>{onfimActiveTags.clear();onfimTagReturnView=null;smartActive=c.id;$('filter').value='ordinary';syncFilterPills();
+    b.onclick=()=>{onfimActiveTags.clear();onfimTagReturnView=null;smartActive=c.id;$('filter').value='ordinary';syncFilterPills();onfimSyncCollectionsToggle();
       void showTags().then(onfimRenderCollections).then(renderNotes);};
     host.append(b);
   }
@@ -6629,6 +6752,7 @@ function onfimMatchesSearch(parts,query){
   return terms.every(term=>haystack.includes(term));
 }
 async function renderNotes(){
+ onfimSyncCollectionsToggle();
   const all=await allNotes(),q=$('search').value.toLocaleLowerCase().trim(),fil=$('filter').value,order=$('sortOrder').value;
   await onfimRenderCollections();onfimRenderActiveTags();
   $('homeHeading').textContent=fil==='reserved'?'Archivio':fil==='favorites'?'Preferiti':smartActive==='all'?'Tutti gli appunti':smartActive==='home'?'I tuoi appunti':('Raccolta '+(smartCollections.find(x=>'c:'+x.id===smartActive)?.name||''));
@@ -7461,13 +7585,13 @@ function backupState(notes){
   const marker=Number(localStorage.getItem(LAST_CHANGE_KEY))||0;
   const latestChange=Math.max(marker,...notes.map(n=>Number(n.updated)||Number(n.created)||0),0);
   const format=t=>new Date(t).toLocaleString(onfimCurrentLocale(),{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
-  if(!lastExport)return {needs:notes.length>0,text:notes.length?'Nessun backup JSON registrato. Esporta una copia prima di cancellare i dati dell’app.':'Nessun backup registrato. Non ci sono ancora appunti.'};
+  if(!lastExport)return {needs:notes.length>0,short:'Backup da creare',text:notes.length?'Nessun backup JSON registrato. Esporta una copia prima di cancellare i dati dell’app.':'Nessun backup registrato. Non ci sono ancora appunti.'};
   const ageDays=(Date.now()-lastExport)/86400000;
-  if(latestChange>lastExport)return {needs:true,text:'Ultima esportazione avviata: '+format(lastExport)+'. Alcuni appunti sono stati modificati dopo: crea un nuovo backup.'};
-  if(ageDays>=BACKUP_MAX_AGE_DAYS)return {needs:true,text:'Ultima esportazione avviata: '+format(lastExport)+' (oltre 7 giorni fa). È consigliato un nuovo backup.'};
-  return {needs:false,text:'Ultima esportazione avviata: '+format(lastExport)+'. Non risultano modifiche successive.'};
+  if(latestChange>lastExport)return {needs:true,short:'Backup da aggiornare',text:'Ultima esportazione avviata: '+format(lastExport)+'. Alcuni appunti sono stati modificati dopo: crea un nuovo backup.'};
+  if(ageDays>=BACKUP_MAX_AGE_DAYS)return {needs:true,short:'Backup di oltre 7 giorni',text:'Ultima esportazione avviata: '+format(lastExport)+' (oltre 7 giorni fa). È consigliato un nuovo backup.'};
+  return {needs:false,short:'',text:'Ultima esportazione avviata: '+format(lastExport)+'. Non risultano modifiche successive.'};
 }
-async function refreshBackupStatus(){if(!db)return;try{const notes=await allNotes(),state=backupState(notes);$('backupStatus').textContent=state.text+' La data registra la richiesta di esportazione, non la verifica che il file sia stato effettivamente salvato.';$('backupReminderText').textContent=state.text;$('backupReminder').classList.toggle('hidden',!state.needs);}catch(e){console.warn('Onfim: stato backup',e);}}
+async function refreshBackupStatus(){if(!db)return;try{const notes=await allNotes(),state=backupState(notes);$('backupStatus').textContent=state.text+' La data registra la richiesta di esportazione, non la verifica che il file sia stato effettivamente salvato.';$('backupReminderText').textContent=state.short;$('backupReminder').classList.toggle('hidden',!state.needs);}catch(e){console.warn('Onfim: stato backup',e);}}
 async function checkPersistentStorage(){const el=$('storageStatus'),b=$('persistButton');if(!navigator.storage?.persisted){el.textContent='Non supportato dal browser in uso.';b.disabled=true;return;}try{const active=await navigator.storage.persisted();el.textContent=active?'Archiviazione persistente attiva.':'Dati non ancora protetti dalla cancellazione automatica per spazio insufficiente.';b.disabled=active;b.textContent=active?'Attiva':'Proteggi dati';}catch(e){el.textContent='Stato non disponibile: '+e.message;}}
 async function requestPersistentStorage(){const el=$('storageStatus');if(!navigator.storage?.persist){el.textContent='Richiesta non supportata dal browser.';return;}try{const granted=await navigator.storage.persist();el.textContent=granted?'Archiviazione persistente concessa.':'Il browser non ha concesso l’archiviazione persistente; gli appunti continuano a essere salvati normalmente.';await checkPersistentStorage();}catch(e){el.textContent='Impossibile richiedere archiviazione persistente: '+e.message;}}
 async function reload(){await showTags();await renderNotes();await refreshBackupStatus();await refreshTrashCount();}
@@ -7955,11 +8079,11 @@ function closeCardMenus(){document.querySelectorAll('.card.menu-open').forEach(c
 document.addEventListener('click',e=>{if(!e.target.closest('.card-menu'))closeCardMenus();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCardMenus();});
 function lockArchive(){unlocked=false;if($('filter').value==='reserved')$('filter').value='ordinary';$('readBody').replaceChildren();$('readPhotos').replaceChildren();$('readAudios').replaceChildren();syncFilterPills();}
-function syncFilterPills(){for(const b of document.querySelectorAll('[data-filter-choice]')){const on=b.dataset.filterChoice===$('filter').value;b.classList.toggle('selected',on);b.setAttribute('aria-pressed',String(on));}}
+function syncFilterPills(){for(const b of document.querySelectorAll('[data-filter-choice]')){const on=b.dataset.filterChoice===$('filter').value&&(b.dataset.filterChoice!=='ordinary'||smartActive==='home');b.classList.toggle('selected',on);b.setAttribute('aria-pressed',String(on));}onfimSyncCollectionsToggle();}
 for(const b of document.querySelectorAll('[data-filter-choice]'))b.onclick=async()=>{if(b.dataset.filterChoice==='reserved'&&!await checkPin())return;if(b.dataset.filterChoice==='ordinary'&&$('filter').value==='reserved')unlocked=false;onfimActiveTags.clear();onfimTagReturnView=null;if(b.dataset.filterChoice==='ordinary')smartActive='home';$('filter').value=b.dataset.filterChoice;syncFilterPills();await showTags();renderNotes();};
 $('onfimCollectionsToggle').onclick=()=>{
  const nav=$('smartCollectionsNav'),open=nav.hidden;nav.hidden=!open;
- $('onfimCollectionsToggle').setAttribute('aria-expanded',String(open));
+ $('onfimCollectionsToggle').setAttribute('aria-expanded',String(open));onfimSyncCollectionsToggle();
 };
 $('onfimCollectionPicker').onchange=async function(){
  if(this.value==='manage'){this.selectedIndex=0;$('manageCollections').click();return;}
@@ -8089,7 +8213,7 @@ for(const id of ['galleryInput','cameraInput'])$(id).onchange=async e=>{await re
 async function refreshTrashCount(){
   const deleted=(await allNotes()).filter(n=>n.deletedAt);
   const groups=new Set(deleted.map(n=>n.trashBatchId||n.id));
-  $('trashSettingsCount').textContent=groups.size===1?'1 appunto eliminato. Puoi ripristinarlo o eliminarlo definitivamente.':groups.size+' appunti eliminati. Puoi ripristinarli o eliminarli definitivamente.';
+  $('trashSettingsCount').textContent=groups.size===1?'1 appunto nel Cestino':groups.size+' appunti nel Cestino';
 }
 async function renderTrash(){
   const deleted=(await allNotes()).filter(n=>n.deletedAt);
@@ -8616,9 +8740,58 @@ Object.assign(ONFIM_UI_EN,{"Dove":"Where","Quando":"When","Informazioni su Onfim
 Object.assign(ONFIM_UI_EN,{"Filtri:":"Filters:","＋ Nuova raccolta":"+ New collection","Nessuna raccolta":"No collections","Sposta su":"Move up","Sposta giù":"Move down","Rimuovi filtro":"Remove filter","Etichette selezionate":"Selected tags"});
 Object.assign(ONFIM_UI_EN,{"Recupera ultima sessione":"Recover last session","Recupera i passaggi dell’ultima sessione":"Recover the last session’s steps","Nessuna sessione precedente recuperabile":"No previous session to recover","Sessione precedente: usa Annulla per recuperare i passaggi.":"Previous session: use Undo to recover its steps.","Spazio cronologia: calcolo alla apertura delle Impostazioni…":"History size: calculated when Settings opens…"});
 Object.assign(ONFIM_UI_EN,{"Raggio: 100 metri (fisso)":"Radius: 100 meters (fixed)","Coordinate non valide":"Invalid coordinates","Promemoria luogo":"Location reminder","Promemoria orario":"Time reminder","Modifica appunto":"Edit note"});
+Object.assign(ONFIM_UI_EN,{
+ 'Nella PWA i promemoria orari funzionano solo ad app aperta; quelli geografici non sono attivi. Per gli avvisi in background usa l’APK Android.':'In the PWA, time reminders work only while the app is open; location alerts are inactive. Use the Android app for background alerts.',
+ 'Luogo importato: non attivo nella PWA.':'Imported location: inactive in the PWA.',
+ 'Cerca un luogo':'Search for a place',
+ 'Coordinate manuali':'Manual coordinates',
+ 'Raggio: 100 m (fisso)':'Radius: 100 m (fixed)',
+ 'Rimuovi promemoria':'Remove reminder',
+ 'Sposta la mappa o tocca il punto desiderato.':'Move the map or tap the desired point.'
+});
 const onfimOriginalText=new WeakMap(),onfimOriginalAttrs=new WeakMap();
 const onfimSkippedUserText='#noteBody,#noteTitle,#readBody,#readTitle,#readPhotos,#readAudios,#readChecklist,#checklistEditorItems,#noteList .title,#noteList .preview,#noteList .chip,#joinOptions .join-title,#joinOptions .join-preview,.read-body,.read-footer,.chip,.audio-label,#linkedFileEditorList,#onfimTagSuggestions';
 function onfimSkipLocaleNode(el){return !el||!!el.closest('script,style,'+onfimSkippedUserText);}
+Object.assign(ONFIM_UI_EN,{
+  'Backup da creare':'Create a backup',
+  'Backup da aggiornare':'Update backup',
+  'Backup di oltre 7 giorni':'Backup over 7 days old',
+  'Lingua':'Language',
+  'Terza scorciatoia':'Third shortcut',
+  'Appunti eliminati':'Deleted notes',
+  'Gli appunti si salvano automaticamente.':'Notes are saved automatically.',
+  'Riduce alcune cancellazioni automatiche, ma non protegge se elimini i dati del browser.':'Reduces automatic data removal, but not deletion of browser data.',
+  'Fino a 5 copie automatiche, ogni 3 ore se ci sono modifiche.':'Up to 5 automatic copies, every 3 hours when changes exist.',
+  'Le copie nel browser si perdono cancellando i suoi dati. Conserva un JSON anche fuori dalla PWA.':'Browser copies are lost when its data is cleared. Keep a JSON backup outside the PWA too.',
+  'Il JSON non cifra le note riservate e non comprende i file esterni collegati.':'JSON does not encrypt private notes or include linked external files.',
+  'Il PIN limita l’accesso all’Archivio, ma non cifra le note.':'The PIN restricts Archive access but does not encrypt notes.',
+  'Imposta o cambia il PIN.':'Set or change the PIN.',
+  'Richiede di nuovo il PIN per accedere all’Archivio.':'Requires the PIN again to access the Archive.',
+  'Esporta un file .ics da aggiungere al calendario.':'Export an .ics file to add to your calendar.',
+  'Funziona con la PWA aperta; ad app chiusa le notifiche non sono garantite.':'Works while the PWA is open; notifications are not guaranteed when it is closed.',
+  'Le notifiche richiedono le autorizzazioni Android.':'Notifications require Android permissions.',
+  'Onfim funziona offline; PWA e APK possono scambiarsi dati tramite JSON.':'Onfim works offline; PWA and APK can exchange data through JSON.',
+  'Limiti della versione Lite':'Lite version limits',
+  'Promemoria orari: con la PWA chiusa le notifiche non sono affidabili.':'Time reminders: notifications are not reliable when the PWA is closed.',
+  'Promemoria di luogo: nessun rilevamento in background.':'Location reminders: no background detection.',
+  'Backup cloud: tramite Condividi, non automatici in background.':'Cloud backups: via Share, not automatic in background.',
+  'Widget e notifiche native Android non disponibili.':'Android widgets and native notifications are unavailable.',
+  'OCR: disponibile nell’APK, non nella PWA Lite.':'OCR: available in the APK, not in the Lite PWA.',
+  'Su Onfim':'About Onfim',
+  'Onfim è stata sviluppata con l’assistenza di ChatGPT. Non integra ChatGPT né servizi di IA generativa.':'Onfim was developed with the assistance of ChatGPT. It does not include ChatGPT or generative AI services.',
+  'Nell’APK il riconoscimento del testo nelle immagini (OCR) avviene sul dispositivo.':'In the APK, image text recognition (OCR) runs on the device.',
+  'Le note si salvano automaticamente.':'Notes are saved automatically.',
+  'Fino a 10 copie, verificate ogni 3 ore in caso di modifiche.':'Up to 10 copies, checked every 3 hours when changes exist.',
+  'Copia dell’ultimo backup locale, ogni 24 ore se cambiato.':'Copy of the latest local backup, every 24 hours if it has changed.',
+  'I backup includono le note riservate senza cifratura.':'Backups include private notes without encryption.',
+  'Il JSON non comprende i file esterni; gli ID già presenti vengono sovrascritti.':'JSON does not include external files; existing IDs are overwritten.',
+  'Abilita Sveglie e promemoria per evitare ritardi.':'Enable Alarms & reminders to avoid delays.',
+  'Serve a scegliere il luogo e rilevare il passaggio.':'Needed to select a location and detect arrival.',
+  'In Android, scegli Posizione → Consenti sempre.':'In Android, choose Location → Allow all the time.',
+  'Il promemoria di luogo scatta una sola volta: salvalo di nuovo per riattivarlo. Il rilevamento può tardare. Dopo un Arresto forzato riapri Onfim.':'Location reminders trigger once: save again to reactivate. Detection can be delayed. Reopen Onfim after Force stop.',
+  'Cestino vuoto':'Trash is empty',
+  'Informazioni':'Information'
+});
 function onfimEnglishText(v){
  if(v.startsWith('Spazio dati note: '))return v.replace('Spazio dati note: ','Note data: ').replace(' · Cronologia: ',' · History: ').replace('% dei dati correnti)','% of current data)').replace(' note con revisioni. Misura del JSON non compresso, inclusi gli allegati nelle note.',' notes with revisions. Uncompressed JSON measurement, including note attachments.');
  if(v.startsWith('Impossibile misurare la cronologia: '))return v.replace('Impossibile misurare la cronologia: ','Could not measure history: ');

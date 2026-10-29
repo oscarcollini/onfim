@@ -1,0 +1,7 @@
+BOZZA DI VERIFICA ONFIM 0.9.0 — NON RELEASE DEFINITIVA.
+Basata sulla PWA consolidata 0.8.30 di Work.
+Interventi: Impostazioni (ordine, Cestino, tre scorciatoie adattabili, Informazioni e testi IT/EN); banner backup compatto; Promemoria (scorciatoie adattabili, avviso PWA unico, Dove più compatto, mappa ridotta, coordinate manuali espandibili, distinzione Rimuovi luogo/Rimuovi promemoria); Raccolte (giallo Onfim #FFF6DA con barra aperta o raccolta attiva, freccia su/giù, Home bianca quando è selezionata una raccolta).
+Lo stato del Cestino non cambia: nessuno svuotamento automatico.
+Il service worker usa una chiave cache nuova SOLO per provare la bozza aggiornata; non modifica le note salvate.
+I numeri di versione interni restano provvisori finché la 0.9.0 non sarà approvata.
+La validazione completa su Android/browser del telefono rimane a cura dell’utente.

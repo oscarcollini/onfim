@@ -1,0 +1,8 @@
+BOZZA della 0.9.0 – SOLO PWA LITE
+- Avviso backup Home: compatto su una riga con icona, breve messaggio e pulsante Backup.
+- Messaggi: Backup da creare / Backup da aggiornare / Backup di oltre 7 giorni (tradotti in inglese).
+- La logica esistente resta invariata: nessun export, modifiche successive, export più vecchio di 7 giorni.
+- I dettagli e la cautela sulla data di esportazione rimangono nel pannello Dati e backup delle Impostazioni.
+- Nessuna variazione al formato note, backup, al pulsante Backup o ai meccanismi di archiviazione.
+- Non aggiornare il numero di versione o il service worker fino al rilascio definitivo 0.9.0.
+- Le modifiche alle Impostazioni della bozza precedente sono preservate, incluso il CSS corretto dei selettori orari.
