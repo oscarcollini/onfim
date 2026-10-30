@@ -1,16 +1,5 @@
-ONFIM LITE PWA 0.9.10 — FILE PER GITHUB PAGES
-
-Aggiornamento basato sulla PWA 0.9.5. Sostituisci i file corrispondenti nella root del repository GitHub oscarcollini/onfim: index.html, manifest.webmanifest, sw.js, icone e questo LEGGIMI.txt. Non pubblicare uno ZIP nella root del sito.
-
-NOVITÀ
-- HTML condiviso autonomo e compilabile: checklist spuntabili, campo Risposta, collegamento «Aggiungi risposta» sotto il titolo, pulsante «Salva copia compilata (.html)».
-- Il file ricevuto vive autonomamente: l'app non importa le risposte. Il destinatario apre l'HTML in un browser completo, lo compila, salva la copia e la restituisce.
-- Dicitura «appunto» al posto di «nota» nei testi visibili in italiano. Inglese sempre «note». Raccolte definite come filtri, non Archivio.
-- Eliminato contatore numerico checklist x/n nella panoramica; le checklist rimangono operative.
-- Versione PWA 0.9.10 e nuova cache SW, con la stessa identità PWA e dati preesistenti.
-
-NOTA TECNICA
-L'HTML esportato incorpora un piccolo script locale per salvare il documento compilato. La CSP permette esclusivamente quello script tramite hash; nessuna connessione di rete o dipendenza esterna per il salvataggio. In alcune anteprime di allegati email o app di messaggistica gli script sono disabilitati: aprire il file in un browser.
-
-NON CAMBIA
-ID PWA, IndexedDB, schema dei backup, promemoria, foto, audio, editor, filtri, geotag. Prima della pubblicazione conviene comunque creare un backup JSON esterno. Il test sul dispositivo Android reale rimane necessario.
+onfim Lite 0.9.10 — revisione della medesima versione
+Condividi HTML: footer corretto, link onfim e app, date in fondo.
+Anteprima: senza dicitura Checklist.
+La PWA non esegue geofence in background. Nessuna modifica ai dati locali.
+Caricare i file nella root GitHub Pages. Cache service worker aggiornata internamente.

@@ -6364,6 +6364,7 @@ body {
   </div>
   <input id="geoRadius" type="hidden" value="100">
   <label class="label" for="geoTransition">Avvisami</label><select id="geoTransition"><option value="enter">Quando arrivo</option><option value="exit">Quando esco</option></select>
+  <input id="geoRepeat" type="hidden" value="once">
  </div></details>
  </div>
 <div class="dialogbuttons reminder-actions"><button id="reminderRemove" type="button">Rimuovi promemoria</button><button id="reminderSave" class="primary" type="button">Salva</button></div>
@@ -6871,8 +6872,7 @@ async function renderNotes(){
     const content=txt(n.text||'').trim();excerpt.textContent=allowed?(content||''):'Inserisci il PIN per leggere';
     if(excerpt.textContent)el.append(excerpt);
     if(allowed){const rows=parts.flatMap(x=>onfimNormalizeChecklist(x.checklist).filter(v=>v.text.trim()));
-      if(rows.length){const summary=document.createElement('div');summary.className='onfim-checklist-summary';
-        summary.textContent='Checklist';el.append(summary);const pending=rows.filter(x=>!x.done).slice(0,2);if(pending.length){const lines=document.createElement('div');lines.className='onfim-checklist-card-preview';for(const item of pending){const line=document.createElement('div');line.textContent='☐ '+item.text;lines.append(line);}el.append(lines);}}
+      if(rows.length){const pending=rows.filter(x=>!x.done).slice(0,2);if(pending.length){const lines=document.createElement('div');lines.className='onfim-checklist-card-preview';for(const item of pending){const line=document.createElement('div');line.textContent='☐ '+item.text;lines.append(line);}el.append(lines);}}
     }
     if(allowed){
       const picSource=parts.find(p=>(p.photos||[]).some(s=>typeof s==='string'&&s.startsWith('data:image/'))||(typeof p.drawing==='string'&&p.drawing.startsWith('data:image/')))||n;
@@ -7988,7 +7988,7 @@ audio{display:block;width:100%;max-width:500px}.linked ul{font-size:.87rem;paddi
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:21px}.tag{font-size:.72rem;color:#3b5360;padding:4px 8px;border-radius:9px;background:#ffffff8c;border:1px solid #222e3814}
 footer{font-size:.72rem;color:#71808a;text-align:center;padding:16px}
 footer button{font:600 .83rem system-ui,sans-serif;border:1px solid #c7d2d8;color:#315b69;background:#fff;border-radius:10px;padding:9px 14px;cursor:pointer;margin-bottom:8px}
-footer button:focus-visible{outline:2px solid #315b69;outline-offset:2px}.exported-meta{margin-top:5px}.onfim-export-link{color:#222E38;text-decoration:underline;text-underline-offset:2px;font-weight:700}.onfim-export-link:focus-visible{outline:2px solid #222E38;outline-offset:2px}.empty-part{font-size:.88rem;color:#75828a;font-style:italic}
+footer button:focus-visible{outline:2px solid #315b69;outline-offset:2px}.exported-meta{margin-top:5px}.onfim-export-link{color:#222E38;text-decoration:underline;text-underline-offset:2px;font-weight:700}.onfim-export-link:focus-visible{outline:2px solid #222E38;outline-offset:2px}.onfim-export-app-link{color:inherit;text-decoration:underline;text-underline-offset:2px}.onfim-export-dates{font-size:.67rem;margin-top:5px;color:#84909a}.empty-part{font-size:.88rem;color:#75828a;font-style:italic}
 @media(max-width:500px){body{padding:12px 9px 35px}.sheet{border-radius:13px;padding:19px 16px}.note-text{font-size:13.5px}}
 @media print{body{background:#fff;padding:0}.sheet{box-shadow:none;border-radius:0;padding:0;background:#fff}.part{break-inside:auto}.photo,.audio-entry{break-inside:avoid}footer{padding-top:25px}}
 
@@ -8029,14 +8029,15 @@ footer button:focus-visible{outline:2px solid #315b69;outline-offset:2px}.export
 .onfim-save-status{font:.78rem/1.5 system-ui,sans-serif;color:#52646d;margin-top:8px;min-height:1em}
 @media print{.onfim-reply button,.onfim-save-status,.onfim-reply-link{display:none}.onfim-reply textarea{border:0;padding:0;min-height:0}}
 </style></head><body><main><article class="sheet"><header class="header"><h1>${htmlEscape(title)}</h1>
-<div class="meta">Creato: ${htmlEscape(when)} · Modificato: ${htmlEscape(latest)}</div><a href="#onfim-reply" class="onfim-reply-link">Aggiungi risposta</a></header>
+<a href="#onfim-reply" class="onfim-reply-link">Aggiungi risposta</a></header>
 ${content}
 <section id="onfim-reply" class="onfim-reply"><h2>Risposta</h2>
 <textarea id="onfim-reply-text" aria-label="Risposta" placeholder="Scrivi qui…"></textarea>
 <button id="onfim-save-copy" type="button">Salva copia compilata (.html)</button>
 <div id="onfim-save-status" class="onfim-save-status" role="status" aria-live="polite"></div>
 </section></article><footer>
-<div class="exported-meta">Condivisa da <a class="onfim-export-link" href="https://oscarcollini.github.io/onfim" target="_blank" rel="noopener noreferrer">onfim</a> · ${htmlEscape(exportedOn)}</div>
+<div class="exported-meta">Condiviso tramite <a class="onfim-export-link" href="https://oscarcollini.github.io/onfim" target="_blank" rel="noopener noreferrer">onfim</a> · ${htmlEscape(exportedOn)} · <a class="onfim-export-app-link" href="https://github.com/oscarcollini/onfim/releases/latest/download/onfim.apk" target="_blank" rel="noopener noreferrer">app</a></div>
+<div class="onfim-export-dates">Creato: ${htmlEscape(when)} · Modificato: ${htmlEscape(latest)}</div>
 </footer></main>
 <scr${'ipt'}>${ONFIM_HTML_REPLY_SCRIPT}</scr${'ipt'}>
 </body></html>`;
@@ -8174,7 +8175,7 @@ $('reminderSave').onclick=()=>{
    if(!$('geoEnabled').checked||!$('geoLat').value.trim()||!$('geoLon').value.trim()){
     toast('Scegli un luogo sulla mappa oppure inserisci le coordinate');return;
    }
-   const geo=cleanGeofence({enabled:true,name:'',lat:Number($('geoLat').value),lon:Number($('geoLon').value),radius:100,transition:$('geoTransition').value,token:String(Date.now())});
+   const geo=cleanGeofence({enabled:true,name:'',lat:Number($('geoLat').value),lon:Number($('geoLon').value),radius:100,transition:$('geoTransition').value,repeat:$('geoRepeat').value,token:String(Date.now())});
    if(!geo){toast('Coordinate non valide');return;}
    void saveReadReminder('',geo,'none','');return;
   }
@@ -8437,11 +8438,11 @@ $('managePin').onclick=async()=>{
 };$('lockPin').onclick=async()=>{unlocked=false;if($('filter').value==='reserved')$('filter').value='ordinary';await showTags();syncFilterPills();await renderNotes();$('settingsStatus').textContent='Archivio bloccato.';};
 window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue='';}});
 // I geofence restano nel JSON; la PWA non li monitora in background.
-function cleanGeofence(g){if(!g||!g.enabled)return null;const lat=Number(g.lat),lon=Number(g.lon),radius=100;if(!Number.isFinite(lat)||lat< -90||lat>90||!Number.isFinite(lon)||lon< -180||lon>180||!Number.isFinite(radius)||radius<100||radius>10000)return null;return{enabled:true,name:String(g.name||''),lat,lon,radius,transition:g.transition==='exit'?'exit':'enter',token:String(g.token||'imported')};}
+function cleanGeofence(g){if(!g||!g.enabled)return null;const lat=Number(g.lat),lon=Number(g.lon),radius=100;if(!Number.isFinite(lat)||lat< -90||lat>90||!Number.isFinite(lon)||lon< -180||lon>180||!Number.isFinite(radius)||radius<100||radius>10000)return null;return{enabled:true,name:String(g.name||''),lat,lon,radius,transition:g.transition==='exit'?'exit':'enter',repeat:g.repeat==='always'?'always':'once',token:String(g.token||'imported')};}
 function fillGeo(g){
  const v=cleanGeofence(g);$('geoEnabled').checked=!!v;$('geoFields').hidden=false;
  $('geoLat').value=v?.lat??'';$('geoLon').value=v?.lon??'';
- $('geoRadius').value=100;$('geoTransition').value=v?.transition||'enter';
+ $('geoRadius').value=100;$('geoTransition').value=v?.transition||'enter';$('geoRepeat').value=v?.repeat||'once';
  $('geoFold').open=!!v;if(v){onfimGeoCenter(v.lat,v.lon,15,false);}else{onfimGeoCenter(42.5,12.5,6,false);}
  requestAnimationFrame(geoMapRender);
 }
