@@ -1,29 +1,16 @@
-ONFIM LITE PWA 0.9.5 — Release completa per GitHub Pages
-============================================================
+ONFIM LITE PWA 0.9.10 — FILE PER GITHUB PAGES
 
-Sovrascrivere i dieci file esistenti nella root del repository GitHub
-(oscarcollini/onfim). Non creare una sottocartella e non pubblicare
-vecchi ZIP o APK fra i file della PWA. Il solo README distribuito
-resta questo LEGGIMI.txt.
+Aggiornamento basato sulla PWA 0.9.5. Sostituisci i file corrispondenti nella root del repository GitHub oscarcollini/onfim: index.html, manifest.webmanifest, sw.js, icone e questo LEGGIMI.txt. Non pubblicare uno ZIP nella root del sito.
 
-Base PWA: 0.9.1. Le versioni .2, .3 e .4 sono state solo Android.
-La memoria e il formato dei backup non cambiano.
+NOVITÀ
+- HTML condiviso autonomo e compilabile: checklist spuntabili, campo Risposta, collegamento «Aggiungi risposta» sotto il titolo, pulsante «Salva copia compilata (.html)».
+- Il file ricevuto vive autonomamente: l'app non importa le risposte. Il destinatario apre l'HTML in un browser completo, lo compila, salva la copia e la restituisce.
+- Dicitura «appunto» al posto di «nota» nei testi visibili in italiano. Inglese sempre «note». Raccolte definite come filtri, non Archivio.
+- Eliminato contatore numerico checklist x/n nella panoramica; le checklist rimangono operative.
+- Versione PWA 0.9.10 e nuova cache SW, con la stessa identità PWA e dati preesistenti.
 
-NOVITÀ 0.9.5
-- Ripetizione settimanale: etichetta dinamica dal giorno effettivo
-  della scadenza scelta, anche in inglese. Non cambia il calcolo.
-- Riferimenti data: @gg.mm.aaaa e @gg.mm.aaaa-oo:mm sono ora
-  riconosciuti come @gg/mm/aaaa e @gg/mm/aaaa-oo:mm. Formati
-  mescolati (es. 29/10.2026) e formato USA non sono accettati.
-- Nelle Informazioni rimosso il riferimento all'OCR dell'APK,
-  eliminato nel progetto Android 0.9.4.
-- In Informazioni: Scarica APK apre una URL permanente di GitHub Releases:
-  https://github.com/oscarcollini/onfim/releases/latest/download/onfim.apk
-  Funzionerà soltanto dopo la prima Release GitHub con file onfim.apk.
-- Verifica di traduzioni e testi. Nessun cambiamento ad aree di tocco,
-  miniature, formattazione, note, promemoria o backup.
+NOTA TECNICA
+L'HTML esportato incorpora un piccolo script locale per salvare il documento compilato. La CSP permette esclusivamente quello script tramite hash; nessuna connessione di rete o dipendenza esterna per il salvataggio. In alcune anteprime di allegati email o app di messaggistica gli script sono disabilitati: aprire il file in un browser.
 
-ATTENZIONE
-- I promemoria PWA a programma chiuso non sono garantiti.
-- Prima dell'aggiornamento, esportare un backup JSON esterno.
-- Assicurarsi che l'installazione PWA aggiorni la cache versione 0.9.5.
+NON CAMBIA
+ID PWA, IndexedDB, schema dei backup, promemoria, foto, audio, editor, filtri, geotag. Prima della pubblicazione conviene comunque creare un backup JSON esterno. Il test sul dispositivo Android reale rimane necessario.
