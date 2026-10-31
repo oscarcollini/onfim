@@ -1,9 +1,10 @@
-onfim Lite 0.9.11 — PWA, pacchetto di distribuzione.
-Base 0.9.10 revisionata.
-Nuovo: riconoscimento Markdown essenziale, incollaggio formattato,
-condivisione con scelta del nuovo appunto o append a un esistente,
-Deseleziona tutte nella checklist (Undo).
-Nessun cambio di font o di formato di backup.
-Geofence e promemoria a PWA chiusa restano non supportati.
-Controllo sintattico JS eseguito, prova end-to-end con browser non conclusa.
-Distribuire i file insieme su hosting HTTPS senza modificare il percorso.
+onfim Lite 0.9.12 — PWA Lite, pacchetto di distribuzione.
+
+Base: onfim Lite 0.9.11. Novità 0.9.12:
+- Anteprima unica: foto > disegno > audio; secondo foglio giallo #FFF6DA per media multipli, senza puntini. In griglia e in elenco.
+- HTML esportato: «Rispondi» in alto e in fondo; apre il campo e il comando «Salva copia».
+- Spuntare una checklist mostra «Salva copia» anche senza risposta. La copia salvata conserva le spunte e l'eventuale risposta.
+
+Nessun nuovo formato dati o backup. Geofence/promemoria in background non supportati nella PWA.
+Pubblicare tutti i file insieme su hosting HTTPS mantenendo percorso e manifest; il Service Worker usa una cache 0.9.12 dedicata.
+Le modifiche sono testate in browser simulato: verificare su GitHub Pages e telefono con i propri appunti, prima di sostituire la versione precedente.

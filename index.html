@@ -6,8 +6,8 @@
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#f3f5f8" name="theme-color"/>
 <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACFElEQVR4nO2aXY5CIQyF62R24iZcjYtzNa5hErcxr84TTkP4azmlEDiJ0aiXth8UCvde3r8/b9pYX94OeOsA8HbAWweAtwPeOgC8HfDW9gC+PYxeb3fVda/nA+wJ0QVVCWqDkgoNoQvAqJ6M7SAhqFMgFbzFEM3ZRtlSTYI8+Nfz8XlZi9tApVzXKjCqx3M2ERCWXAaREJYEQISDsCwAIgwEl0JIq1qQmtVhiRFgOdkuMwJqELQpsMQIsNQ0IyDXg9a1himA2rBsCa7UBgIOFEBPwB5VJREYgGUQyA0Ql+kkeL3dm9bulnZa/yuVGQBUj4V2wgsNwQQAD77H6RxEJAQ4gOB0fGZQcjr1Gw+epxK6IIICiHO1p+f555ZRoE03MYBcT8Tfp3JWAiRci0ilkqAjIHY6/q1Fo06Xg0xXgVbFcCzO/nKCFEKStVyiEgjXU+EWpXJWmgap66esA3hg0iWw1BbR/xLI25nixkhJfDLUOh1PphbBExnVAUTUFTwvgPj71JshtNNxe1aCb4clZWtLe9aCzwESp0cXPSltfyi6PQBRCljOxiV7QRZ2XY/FczvK2v+QcgXgdS+AayiAGQKONXwEeAab0tBVYLbgiQAPSc2iIXeHZ+zB+OaL1Efoc4IaByRt16SxrX5SdKY06IEOe1Y4p9HVo1TmAGbX9puhA8DbAW8dAN4OeOsA8HbAW9sD+AOCbitmjicJ7wAAAABJRU5ErkJggg==" rel="icon" type="image/png"/>
-<title>onfim Lite 0.9.11 · Appunti</title>
-<link rel="manifest" href="./manifest.webmanifest?release=0.9.11"/>
+<title>onfim Lite 0.9.12 · Appunti</title>
+<link rel="manifest" href="./manifest.webmanifest?release=0.9.12"/>
 <meta name="theme-color" content="#222E38"/>
 <link rel="apple-touch-icon" href="./apple-touch-icon.png"/>
 <link rel="icon" type="image/png" href="./favicon.png"/>
@@ -5812,24 +5812,41 @@ body {
   fill: none !important;
   stroke: currentColor !important;
 }
+/* 0.9.12: anteprima unica con secondo foglio giallo; foto > disegno > audio */
 .card .onfim-media-thumbs {
   order: 3;
   display: flex;
+  position: relative;
+  isolation: isolate;
   align-items: stretch;
-  gap: 8px;
   width: 100%;
   min-width: 0;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow: visible;
 }
-.card .onfim-media-thumbs>.cardthumb {
-  flex: 1 1 100px;
+.card .onfim-media-thumbs > .cardthumb {
+  flex: 1 1 100%;
   min-width: 0;
-  width: auto;
+  width: 100%;
   max-width: 100%;
   margin: 0;
   border: 1px solid #222E38 !important;
+  border-radius: 10px;
+  position: relative;
+  z-index: 1;
 }
-.card .onfim-media-thumbs>.onfim-audio-thumb {
+.card .onfim-media-thumbs.onfim-multi-thumb::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translate(-8px, 8px);
+  background: #FFF6DA;
+  border: 1px solid #222E38;
+  border-radius: 10px;
+  z-index: 0;
+  pointer-events: none;
+}
+.card .onfim-media-thumbs > .onfim-audio-thumb {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5839,10 +5856,6 @@ body {
   color: #222E38;
   min-height: 76px;
   aspect-ratio: 16/9;
-  border-radius: 10px;
-  border: 1px solid #222E38 !important;
-  position: relative;
-  overflow: visible;
 }
 .card .onfim-audio-thumb .onfim-audio-symbol {
   display: block;
@@ -5855,10 +5868,6 @@ body {
   width: 34px;
   height: 34px;
 }
-.cards.list-layout .card .onfim-media-thumbs:has(> :nth-child(2)) .onfim-audio-symbol {
-  width: 20px;
-  height: 20px;
-}
 .cards.list-layout .card .onfim-media-thumbs {
   grid-column: 2;
   grid-row: 1;
@@ -5866,41 +5875,24 @@ body {
   justify-self: center;
   width: 66px;
   max-width: 66px;
-  gap: 3px;
-  flex-wrap: nowrap;
-  flex-direction: column;
 }
-.cards.list-layout .card .onfim-media-thumbs>.cardthumb {
+.cards.list-layout .card .onfim-media-thumbs > .cardthumb {
   flex: 0 0 auto;
   width: 66px !important;
   height: 65px !important;
   max-height: 65px !important;
   aspect-ratio: 1;
+  border-radius: 9px !important;
 }
-.cards.list-layout .card .onfim-media-thumbs:has(> :nth-child(2))>.cardthumb {
-  height: 38px !important;
-  max-height: 38px !important;
-}
-.cards.list-layout .card .onfim-media-thumbs>.onfim-audio-thumb {
-  flex: 0 0 auto;
+.cards.list-layout .card .onfim-media-thumbs > .onfim-audio-thumb {
   width: 66px !important;
   min-height: 0;
   height: 65px !important;
   max-height: 65px !important;
   aspect-ratio: auto;
 }
-.cards.list-layout .card .onfim-media-thumbs:has(> :nth-child(2))>.onfim-audio-thumb {
-  height: 24px !important;
-  max-height: 24px !important;
-  gap: 2px;
-  flex-direction: row;
-}
-.cards.list-layout .card .onfim-media-thumbs:has(> :nth-child(2)) .onfim-audio-symbol {
-  font-size: .9rem;
-}
-.cardthumb.onfim-multi-thumb,
-.card .onfim-media-thumbs>.onfim-multi-thumb {
-  box-shadow: -8px 8px 0 -1px #FFF6DA,-8px 8px 0 -0.5px #222E38 !important;
+.cards.list-layout .card .onfim-media-thumbs.onfim-multi-thumb::before {
+  border-radius: 9px;
 }
 #noteBody.editor,
 .read-body {
@@ -6288,7 +6280,7 @@ body {
 <details><summary>Limiti della versione Lite</summary><ul class="lite-limit-list"><li>Promemoria orari: con la PWA chiusa le notifiche non sono affidabili.</li><li>Promemoria di luogo: nessun rilevamento in background.</li><li>Backup cloud: tramite Condividi, non automatici in background.</li><li>Widget e notifiche native Android non disponibili.</li></ul></details>
 <div class="settingsrow onfim-apk-download-row"><div><strong>Onfim per Android</strong><p>Scarica o aggiorna l’APK da GitHub.</p></div><a id="onfimApkDownload" class="onfim-apk-download" href="https://github.com/oscarcollini/onfim/releases/latest/download/onfim.apk" target="_blank" rel="noopener noreferrer" aria-label="Scarica l’APK di Onfim per Android">Scarica APK ↗</a></div>
 <details><summary>Su Onfim</summary><p>Onfim è stata sviluppata con l’assistenza di ChatGPT. Non integra ChatGPT né servizi di IA generativa.</p></details></div>
-<footer class="onfim-colophon">onfim v0.9.11 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
+<footer class="onfim-colophon">onfim v0.9.12 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
 <section class="view" id="trashView" aria-label="Cestino">
   <div class="controls"><button id="backTrash" type="button">← Impostazioni</button></div>
   <div class="panel trash-panel"><div class="trash-head"><div><h2>Appunti eliminati</h2><p class="hint">Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.</p></div><button id="emptyTrash" class="danger" type="button">Svuota</button></div><p id="trashCount" class="small" role="status"></p><div id="trashList" class="trash-list"></div></div>
@@ -6898,20 +6890,21 @@ async function renderNotes(){
       if(rows.length){const pending=rows.filter(x=>!x.done).slice(0,2);if(pending.length){const lines=document.createElement('div');lines.className='onfim-checklist-card-preview';for(const item of pending){const line=document.createElement('div');line.textContent='☐ '+item.text;lines.append(line);}el.append(lines);}}
     }
     if(allowed){
-      const picSource=parts.find(p=>(p.photos||[]).some(s=>typeof s==='string'&&s.startsWith('data:image/'))||(typeof p.drawing==='string'&&p.drawing.startsWith('data:image/')))||n;
+      const picSource=parts.find(p=>(p.photos||[]).some(s=>typeof s==='string'&&s.startsWith('data:image/')))||parts.find(p=>typeof p.drawing==='string'&&p.drawing.startsWith('data:image/'))||n;
       const picture=(picSource.photos||[]).find(s=>typeof s==='string'&&s.startsWith('data:image/'))||(typeof picSource.drawing==='string'&&picSource.drawing.startsWith('data:image/')?picSource.drawing:'');
       const audioCount=parts.reduce((sum,p)=>sum+(p.audios||[]).length,0);
+      const mediaCount=parts.reduce((sum,p)=>sum+(p.photos||[]).length+(p.drawing?1:0)+(p.audios||[]).length,0);
       const mediaTray=(picture||audioCount)?document.createElement('div'):null;
-      if(mediaTray){mediaTray.className='onfim-media-thumbs';el.append(mediaTray);}
-      if(picture){const thumb=document.createElement('img');thumb.className='cardthumb'+(picture===picSource.drawing?' drawing':'');thumb.src=picture;thumb.alt=picture===picSource.drawing?'Disegno':'Fotografia';thumb.loading='lazy';mediaTray.append(thumb);if(parts.reduce((sum,p)=>sum+(p.photos||[]).length+(p.drawing?1:0)+(p.audios||[]).length,0)>1){thumb.classList.add('onfim-multi-thumb');}
+      if(mediaTray){mediaTray.className='onfim-media-thumbs'+(mediaCount>1?' onfim-multi-thumb':'');el.append(mediaTray);}
+      if(picture){const thumb=document.createElement('img');thumb.className='cardthumb'+(picture===picSource.drawing?' drawing':'');thumb.src=picture;thumb.alt=picture===picSource.drawing?'Disegno':'Fotografia';thumb.loading='lazy';mediaTray.append(thumb);
         if(picture!==picSource.drawing&&picSource.photoMarks?.length){const index=(picSource.photos||[]).indexOf(picture),overlay=picSource.photoMarks[index];if(typeof overlay==='string'&&overlay.startsWith('data:image/')){const composite=document.createElement('canvas'),context=composite.getContext('2d');const source=new Image(),paint=new Image();source.onload=()=>{composite.width=source.naturalWidth;composite.height=source.naturalHeight;context.drawImage(source,0,0);paint.onload=()=>{context.drawImage(paint,0,0,composite.width,composite.height);thumb.src=composite.toDataURL('image/jpeg',0.83);};paint.src=overlay;};source.src=picture;}}}
-    if(audioCount){const aud=document.createElement('div');aud.className='cardthumb onfim-audio-thumb';
+    if(audioCount&&!picture){const aud=document.createElement('div');aud.className='cardthumb onfim-audio-thumb';
       aud.setAttribute('role','img');aud.setAttribute('aria-label','Audio');
       const symbol=document.createElementNS('http://www.w3.org/2000/svg','svg');symbol.classList.add('onfim-audio-symbol');symbol.setAttribute('viewBox','0 0 24 24');symbol.setAttribute('fill','none');symbol.setAttribute('stroke','currentColor');symbol.setAttribute('stroke-width','2');symbol.setAttribute('stroke-linecap','round');symbol.setAttribute('stroke-linejoin','round');symbol.setAttribute('aria-hidden','true');
       const mic=document.createElementNS('http://www.w3.org/2000/svg','rect');mic.setAttribute('x','9');mic.setAttribute('y','2');mic.setAttribute('width','6');mic.setAttribute('height','12');mic.setAttribute('rx','3');symbol.append(mic);
       const stand=document.createElementNS('http://www.w3.org/2000/svg','path');stand.setAttribute('d','M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8');symbol.append(stand);aud.append(symbol);
       mediaTray.append(aud);
-      if(parts.reduce((sum,p)=>sum+(p.photos||[]).length+(p.drawing?1:0)+(p.audios||[]).length,0)>1)aud.classList.add('onfim-multi-thumb');}
+      }
     }
     const meta=document.createElement('div');meta.className='meta';
     if(n.reserved){const b=document.createElement('span');b.className='chip';b.textContent='🔒';b.title='Archivio';meta.append(b);}
@@ -8054,7 +8047,7 @@ function onfimSharePartHTML(n,partNumber,total){
   if(tags.length)fragments.push(`<div class="tags">${tags.map(t=>`<span class="tag">${htmlEscape(onfimTagLabel(t))}</span>`).join('')}</div>`);
   return `<section class="part">${heading}${fragments.length?fragments.join('\n'):'<p class="empty-part">Parte senza contenuto esportabile</p>'}</section>`;
 }
-const ONFIM_HTML_REPLY_SCRIPT="(()=>{'use strict';\nconst save=document.getElementById('onfim-save-copy');\nif(!save)return;\nsave.addEventListener('click',()=>{\n  const copy=document.documentElement.cloneNode(true);\n  const current=document.querySelectorAll('.onfim-share-checklist input[type=\"checkbox\"]');\n  const copies=copy.querySelectorAll('.onfim-share-checklist input[type=\"checkbox\"]');\n  for(let i=0;i<current.length;i++){\n    if(current[i].checked)copies[i].setAttribute('checked','');\n    else copies[i].removeAttribute('checked');\n  }\n  copy.querySelector('#onfim-reply-text').textContent=document.getElementById('onfim-reply-text').value;\n  copy.querySelector('#onfim-save-status').textContent='';\n  const html='<!doctype html>\\n'+copy.outerHTML;\n  const url=URL.createObjectURL(new Blob([html],{type:'text/html;charset=utf-8'}));\n  const a=document.createElement('a');\n  a.href=url;\n  a.download=document.documentElement.getAttribute('data-onfim-copy-name')||'appunto-compilato.html';\n  a.hidden=true;\n  document.body.appendChild(a);\n  a.click();\n  a.remove();\n  setTimeout(()=>URL.revokeObjectURL(url),60000);\n  document.getElementById('onfim-save-status').textContent='Copia HTML generata. Controlla i download del dispositivo.';\n});\n})();";
+const ONFIM_HTML_REPLY_SCRIPT="(()=>{'use strict';\nconst save=document.getElementById('onfim-save-copy');\nconst replyButton=document.getElementById('onfim-reply-toggle');\nconst topReply=document.getElementById('onfim-reply-top');\nconst replyFields=document.getElementById('onfim-reply-fields');\nconst replyText=document.getElementById('onfim-reply-text');\nconst status=document.getElementById('onfim-save-status');\nif(!save||!replyButton||!topReply||!replyFields||!replyText||!status)return;\nconst checks=Array.from(document.querySelectorAll('.onfim-share-checklist input[type=\"checkbox\"]'));\nfunction showReply(){\n  replyFields.hidden=false;\n  replyButton.hidden=true;\n  topReply.hidden=true;\n  save.hidden=false;\n  replyText.focus();\n}\nreplyButton.addEventListener('click',showReply);\ntopReply.addEventListener('click',(event)=>{event.preventDefault();showReply();});\nfor(const check of checks){check.addEventListener('change',()=>{save.hidden=false;});}\nif(replyText.value.trim()){\n  replyFields.hidden=false;\n  replyButton.hidden=true;\n  topReply.hidden=true;\n}\nsave.addEventListener('click',()=>{\n  const copy=document.documentElement.cloneNode(true);\n  const copies=copy.querySelectorAll('.onfim-share-checklist input[type=\"checkbox\"]');\n  for(let i=0;i<checks.length;i++){\n    if(checks[i].checked)copies[i].setAttribute('checked','');\n    else copies[i].removeAttribute('checked');\n  }\n  const newReply=replyText.value;\n  copy.querySelector('#onfim-reply-text').textContent=newReply;\n  copy.querySelector('#onfim-save-status').textContent='';\n  copy.querySelector('#onfim-save-copy').setAttribute('hidden','');\n  if(newReply.trim()){\n    copy.querySelector('#onfim-reply-fields').removeAttribute('hidden');\n    copy.querySelector('#onfim-reply-toggle').setAttribute('hidden','');\n    copy.querySelector('#onfim-reply-top').setAttribute('hidden','');\n  }else{\n    copy.querySelector('#onfim-reply-fields').setAttribute('hidden','');\n    copy.querySelector('#onfim-reply-toggle').removeAttribute('hidden');\n    copy.querySelector('#onfim-reply-top').removeAttribute('hidden');\n  }\n  const html='<!doctype html>\\n'+copy.outerHTML;\n  const url=URL.createObjectURL(new Blob([html],{type:'text/html;charset=utf-8'}));\n  const a=document.createElement('a');\n  a.href=url;\n  a.download=document.documentElement.getAttribute('data-onfim-copy-name')||'appunto-compilato.html';\n  a.hidden=true;\n  document.body.appendChild(a);\n  a.click();\n  a.remove();\n  setTimeout(()=>URL.revokeObjectURL(url),60000);\n  status.textContent='Copia HTML generata. Controlla i download del dispositivo.';\n});\n})();";
 function onfimBuildStandaloneNoteHTML(root,parts){
   const title=String(root.title||'Senza titolo');
   const when=dateTimeLabel(root.created);
@@ -8066,7 +8059,7 @@ function onfimBuildStandaloneNoteHTML(root,parts){
   return `<!doctype html>
 <html lang="it" data-onfim-copy-name="${htmlEscape(copyName)}"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; media-src data:; style-src 'unsafe-inline'; script-src 'sha256-hMmab2L6/CCvOYM5168u4SbaZMBmjtjrMpCUlOMgRi0='; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; media-src data:; style-src 'unsafe-inline'; script-src 'sha256-IHd4hAfqgf6x08EYg9auwjwZSTJ3k5kot1Kgan6iDo0='; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="color-scheme" content="light">
 <title>${htmlEscape(title)} · onfim</title>
 <style>
@@ -8118,7 +8111,7 @@ footer button:focus-visible{outline:2px solid #315b69;outline-offset:2px}.export
 /* onfim 0.8.30: bordo uniforme tra miniatura e foglio posteriore */
 .cardthumb.onfim-multi-thumb,.card .onfim-media-thumbs>.onfim-multi-thumb{box-shadow:-8px 8px 0 -1px #FFF6DA,-8px 8px 0 -0.5px #222E38!important;}
 
-/* onfim 0.9.11 · HTML condiviso compilabile e autonomo */
+/* onfim 0.9.12 · HTML condiviso compilabile e autonomo */
 .onfim-reply-link{display:inline-block;margin-top:13px;font:600 .85rem system-ui,sans-serif;color:#24638b;text-underline-offset:3px}
 .onfim-share-checklist{list-style:none;padding:0;margin:0}
 .onfim-share-checklist li{margin:10px 0}
@@ -8131,14 +8124,19 @@ footer button:focus-visible{outline:2px solid #315b69;outline-offset:2px}.export
 .onfim-reply textarea:focus-visible{outline:2px solid #315f75;outline-offset:1px}
 .onfim-reply button{font:600 .9rem system-ui,sans-serif;min-height:46px;border-radius:10px;border:1px solid #222e38;background:#222e38;color:#fff;padding:10px 15px;margin-top:13px;cursor:pointer}
 .onfim-reply button:focus-visible,.onfim-reply-link:focus-visible{outline:2px solid #315f75;outline-offset:2px}
+.onfim-reply [hidden],.onfim-reply-link[hidden]{display:none!important}
+#onfim-reply-toggle{min-height:0;padding:5px 0;margin:0;border:0;border-radius:0;background:transparent;color:#24638b;text-decoration:underline;text-underline-offset:3px;font-size:.85rem}
+#onfim-reply-fields{margin-top:16px}
 .onfim-save-status{font:.78rem/1.5 system-ui,sans-serif;color:#52646d;margin-top:8px;min-height:1em}
 @media print{.onfim-reply button,.onfim-save-status,.onfim-reply-link{display:none}.onfim-reply textarea{border:0;padding:0;min-height:0}}
 </style></head><body><main><article class="sheet"><header class="header"><h1>${htmlEscape(title)}</h1>
-<a href="#onfim-reply" class="onfim-reply-link">Aggiungi risposta</a></header>
+<a href="#onfim-reply" class="onfim-reply-link" id="onfim-reply-top">Rispondi</a></header>
 ${content}
-<section id="onfim-reply" class="onfim-reply"><h2>Risposta</h2>
-<textarea id="onfim-reply-text" aria-label="Risposta" placeholder="Scrivi qui…"></textarea>
-<button id="onfim-save-copy" type="button">Salva copia compilata (.html)</button>
+<section id="onfim-reply" class="onfim-reply">
+<button id="onfim-reply-toggle" type="button" aria-controls="onfim-reply-fields">Rispondi</button>
+<div id="onfim-reply-fields" hidden><h2>Risposta</h2>
+<textarea id="onfim-reply-text" aria-label="Risposta" placeholder="Scrivi qui…"></textarea></div>
+<button id="onfim-save-copy" type="button" hidden>Salva copia compilata (.html)</button>
 <div id="onfim-save-status" class="onfim-save-status" role="status" aria-live="polite"></div>
 </section></article><footer>
 <div class="exported-meta">Condiviso tramite <a class="onfim-export-link" href="https://oscarcollini.github.io/onfim" target="_blank" rel="noopener noreferrer">onfim</a> · ${htmlEscape(exportedOn)} · <a class="onfim-export-app-link" href="https://github.com/oscarcollini/onfim/releases/latest/download/onfim.apk" target="_blank" rel="noopener noreferrer">app</a></div>
