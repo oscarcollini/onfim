@@ -6099,11 +6099,11 @@ body {
 #onfimLinkRemove {margin-right:auto;color:#b72b31}
 #onfimLinkConfirm {background:#222e38;color:white;border-color:#222e38}
 
-/* 0.9.14 — Raccolte: cartella aperta petrolio, sfondo giallo solo nel pannello. */
+/* 0.9.14 — Raccolte: cartella aperta Tabler, colore uniforme agli altri filtri, sfondo giallo solo nel pannello. */
 #listView #onfimCollectionsToggle{
   flex:0 0 42px;width:42px;min-width:42px;max-width:42px;
   padding:0;border:1px solid #d7e0e4;border-radius:15px;
-  height:42px;min-height:42px;background:#fff;color:#315B69;
+  height:42px;min-height:42px;background:#fff;color:#54646e;
 }
 #listView #onfimCollectionsToggle[aria-expanded="true"],
 #listView #onfimCollectionsToggle[data-collection-active="true"]{
@@ -6111,7 +6111,7 @@ body {
   border-color:#315B69;
   color:#fff;
 }
-#listView #onfimCollectionsToggle svg{display:block;width:22px;height:22px;flex:none;stroke:currentColor}
+#listView #onfimCollectionsToggle svg{display:block;width:21px;height:21px;flex:none;stroke:currentColor}
 #listView #smartCollectionsNav{background:#FFF6DA;border-radius:13px;padding:5px 7px;margin-top:8px}
 @media(max-width:395px){#listView #onfimCollectionsToggle{flex-basis:36px;width:36px;min-width:36px;max-width:36px;height:40px;min-height:40px}}
 </style>
@@ -6138,7 +6138,7 @@ body {
 <button aria-pressed="false" class="filter-pill" data-filter-choice="reserved" type="button" aria-label="Archivio" title="Archivio"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></button>
 <select aria-label="Tipo appunti" class="hidden" id="filter"><option selected="" value="ordinary">Appunti</option>
 <option value="reserved">Archivio</option><option value="favorites">Preferiti</option></select>
-<button class="onfim-collection-picker-label" id="onfimCollectionsToggle" type="button" aria-label="Raccolte" title="Raccolte" aria-expanded="false" aria-controls="smartCollectionsNav"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1-2h14l-3 8H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 2h6a2 2 0 0 1 2 2v3"/></svg></button><select id="onfimCollectionPicker" class="hidden" aria-hidden="true" tabindex="-1"><option value="">Raccolte</option></select><div id="searchPanel" class="home-search"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24" width="18"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><input aria-label="Cerca negli appunti" class="search" id="search" placeholder="Cerca…" type="search"/><button aria-label="Azzera ricerca" class="search-close hidden" id="searchClose" title="Azzera ricerca" type="button">×</button></div>
+<button class="onfim-collection-picker-label" id="onfimCollectionsToggle" type="button" aria-label="Raccolte" title="Raccolte" aria-expanded="false" aria-controls="smartCollectionsNav"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19l2.757-7.351a1 1 0 0 1 .936-.649H21a1 1 0 0 1 .986 1.164l-.996 5.211A2 2 0 0 1 19.026 19H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h4l3 3h7a2 2 0 0 1 2 2v2"/></svg></button><select id="onfimCollectionPicker" class="hidden" aria-hidden="true" tabindex="-1"><option value="">Raccolte</option></select><div id="searchPanel" class="home-search"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24" width="18"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><input aria-label="Cerca negli appunti" class="search" id="search" placeholder="Cerca…" type="search"/><button aria-label="Azzera ricerca" class="search-close hidden" id="searchClose" title="Azzera ricerca" type="button">×</button></div>
 </div>
 </div>
 <nav class="smart-collections-nav" id="smartCollectionsNav" aria-label="Raccolte dinamiche" hidden>
