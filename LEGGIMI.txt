@@ -1,3 +1,9 @@
+onfim Lite 0.9.13 — PWA GitHub
+
+Punto di partenza: 0.9.12 con le correzioni HTML di Work già allineate.
+Sostituire il contenuto della root GitHub con quello di questo ZIP; le icone sono immutate.
+Le modifiche 0.9.13 sono riepilogate nel file MODIFICHE_0913.txt.
+
 onfim Lite 0.9.12 — PWA Lite, pacchetto di distribuzione.
 
 Base: onfim Lite 0.9.11. Novità 0.9.12:

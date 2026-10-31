@@ -6,8 +6,8 @@
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#f3f5f8" name="theme-color"/>
 <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACFElEQVR4nO2aXY5CIQyF62R24iZcjYtzNa5hErcxr84TTkP4azmlEDiJ0aiXth8UCvde3r8/b9pYX94OeOsA8HbAWweAtwPeOgC8HfDW9gC+PYxeb3fVda/nA+wJ0QVVCWqDkgoNoQvAqJ6M7SAhqFMgFbzFEM3ZRtlSTYI8+Nfz8XlZi9tApVzXKjCqx3M2ERCWXAaREJYEQISDsCwAIgwEl0JIq1qQmtVhiRFgOdkuMwJqELQpsMQIsNQ0IyDXg9a1himA2rBsCa7UBgIOFEBPwB5VJREYgGUQyA0Ql+kkeL3dm9bulnZa/yuVGQBUj4V2wgsNwQQAD77H6RxEJAQ4gOB0fGZQcjr1Gw+epxK6IIICiHO1p+f555ZRoE03MYBcT8Tfp3JWAiRci0ilkqAjIHY6/q1Fo06Xg0xXgVbFcCzO/nKCFEKStVyiEgjXU+EWpXJWmgap66esA3hg0iWw1BbR/xLI25nixkhJfDLUOh1PphbBExnVAUTUFTwvgPj71JshtNNxe1aCb4clZWtLe9aCzwESp0cXPSltfyi6PQBRCljOxiV7QRZ2XY/FczvK2v+QcgXgdS+AayiAGQKONXwEeAab0tBVYLbgiQAPSc2iIXeHZ+zB+OaL1Efoc4IaByRt16SxrX5SdKY06IEOe1Y4p9HVo1TmAGbX9puhA8DbAW8dAN4OeOsA8HbAW9sD+AOCbitmjicJ7wAAAABJRU5ErkJggg==" rel="icon" type="image/png"/>
-<title>onfim Lite 0.9.12 · Appunti</title>
-<link rel="manifest" href="./manifest.webmanifest?release=0.9.12"/>
+<title>onfim Lite 0.9.13 · Appunti</title>
+<link rel="manifest" href="./manifest.webmanifest?release=0.9.13"/>
 <meta name="theme-color" content="#222E38"/>
 <link rel="apple-touch-icon" href="./apple-touch-icon.png"/>
 <link rel="icon" type="image/png" href="./favicon.png"/>
@@ -6082,6 +6082,22 @@ body {
 /* Collegamento ufficiale all'APK; nessuna modifica ai comandi esistenti. */
 #settingsView .onfim-apk-download { flex-shrink:0; display:inline-block; border:1px solid #CFDAE0; border-radius:10px; padding:9px 12px; background:#fff; color:#315B69; font-size:.85rem; font-weight:600; text-decoration:none; white-space:nowrap; }
 #settingsView .onfim-apk-download:focus-visible { outline:2px solid #315B69; outline-offset:2px; }
+
+/* 0.9.13 — navigazione delle fotografie centrata e contatore visibile */
+#readView .onfim-photo-heading {display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center}
+#readView .onfim-photo-heading>h2 {grid-column:1}
+#readView .onfim-photo-heading .onfim-photo-controls {grid-column:2;justify-self:center;justify-content:center;margin:0}
+#readView .onfim-photo-count {font-weight:750;color:var(--ink);font-size:1rem}
+/* Editor di collegamenti: testo visibile e modificabile, non navigabile in modifica. */
+#noteBody a[href] {color:#24638b;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.onfim-link-dialog {width:min(95vw,430px);max-width:430px;border:1px solid #c7d1d8;border-radius:16px;padding:18px 20px;color:var(--ink);background:var(--panel)}
+.onfim-link-dialog::backdrop {background:#111b2780}
+.onfim-link-dialog label {display:block;font-weight:600;font-size:.87rem;margin:12px 0 5px}
+.onfim-link-dialog input {display:block;width:100%;min-width:0;border:1px solid #a9b9c3;border-radius:9px;padding:10px 11px;background:#fff;color:var(--ink)}
+#onfimLinkError {min-height:1em;font-size:.82rem;color:#b72b31;margin-top:7px}
+.onfim-link-actions {display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end;margin-top:12px}
+#onfimLinkRemove {margin-right:auto;color:#b72b31}
+#onfimLinkConfirm {background:#222e38;color:white;border-color:#222e38}
 </style>
 <!--  -->
 <meta name="theme-color" content="#222E38"/>
@@ -6166,6 +6182,7 @@ body {
 <button aria-label="Sottolineato" aria-pressed="false" data-command="underline"><u>U</u></button>
 <button aria-label="Barrato" aria-pressed="false" data-command="strikeThrough"><s>S</s></button>
 <button aria-label="Elenco puntato" aria-pressed="false" data-command="insertUnorderedList">•</button>
+<button id="onfimLinkTool" type="button" aria-label="Collegamento" title="Collegamento" aria-haspopup="dialog"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.1 0l3-3a5 5 0 0 0-7.1-7.1l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.1 0l-3 3a5 5 0 0 0 7.1 7.1l1.7-1.7"/></svg></button>
 <button aria-label="Annulla modifica testo" disabled="" id="textUndo" title="Annulla testo" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7 4 12l5 5M4 12h10c4 0 6 2.5 6 7"/></svg></button>
 <button aria-label="Ripristina modifica testo" disabled="" id="textRedo" title="Ripristina testo" type="button"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(24 0) scale(-1 1)"><path d="M9 7 4 12l5 5M4 12h10c4 0 6 2.5 6 7"/></g></svg></button>
 <button aria-label="Recupera ultima sessione" id="recoverNote" title="Recupera ultima sessione" type="button" disabled><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg></button>
@@ -6280,12 +6297,21 @@ body {
 <details><summary>Limiti della versione Lite</summary><ul class="lite-limit-list"><li>Promemoria orari: con la PWA chiusa le notifiche non sono affidabili.</li><li>Promemoria di luogo: nessun rilevamento in background.</li><li>Backup cloud: tramite Condividi, non automatici in background.</li><li>Widget e notifiche native Android non disponibili.</li></ul></details>
 <div class="settingsrow onfim-apk-download-row"><div><strong>Onfim per Android</strong><p>Scarica o aggiorna l’APK da GitHub.</p></div><a id="onfimApkDownload" class="onfim-apk-download" href="https://github.com/oscarcollini/onfim/releases/latest/download/onfim.apk" target="_blank" rel="noopener noreferrer" aria-label="Scarica l’APK di Onfim per Android">Scarica APK ↗</a></div>
 <details><summary>Su Onfim</summary><p>Onfim è stata sviluppata con l’assistenza di ChatGPT. Non integra ChatGPT né servizi di IA generativa.</p></details></div>
-<footer class="onfim-colophon">onfim v0.9.12 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
+<footer class="onfim-colophon">onfim v0.9.13 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
 <section class="view" id="trashView" aria-label="Cestino">
   <div class="controls"><button id="backTrash" type="button">← Impostazioni</button></div>
   <div class="panel trash-panel"><div class="trash-head"><div><h2>Appunti eliminati</h2><p class="hint">Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.</p></div><button id="emptyTrash" class="danger" type="button">Svuota</button></div><p id="trashCount" class="small" role="status"></p><div id="trashList" class="trash-list"></div></div>
 </section>
 </main>
+<dialog id="onfimLinkDialog" aria-labelledby="onfimLinkHeading" class="onfim-link-dialog">
+ <div class="onfim-dialog-head"><h2 id="onfimLinkHeading">Inserisci collegamento</h2><button type="button" class="dialog-cross" id="onfimLinkClose" aria-label="Chiudi">×</button></div>
+ <label for="onfimLinkLabel">Testo da visualizzare</label>
+ <input id="onfimLinkLabel" type="text" maxlength="600" autocomplete="off" placeholder="Testo del collegamento"/>
+ <label for="onfimLinkHref">Indirizzo (URL o email)</label>
+ <input id="onfimLinkHref" type="text" maxlength="2048" autocomplete="off" inputmode="url" placeholder="https://… oppure mailto:…"/>
+ <div id="onfimLinkError" role="alert" aria-live="polite"></div>
+ <div class="onfim-link-actions"><button type="button" id="onfimLinkRemove" hidden>Rimuovi collegamento</button><button type="button" id="onfimLinkCancel">Annulla</button><button type="button" id="onfimLinkConfirm">Inserisci</button></div>
+</dialog>
 <dialog id="noteColorDialog" class="note-color-dialog" aria-labelledby="noteColorHeading">
  <div class="onfim-dialog-head"><h2 id="noteColorHeading">Colore dell’appunto</h2><button id="noteColorClose" type="button" class="dialog-cross" aria-label="Chiudi">×</button></div>
  <div class="note-color-choices" role="group" aria-label="Colori dell’appunto">
@@ -7380,81 +7406,14 @@ for(const id of ['onfimPointLat','onfimPointLon'])$(id).addEventListener('change
 // Onfim 0.8.14: elenchi automatici all'inizio di un paragrafo.
 // Eseguito DOPO l'inserimento dello spazio per supportare anche la tastiera Android.
 // Non interpreta gli incollaggi, la composizione IME o segni nel mezzo del testo.
-// Limited Markdown shortcuts; source remains HTML and editor remains visual.
-// This code never touches wiki syntax, fenced code or nested list indentation.
-function onfimMarkdownInlineHTML(source){
- const tokens=/\[([^\]\n]+)\]\((https?:\/\/[^\s)]+|mailto:[^\s)]+)\)|\*\*([^*\n]+)\*\*|~~([^~\n]+)~~|(?<!\*)\*([^*\n]+)\*(?!\*)/g;
- let out='',end=0,m;
- while((m=tokens.exec(source))){
-  out+=htmlEscape(source.slice(end,m.index));
-  if(m[1]!==undefined){const href=onfimSafeLinkHref(m[2]);out+=href?'<a href="'+htmlEscape(href)+'">'+htmlEscape(m[1])+'</a>':htmlEscape(m[0]);}
-  else if(m[3]!==undefined)out+='<strong>'+htmlEscape(m[3])+'</strong>';
-  else if(m[4]!==undefined)out+='<s>'+htmlEscape(m[4])+'</s>';
-  else if(m[5]!==undefined)out+='<em>'+htmlEscape(m[5])+'</em>';
-  end=tokens.lastIndex;
- }
- return out+htmlEscape(source.slice(end));
-}
-function onfimMarkdownFromPlainText(source){
- const lines=String(source).replace(/\r\n?/g,'\n').split('\n');
- const out=[];let list=null;
- const closeList=()=>{if(list){out.push('</'+list+'>');list=null;}};
- for(const line of lines){
-  const heading=line.match(/^(#{1,3}) (.+)$/);
-  const bullets=line.match(/^- (.*)$/),ordered=line.match(/^\d+\. (.*)$/);
-  if(heading){closeList();const h=heading[1].length;out.push('<h'+h+'>'+onfimMarkdownInlineHTML(heading[2])+'</h'+h+'>');}
-  else if(bullets||ordered){const tag=bullets?'ul':'ol';if(list!==tag){closeList();out.push('<'+tag+'>');list=tag;}out.push('<li>'+onfimMarkdownInlineHTML((bullets||ordered)[1])+'</li>');}
-  else{closeList();out.push('<div>'+ (line?onfimMarkdownInlineHTML(line):'<br>')+'</div>');}
- }
- closeList();return sanitizeHTML(out.join(''));
-}
-function onfimLooksLikeMarkdown(source){
- return /(^|\n)#{1,3} \S|(^|\n)- \S|(^|\n)\d+\. \S|\*\*[^*\n]+\*\*|(?<!\*)\*[^*\n]+\*(?!\*)|~~[^~\n]+~~|\[[^\]\n]+\]\((?:https?:\/\/|mailto:)[^\s)]+\)/m.test(source);
-}
-function onfimAutoMarkdownFromTyping(e){
- if(e.isComposing||e.inputType!=='insertText')return false;
- const host=$('noteBody'),sel=getSelection();if(document.activeElement!==host||!sel||!sel.rangeCount||!sel.isCollapsed)return false;
- const r=sel.getRangeAt(0),node=r.startContainer;if(node.nodeType!==Node.TEXT_NODE)return false;
- const offset=r.startOffset,source=node.textContent||'',prefix=source.slice(0,offset);
- if(e.data===' '){
-  const m=prefix.replace(/\u00a0/g,' ').match(/^(#{1,3}) $/);
-  if(!m)return false;
-  let block=node.parentElement;
-  while(block&&block!==host&&!['P','DIV'].includes(block.tagName))block=block.parentElement;
-  if(!block||block.closest('li')||(block!==host&&block.textContent!==prefix)||(block===host&&(node.parentNode!==host||host.textContent!==prefix)))return false;
-  recordTextHistory(true);
-  const h=document.createElement('h'+m[1].length);h.append(document.createElement('br'));
-  if(block===host)node.replaceWith(h);else block.replaceWith(h);
-  const caret=document.createRange();caret.selectNodeContents(h);caret.collapse(true);sel.removeAllRanges();sel.addRange(caret);
-  rememberRange();markDirty();recordTextHistory(true);updateTextMark();return true;
- }
- if(e.data!=='*'&&e.data!=='~'&&e.data!==')')return false;
- let match=null,kind=null,value=null,link=null;
- for(const [rx,t] of [[/\[([^\]\n]+)\]\((https?:\/\/[^\s)]+|mailto:[^\s)]+)\)$/, 'a'],[/\*\*([^*\n]+)\*\*$/,'strong'],[/~~([^~\n]+)~~$/,'s'],[/(?<!\*)\*([^*\n]+)\*(?!\*)$/,'em']]){
-  const m=prefix.match(rx);if(!m)continue;
-  if(t==='a'){link=onfimSafeLinkHref(m[2]);if(!link)continue;}
-  match=m;kind=t;value=m[1];break;
- }
- if(!match)return false;
- const start=offset-match[0].length;
- if(start>0&&/\w/u.test(prefix[start-1]))return false;
- recordTextHistory(true);
- const replaced=document.createRange();replaced.setStart(node,start);replaced.setEnd(node,offset);replaced.deleteContents();
- const el=document.createElement(kind);el.textContent=value;
- if(kind==='a'){el.href=link;el.target='_blank';el.rel='noopener noreferrer';}
- replaced.insertNode(el);
- const after=document.createRange();after.setStartAfter(el);after.collapse(true);sel.removeAllRanges();sel.addRange(after);
- rememberRange();markDirty();recordTextHistory(true);updateTextMark();return true;
-}
+// Le sole scorciatoie testuali automatiche sono gli elenchi "- " e "1. ".
+// Markdown per titoli, grassetto e collegamenti non viene interpretato.
 function onfimPasteFormatted(e){
  const clip=e.clipboardData;if(!clip||document.activeElement!==$('noteBody'))return;
- const html=clip.getData('text/html'),plain=clip.getData('text/plain');
- let converted='';
- if(html){converted=sanitizeHTML(html);if(!converted.trim()&&plain)converted=onfimMarkdownInlineHTML(plain);}
- else if(plain&&onfimLooksLikeMarkdown(plain))converted=onfimMarkdownFromPlainText(plain);
- if(!converted)return;
+ const html=clip.getData('text/html');
+ if(!html)return; // Gli incollaggi di solo testo restano testo, senza conversioni Markdown.
+ const converted=sanitizeHTML(html);if(!converted.trim())return;
  e.preventDefault();recordTextHistory(true);
- // HTML is sanitized before insertion and again before persistence.
  $('noteBody').focus();
  if(!document.execCommand('insertHTML',false,converted)){
   const sel=getSelection();if(sel&&sel.rangeCount){const range=sel.getRangeAt(0);range.deleteContents();const frag=range.createContextualFragment(converted);range.insertNode(frag);}
@@ -8047,7 +8006,6 @@ function onfimSharePartHTML(n,partNumber,total){
   if(tags.length)fragments.push(`<div class="tags">${tags.map(t=>`<span class="tag">${htmlEscape(onfimTagLabel(t))}</span>`).join('')}</div>`);
   return `<section class="part">${heading}${fragments.length?fragments.join('\n'):'<p class="empty-part">Parte senza contenuto esportabile</p>'}</section>`;
 }
-const ONFIM_HTML_REPLY_SCRIPT="(()=>{'use strict';\nconst save=document.getElementById('onfim-save-copy');\nconst replyButton=document.getElementById('onfim-reply-toggle');\nconst topReply=document.getElementById('onfim-reply-top');\nconst replyFields=document.getElementById('onfim-reply-fields');\nconst replyText=document.getElementById('onfim-reply-text');\nconst status=document.getElementById('onfim-save-status');\nif(!save||!replyButton||!topReply||!replyFields||!replyText||!status)return;\nconst checks=Array.from(document.querySelectorAll('.onfim-share-checklist input[type=\"checkbox\"]'));\nfunction showReply(){\n  replyFields.hidden=false;\n  replyButton.hidden=true;\n  topReply.hidden=true;\n  save.hidden=false;\n  replyText.focus();\n}\nreplyText.addEventListener('input',()=>{save.hidden=false;});\nreplyButton.addEventListener('click',showReply);\ntopReply.addEventListener('click',(event)=>{event.preventDefault();showReply();});\nfor(const check of checks){check.addEventListener('change',()=>{save.hidden=false;});}\nif(replyText.value.trim()){\n  replyFields.hidden=false;\n  replyButton.hidden=true;\n  topReply.hidden=true;\n}\nsave.addEventListener('click',()=>{\n  const copy=document.documentElement.cloneNode(true);\n  const copies=copy.querySelectorAll('.onfim-share-checklist input[type=\"checkbox\"]');\n  for(let i=0;i<checks.length;i++){\n    if(checks[i].checked)copies[i].setAttribute('checked','');\n    else copies[i].removeAttribute('checked');\n  }\n  const newReply=replyText.value;\n  copy.querySelector('#onfim-reply-text').textContent=newReply;\n  copy.querySelector('#onfim-save-status').textContent='';\n  copy.querySelector('#onfim-save-copy').setAttribute('hidden','');\n  if(newReply.trim()){\n    copy.querySelector('#onfim-reply-fields').removeAttribute('hidden');\n    copy.querySelector('#onfim-reply-toggle').setAttribute('hidden','');\n    copy.querySelector('#onfim-reply-top').setAttribute('hidden','');\n  }else{\n    copy.querySelector('#onfim-reply-fields').setAttribute('hidden','');\n    copy.querySelector('#onfim-reply-toggle').removeAttribute('hidden');\n    copy.querySelector('#onfim-reply-top').removeAttribute('hidden');\n  }\n  const html='<!doctype html>\\n'+copy.outerHTML;\n  const url=URL.createObjectURL(new Blob([html],{type:'text/html;charset=utf-8'}));\n  const a=document.createElement('a');\n  a.href=url;\n  a.download=document.documentElement.getAttribute('data-onfim-copy-name')||'appunto-compilato.html';\n  a.hidden=true;\n  document.body.appendChild(a);\n  a.click();\n  a.remove();\n  setTimeout(()=>URL.revokeObjectURL(url),60000);\n  status.textContent='Copia HTML generata. Controlla i download del dispositivo.';\n});\n})();";
 function onfimBuildStandaloneNoteHTML(root,parts){
   const title=String(root.title||'Senza titolo');
   const when=dateTimeLabel(root.created);
@@ -8055,11 +8013,11 @@ function onfimBuildStandaloneNoteHTML(root,parts){
   const background=onfimShareSafeColor(root.color);
   const exportedOn=new Intl.DateTimeFormat('it-IT',{day:'2-digit',month:'long',year:'numeric'}).format(new Date());
   const content=parts.map((p,i)=>onfimSharePartHTML(p,i+1,parts.length)).join('\n');
-  const copyName=onfimShareFilename(title).replace(/\.html$/i,' - compilato.html');
+  const hasChecklist=parts.some(p=>onfimNormalizeChecklist(p.checklist).some(x=>x.text.trim()));
   return `<!doctype html>
-<html lang="it" data-onfim-copy-name="${htmlEscape(copyName)}"><head><meta charset="utf-8">
+<html lang="it"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; media-src data:; style-src 'unsafe-inline'; script-src 'sha256-jdHPI6v+E0ovV2LDIt3gxmSVdbMoQ0yvX0Z++73cDxg='; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; media-src data:; style-src 'unsafe-inline'; script-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="color-scheme" content="light">
 <title>${htmlEscape(title)} · onfim</title>
 <style>
@@ -8077,7 +8035,7 @@ h1{font-size:clamp(1.5rem,5vw,2.2rem);line-height:1.25;letter-spacing:-.025em;ma
  .note-text a{color:#24638b;text-decoration:underline;text-underline-offset:2px;overflow-wrap:anywhere}
 .media{margin-top:25px}.media h3{font:700 .84rem/1.4 system-ui,sans-serif;letter-spacing:.01em;color:#52646d;margin:0 0 10px}
 .drawing{display:block;width:100%;max-width:700px;height:auto;background:#fff;border-radius:11px;border:1px solid #222e381a}
-.photo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px}
+.photo-grid{display:flex;flex-direction:column;gap:14px}.photo{width:100%;max-width:700px}
 .photo{margin:0}.photo-visual{position:relative;overflow:hidden;border-radius:11px;line-height:0;background:#fff;border:1px solid #222e381a}
 .photo-visual img{display:block;width:100%;height:auto;object-fit:contain}
 .photo-visual .photo-annotation{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none}
@@ -8111,38 +8069,21 @@ footer button:focus-visible{outline:2px solid #315b69;outline-offset:2px}.export
 /* onfim 0.8.30: bordo uniforme tra miniatura e foglio posteriore */
 .cardthumb.onfim-multi-thumb,.card .onfim-media-thumbs>.onfim-multi-thumb{box-shadow:-8px 8px 0 -1px #FFF6DA,-8px 8px 0 -0.5px #222E38!important;}
 
-/* onfim 0.9.12 · HTML condiviso compilabile e autonomo */
-.onfim-reply-link{display:inline-block;margin-top:13px;font:600 .85rem system-ui,sans-serif;color:#24638b;text-underline-offset:3px}
+/* 0.9.13: consultazione autonoma. Caselle spuntabili soltanto durante la sessione. */
 .onfim-share-checklist{list-style:none;padding:0;margin:0}
 .onfim-share-checklist li{margin:10px 0}
 .onfim-share-checklist label{display:flex;gap:10px;align-items:flex-start;cursor:pointer;font:15px/1.5 system-ui,sans-serif}
 .onfim-share-checklist input{appearance:auto;accent-color:#222e38;width:18px;height:18px;flex:none;margin:3px 0 0}
 .onfim-share-checklist input:checked+span{text-decoration:line-through;color:#60717b}
-.onfim-reply{border-top:1px solid #222e3825;margin-top:35px;padding-top:20px;scroll-margin-top:14px}
-.onfim-reply h2{font:700 1.05rem/1.4 system-ui,sans-serif;margin:0 0 11px}
-.onfim-reply textarea{width:100%;min-height:132px;resize:vertical;display:block;border:1px solid #a9b9c3;border-radius:10px;background:#fff;color:#222e38;padding:11px 12px;font:15px/1.5 system-ui,sans-serif;white-space:pre-wrap}
-.onfim-reply textarea:focus-visible{outline:2px solid #315f75;outline-offset:1px}
-.onfim-reply button{font:600 .9rem system-ui,sans-serif;min-height:46px;border-radius:10px;border:1px solid #222e38;background:#222e38;color:#fff;padding:10px 15px;margin-top:13px;cursor:pointer}
-.onfim-reply button:focus-visible,.onfim-reply-link:focus-visible{outline:2px solid #315f75;outline-offset:2px}
-.onfim-reply [hidden],.onfim-reply-link[hidden]{display:none!important}
-#onfim-reply-toggle{min-height:0;padding:5px 0;margin:0;border:0;border-radius:0;background:transparent;color:#24638b;text-decoration:underline;text-underline-offset:3px;font-size:.85rem}
-#onfim-reply-fields{margin-top:16px}
-.onfim-save-status{font:.78rem/1.5 system-ui,sans-serif;color:#52646d;margin-top:8px;min-height:1em}
-@media print{.onfim-reply button,.onfim-save-status,.onfim-reply-link{display:none}.onfim-reply textarea{border:0;padding:0;min-height:0}}
+.onfim-checklist-footnote{font-size:.67rem;line-height:1.4;color:#71808a;margin-bottom:6px}
 </style></head><body><main><article class="sheet"><header class="header"><h1>${htmlEscape(title)}</h1>
-<a href="#onfim-reply" class="onfim-reply-link" id="onfim-reply-top">Rispondi</a></header>
+</header>
 ${content}
-<section id="onfim-reply" class="onfim-reply">
-<button id="onfim-reply-toggle" type="button" aria-controls="onfim-reply-fields">Rispondi</button>
-<div id="onfim-reply-fields" hidden><h2>Risposta</h2>
-<textarea id="onfim-reply-text" aria-label="Risposta" placeholder="Scrivi qui…"></textarea></div>
-<button id="onfim-save-copy" type="button" hidden>Salva copia compilata (.html)</button>
-<div id="onfim-save-status" class="onfim-save-status" role="status" aria-live="polite"></div>
-</section></article><footer>
+</article><footer>
+${hasChecklist?'<div class="onfim-checklist-footnote">Le spunte sono temporanee e non vengono salvate.</div>':''}
 <div class="exported-meta">Condiviso tramite <a class="onfim-export-link" href="https://oscarcollini.github.io/onfim" target="_blank" rel="noopener noreferrer">onfim</a> · ${htmlEscape(exportedOn)} · <a class="onfim-export-app-link" href="https://github.com/oscarcollini/onfim/releases/latest/download/onfim.apk" target="_blank" rel="noopener noreferrer">app</a></div>
 <div class="onfim-export-dates">Creato: ${htmlEscape(when)} · Modificato: ${htmlEscape(latest)}</div>
 </footer></main>
-<scr${'ipt'}>${ONFIM_HTML_REPLY_SCRIPT}</scr${'ipt'}>
 </body></html>`;
 }
 // PWA: il pannello Condividi di Android non garantisce una destinazione "Salva".
@@ -8404,8 +8345,74 @@ $('noteTitle').oninput=()=>{markDirty();};$('noteTitle').addEventListener('chang
    host.style.top=(below+desired>bottom?Math.max(8,rect.top-desired-6):below)+'px';
   }
  }
-$('reserved').onchange=async()=>{if($('reserved').checked){$('reserved').checked=false;const ok=await checkPin();if(ok)$('reserved').checked=true;}markDirty();};$('noteBody').addEventListener('paste',onfimPasteFormatted);$('noteBody').addEventListener('beforeinput',onfimBeforeDelete);$('noteBody').addEventListener('blur',()=>recordTextHistory(true));$('noteBody').addEventListener('compositionend',()=>{recordTextHistory(true);markDirty();});$('noteBody').oninput=e=>{lastHighlightAction=null;if(onfimAutoListFromTyping(e)||onfimAutoMarkdownFromTyping(e))return;markDirty();onfimTextAfterInput(e);updateTextMark();onfimTagAutofill();onfimUpdatePointEdit();};$('textUndo').onclick=()=>textUndoOrRedo(-1);$('textRedo').onclick=()=>textUndoOrRedo(1);document.addEventListener('selectionchange',()=>{rememberRange();if(document.activeElement===$('noteBody')){updateFormat();onfimUpdatePointEdit();}});
+$('reserved').onchange=async()=>{if($('reserved').checked){$('reserved').checked=false;const ok=await checkPin();if(ok)$('reserved').checked=true;}markDirty();};$('noteBody').addEventListener('paste',onfimPasteFormatted);$('noteBody').addEventListener('beforeinput',onfimBeforeDelete);$('noteBody').addEventListener('blur',()=>recordTextHistory(true));$('noteBody').addEventListener('compositionend',()=>{recordTextHistory(true);markDirty();});$('noteBody').oninput=e=>{lastHighlightAction=null;if(onfimAutoListFromTyping(e))return;markDirty();onfimTextAfterInput(e);updateTextMark();onfimTagAutofill();onfimUpdatePointEdit();};$('textUndo').onclick=()=>textUndoOrRedo(-1);$('textRedo').onclick=()=>textUndoOrRedo(1);document.addEventListener('selectionchange',()=>{rememberRange();if(document.activeElement===$('noteBody')){updateFormat();onfimUpdatePointEdit();}});
 for(const b of document.querySelectorAll('[data-command]')){b.addEventListener('pointerdown',e=>e.preventDefault());b.onclick=()=>applyCommand(b.dataset.command);}
+// Collegamenti nell'editor visuale; tap in modifica = modifica, in lettura = apertura URL.
+let onfimLinkTarget=null,onfimLinkSavedRange=null;
+function onfimLinkAncestor(node){
+ const element=node?.nodeType===Node.ELEMENT_NODE?node:node?.parentElement;
+ const a=element?.closest?.('a[href]');
+ return a&&$('noteBody').contains(a)?a:null;
+}
+function onfimOpenLinkDialog(target=null){
+ const host=$('noteBody'),sel=window.getSelection();
+ let range=sel?.rangeCount&&host.contains(sel.getRangeAt(0).commonAncestorContainer)?sel.getRangeAt(0).cloneRange():null;
+ if(!range&&selectionRange&&host.contains(selectionRange.commonAncestorContainer))range=selectionRange.cloneRange();
+ onfimLinkTarget=target&&host.contains(target)?target:null;
+ if(!onfimLinkTarget&&range?.collapsed)onfimLinkTarget=onfimLinkAncestor(range.startContainer);
+ onfimLinkSavedRange=range;
+ $('onfimLinkHeading').textContent=onfimLinkTarget?'Modifica collegamento':'Inserisci collegamento';
+ $('onfimLinkLabel').value=onfimLinkTarget?.textContent||range?.toString()||'';
+ $('onfimLinkHref').value=onfimLinkTarget?.getAttribute('href')||'';
+ $('onfimLinkConfirm').textContent=onfimLinkTarget?'Aggiorna':'Inserisci';
+ $('onfimLinkRemove').hidden=!onfimLinkTarget;
+ $('onfimLinkError').textContent='';
+ $('onfimLinkDialog').showModal();$('onfimLinkLabel').focus();
+}
+function onfimCloseLinkDialog(){if($('onfimLinkDialog').open)$('onfimLinkDialog').close();onfimLinkTarget=null;onfimLinkSavedRange=null;}
+function onfimLinkAfter(node){
+ const range=document.createRange();range.setStartAfter(node);range.collapse(true);
+ const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);
+ rememberRange();
+}
+function onfimNormalizeLinkHref(value){
+ const raw=String(value||'').trim();
+ const href=/^[\w.+%-]+@[\w.-]+\.[A-Za-z]{2,}$/.test(raw)?'mailto:'+raw:raw;
+ return onfimSafeLinkHref(href);
+}
+$('onfimLinkTool').addEventListener('pointerdown',e=>e.preventDefault());
+$('onfimLinkTool').onclick=()=>onfimOpenLinkDialog();
+$('noteBody').addEventListener('click',e=>{
+ const a=e.target?.closest?.('a[href]');if(!a||!$('noteBody').contains(a))return;
+ e.preventDefault();e.stopPropagation();onfimOpenLinkDialog(a);
+});
+$('onfimLinkClose').onclick=onfimCloseLinkDialog;
+$('onfimLinkCancel').onclick=onfimCloseLinkDialog;
+$('onfimLinkDialog').addEventListener('close',()=>{onfimLinkTarget=null;onfimLinkSavedRange=null;});
+$('onfimLinkRemove').onclick=()=>{
+ const target=onfimLinkTarget;if(!target||!$('noteBody').contains(target))return;
+ recordTextHistory(true);
+ const text=document.createTextNode(target.textContent||'');target.replaceWith(text);
+ onfimCloseLinkDialog();$('noteBody').focus();onfimLinkAfter(text);
+ markDirty();recordTextHistory(true);updateFormat();updateTextMark();
+};
+$('onfimLinkConfirm').onclick=()=>{
+ const text=$('onfimLinkLabel').value.trim(),url=onfimNormalizeLinkHref($('onfimLinkHref').value);
+ if(!text||!url){$('onfimLinkError').textContent=!text?'Inserisci il testo da visualizzare.':'Indirizzo non valido: usa https://, http:// o mailto:.';return;}
+ const host=$('noteBody'),existing=onfimLinkTarget;
+ recordTextHistory(true);
+ if(existing&&host.contains(existing)){
+  existing.textContent=text;existing.setAttribute('href',url);existing.setAttribute('target','_blank');existing.setAttribute('rel','noopener noreferrer');
+  onfimCloseLinkDialog();host.focus();onfimLinkAfter(existing);
+ }else{
+  let range=onfimLinkSavedRange?.cloneRange?.();
+  if(!range||!host.contains(range.commonAncestorContainer)){range=document.createRange();range.selectNodeContents(host);range.collapse(false);}
+  range.deleteContents();const a=document.createElement('a');a.href=url;a.textContent=text;a.target='_blank';a.rel='noopener noreferrer';
+  range.insertNode(a);onfimCloseLinkDialog();host.focus();onfimLinkAfter(a);
+ }
+ markDirty();recordTextHistory(true);updateFormat();updateTextMark();
+};
+
 for(const b of document.querySelectorAll('[data-ink]')){b.addEventListener('pointerdown',e=>e.preventDefault());b.onclick=()=>{applyCommand('foreColor',b.dataset.ink);document.querySelectorAll('[data-ink]').forEach(x=>x.classList.toggle('selected',x===b));};}
 // Three highlighting swatches are always visible. With the same selected
 // text, tapping the same colour twice removes highlighting (no hidden picker).
@@ -9191,7 +9198,7 @@ onfimExtraRefreshUI();
 
 // LOCALE: one UI, two string dictionaries; system-language default plus explicit override.
 
-const ONFIM_UI_EN={"Esporta JSON":"Export JSON","Importa JSON":"Import JSON","Link a file esterni":"Links to external files","Informazioni sui file esterni":"About external files","Proteggi dati":"Protect data","Crea copia ora":"Create snapshot now","Tutti":"All","Tutte":"All","Tutti gli appunti":"All notes","Testo":"Text","Inserisci testo nel disegno":"Insert text on drawing","Inserisci testo sulla fotografia":"Insert text on photo","Scrivi, poi tocca o trascina sul foglio":"Type, then tap or drag on the canvas","Scrivi, poi tocca o trascina sulla foto":"Type, then tap or drag on the photo","Scorrimento verticale fotografia":"Photo vertical scroll","Scorri fotografia":"Scroll photo","Nessun backup JSON registrato. Esporta una copia prima di cancellare i dati dell’app.":"No JSON backup recorded. Export a copy before clearing app data.","La data registra la richiesta di esportazione, non la verifica che il file sia stato effettivamente salvato.":"The date records when export was requested, not confirmation that the file was saved.","Cancellare il disegno?":"Clear drawing?","Nessun backup registrato. Non ci sono ancora appunti.":"No backups yet; there are no notes.","Nessuna copia interna: verrà creata durante l’uso, se ci sono appunti.":"No local snapshots yet. A snapshot will be created when notes are available.","Non supportato dal browser in uso.":"Not supported by this browser.","Archivio vuoto":"Archive empty","Nessun preferito":"No favorites","Nessun appunto":"No notes","Premi ＋ per crearne uno.":"Press + to create one.","Aggiungi una stella a un appunto dal menu ⋮.":"Star a note using the ⋮ menu.","Puoi spostare qui gli appunti dal menu ⋮.":"Move notes here using the ⋮ menu.","Modifica appunto":"Edit note","Appunti":"Notes","Preferiti":"Favorites","Archivio":"Archive","Filtri":"Filters","Etichette":"Tags","Azzera":"Clear","Modificati di recente":"Recently edited","Creati di recente":"Recently created","Modificati meno di recente":"Least recently edited","Creati meno di recente":"Oldest first","Titolo A–Z":"Title A–Z","Titolo Z–A":"Title Z–A","Backup":"Backup","I tuoi appunti":"Your notes","Indietro":"Back","Lettura":"Reading","Fissa in alto":"Pin to top","Promemoria":"Reminders","Condividi appunto":"Share note","Aggiungi a un altro appunto":"Add to another note","Sposta in Archivio":"Move to archive","Elimina appunto":"Delete note","Disegno":"Drawing","Foto":"Photos","Registrazioni vocali":"Voice recordings","Preferito":"Favorite","Modifica":"Edit","← Appunti":"← Notes","Audio":"Audio","Foglio da disegno":"Drawing canvas","Ingrandisci":"Expand","Riduci":"Reduce","Penna":"Pen","Gomma":"Eraser","Spessore":"Thickness","Cancella":"Clear","Le fotografie vengono ridimensionate. Le GIF non si possono annotare.":"Photos may be resized. Animated GIFs cannot be annotated.","● Registra":"● Record","Pausa":"Pause","■ Stop":"■ Stop","Per registrare, autorizza il microfono quando richiesto.":"Allow microphone access to make a recording.","Dettagli":"Details","Colore dell’appunto":"Note color","Bianco":"White","Rosso":"Red","Azzurro":"Light blue","Giallo":"Yellow","Verde":"Green","Grigio":"Gray","Blu":"Blue","Nero":"Black","Scrivi #etichetta nel testo per organizzare l’appunto.":"Use #tags in the text to organize notes.","Nell’Archivio 🔒 (accesso con PIN)":"In the archive 🔒 (PIN protected)","↗ Collega file":"↗ Link file","Il backup non include i file esterni.":"External files are not included in backups.","Elimina":"Delete","Chiudi":"Close","Salva":"Save","Lingua / Language":"Language / Lingua","Lingua dell’interfaccia":"Interface language","Scegli una lingua oppure segui quella del dispositivo.":"Choose a language or use the device language.","Automatica":"Automatic","Italiano":"Italian","Orari utilizzati per Mattina e Pomeriggio.":"Times used for Morning and Afternoon.","Mattina":"Morning","Pomeriggio":"Afternoon","Le modifiche valgono per i nuovi promemoria.":"Changes affect new reminders.","Terza scorciatoia (facoltativa)":"Third shortcut (optional)","Tipo":"Type","Disattivata":"Disabled","Altro momento della giornata":"Another time of day","Fra un numero di giorni":"After a number of days","Prossimo giorno della settimana":"Next weekday","Fra quanti giorni":"After how many days","Giorno":"Day","Ora":"Time","Lunedì":"Monday","Martedì":"Tuesday","Mercoledì":"Wednesday","Giovedì":"Thursday","Venerdì":"Friday","Sabato":"Saturday","Domenica":"Sunday","Promemoria nel calendario":"Calendar reminders","Esporta eventi .ics per importarli nel calendario Android, che potrà notificarti anche con Onfim chiusa.":"Export .ics events to your calendar so you can be notified even when Onfim is closed.","Esporta .ics":"Export .ics","Avvisi web":"Web notifications","Avvisa mentre onfim Lite è aperta. Con la PWA chiusa non sono garantiti.":"Notifications while Onfim is open. Background alerts are not guaranteed.","Abilita":"Enable","Dati e backup":"Data & backups","Esporta":"Export","Importa":"Import","Condividi":"Share","Copie interne":"Local snapshots","Controllo copie interne…":"Checking local snapshots…","Archiviazione persistente":"Persistent storage","Controllo permesso…":"Checking permission…","Privacy e sicurezza":"Privacy & security","Il PIN non cifra gli appunti. I backup JSON includono anche quelli riservati in chiaro. Conservali con attenzione.":"The PIN does not encrypt notes. JSON backups contain private notes as readable text.","PIN dell’Archivio":"Archive PIN","Serve per aprire e visualizzare l’Archivio.":"Required to open the private archive.","Gestisci":"Manage","Blocca Archivio":"Lock archive","Chiude la sessione dell’Archivio e richiede nuovamente il PIN.":"Locks the archive until the PIN is entered again.","Blocca":"Lock","Cestino":"Trash","Appunti eliminati":"Deleted notes","Il Cestino conserva gli appunti finché non decidi di eliminarli definitivamente.":"Deleted notes remain in Trash until permanently removed.","Apri":"Open","Informazioni · browser":"About · browser","Questa versione funziona offline e condivide gli appunti tramite file JSON con onfim Android, ma alcune funzioni richiedono l'APK:":"This browser version works offline and exchanges notes with the Android app through JSON, but some features require the APK:","Promemoria:":"Reminders:","nessuna sveglia affidabile con la PWA chiusa; puoi esportarli nel Calendario.":"background alerts are not guaranteed; you can export events to your calendar.","Geofence:":"Location alerts:","non disponibili in background; quelli importati restano nel backup senza attivarsi.":"not active in the background; imported location settings remain in backups.","Backup su Drive:":"Drive backup:","manuale tramite Condividi; non automatico in background.":"manual through Share, not automatic in the background.","Widget e notifiche native Android:":"Widget and native Android notifications:","non disponibili.":"unavailable.","Estrazione testo dalle fotografie (OCR):":"Extract text from photos (OCR):","disponibile nell’APK completa. La Lite non incorpora un motore OCR.":"Available in the full Android app. Lite does not include an OCR engine.","← Impostazioni":"← Settings","Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.":"Deleted notes remain here until emptied. Reminders in Trash do not trigger alerts.","Svuota":"Empty","Colore dell’appunto":"Card color","Il colore si applica all’appunto.":"The color applies to the card.","Quando":"When","Oggi":"Today","Domani":"Tomorrow","Altra data":"Another date","Scegli giorno e fascia oraria.":"Choose a day and time of day.","Data e ora libera":"Custom date & time","Nessuna data":"No date","Data e ora":"Date & time","Scelte aggiuntive":"Additional choices","Ripeti":"Repeat","Mai":"Never","Ogni giorno della data scelta":"Repeat on the selected weekday","Mai (una volta)":"Never (once)","Ogni giorno":"Every day","Ogni settimana":"Every week","Ogni mese":"Every month","Ogni lunedì–venerdì":"Every weekday","Ogni lunedì":"Every Monday","Ogni martedì":"Every Tuesday","Ogni mercoledì":"Every Wednesday","Ogni giovedì":"Every Thursday","Ogni venerdì":"Every Friday","Ogni sabato":"Every Saturday","Ogni domenica":"Every Sunday","Questo appunto contiene un geofence importato dall’APK. Rimane nel backup, ma non è attivo nella PWA.":"This note has an imported location alert. It stays in backups but is inactive in the browser.","Luogo":"Location","Ricerca o mappa":"Search or map","Seleziona un punto sulla mappa oppure cercalo per indirizzo.":"Select a map point or search for an address.","Gli avvisi geografici non sono attivi nella PWA.":"Location alerts are not active in the browser.","Cerca indirizzo o località":"Search for address or place","Ricerca online, solo quando premi Cerca.":"Online search starts only when you press Search.","Scegli sulla mappa":"Choose on map","⛶ Ingrandisci":"⛶ Expand","Il mirino al centro indica il punto scelto. Tocca o trascina la mappa.":"The crosshair marks the selected point. Tap or drag the map.","· La mappa necessita di Internet":"· Maps require internet","Usa posizione attuale":"Use current location","Latitudine":"Latitude","Longitudine":"Longitude","Avvisami":"Notify me","Quando arrivo":"When arriving","Quando esco":"When leaving","Rimuovi luogo":"Remove location","Rimuovi":"Remove","Scegli il luogo":"Choose location","✓ Fine":"✓ Done","Condividi con onfim":"Share with Onfim","Crea nuovo appunto":"Create new note","Aggiungi a un appunto esistente":"Add to an existing note","Scegli un appunto":"Choose a note","Il contenuto ricevuto sarà aggiunto senza sostituire quello esistente.":"Shared content will be appended without replacing existing content.","Cerca appunto di destinazione…":"Search destination note…","Deseleziona tutte":"Uncheck all","Il contenuto verrà aperto in un nuovo appunto: potrai completarlo e salvarlo normalmente.":"The shared content will open as a new note.","Annulla":"Cancel","Crea appunto":"Create note","Scegli dove aggiungere il contenuto. L’originale sarà spostato nel Cestino, senza trasferire promemoria o impostazioni.":"Choose where to add the content. The original is moved to Trash; reminders and settings are not transferred.","Raccolte dinamiche":"Smart collections","Le Raccolte sono filtri: mostrano gli appunti che contengono almeno uno degli hashtag scelti, senza spostarli o modificarli.":"Notes stay in the archive. Collections show notes matching any selected tag.","Nuova raccolta":"New collection","Hashtag (separati da spazio o virgola)":"Hashtags (space or comma separated)","Nascondi questi appunti dalla Home":"Hide these notes from Home","Crea raccolta":"Create collection","PIN Archivio":"Archive PIN","PIN di 4 cifre":"4-digit PIN","Annota fotografia":"Annotate photo","Salva segni":"Save annotations","I segni vengono conservati separatamente dalla foto originale.":"Annotations are saved separately from the original photo.","Colore della penna":"Pen color","I sette colori di onfim":"Seven Onfim colors","Oppure regola un colore personalizzato":"Or choose a custom color","Tonalità":"Hue","Saturazione":"Saturation","Luminosità":"Lightness","Codice colore":"Color code","Usa colore":"Use color","Checklist":"Checklist","＋ Aggiungi voce":"＋ Add item","Voce della lista":"List item","Voce completata":"Item completed","Rimuovi voce":"Remove item","Cerca negli appunti":"Search notes","Titolo (facoltativo)":"Title (optional)","Scrivi qui…":"Write here…","Nuovo appunto":"New note","Grassetto":"Bold","Corsivo":"Italic","Sottolineato":"Underline","Barrato":"Strikethrough","Elenco puntato":"Bulleted list","Evidenziatore viola":"Purple highlighter","Annulla modifica testo":"Undo text","Ripristina modifica testo":"Redo text","Testo nero":"Black text","Testo rosso":"Red text","Testo blu":"Blue text","Testo verde":"Green text","Inserisci data e ora nel testo":"Insert date and time","Personalizza colore":"Custom color","Galleria":"Gallery","Fotocamera":"Camera","Ingrandisci foglio":"Expand canvas","Senza titolo":"Untitled","Scegli una data.":"Choose a date.","Scegli Mattina o Pomeriggio.":"Choose Morning or Afternoon.","Le fasce orarie già trascorse non sono disponibili.":"Past times today are unavailable.","Scegli data e ora future":"Choose a future date and time","Promemoria salvato":"Reminder saved","Promemoria rimosso":"Reminder removed","Appunto vuoto":"Empty note","Rimuovi dai Preferiti":"Remove from Favorites","Aggiungi ai Preferiti":"Add to Favorites","Rimuovi da Fissati":"Unpin","Fissato in alto":"Pinned","Sposta nel Cestino":"Move to Trash","Rimosso dai Preferiti":"Removed from Favorites","Aggiunto ai Preferiti":"Added to Favorites","Appunto non trovato":"Note not found","Voce non trovata":"Item not found","Limite di 300 voci raggiunto":"300-item limit reached","Non è stato possibile aggiornare la lista":"Could not update checklist","Altro orario":"Other time","Terza scelta":"Third choice","Fra":"In","giorni":"days","giorno":"day","Prossimo":"Next"};
+const ONFIM_UI_EN={"Esporta JSON":"Export JSON","Importa JSON":"Import JSON","Link a file esterni":"Links to external files","Informazioni sui file esterni":"About external files","Proteggi dati":"Protect data","Crea copia ora":"Create snapshot now","Tutti":"All","Tutte":"All","Tutti gli appunti":"All notes","Testo":"Text","Inserisci testo nel disegno":"Insert text on drawing","Inserisci testo sulla fotografia":"Insert text on photo","Scrivi, poi tocca o trascina sul foglio":"Type, then tap or drag on the canvas","Scrivi, poi tocca o trascina sulla foto":"Type, then tap or drag on the photo","Scorrimento verticale fotografia":"Photo vertical scroll","Scorri fotografia":"Scroll photo","Nessun backup JSON registrato. Esporta una copia prima di cancellare i dati dell’app.":"No JSON backup recorded. Export a copy before clearing app data.","La data registra la richiesta di esportazione, non la verifica che il file sia stato effettivamente salvato.":"The date records when export was requested, not confirmation that the file was saved.","Cancellare il disegno?":"Clear drawing?","Nessun backup registrato. Non ci sono ancora appunti.":"No backups yet; there are no notes.","Nessuna copia interna: verrà creata durante l’uso, se ci sono appunti.":"No local snapshots yet. A snapshot will be created when notes are available.","Non supportato dal browser in uso.":"Not supported by this browser.","Archivio vuoto":"Archive empty","Nessun preferito":"No favorites","Nessun appunto":"No notes","Premi ＋ per crearne uno.":"Press + to create one.","Aggiungi una stella a un appunto dal menu ⋮.":"Star a note using the ⋮ menu.","Puoi spostare qui gli appunti dal menu ⋮.":"Move notes here using the ⋮ menu.","Modifica appunto":"Edit note","Appunti":"Notes","Preferiti":"Favorites","Archivio":"Archive","Filtri":"Filters","Etichette":"Tags","Azzera":"Clear","Modificati di recente":"Recently edited","Creati di recente":"Recently created","Modificati meno di recente":"Least recently edited","Creati meno di recente":"Oldest first","Titolo A–Z":"Title A–Z","Titolo Z–A":"Title Z–A","Backup":"Backup","I tuoi appunti":"Your notes","Indietro":"Back","Lettura":"Reading","Fissa in alto":"Pin to top","Promemoria":"Reminders","Condividi appunto":"Share note","Aggiungi a un altro appunto":"Add to another note","Sposta in Archivio":"Move to archive","Elimina appunto":"Delete note","Disegno":"Drawing","Foto":"Photos","Registrazioni vocali":"Voice recordings","Preferito":"Favorite","Modifica":"Edit","← Appunti":"← Notes","Audio":"Audio","Foglio da disegno":"Drawing canvas","Ingrandisci":"Expand","Riduci":"Reduce","Penna":"Pen","Gomma":"Eraser","Spessore":"Thickness","Cancella":"Clear","Le fotografie vengono ridimensionate. Le GIF non si possono annotare.":"Photos may be resized. Animated GIFs cannot be annotated.","● Registra":"● Record","Pausa":"Pause","■ Stop":"■ Stop","Per registrare, autorizza il microfono quando richiesto.":"Allow microphone access to make a recording.","Dettagli":"Details","Colore dell’appunto":"Note color","Bianco":"White","Rosso":"Red","Azzurro":"Light blue","Giallo":"Yellow","Verde":"Green","Grigio":"Gray","Blu":"Blue","Nero":"Black","Scrivi #etichetta nel testo per organizzare l’appunto.":"Use #tags in the text to organize notes.","Nell’Archivio 🔒 (accesso con PIN)":"In the archive 🔒 (PIN protected)","↗ Collega file":"↗ Link file","Il backup non include i file esterni.":"External files are not included in backups.","Elimina":"Delete","Chiudi":"Close","Salva":"Save","Lingua / Language":"Language / Lingua","Lingua dell’interfaccia":"Interface language","Scegli una lingua oppure segui quella del dispositivo.":"Choose a language or use the device language.","Automatica":"Automatic","Italiano":"Italian","Orari utilizzati per Mattina e Pomeriggio.":"Times used for Morning and Afternoon.","Mattina":"Morning","Pomeriggio":"Afternoon","Le modifiche valgono per i nuovi promemoria.":"Changes affect new reminders.","Terza scorciatoia (facoltativa)":"Third shortcut (optional)","Tipo":"Type","Disattivata":"Disabled","Altro momento della giornata":"Another time of day","Fra un numero di giorni":"After a number of days","Prossimo giorno della settimana":"Next weekday","Fra quanti giorni":"After how many days","Giorno":"Day","Ora":"Time","Lunedì":"Monday","Martedì":"Tuesday","Mercoledì":"Wednesday","Giovedì":"Thursday","Venerdì":"Friday","Sabato":"Saturday","Domenica":"Sunday","Promemoria nel calendario":"Calendar reminders","Esporta eventi .ics per importarli nel calendario Android, che potrà notificarti anche con Onfim chiusa.":"Export .ics events to your calendar so you can be notified even when Onfim is closed.","Esporta .ics":"Export .ics","Avvisi web":"Web notifications","Avvisa mentre onfim Lite è aperta. Con la PWA chiusa non sono garantiti.":"Notifications while Onfim is open. Background alerts are not guaranteed.","Abilita":"Enable","Dati e backup":"Data & backups","Esporta":"Export","Importa":"Import","Condividi":"Share","Copie interne":"Local snapshots","Controllo copie interne…":"Checking local snapshots…","Archiviazione persistente":"Persistent storage","Controllo permesso…":"Checking permission…","Privacy e sicurezza":"Privacy & security","Il PIN non cifra gli appunti. I backup JSON includono anche quelli riservati in chiaro. Conservali con attenzione.":"The PIN does not encrypt notes. JSON backups contain private notes as readable text.","PIN dell’Archivio":"Archive PIN","Serve per aprire e visualizzare l’Archivio.":"Required to open the private archive.","Gestisci":"Manage","Blocca Archivio":"Lock archive","Chiude la sessione dell’Archivio e richiede nuovamente il PIN.":"Locks the archive until the PIN is entered again.","Blocca":"Lock","Cestino":"Trash","Appunti eliminati":"Deleted notes","Il Cestino conserva gli appunti finché non decidi di eliminarli definitivamente.":"Deleted notes remain in Trash until permanently removed.","Apri":"Open","Informazioni · browser":"About · browser","Questa versione funziona offline e condivide gli appunti tramite file JSON con onfim Android, ma alcune funzioni richiedono l'APK:":"This browser version works offline and exchanges notes with the Android app through JSON, but some features require the APK:","Promemoria:":"Reminders:","nessuna sveglia affidabile con la PWA chiusa; puoi esportarli nel Calendario.":"background alerts are not guaranteed; you can export events to your calendar.","Geofence:":"Location alerts:","non disponibili in background; quelli importati restano nel backup senza attivarsi.":"not active in the background; imported location settings remain in backups.","Backup su Drive:":"Drive backup:","manuale tramite Condividi; non automatico in background.":"manual through Share, not automatic in the background.","Widget e notifiche native Android:":"Widget and native Android notifications:","non disponibili.":"unavailable.","Estrazione testo dalle fotografie (OCR):":"Extract text from photos (OCR):","disponibile nell’APK completa. La Lite non incorpora un motore OCR.":"Available in the full Android app. Lite does not include an OCR engine.","← Impostazioni":"← Settings","Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.":"Deleted notes remain here until emptied. Reminders in Trash do not trigger alerts.","Svuota":"Empty","Colore dell’appunto":"Card color","Il colore si applica all’appunto.":"The color applies to the card.","Quando":"When","Oggi":"Today","Domani":"Tomorrow","Altra data":"Another date","Scegli giorno e fascia oraria.":"Choose a day and time of day.","Data e ora libera":"Custom date & time","Nessuna data":"No date","Data e ora":"Date & time","Scelte aggiuntive":"Additional choices","Ripeti":"Repeat","Mai":"Never","Ogni giorno della data scelta":"Repeat on the selected weekday","Mai (una volta)":"Never (once)","Ogni giorno":"Every day","Ogni settimana":"Every week","Ogni mese":"Every month","Ogni lunedì–venerdì":"Every weekday","Ogni lunedì":"Every Monday","Ogni martedì":"Every Tuesday","Ogni mercoledì":"Every Wednesday","Ogni giovedì":"Every Thursday","Ogni venerdì":"Every Friday","Ogni sabato":"Every Saturday","Ogni domenica":"Every Sunday","Questo appunto contiene un geofence importato dall’APK. Rimane nel backup, ma non è attivo nella PWA.":"This note has an imported location alert. It stays in backups but is inactive in the browser.","Luogo":"Location","Ricerca o mappa":"Search or map","Seleziona un punto sulla mappa oppure cercalo per indirizzo.":"Select a map point or search for an address.","Gli avvisi geografici non sono attivi nella PWA.":"Location alerts are not active in the browser.","Cerca indirizzo o località":"Search for address or place","Ricerca online, solo quando premi Cerca.":"Online search starts only when you press Search.","Scegli sulla mappa":"Choose on map","⛶ Ingrandisci":"⛶ Expand","Il mirino al centro indica il punto scelto. Tocca o trascina la mappa.":"The crosshair marks the selected point. Tap or drag the map.","· La mappa necessita di Internet":"· Maps require internet","Usa posizione attuale":"Use current location","Latitudine":"Latitude","Longitudine":"Longitude","Avvisami":"Notify me","Quando arrivo":"When arriving","Quando esco":"When leaving","Rimuovi luogo":"Remove location","Rimuovi":"Remove","Scegli il luogo":"Choose location","✓ Fine":"✓ Done","Condividi con onfim":"Share with Onfim","Crea nuovo appunto":"Create new note","Aggiungi a un appunto esistente":"Add to an existing note","Scegli un appunto":"Choose a note","Il contenuto ricevuto sarà aggiunto senza sostituire quello esistente.":"Shared content will be appended without replacing existing content.","Cerca appunto di destinazione…":"Search destination note…","Deseleziona tutte":"Uncheck all","Il contenuto verrà aperto in un nuovo appunto: potrai completarlo e salvarlo normalmente.":"The shared content will open as a new note.","Annulla":"Cancel","Crea appunto":"Create note","Scegli dove aggiungere il contenuto. L’originale sarà spostato nel Cestino, senza trasferire promemoria o impostazioni.":"Choose where to add the content. The original is moved to Trash; reminders and settings are not transferred.","Raccolte dinamiche":"Smart collections","Le Raccolte sono filtri: mostrano gli appunti che contengono almeno uno degli hashtag scelti, senza spostarli o modificarli.":"Notes stay in the archive. Collections show notes matching any selected tag.","Nuova raccolta":"New collection","Hashtag (separati da spazio o virgola)":"Hashtags (space or comma separated)","Nascondi questi appunti dalla Home":"Hide these notes from Home","Crea raccolta":"Create collection","PIN Archivio":"Archive PIN","PIN di 4 cifre":"4-digit PIN","Annota fotografia":"Annotate photo","Salva segni":"Save annotations","I segni vengono conservati separatamente dalla foto originale.":"Annotations are saved separately from the original photo.","Colore della penna":"Pen color","I sette colori di onfim":"Seven Onfim colors","Oppure regola un colore personalizzato":"Or choose a custom color","Tonalità":"Hue","Saturazione":"Saturation","Luminosità":"Lightness","Codice colore":"Color code","Usa colore":"Use color","Checklist":"Checklist","＋ Aggiungi voce":"＋ Add item","Voce della lista":"List item","Voce completata":"Item completed","Rimuovi voce":"Remove item","Cerca negli appunti":"Search notes","Titolo (facoltativo)":"Title (optional)","Scrivi qui…":"Write here…","Nuovo appunto":"New note","Grassetto":"Bold","Corsivo":"Italic","Sottolineato":"Underline","Barrato":"Strikethrough","Collegamento":"Link","Inserisci collegamento":"Insert link","Modifica collegamento":"Edit link","Testo da visualizzare":"Display text","Testo del collegamento":"Link text","Indirizzo (URL o email)":"Address (URL or email)","Rimuovi collegamento":"Remove link","Aggiorna":"Update","Inserisci":"Insert","Inserisci il testo da visualizzare.":"Enter the display text.","Indirizzo non valido: usa https://, http:// o mailto:.":"Invalid address: use https://, http:// or mailto:.","Elenco puntato":"Bulleted list","Evidenziatore viola":"Purple highlighter","Annulla modifica testo":"Undo text","Ripristina modifica testo":"Redo text","Testo nero":"Black text","Testo rosso":"Red text","Testo blu":"Blue text","Testo verde":"Green text","Inserisci data e ora nel testo":"Insert date and time","Personalizza colore":"Custom color","Galleria":"Gallery","Fotocamera":"Camera","Ingrandisci foglio":"Expand canvas","Senza titolo":"Untitled","Scegli una data.":"Choose a date.","Scegli Mattina o Pomeriggio.":"Choose Morning or Afternoon.","Le fasce orarie già trascorse non sono disponibili.":"Past times today are unavailable.","Scegli data e ora future":"Choose a future date and time","Promemoria salvato":"Reminder saved","Promemoria rimosso":"Reminder removed","Appunto vuoto":"Empty note","Rimuovi dai Preferiti":"Remove from Favorites","Aggiungi ai Preferiti":"Add to Favorites","Rimuovi da Fissati":"Unpin","Fissato in alto":"Pinned","Sposta nel Cestino":"Move to Trash","Rimosso dai Preferiti":"Removed from Favorites","Aggiunto ai Preferiti":"Added to Favorites","Appunto non trovato":"Note not found","Voce non trovata":"Item not found","Limite di 300 voci raggiunto":"300-item limit reached","Non è stato possibile aggiornare la lista":"Could not update checklist","Altro orario":"Other time","Terza scelta":"Third choice","Fra":"In","giorni":"days","giorno":"day","Prossimo":"Next"};
 Object.assign(ONFIM_UI_EN,{
  "Ora 1":"Time 1","Ora 2":"Time 2","Ora 3":"Time 3",
  "Scorciatoia giorni":"Day shortcut","Data":"Date","Altra ora":"Custom time",
