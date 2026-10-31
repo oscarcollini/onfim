@@ -1,5 +1,9 @@
-onfim Lite 0.9.10 — revisione della medesima versione
-Condividi HTML: footer corretto, link onfim e app, date in fondo.
-Anteprima: senza dicitura Checklist.
-La PWA non esegue geofence in background. Nessuna modifica ai dati locali.
-Caricare i file nella root GitHub Pages. Cache service worker aggiornata internamente.
+onfim Lite 0.9.11 — PWA, pacchetto di distribuzione.
+Base 0.9.10 revisionata.
+Nuovo: riconoscimento Markdown essenziale, incollaggio formattato,
+condivisione con scelta del nuovo appunto o append a un esistente,
+Deseleziona tutte nella checklist (Undo).
+Nessun cambio di font o di formato di backup.
+Geofence e promemoria a PWA chiusa restano non supportati.
+Controllo sintattico JS eseguito, prova end-to-end con browser non conclusa.
+Distribuire i file insieme su hosting HTTPS senza modificare il percorso.
