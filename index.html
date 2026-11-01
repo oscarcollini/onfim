@@ -6,8 +6,8 @@
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#f3f5f8" name="theme-color"/>
 <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACFElEQVR4nO2aXY5CIQyF62R24iZcjYtzNa5hErcxr84TTkP4azmlEDiJ0aiXth8UCvde3r8/b9pYX94OeOsA8HbAWweAtwPeOgC8HfDW9gC+PYxeb3fVda/nA+wJ0QVVCWqDkgoNoQvAqJ6M7SAhqFMgFbzFEM3ZRtlSTYI8+Nfz8XlZi9tApVzXKjCqx3M2ERCWXAaREJYEQISDsCwAIgwEl0JIq1qQmtVhiRFgOdkuMwJqELQpsMQIsNQ0IyDXg9a1himA2rBsCa7UBgIOFEBPwB5VJREYgGUQyA0Ql+kkeL3dm9bulnZa/yuVGQBUj4V2wgsNwQQAD77H6RxEJAQ4gOB0fGZQcjr1Gw+epxK6IIICiHO1p+f555ZRoE03MYBcT8Tfp3JWAiRci0ilkqAjIHY6/q1Fo06Xg0xXgVbFcCzO/nKCFEKStVyiEgjXU+EWpXJWmgap66esA3hg0iWw1BbR/xLI25nixkhJfDLUOh1PphbBExnVAUTUFTwvgPj71JshtNNxe1aCb4clZWtLe9aCzwESp0cXPSltfyi6PQBRCljOxiV7QRZ2XY/FczvK2v+QcgXgdS+AayiAGQKONXwEeAab0tBVYLbgiQAPSc2iIXeHZ+zB+OaL1Efoc4IaByRt16SxrX5SdKY06IEOe1Y4p9HVo1TmAGbX9puhA8DbAW8dAN4OeOsA8HbAW9sD+AOCbitmjicJ7wAAAABJRU5ErkJggg==" rel="icon" type="image/png"/>
-<title>onfim Lite 0.9.14 · Appunti</title>
-<link rel="manifest" href="./manifest.webmanifest?release=0.9.14"/>
+<title>onfim Lite 0.9.15 · Appunti</title>
+<link rel="manifest" href="./manifest.webmanifest?release=0.9.15"/>
 <meta name="theme-color" content="#222E38"/>
 <link rel="apple-touch-icon" href="./apple-touch-icon.png"/>
 <link rel="icon" type="image/png" href="./favicon.png"/>
@@ -6138,7 +6138,7 @@ body {
 <button aria-pressed="false" class="filter-pill" data-filter-choice="reserved" type="button" aria-label="Archivio" title="Archivio"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></button>
 <select aria-label="Tipo appunti" class="hidden" id="filter"><option selected="" value="ordinary">Appunti</option>
 <option value="reserved">Archivio</option><option value="favorites">Preferiti</option></select>
-<button class="onfim-collection-picker-label" id="onfimCollectionsToggle" type="button" aria-label="Raccolte" title="Raccolte" aria-expanded="false" aria-controls="smartCollectionsNav"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19l2.757-7.351a1 1 0 0 1 .936-.649H21a1 1 0 0 1 .986 1.164l-.996 5.211A2 2 0 0 1 19.026 19H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h4l3 3h7a2 2 0 0 1 2 2v2"/></svg></button><select id="onfimCollectionPicker" class="hidden" aria-hidden="true" tabindex="-1"><option value="">Raccolte</option></select><div id="searchPanel" class="home-search"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24" width="18"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><input aria-label="Cerca negli appunti" class="search" id="search" placeholder="Cerca…" type="search"/><button aria-label="Azzera ricerca" class="search-close hidden" id="searchClose" title="Azzera ricerca" type="button">×</button></div>
+<button class="onfim-collection-picker-label" id="onfimCollectionsToggle" type="button" aria-label="Raccolte" title="Raccolte" aria-pressed="false" aria-expanded="false" aria-controls="smartCollectionsNav"><svg class="oi" aria-hidden="true" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19l2.757-7.351a1 1 0 0 1 .936-.649H21a1 1 0 0 1 .986 1.164l-.996 5.211A2 2 0 0 1 19.026 19H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h4l3 3h7a2 2 0 0 1 2 2v2"/></svg></button><select id="onfimCollectionPicker" class="hidden" aria-hidden="true" tabindex="-1"><option value="">Raccolte</option></select><div id="searchPanel" class="home-search"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24" width="18"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><input aria-label="Cerca negli appunti" class="search" id="search" placeholder="Cerca…" type="search"/><button aria-label="Azzera ricerca" class="search-close hidden" id="searchClose" title="Azzera ricerca" type="button">×</button></div>
 </div>
 </div>
 <nav class="smart-collections-nav" id="smartCollectionsNav" aria-label="Raccolte dinamiche" hidden>
@@ -6313,7 +6313,7 @@ body {
 <details><summary>Limiti della versione Lite</summary><ul class="lite-limit-list"><li>Promemoria orari: con la PWA chiusa le notifiche non sono affidabili.</li><li>Promemoria di luogo: nessun rilevamento in background.</li><li>Backup cloud: tramite Condividi, non automatici in background.</li><li>Widget e notifiche native Android non disponibili.</li></ul></details>
 <div class="settingsrow onfim-apk-download-row"><div><strong>Onfim per Android</strong><p>Scarica o aggiorna l’APK da GitHub.</p></div><a id="onfimApkDownload" class="onfim-apk-download" href="https://github.com/oscarcollini/onfim/releases/latest/download/onfim.apk" target="_blank" rel="noopener noreferrer" aria-label="Scarica l’APK di Onfim per Android">Scarica APK ↗</a></div>
 <details><summary>Su Onfim</summary><p>Onfim è stata sviluppata con l’assistenza di ChatGPT. Non integra ChatGPT né servizi di IA generativa.</p></details></div>
-<footer class="onfim-colophon">onfim v0.9.14 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
+<footer class="onfim-colophon">onfim v0.9.15 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
 <section class="view" id="trashView" aria-label="Cestino">
   <div class="controls"><button id="backTrash" type="button">← Impostazioni</button></div>
   <div class="panel trash-panel"><div class="trash-head"><div><h2>Appunti eliminati</h2><p class="hint">Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.</p></div><button id="emptyTrash" class="danger" type="button">Svuota</button></div><p id="trashCount" class="small" role="status"></p><div id="trashList" class="trash-list"></div></div>
@@ -6791,9 +6791,12 @@ function previewAllowed(n){return !n.reserved||unlocked;}
  function onfimCollectionHidden(group){return smartCollections.some(c=>c.hideHome&&onfimCollectionMatches(group,c));}
  function onfimSyncCollectionsToggle(){
   const toggle=$('onfimCollectionsToggle');if(!toggle)return;
-  const collectionActive=$('filter').value==='ordinary'&&smartActive.startsWith('c:');
+  const collectionActive=$('filter').value==='ordinary'&&(smartActive==='collections'||smartActive.startsWith('c:'));
   toggle.dataset.collectionActive=String(collectionActive);
-  // L'icona della cartella rimane uguale a pannello aperto e chiuso.
+  toggle.setAttribute('aria-pressed',String(collectionActive));
+  $('smartCollectionsNav').hidden=!collectionActive;
+  toggle.setAttribute('aria-expanded',String(collectionActive));
+  // Raccolte è una quarta vista esclusiva, non un pannello sopra Home/Preferiti/Archivio.
  }
  async function onfimRenderCollections(){
   const host=$('smartCollectionTabs'),oldScroll=host.scrollLeft;host.replaceChildren();
@@ -6802,7 +6805,7 @@ function previewAllowed(n){return !n.reserved||unlocked;}
     ordinary.set(n.id,{root:n,parts:[n]});
   }
   const choices=[...smartCollections.map(c=>({id:'c:'+c.id,name:c.name}))];
-  if(smartActive!=='home'&&smartActive!=='all'&&!choices.some(c=>c.id===smartActive))smartActive='home';
+  if(smartActive.startsWith('c:')&&!choices.some(c=>c.id===smartActive))smartActive='collections';
   onfimSyncCollectionsToggle();
   for(const c of choices){
     const b=document.createElement('button');b.type='button';b.textContent=c.name;
@@ -6856,7 +6859,7 @@ function previewAllowed(n){return !n.reserved||unlocked;}
     const actions=document.createElement('div');actions.className='smart-collection-item-actions';
     appendButton(actions,'Rinomina',()=>{const answer=prompt('Nome raccolta',c.name);if(answer===null)return;const value=answer.trim().slice(0,48);if(!value)return;c.name=value;onfimSaveCollections();onfimCollectionsDialogRender();});
     appendButton(actions,'Modifica hashtag',()=>{const answer=prompt('Hashtag della raccolta '+c.name+' (separati da spazio o virgola)',c.tags.map(onfimTagLabel).join(' '));if(answer===null)return;const parsed=onfimParseCollectionTags(answer);if(!parsed.length){toast('Inserisci almeno un hashtag');return;}c.tags=parsed;onfimSaveCollections();onfimCollectionsDialogRender();});
-    appendButton(actions,'Elimina',()=>{if(!confirm('Eliminare la raccolta “'+c.name+'”? Gli appunti non verranno eliminati.'))return;smartCollections=smartCollections.filter(x=>x.id!==c.id);if(smartActive==='c:'+c.id)smartActive='home';onfimSaveCollections();onfimCollectionsDialogRender();},false,'danger');
+    appendButton(actions,'Elimina',()=>{if(!confirm('Eliminare la raccolta “'+c.name+'”? Gli appunti non verranno eliminati.'))return;smartCollections=smartCollections.filter(x=>x.id!==c.id);if(smartActive==='c:'+c.id)smartActive='collections';onfimSaveCollections();onfimCollectionsDialogRender();},false,'danger');
     details.append(tags,hide,actions);item.append(details);host.append(item);
     toggle.onclick=()=>{const open=details.classList.toggle('hidden');toggle.setAttribute('aria-expanded',String(!open));toggle.textContent=c.name+(open?'  ▼':'  ▲');};
   });
@@ -6903,6 +6906,7 @@ function onfimViewKey(){
  if(filter==='reserved')return 'archive';
  if(smartActive.startsWith('c:'))return 'collection:'+smartActive.slice(2);
  if(smartActive==='all')return 'all';
+ if(smartActive==='collections')return 'collections';
  return 'home';
 }
 function onfimViewChoice(key){
@@ -6936,8 +6940,12 @@ async function renderNotes(){
   const all=await allNotes(),q=$('search').value.toLocaleLowerCase().trim(),fil=$('filter').value;
   await onfimRenderCollections();onfimRestoreViewChoice();
   const order=$('sortOrder').value;onfimRenderActiveTags();
-  $('homeHeading').textContent=fil==='reserved'?'Archivio':fil==='favorites'?'Preferiti':smartActive==='all'?'Tutti gli appunti':smartActive==='home'?'I tuoi appunti':('Raccolta '+(smartCollections.find(x=>'c:'+x.id===smartActive)?.name||''));
+  $('homeHeading').textContent=fil==='reserved'?'Archivio':fil==='favorites'?'Preferiti':smartActive==='collections'?'Raccolte':smartActive==='all'?'Tutti gli appunti':smartActive==='home'?'I tuoi appunti':('Raccolta '+(smartCollections.find(x=>'c:'+x.id===smartActive)?.name||''));
   $('onfimCollectionPicker').disabled=false;
+  const collectionLanding=fil==='ordinary'&&smartActive==='collections';
+  document.querySelector('.home-view-actions').classList.toggle('hidden',collectionLanding);
+  $('searchPanel').classList.toggle('hidden',collectionLanding);
+  if(collectionLanding){$('noteList').replaceChildren();$('noteCount').textContent='';return;}
   // Ogni nota è autonoma; manteniamo la struttura delle schede per i filtri correnti.
   let a=all.filter(x=>!x.deletedAt&&(fil==='reserved'?!!x.reserved:!x.reserved))
     .map(n=>({root:n,parts:[n]}));
@@ -7982,8 +7990,9 @@ async function onfimOpenJoinDialog(){
   if(!choices.length){toast('Nessun appunto autonomo disponibile');return;}
   $('joinSearch').value='';$('joinSourceName').textContent='Da: '+(root.title||'Senza titolo');
   function drawOptions(){
-    const q=$('joinSearch').value.toLocaleLowerCase().trim(),host=$('joinOptions');host.replaceChildren();
-    const matches=choices.filter(n=>!q||[n.title,txt(n.text),...noteTags(n),...(n.checklist||[]).map(x=>x?.text||'')].join(' ').toLocaleLowerCase().includes(q));
+    const q=$('joinSearch').value,host=$('joinOptions');host.replaceChildren();
+    // Stessa ricerca della panoramica: sottostringhe, AND fra termini, ordine libero.
+    const matches=choices.filter(n=>onfimMatchesSearch([n],q));
     if(!matches.length){const msg=document.createElement('p');msg.className='small';msg.textContent='Nessun risultato';host.append(msg);return;}
     for(const candidate of matches){
       const btn=document.createElement('button');btn.type='button';btn.className='join-option';btn.setAttribute('role','listitem');
@@ -8360,11 +8369,14 @@ document.addEventListener('click',e=>{if(!e.target.closest('.card-menu'))closeCa
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCardMenus();});
 function lockArchive(){unlocked=false;if($('filter').value==='reserved')$('filter').value='ordinary';$('readBody').replaceChildren();$('readPhotos').replaceChildren();$('readAudios').replaceChildren();syncFilterPills();}
 function syncFilterPills(){for(const b of document.querySelectorAll('[data-filter-choice]')){const on=b.dataset.filterChoice===$('filter').value&&(b.dataset.filterChoice!=='ordinary'||smartActive==='home');b.classList.toggle('selected',on);b.setAttribute('aria-pressed',String(on));}onfimSyncCollectionsToggle();}
-for(const b of document.querySelectorAll('[data-filter-choice]'))b.onclick=async()=>{if(b.dataset.filterChoice==='reserved'&&!await checkPin())return;if(b.dataset.filterChoice==='ordinary'&&$('filter').value==='reserved')unlocked=false;onfimActiveTags.clear();onfimTagReturnView=null;if(b.dataset.filterChoice==='ordinary')smartActive='home';$('filter').value=b.dataset.filterChoice;syncFilterPills();await showTags();renderNotes();};
-$('onfimCollectionsToggle').onclick=()=>{
- const nav=$('smartCollectionsNav'),open=nav.hidden;nav.hidden=!open;
- $('onfimCollectionsToggle').setAttribute('aria-expanded',String(open));onfimSyncCollectionsToggle();
-};
+for(const b of document.querySelectorAll('[data-filter-choice]'))b.onclick=async()=>{if(b.dataset.filterChoice==='reserved'&&!await checkPin())return;if(b.dataset.filterChoice==='ordinary'&&$('filter').value==='reserved')unlocked=false;onfimActiveTags.clear();onfimTagReturnView=null;smartActive='home';$('filter').value=b.dataset.filterChoice;syncFilterPills();await showTags();renderNotes();};
+$('onfimCollectionsToggle').onclick=async()=>{
+  // Anche rientrando nella sezione non preselezionare l'ultima raccolta.
+  onfimActiveTags.clear();onfimTagReturnView=null;smartActive='collections';
+  $('filter').value='ordinary';
+  $('search').value='';$('searchClose').classList.add('hidden');
+  syncFilterPills();await showTags();await renderNotes();
+ };
 $('onfimCollectionPicker').onchange=async function(){
  if(this.value==='manage'){this.selectedIndex=0;$('manageCollections').click();return;}
  if(!this.value)return;
