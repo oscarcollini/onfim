@@ -191,7 +191,7 @@ select {
   overflow-wrap: anywhere;
 }
 .read-body {
-  font: 15px/1.65 ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace;
+  font: 15px/1.65 var(--onfim-note-font);
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   min-height: 2.4em;
@@ -273,7 +273,7 @@ select {
   outline: none;
   overflow-wrap: anywhere;
   white-space: pre-wrap;
-  font: 15px/1.6 ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace;
+  font: 15px/1.6 var(--onfim-note-font);
 }
 #noteBody h1,.read-body h1{font-size:1.28em;font-weight:750;margin:.5em 0 .25em}
 #noteBody h2,.read-body h2{font-size:1.14em;font-weight:700;margin:.45em 0 .22em}
@@ -303,7 +303,7 @@ select {
 .mono {
   padding: 6px 9px;
   color: #4e5964;
-  font: 12px/1.4 ui-monospace,monospace;
+  font: 12px/1.4 var(--onfim-note-font);
 }
 .palette {
   display: flex;
@@ -669,7 +669,7 @@ button:focus-visible,
   color: #25343D;
 }
 .preview {
-  font: 12.8px/1.57 ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace;
+  font: 12.8px/1.57 var(--onfim-note-font);
   white-space: pre-wrap;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -2168,7 +2168,7 @@ body.onfim-drawing #drawPalette #customDrawColor {
 .onfim-compact-dialog h2 {
   margin: 0 0 15px;
 }
-.onfim-compact-dialog button:not(.part-cancel) {
+.onfim-compact-dialog button:not(.part-cancel):not(.dialog-cross) {
   display: flex;
   gap: 12px;
   align-items: center;
@@ -3815,6 +3815,7 @@ body.onfim-drawing #editorDates {
   flex: 0 0 auto;
 }
 .onfim-checklist-line input[type="text"] {
+  font-family: var(--onfim-note-font);
   flex: 1;
   min-width: 0;
   min-height: 39px;
@@ -3842,6 +3843,7 @@ body.onfim-drawing #editorDates {
   color: var(--muted);
 }
 .onfim-checklist-read label {
+  font-family: var(--onfim-note-font);
   display: flex;
   gap: 10px;
   align-items: flex-start;
@@ -5322,6 +5324,7 @@ body.onfim-drawing #drawTab .drawframe canvas {
   }
 }
 .onfim-checklist-card-preview {
+  font-family: var(--onfim-note-font);
   display: grid;
   gap: 2px;
   color: #506571;
@@ -6114,6 +6117,19 @@ body {
 #listView #onfimCollectionsToggle svg{display:block;width:21px;height:21px;flex:none;stroke:currentColor}
 #listView #smartCollectionsNav{background:#FFF6DA;border-radius:13px;padding:5px 7px;margin-top:8px}
 @media(max-width:395px){#listView #onfimCollectionsToggle{flex-basis:36px;width:36px;min-width:36px;max-width:36px;height:40px;min-height:40px}}
+
+/* 0.9.15 build 9154: font di sistema e pulsanti di chiusura uniformi. */
+:root{--onfim-note-font:ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace}
+#onfimFontPreview{font:16px/1.7 var(--onfim-note-font);overflow-wrap:anywhere;margin:12px 0 0}
+#onfimTextFont{max-width:55%;min-width:0}
+.onfim-compact-dialog .onfim-dialog-head>.dialog-cross,.onfim-dialog-head>.dialog-cross{display:inline-flex;align-items:center;justify-content:center;flex:0 0 36px;width:36px;height:36px;min-height:36px;max-width:36px;padding:0;margin:0;border:0;border-radius:8px;background:transparent;gap:0;line-height:1;text-align:center}
+.onfim-permission-status{font-size:.84rem;line-height:1.45;margin:9px 0;color:#425763}
+.onfim-permission-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0}
+.onfim-permission-row>div{flex:1;min-width:0}.onfim-permission-row small{display:block;margin-top:3px}
+.onfim-permission-row button{flex:none}
+
+:root[data-onfim-font="sans"]{--onfim-note-font:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+:root[data-onfim-font="serif"]{--onfim-note-font:ui-serif,Georgia,"Times New Roman",serif}
 </style>
 <!--  -->
 <meta name="theme-color" content="#222E38"/>
@@ -6304,6 +6320,9 @@ body {
 </div>
 <div class="panel"><h2>Privacy e sicurezza</h2><p class="notice">Il PIN limita l’accesso all’Archivio, ma non cifra gli appunti.</p><div class="settingsrow"><div><strong>PIN dell’Archivio</strong><p>Imposta o cambia il PIN.</p></div><button id="managePin">Gestisci</button></div><div class="settingsrow"><div><strong>Blocca Archivio</strong><p>Richiede di nuovo il PIN per accedere all’Archivio.</p></div><button id="lockPin">Blocca</button></div></div>
 
+<div class="panel onfim-mono-panel"><h2>Carattere degli appunti</h2>
+<div class="settingsrow"><label for="onfimTextFont"><strong>Font</strong></label><select id="onfimTextFont"><option value="monospace">Monospaced</option><option value="sans">Sans serif</option><option value="serif">Serif</option></select></div>
+<p id="onfimFontPreview" aria-label="Anteprima del carattere">Aa Bb 0123 · àèéìòù · 🟥 🟨 🟩 🟦</p></div>
 <div class="panel onfim-language-panel"><h2>Lingua</h2>
 <div class="settingsrow"><div><strong>Lingua dell’interfaccia</strong></div>
 <select id="onfimLanguage" aria-label="Lingua"><option value="auto">Automatica</option><option value="it">Italiano</option><option value="en">English</option></select></div></div>
@@ -9281,6 +9300,19 @@ onfimExtraRefreshUI();
 
 // LOCALE: one UI, two string dictionaries; system-language default plus explicit override.
 
+
+const ONFIM_FONT_KEY='onfim-note-font-v1';
+function onfimApplyNoteFont(value){
+ const chosen=['sans','serif'].includes(value)?value:'monospace';
+ document.documentElement.dataset.onfimFont=chosen;
+ $('onfimTextFont').value=chosen;
+}
+try{onfimApplyNoteFont(localStorage.getItem(ONFIM_FONT_KEY));}catch(e){onfimApplyNoteFont('monospace');}
+$('onfimTextFont').onchange=()=>{
+ const chosen=$('onfimTextFont').value;
+ try{localStorage.setItem(ONFIM_FONT_KEY,chosen);onfimApplyNoteFont(chosen);}catch(e){toast('Impossibile salvare la scelta del carattere');}
+};
+
 const ONFIM_UI_EN={"Esporta JSON":"Export JSON","Importa JSON":"Import JSON","Link a file esterni":"Links to external files","Informazioni sui file esterni":"About external files","Proteggi dati":"Protect data","Crea copia ora":"Create snapshot now","Tutti":"All","Tutte":"All","Tutti gli appunti":"All notes","Testo":"Text","Inserisci testo nel disegno":"Insert text on drawing","Inserisci testo sulla fotografia":"Insert text on photo","Scrivi, poi tocca o trascina sul foglio":"Type, then tap or drag on the canvas","Scrivi, poi tocca o trascina sulla foto":"Type, then tap or drag on the photo","Scorrimento verticale fotografia":"Photo vertical scroll","Scorri fotografia":"Scroll photo","Nessun backup JSON registrato. Esporta una copia prima di cancellare i dati dell’app.":"No JSON backup recorded. Export a copy before clearing app data.","La data registra la richiesta di esportazione, non la verifica che il file sia stato effettivamente salvato.":"The date records when export was requested, not confirmation that the file was saved.","Cancellare il disegno?":"Clear drawing?","Nessun backup registrato. Non ci sono ancora appunti.":"No backups yet; there are no notes.","Nessuna copia interna: verrà creata durante l’uso, se ci sono appunti.":"No local snapshots yet. A snapshot will be created when notes are available.","Non supportato dal browser in uso.":"Not supported by this browser.","Archivio vuoto":"Archive empty","Nessun preferito":"No favorites","Nessun appunto":"No notes","Premi ＋ per crearne uno.":"Press + to create one.","Aggiungi una stella a un appunto dal menu ⋮.":"Star a note using the ⋮ menu.","Puoi spostare qui gli appunti dal menu ⋮.":"Move notes here using the ⋮ menu.","Modifica appunto":"Edit note","Appunti":"Notes","Preferiti":"Favorites","Archivio":"Archive","Filtri":"Filters","Etichette":"Tags","Azzera":"Clear","Modificati di recente":"Recently edited","Creati di recente":"Recently created","Modificati meno di recente":"Least recently edited","Creati meno di recente":"Oldest first","Titolo A–Z":"Title A–Z","Titolo Z–A":"Title Z–A","Backup":"Backup","I tuoi appunti":"Your notes","Indietro":"Back","Lettura":"Reading","Fissa in alto":"Pin to top","Promemoria":"Reminders","Condividi appunto":"Share note","Aggiungi a un altro appunto":"Add to another note","Sposta in Archivio":"Move to archive","Elimina appunto":"Delete note","Disegno":"Drawing","Foto":"Photos","Registrazioni vocali":"Voice recordings","Preferito":"Favorite","Modifica":"Edit","← Appunti":"← Notes","Audio":"Audio","Foglio da disegno":"Drawing canvas","Ingrandisci":"Expand","Riduci":"Reduce","Penna":"Pen","Gomma":"Eraser","Spessore":"Thickness","Cancella":"Clear","Le fotografie vengono ridimensionate. Le GIF non si possono annotare.":"Photos may be resized. Animated GIFs cannot be annotated.","● Registra":"● Record","Pausa":"Pause","■ Stop":"■ Stop","Per registrare, autorizza il microfono quando richiesto.":"Allow microphone access to make a recording.","Dettagli":"Details","Colore dell’appunto":"Note color","Bianco":"White","Rosso":"Red","Azzurro":"Light blue","Giallo":"Yellow","Verde":"Green","Grigio":"Gray","Blu":"Blue","Nero":"Black","Scrivi #etichetta nel testo per organizzare l’appunto.":"Use #tags in the text to organize notes.","Nell’Archivio 🔒 (accesso con PIN)":"In the archive 🔒 (PIN protected)","↗ Collega file":"↗ Link file","Il backup non include i file esterni.":"External files are not included in backups.","Elimina":"Delete","Chiudi":"Close","Salva":"Save","Lingua / Language":"Language / Lingua","Lingua dell’interfaccia":"Interface language","Scegli una lingua oppure segui quella del dispositivo.":"Choose a language or use the device language.","Automatica":"Automatic","Italiano":"Italian","Orari utilizzati per Mattina e Pomeriggio.":"Times used for Morning and Afternoon.","Mattina":"Morning","Pomeriggio":"Afternoon","Le modifiche valgono per i nuovi promemoria.":"Changes affect new reminders.","Terza scorciatoia (facoltativa)":"Third shortcut (optional)","Tipo":"Type","Disattivata":"Disabled","Altro momento della giornata":"Another time of day","Fra un numero di giorni":"After a number of days","Prossimo giorno della settimana":"Next weekday","Fra quanti giorni":"After how many days","Giorno":"Day","Ora":"Time","Lunedì":"Monday","Martedì":"Tuesday","Mercoledì":"Wednesday","Giovedì":"Thursday","Venerdì":"Friday","Sabato":"Saturday","Domenica":"Sunday","Promemoria nel calendario":"Calendar reminders","Esporta eventi .ics per importarli nel calendario Android, che potrà notificarti anche con Onfim chiusa.":"Export .ics events to your calendar so you can be notified even when Onfim is closed.","Esporta .ics":"Export .ics","Avvisi web":"Web notifications","Avvisa mentre onfim Lite è aperta. Con la PWA chiusa non sono garantiti.":"Notifications while Onfim is open. Background alerts are not guaranteed.","Abilita":"Enable","Dati e backup":"Data & backups","Esporta":"Export","Importa":"Import","Condividi":"Share","Copie interne":"Local snapshots","Controllo copie interne…":"Checking local snapshots…","Archiviazione persistente":"Persistent storage","Controllo permesso…":"Checking permission…","Privacy e sicurezza":"Privacy & security","Il PIN non cifra gli appunti. I backup JSON includono anche quelli riservati in chiaro. Conservali con attenzione.":"The PIN does not encrypt notes. JSON backups contain private notes as readable text.","PIN dell’Archivio":"Archive PIN","Serve per aprire e visualizzare l’Archivio.":"Required to open the private archive.","Gestisci":"Manage","Blocca Archivio":"Lock archive","Chiude la sessione dell’Archivio e richiede nuovamente il PIN.":"Locks the archive until the PIN is entered again.","Blocca":"Lock","Cestino":"Trash","Appunti eliminati":"Deleted notes","Il Cestino conserva gli appunti finché non decidi di eliminarli definitivamente.":"Deleted notes remain in Trash until permanently removed.","Apri":"Open","Informazioni · browser":"About · browser","Questa versione funziona offline e condivide gli appunti tramite file JSON con onfim Android, ma alcune funzioni richiedono l'APK:":"This browser version works offline and exchanges notes with the Android app through JSON, but some features require the APK:","Promemoria:":"Reminders:","nessuna sveglia affidabile con la PWA chiusa; puoi esportarli nel Calendario.":"background alerts are not guaranteed; you can export events to your calendar.","Geofence:":"Location alerts:","non disponibili in background; quelli importati restano nel backup senza attivarsi.":"not active in the background; imported location settings remain in backups.","Backup su Drive:":"Drive backup:","manuale tramite Condividi; non automatico in background.":"manual through Share, not automatic in the background.","Widget e notifiche native Android:":"Widget and native Android notifications:","non disponibili.":"unavailable.","Estrazione testo dalle fotografie (OCR):":"Extract text from photos (OCR):","disponibile nell’APK completa. La Lite non incorpora un motore OCR.":"Available in the full Android app. Lite does not include an OCR engine.","← Impostazioni":"← Settings","Gli appunti rimangono qui fino allo svuotamento. I promemoria nel Cestino non vengono notificati.":"Deleted notes remain here until emptied. Reminders in Trash do not trigger alerts.","Svuota":"Empty","Colore dell’appunto":"Card color","Il colore si applica all’appunto.":"The color applies to the card.","Quando":"When","Oggi":"Today","Domani":"Tomorrow","Altra data":"Another date","Scegli giorno e fascia oraria.":"Choose a day and time of day.","Data e ora libera":"Custom date & time","Nessuna data":"No date","Data e ora":"Date & time","Scelte aggiuntive":"Additional choices","Ripeti":"Repeat","Mai":"Never","Ogni giorno della data scelta":"Repeat on the selected weekday","Mai (una volta)":"Never (once)","Ogni giorno":"Every day","Ogni settimana":"Every week","Ogni mese":"Every month","Ogni lunedì–venerdì":"Every weekday","Ogni lunedì":"Every Monday","Ogni martedì":"Every Tuesday","Ogni mercoledì":"Every Wednesday","Ogni giovedì":"Every Thursday","Ogni venerdì":"Every Friday","Ogni sabato":"Every Saturday","Ogni domenica":"Every Sunday","Questo appunto contiene un geofence importato dall’APK. Rimane nel backup, ma non è attivo nella PWA.":"This note has an imported location alert. It stays in backups but is inactive in the browser.","Luogo":"Location","Ricerca o mappa":"Search or map","Seleziona un punto sulla mappa oppure cercalo per indirizzo.":"Select a map point or search for an address.","Gli avvisi geografici non sono attivi nella PWA.":"Location alerts are not active in the browser.","Cerca indirizzo o località":"Search for address or place","Ricerca online, solo quando premi Cerca.":"Online search starts only when you press Search.","Scegli sulla mappa":"Choose on map","⛶ Ingrandisci":"⛶ Expand","Il mirino al centro indica il punto scelto. Tocca o trascina la mappa.":"The crosshair marks the selected point. Tap or drag the map.","· La mappa necessita di Internet":"· Maps require internet","Usa posizione attuale":"Use current location","Latitudine":"Latitude","Longitudine":"Longitude","Avvisami":"Notify me","Quando arrivo":"When arriving","Quando esco":"When leaving","Rimuovi luogo":"Remove location","Rimuovi":"Remove","Scegli il luogo":"Choose location","✓ Fine":"✓ Done","Condividi con onfim":"Share with Onfim","Crea nuovo appunto":"Create new note","Aggiungi a un appunto esistente":"Add to an existing note","Scegli un appunto":"Choose a note","Il contenuto ricevuto sarà aggiunto senza sostituire quello esistente.":"Shared content will be appended without replacing existing content.","Cerca appunto di destinazione…":"Search destination note…","Deseleziona tutte":"Uncheck all","Il contenuto verrà aperto in un nuovo appunto: potrai completarlo e salvarlo normalmente.":"The shared content will open as a new note.","Annulla":"Cancel","Crea appunto":"Create note","Scegli dove aggiungere il contenuto. L’originale sarà spostato nel Cestino, senza trasferire promemoria o impostazioni.":"Choose where to add the content. The original is moved to Trash; reminders and settings are not transferred.","Raccolte dinamiche":"Smart collections","Le Raccolte sono filtri: mostrano gli appunti che contengono almeno uno degli hashtag scelti, senza spostarli o modificarli.":"Notes stay in the archive. Collections show notes matching any selected tag.","Nuova raccolta":"New collection","Hashtag (separati da spazio o virgola)":"Hashtags (space or comma separated)","Nascondi questi appunti dalla Home":"Hide these notes from Home","Crea raccolta":"Create collection","PIN Archivio":"Archive PIN","PIN di 4 cifre":"4-digit PIN","Annota fotografia":"Annotate photo","Salva segni":"Save annotations","I segni vengono conservati separatamente dalla foto originale.":"Annotations are saved separately from the original photo.","Colore della penna":"Pen color","I sette colori di onfim":"Seven Onfim colors","Oppure regola un colore personalizzato":"Or choose a custom color","Tonalità":"Hue","Saturazione":"Saturation","Luminosità":"Lightness","Codice colore":"Color code","Usa colore":"Use color","Checklist":"Checklist","＋ Aggiungi voce":"＋ Add item","Voce della lista":"List item","Voce completata":"Item completed","Rimuovi voce":"Remove item","Cerca negli appunti":"Search notes","Titolo (facoltativo)":"Title (optional)","Scrivi qui…":"Write here…","Nuovo appunto":"New note","Grassetto":"Bold","Corsivo":"Italic","Sottolineato":"Underline","Barrato":"Strikethrough","Collegamento":"Link","Inserisci collegamento":"Insert link","Modifica collegamento":"Edit link","Testo da visualizzare":"Display text","Testo del collegamento":"Link text","Indirizzo (URL, email o telefono)":"Address (URL, email or phone)","Rimuovi collegamento":"Remove link","Aggiorna":"Update","Inserisci":"Insert","Inserisci il testo da visualizzare.":"Enter the display text.","Indirizzo non valido: usa https://, http://, mailto: o tel:.":"Invalid address: use https://, http://, mailto: or tel:.","Elenco puntato":"Bulleted list","Evidenziatore viola":"Purple highlighter","Annulla modifica testo":"Undo text","Ripristina modifica testo":"Redo text","Testo nero":"Black text","Testo rosso":"Red text","Testo blu":"Blue text","Testo verde":"Green text","Inserisci data e ora nel testo":"Insert date and time","Personalizza colore":"Custom color","Galleria":"Gallery","Fotocamera":"Camera","Ingrandisci foglio":"Expand canvas","Senza titolo":"Untitled","Scegli una data.":"Choose a date.","Scegli Mattina o Pomeriggio.":"Choose Morning or Afternoon.","Le fasce orarie già trascorse non sono disponibili.":"Past times today are unavailable.","Scegli data e ora future":"Choose a future date and time","Promemoria salvato":"Reminder saved","Promemoria rimosso":"Reminder removed","Appunto vuoto":"Empty note","Rimuovi dai Preferiti":"Remove from Favorites","Aggiungi ai Preferiti":"Add to Favorites","Rimuovi da Fissati":"Unpin","Fissato in alto":"Pinned","Sposta nel Cestino":"Move to Trash","Rimosso dai Preferiti":"Removed from Favorites","Aggiunto ai Preferiti":"Added to Favorites","Appunto non trovato":"Note not found","Voce non trovata":"Item not found","Limite di 300 voci raggiunto":"300-item limit reached","Non è stato possibile aggiornare la lista":"Could not update checklist","Altro orario":"Other time","Terza scelta":"Third choice","Fra":"In","giorni":"days","giorno":"day","Prossimo":"Next"};
 Object.assign(ONFIM_UI_EN,{
  "Ora 1":"Time 1","Ora 2":"Time 2","Ora 3":"Time 3",
@@ -9376,6 +9408,7 @@ function onfimEnglishText(v){
   match(/^(\d+) appunto$/,n=>n+' note')||
   v;
 }
+Object.assign(ONFIM_UI_EN,{"Carattere degli appunti": "Note typeface", "Font monospaced": "Monospaced font", "Di sistema": "System default", "Anteprima del carattere": "Font preview", "Impossibile salvare la scelta del carattere": "Could not save font preference", "Promemoria attivo": "Reminder active", "Promemoria salvato · autorizzazioni da completare": "Reminder saved · permissions required", "Promemoria salvato · attivazione in corso": "Reminder saved · activating", "Promemoria salvato · attivazione non riuscita": "Reminder saved · activation failed", "Promemoria già eseguito": "Reminder already triggered", "Configura permessi": "Configure permissions", "Controlla permessi": "Check permissions", "Controlla di nuovo": "Check again", "Notifiche": "Notifications", "Posizione sempre": "Background location", "Autorizzato": "Allowed", "Da autorizzare": "Permission required", "Notifiche e canale Promemoria devono essere abilitati.": "Enable notifications and the Reminders notification channel.", "Consenti gli avvisi all’orario scelto.": "Allow alerts at the selected time.", "Consenti la posizione precisa.": "Allow precise location.", "In Autorizzazioni → Posizione scegli Consenti sempre.": "Under Permissions → Location, select Allow all the time.", "Promemoria salvato · impossibile verificarne l’attivazione": "Reminder saved · could not verify activation"});
 function onfimTranslateTextNode(node){
  if(node.nodeType!==Node.TEXT_NODE||!node.parentElement||onfimSkipLocaleNode(node.parentElement))return;
  const raw=node.nodeValue;if(!raw.trim())return;
