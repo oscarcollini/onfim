@@ -6330,6 +6330,10 @@ body {
 <p id="onfimHistoryStorage" class="onfim-history-storage" role="status">Spazio cronologia: calcolo alla apertura delle Impostazioni…</p>
 <p class="hint">Onfim funziona offline; PWA e APK possono scambiarsi dati tramite JSON.</p>
 <details><summary>Limiti della versione Lite</summary><ul class="lite-limit-list"><li>Promemoria orari: con la PWA chiusa le notifiche non sono affidabili.</li><li>Promemoria di luogo: nessun rilevamento in background.</li><li>Backup cloud: tramite Condividi, non automatici in background.</li><li>Widget e notifiche native Android non disponibili.</li></ul></details>
+<div id="onfimInstallPanel">
+<div class="settingsrow"><div><strong>Onfim Lite sul dispositivo</strong><p>Aggiungi questa app web alla schermata Home.</p></div><button id="onfimInstallButton" type="button">Installa Onfim Lite</button></div>
+<p id="onfimInstallStatus" class="hint" role="status"></p>
+</div>
 <div class="settingsrow onfim-apk-download-row"><div><strong>Onfim per Android</strong><p>Scarica o aggiorna l’APK da GitHub.</p></div><a id="onfimApkDownload" class="onfim-apk-download" href="https://github.com/oscarcollini/onfim/releases/latest/download/onfim.apk" target="_blank" rel="noopener noreferrer" aria-label="Scarica l’APK di Onfim per Android">Scarica APK ↗</a></div>
 <details><summary>Su Onfim</summary><p>Onfim è stata sviluppata con l’assistenza di ChatGPT. Non integra ChatGPT né servizi di IA generativa.</p></details></div>
 <footer class="onfim-colophon">onfim v0.9.15 · Oscar Collini fecit · CC BY-SA 4.0</footer></section>
@@ -9451,6 +9455,13 @@ $('onfimApkDownload').addEventListener('click',event=>{
   event.preventDefault();OnfimAndroid.openExternalLink(event.currentTarget.href);
  }
 });
+Object.assign(ONFIM_UI_EN,{
+ 'Onfim Lite sul dispositivo':'Onfim Lite on this device',
+ 'Aggiungi questa app web alla schermata Home.':'Add this web app to your home screen.',
+ 'Installa Onfim Lite':'Install Onfim Lite',
+ 'In Chrome apri il menu ⋮ e scegli «Aggiungi a schermata Home» o «Installa app», se disponibile.':'In Chrome, open the ⋮ menu and choose “Add to home screen” or “Install app”, if available.',
+ 'Il browser non ha aperto la richiesta. Riprova dal menu ⋮.':'The browser did not open the prompt. Try from the ⋮ menu.'
+});
 Object.assign(ONFIM_UI_EN,{'Onfim per Android':'Onfim for Android','Scarica o aggiorna l’APK da GitHub.':'Download or update the APK from GitHub.','Scarica APK ↗':'Download APK ↗','Scarica l’APK di Onfim per Android':'Download Onfim APK for Android'});
 $('onfimLanguage').value=localStorage.getItem(ONFIM_LANG_KEY)||'auto';
 $('onfimLanguage').onchange=()=>{localStorage.setItem(ONFIM_LANG_KEY,$('onfimLanguage').value);onfimApplyLanguage();};
@@ -9467,6 +9478,54 @@ onfimApplyLanguage();
 })();
 </script>
 <script>
+(() => {
+  const panel = document.getElementById('onfimInstallPanel');
+  const button = document.getElementById('onfimInstallButton');
+  const status = document.getElementById('onfimInstallStatus');
+  const appMode = matchMedia('(display-mode: standalone)');
+  let installPrompt = null;
+  let installedHere = false;
+
+  function updatePanel() {
+    panel.hidden = installedHere || appMode.matches || navigator.standalone === true;
+  }
+
+  window.addEventListener('beforeinstallprompt', event => {
+    event.preventDefault();
+    installPrompt = event;
+    status.textContent = '';
+  });
+  window.addEventListener('appinstalled', () => {
+    installedHere = true;
+    installPrompt = null;
+    updatePanel();
+  });
+  appMode.addEventListener('change', updatePanel);
+  updatePanel();
+
+  button.addEventListener('click', async () => {
+    const prompt = installPrompt;
+    if (!prompt) {
+      status.textContent = 'In Chrome apri il menu ⋮ e scegli «Aggiungi a schermata Home» o «Installa app», se disponibile.';
+      return;
+    }
+    installPrompt = null;
+    button.disabled = true;
+    status.textContent = '';
+    try {
+      await prompt.prompt();
+      const choice = await prompt.userChoice;
+      if (choice.outcome === 'accepted') {
+        installedHere = true;
+        updatePanel();
+      }
+    } catch {
+      status.textContent = 'Il browser non ha aperto la richiesta. Riprova dal menu ⋮.';
+    } finally {
+      button.disabled = false;
+    }
+  });
+})();
 if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
   window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(err=>console.warn('onfim Lite: modalità offline non disponibile',err)));
 }
