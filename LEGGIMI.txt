@@ -1,16 +1,16 @@
-onfim Lite 0.9.13 — PWA GitHub
+onfim Lite 0.9.15 — PWA GitHub, build 9155
 
-Punto di partenza: 0.9.12 con le correzioni HTML di Work già allineate.
-Sostituire il contenuto della root GitHub con quello di questo ZIP; le icone sono immutate.
-Le modifiche 0.9.13 sono riepilogate nel file MODIFICHE_0913.txt.
+App per appunti con checklist, etichette, raccolte, foto annotate e
+backup locale. La PWA si apre da https://oscarcollini.github.io/onfim/.
 
-onfim Lite 0.9.12 — PWA Lite, pacchetto di distribuzione.
+Prima di aggiornare, esporta un backup JSON e conservalo fuori dal browser.
+Per pubblicare un aggiornamento dell’app, carica i file nella stessa
+cartella di GitHub Pages. Mantieni lo stesso indirizzo per ritrovare
+gli appunti. Dopo il caricamento, riapri l’app e controlla il colophon.
 
-Base: onfim Lite 0.9.11. Novità 0.9.12:
-- Anteprima unica: foto > disegno > audio; secondo foglio giallo #FFF6DA per media multipli, senza puntini. In griglia e in elenco.
-- HTML esportato: «Rispondi» in alto e in fondo; apre il campo e il comando «Salva copia».
-- Spuntare una checklist mostra «Salva copia» anche senza risposta. La copia salvata conserva le spunte e l'eventuale risposta.
+La build 9155 introduce il comando di installazione PWA. Se il browser
+non mostra la richiesta, usa il menu del browser.
+La PWA e l’APK Android usano archivi locali distinti. Per trasferire gli
+appunti fra le due edizioni, usa il backup JSON.
 
-Nessun nuovo formato dati o backup. Geofence/promemoria in background non supportati nella PWA.
-Pubblicare tutti i file insieme su hosting HTTPS mantenendo percorso e manifest; il Service Worker usa una cache 0.9.12 dedicata.
-Le modifiche sono testate in browser simulato: verificare su GitHub Pages e telefono con i propri appunti, prima di sostituire la versione precedente.
+Cache della PWA: onfim-shell-lite-v0.9.15-b9155.
